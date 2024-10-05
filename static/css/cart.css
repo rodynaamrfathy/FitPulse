@@ -1,0 +1,186 @@
+.wrapper1,
+.wrapper2,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    color: white;
+    background-color: #333;
+    overflow: hidden; /* Prevent overflow of content */
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+}
+
+.wrapper2 h1{
+    font-size: 3rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    padding: 1rem;
+}
+
+.wrapper2 p {
+    font-size: 1.33rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    padding: 1rem;
+    padding-top: 0.1rem;
+    padding-left: 2rem;
+}
+
+.wrapper2 a {
+    font-size: 1.33rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: #ff9409;
+    padding: 1rem;
+    padding-top: 0.1rem;
+}
+
+.wrapper1 {
+    margin-top: 1rem;
+}
+
+.cart {
+    display: flex; /* Flexbox for the cart items */
+    flex-direction: column; /* Stack items vertically */
+    width: 100%; /* Full width */
+}
+
+.product {
+    display: flex; /* Flex layout for product details */
+    align-items: center; /* Center items vertically */
+    padding: 5px; /* Padding around each product */
+    border-bottom: 1px solid #fff8f8; /* Separator between products */
+}
+
+.product-image {
+    width: 15%; /* Adjust width for the image */
+    margin-right: 20px; /* Space between image and details */
+}
+
+.product-image img {
+    width: 100%; /* Make the image take full width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.product-details {
+    display: flex; /* Flex layout for details */
+    flex-direction: row; /* Align items in a row */
+    justify-content: space-between; /* Space between title, price, and quantity */
+    align-items: center; /* Center items vertically */
+    width: 80%; /* Take the remaining width */
+}
+
+.product-title {
+    font-size: 1.7rem; /* Title size */
+    margin-right: 1rem; /* Space after title */
+    width: 300px;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.product-price {
+    font-size: 1.2rem; /* Price size */
+    margin-right: 4rem; /* Space after price */
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.product-quantity {
+    display: flex; /* Flex layout for quantity buttons and input */
+    align-items: center; /* Center items vertically */
+}
+
+.quantity-button-plus {
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #333;
+    margin-left: -0.5rem;
+    z-index: 0;
+}
+
+.quantity-button-minus {
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #333;
+    margin-right: 0.5rem;
+    z-index: 0;
+}
+
+.quantity-input {
+    width: 3rem; /* Fixed width for input */
+    text-align: center; /* Center text in input */
+    margin: 0 5px; /* Space around input */
+    font-size: 1.2rem; /* Font size */
+    color: white;
+    border: none;
+    background-color: #333;
+}
+
+
+
+.remove-product {
+    background-color: #ff4c4c; /* Background color for remove button */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.subtotal {
+    display: flex; /* Flexbox for centering */
+    padding: 20px; /* Padding around the element */
+    margin-top: 20px; /* Spacing above the subtotal */
+    color: white;
+    width: 900px;
+}
+
+.subtotal-price{
+    margin-right:13rem;
+    width: 65%;
+}
+
+.checkout-button{
+    background-color:#333;
+    border: 2px solid white;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+.checkout-button:hover {
+    transform: scale(1.1);
+}
+
+.subtotal-price {
+    font-size: 24px; /* Large text size */
+    font-weight: bold; /* Bold text */
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    .wrapper1,
+    .wrapper2,
+    .wrapper {
+        margin-top: 6rem;
+        width: 700px;
+    }
+
+    .wrapper1 {
+        margin-top: 1rem;
+    }
+
+    
+}
