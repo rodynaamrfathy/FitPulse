@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Exercise Category</h1>
+
+    <!-- Form to Edit an Exercise Category -->
+    <form action="{{ url_for('exercisescontroller.edit_exercise_category', category_id=category[0]) }}" method="POST" enctype="multipart/form-data">
+        <label for="category_name">Exercise Category Name:</label>
+        <input type="text" id="category_name" name="categoryname" value="{{ category[1] }}" required>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required>{{ category[3] }}</textarea>
+
+        <button type="submit">Update Exercise Category</button>
+    </form>
+
+    <!-- Edit Button Form -->
+    <form action="{{ url_for('exercisescontroller.edit_exercise_category', category_id=category[0]) }}" method="POST" enctype="multipart/form-data">
+        <button type="submit">Edit</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input[type="text"],
+        textarea,
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .existing-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Exercise</h1>
+
+    <form action="{{ url_for('exercisescontroller.edit_exercise', exercise_id=exercise[0]) }}" method="POST" enctype="multipart/form-data">
+        <label for="exercisename">Exercise Name:</label>
+        <input type="text" id="exercisename" name="exercisename" value="{{ exercise[2] }}" required>
+
+        <label for="categoryid">Category:</label>
+        <select id="categoryid" name="categoryid" required>
+            {% for category in categories %}
+            <option value="{{ category[0] }}" {% if category[0] == exercise[4] %}selected{% endif %}>{{ category[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="image">Image:</label>
+        {% if exercise[12] %}  <!-- Assuming the existing image URL is stored at index 12 -->
+            <img src="{{ url_for('static', filename='uploads/exercise_images/' ~ exercise[3]) }}" class="existing-image" alt="Current Exercise Image">
+        {% endif %}
+        <input type="file" id="image" name="image" accept="image/*">
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" value="{{ exercise[4] }}" required>
+
+        <label for="equipment">Equipment:</label>
+        <input type="text" id="equipment" name="equipment" value="{{ exercise[5] }}">
+
+        <label for="experiencelevel">Experience Level:</label>
+        <input type="text" id="experiencelevel" name="experiencelevel" value="{{ exercise[6] }}">
+
+        <label for="mechanics">Mechanics:</label>
+        <input type="text" id="mechanics" name="mechanics" value="{{ exercise[7] }}">
+
+        <label for="forcetype">Force Type:</label>
+        <input type="text" id="forcetype" name="forcetype" value="{{ exercise[8] }}">
+
+        <label for="secondarymuscles">Secondary Muscles:</label>
+        <input type="text" id="secondarymuscles" name="secondarymuscles" value="{{ exercise[9] }}">
+
+        <label for="targetmuscle">Target Muscle:</label>
+        <input type="text" id="targetmuscle" name="targetmuscle" value="{{ exercise[10] }}">
+
+        <label for="videourl">Video URL:</label>
+        <input type="text" id="videourl" name="videourl" value="{{ exercise[11] }}">
+
+        <label for="targetmuscleimage">Target Muscle Image:</label>
+        <img src="{{ url_for('static', filename='uploads/exercise_images/' ~ exercise[12]) }}" class="existing-image" alt="Current Exercise Image">
+        <input type="file" id="targetmuscleimage" name="targetmuscleimage" accept="image/*">
+
+        <label for="overview">Overview:</label>
+        <textarea id="overview" name="overview" rows="4">{{ exercise[13] }}</textarea>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="4">{{ exercise[14] }}</textarea>
+
+        <button type="submit">Update Exercise</button>
+    </form>
+</body>
+</html>
