@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Join Our Team</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/careers.css') }}">
+</head>
+<body>
+
+    <section class="careers">
+        <h1>Join Our Team of Trainers</h1>
+        <p>We are always looking for passionate and qualified trainers to join our team. Check out our current openings!</p>
+
+        <h2>Available Positions</h2>
+        <ul class="positions">
+            <li>
+                <h3><a href="{{ url_for('careers.apply_trainer', specialty='Personal Trainer') }}">Personal Trainer</a></h3>
+                <p>Help clients achieve their fitness goals with personalized training programs.</p>
+            </li>
+            <li>
+                <h3><a href="{{ url_for('careers.apply_trainer', specialty='Group Fitness Instructor') }}">Group Fitness Instructor</a></h3>
+                <p>Lead group classes and motivate participants through engaging workouts.</p>
+            </li>
+            <li>
+                <h3><a href="{{ url_for('careers.apply_trainer', specialty='Nutrition Coach') }}">Nutrition Coach</a></h3>
+                <p>Provide nutritional guidance and meal planning for clients.</p>
+            </li>
+            <li>
+                <h3><a href="{{ url_for('careers.apply_trainer', specialty='Online Fitness Trainer') }}">Online Fitness Trainer</a></h3>
+                <p>Train clients virtually and provide support through online platforms.</p>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Fitness Website - All Rights Reserved</p>
+    </footer>
+</body>
+</html>

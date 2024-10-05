@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.careers {
+    padding: 20px;
+}
+
+.positions {
+    list-style-type: none;
+    padding: 0;
+}
+
+.positions li {
+    margin-bottom: 20px;
+}
+
+.application-form {
+    margin-top: 20px;
+}
+
+.application-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.application-form input,
+.application-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.application-form button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.application-form button:hover {
+    background-color: #218838;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}

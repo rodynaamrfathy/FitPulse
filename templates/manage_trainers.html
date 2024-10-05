@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Trainers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pending Trainers</h1>
+
+    <!-- Table to Display Pending Trainers -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Specialty</th>
+                <th>Experience (Years)</th>
+                <th>Rating</th>
+                <th>Bio</th>
+                <th>Resume</th>
+                <th>Accept</th>
+                <th>Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainer in pending_trainers %}
+            <tr>
+                <td>{{ trainer.trainerid }}</td>
+                <td>{{ trainer.firstname }}</td>
+                <td>{{ trainer.lastname }}</td>
+                <td>{{ trainer.email }}</td>
+                <td>{{ trainer.specialty }}</td>
+                <td>{{ trainer.experienceyears }}</td>
+                <td>{{ trainer.rating }}</td>
+                <td>{{ trainer.bio }}</td>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/resumes/' ~ trainer.resume) }}" target="_blank">View Resume</a>
+                </td>
+                <td>
+                    <!-- Form to Accept the Trainer -->
+                    <form action="{{ url_for('trainerscontroller.accept_trainer', trainer_id=trainer.trainerid) }}" method="POST">
+                        <button type="submit">Accept</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- Form to Reject the Trainer -->
+                    <form action="{{ url_for('trainerscontroller.reject_trainer', trainer_id=trainer.trainerid) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Approved Trainers</h1>
+
+    <!-- Table to Display Approved Trainers -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Specialty</th>
+                <th>Experience (Years)</th>
+                <th>Rating</th>
+                <th>Bio</th>
+                <th>Resume</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainer in approved_trainers %}
+            <tr>
+                <td>{{ trainer.trainerid }}</td>
+                <td>{{ trainer.firstname }}</td>
+                <td>{{ trainer.lastname }}</td>
+                <td>{{ trainer.email }}</td>
+                <td>{{ trainer.specialty }}</td>
+                <td>{{ trainer.experienceyears }}</td>
+                <td>{{ trainer.rating }}</td>
+                <td>{{ trainer.bio }}</td>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/resumes/' ~ trainer.resume) }}" target="_blank">View Resume</a>
+                </td>
+                <td>
+                    <a href="{{ url_for('trainerscontroller.trainer_details', trainer_id=trainer.trainerid) }}">View Details</a>
+                </td>
+                <td>
+                    <!-- Form to Delete the Trainer -->
+                    <form action="{{ url_for('trainerscontroller.delete_trainer', trainer_id=trainer.trainerid) }}" method="POST">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this trainer?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
