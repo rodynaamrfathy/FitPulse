@@ -31,7 +31,7 @@
                 {% for product_id, item in session.cart.items() %}
                     <div class="product">
                         <div class="product-image">
-                            <img src="{{ url_for('static', filename='images/' ~ item['image']) }}" alt="{{ item['name'] }}">
+                            <img src="{{ url_for('static', filename='uploads/productsimg/' ~ item['image']) }}" alt="{{ item['name'] }}">
                         </div>
                         <div class="product-details">
                             <div class="product-title">{{ item['name'] }}</div>
