@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/workoutsCategory.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class = "wrapper0">
+        <div class = "workout-banner">
+           <img src="{{ url_for('static', filename='images/exercise-banner1.jpg') }}" alt="Abs Image">
+           <h1>Free Workout Plans </h1>
+           <p>The most comprehensive database of free workout routines anywhere! Download workout plans any goal or experience level.</p>
+        </div>  
+    </div>
+
+    <div class = "wrapper1">
+        <div>
+        <h1 >Workout Categories</h1>
+        <p>Choose a category that best suits the workout you're searching for. Once in the category, use the sort and filter options to find the right workout for your experience and goals.</p>
+        </div>
+    </div>
+
+    
+    <div class="wrapper">
+        <div class = "workout-category">
+            <a href=""><img src="{{ url_for('static', filename='images/workoutmens.jpg') }}" alt="Abs Image"></a>
+                <h2>Workouts For Men</h2>
+        </div>
+
+        <div class = "workout-category">
+            <a href=""><img src="{{ url_for('static', filename='images/workoutmens.jpg') }}" alt="Abs Image"></a>
+                <h2>Workouts For Men</h2>
+        </div>
+
+        <div class = "workout-category">
+            <a href=""><img src="{{ url_for('static', filename='images/workoutmens.jpg') }}" alt="Abs Image"></a>
+                <h2>Workouts For Men</h2>
+        </div>
+
+        <div class = "workout-category">
+            <a href=""><img src="{{ url_for('static', filename='images/workoutmens.jpg') }}" alt="Abs Image"></a>
+                <h2>Workouts For Men</h2>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/workouts.js') }}"></script>
+</body>
+</html>

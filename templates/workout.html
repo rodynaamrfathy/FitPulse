@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workouts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/workout.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <div>
+            <h1 class = "workout-title">Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h1>
+        </div>
+    </div>
+    <div class = "wrapper1">
+        <div class = "author-container">
+            <img class = "author-img" src="{{ url_for('static', filename='../static/images/hanma.jpg') }}" alt="author">
+            <div class = "author-info">
+                <p class = "author-name">Written By : Hanma Baki</p>
+                <p class = "author-date">Published on :  2024-06-01</p>
+            </div>
+        </div>
+    </div>
+
+    <div class = "wrapper2">
+        <div class = "workout-intro-description"> 
+            <p> This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+        </div>
+
+        <div class = "workout-summary">
+            <h2>Workout Summary</h2>
+
+            <div class = "row">
+                <h3 class = "property-title">Main Goal</h3>  
+                <h3 class = " property-value">Build Muscle</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Workout Type</h3>  
+                <h3 class = " property-value">Split</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Training Level</h3>  
+                <h3 class = " property-value">Intermediate</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Days Per Week</h3>  
+                <h3 class = " property-value">5</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Time Per Workout</h3>  
+                <h3 class = " property-value">45-60 minutes</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Equipment Required</h3>  
+                <h3 class = " property-value"> Bodyweight, Dumbbells</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Target Gender</h3>  
+                <h3 class = " property-value">Male & Female</h3>
+            </div>
+
+            <div class = "row">
+                <h3 class = "property-title">Recommended Supps</h3>  
+                <h3 class = " property-value">
+                    Whey Protein 
+                    Protein Bars (Optional)
+                    Multivitamin
+                    Fish Oil</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class = "wrapper3">
+        <div class = "workout-description">
+            <h1>Workout Description</h1>
+            <p>
+                So, you’ve completed the 3 day full body dumbbell only workout?
+
+                AND you’ve completed the 4 day upper/lower dumbbell only workout as a form of progression?
+
+                Well, you’ve asked for it and today I’m bringing you the next step in our dumbbell only workout series.
+
+                The following workout, for those who only have access to a set of dumbbells, is a 5 day per week program.
+
+                It can be performed by those who work out at home in their home gym, travel frequently and need a go-to program they can do at a hotel gym, or anyone really who prefers to use dumbbells over other implements at the gym.
+            </p>
+        </div>
+    </div>
+
+    <div class = "wrapper4">
+        <div class = "workout-split">
+            <h1>Workout Split</h1>
+
+            <div class="Day">
+                <div class="day-title">
+                    <h2>Day 1: Chest, Shoulders, & Triceps Dumbbell Workout</h2>
+                </div>
+            
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dumbbell Bench Press</td>
+                            <td>4</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Incline Dumbbell Bench Press</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Floor Press</td>
+                            <td>3</td>
+                            <td>15</td>
+                        </tr>
+                         <tr>
+                            <td>Standing Dumbbell Press</td>
+                            <td>4</td>
+                            <td>10-12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Lateral Raise</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Tricep Kickback</td>
+                            <td>3</td>
+                            <td>15-20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="Day">
+                <div class="day-title">
+                    <h2>Day 1: Chest, Shoulders, & Triceps Dumbbell Workout</h2>
+                </div>
+            
+                <table class="workout-table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Sets</th>
+                            <th>Reps</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dumbbell Bench Press</td>
+                            <td>4</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Incline Dumbbell Bench Press</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Floor Press</td>
+                            <td>3</td>
+                            <td>15</td>
+                        </tr>
+                         <tr>
+                            <td>Standing Dumbbell Press</td>
+                            <td>4</td>
+                            <td>10-12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Lateral Raise</td>
+                            <td>3</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>Dumbbell Tricep Kickback</td>
+                            <td>3</td>
+                            <td>15-20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+    <script src="{{ url_for('static', filename='js/workout.js') }}"></script>
+</body>
+</html>

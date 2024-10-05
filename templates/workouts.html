@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workouts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/workouts.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <div class = "workout-intro">
+            <h1 >Workouts For Men</h1>
+            <p >We have a huge range of free downloadable workouts for men designed by fitness experts and trainers. Find the best workout for your goal, experience, desired training style and equipment access.</p>
+        </div>
+    </div>
+
+    <div class = "wrapper1">
+        <div class = "workout">
+            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
+            
+            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
+            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+            <a href = "" class = "view-button"> View workout</a> 
+        </div>
+
+        <div class = "workout">
+            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
+            
+            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
+            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+
+            <a href = "" class = "view-button"> View workout</a> 
+            
+        </div>
+
+        <div class = "workout">
+            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
+            
+            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
+            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+
+            <a href = "" class = "view-button"> View workout</a> 
+        </div>
+
+        
+
+        
+    </div>
+
+    
+
+    <script src="{{ url_for('static', filename='js/workouts.js') }}"></script>
+</body>
+</html>
