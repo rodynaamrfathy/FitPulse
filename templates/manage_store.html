@@ -90,9 +90,9 @@
 
     <!-- Form to Add a Product -->
     <h2>Add a New Product</h2>
-    <form action="{{ url_for('store.add_product') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url_for('storemanager.add_product') }}" method="POST" enctype="multipart/form-data">
         <label for="product_name">Product Name:</label>
-        <input type="text" id="product_name" name="productname" required>
+        <input type="text" id="product_name" name="product_name" required>
 
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" step="0.01" required>
@@ -151,12 +151,12 @@
                     {% endif %}
                 </td>
                 <td>
-                    <form class = "form" action="{{ url_for('store.edit_product', product_id=product.productid) }}" method="GET">
+                    <form class = "form" action="{{ url_for('storemanager.edit_product', product_id=product.productid) }}" method="GET">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
                 <td>
-                    <form class = "form" action="{{ url_for('store.delete_product', product_id=product.productid) }}" method="POST" style="display:inline;">
+                    <form class = "form" action="{{ url_for('storemanager.delete_product', product_id=product.productid) }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
