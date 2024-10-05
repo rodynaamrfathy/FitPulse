@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Light grey background for the whole page */
+}
+
+.main {
+    margin-top: 70px;
+    padding: 20px;
+}
+
+
+nav {
+    text-align: center; /* Center navigation links */
+    padding: 15px; /* Space around the navigation */
+}
+
+nav a {
+    margin: 0 15px; /* Space between navigation links */
+    color: #ff5c33; /* Orange color for links */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Bold font for links */
+}
+
+
+.main h1 {
+    font-size: 70px; /* Large font size for headings */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    padding-left: 40px; /* Space from the left */
+    padding-top: 10px;
+
+}
+
+.main h1.forever {
+    color: #ff5c33; /* Orange color for specific heading */
+    text-align: left; /* Left align text */
+    padding-left: 90px; /* Space from the left */
+    padding-top: 10px;
+}
+
+.main .Fast {
+    padding-left:60px;
+}
+
+.main img {
+    max-width: 100%; /* Ensure the image does not exceed its container width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.features {
+    display: flex; /* Use flexbox layout */
+    flex-wrap: wrap; /* Wrap items to new lines */
+    justify-content: center; /* Center the features horizontally */
+    padding: 50px; /* Space around the features section */
+}
+
+.feature {
+    flex: 1 1 calc(33% - 40px); /* Responsive layout with margin */
+    margin: 20px; /* Space around each feature */
+    text-align: center; /* Center text inside each feature */
+    background-color: #fff; /* White background for features */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Space inside each feature */
+}
+
+.feature img {
+    width: 100px; /* Fixed width for feature images */
+    height: 100px; /* Fixed height for feature images */
+}
+
+.feature h3 {
+    margin-top: 20px; /* Space above feature headings */
+}
+
+.about-us {
+    background-color: #111; /* Dark background for the about us section */
+    color: #fff; /* White text color */
+    padding: 20px; /* Space inside the section */
+}
+
+.footer {
+    background-color: #111; /* Dark background for footer */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    padding: 20px; /* Space inside the footer */
+}
+/* Ensure the section and its contents are styled correctly */
+/* Styling for the main section */
+.main {
+    position: relative; /* Needed to allow absolute positioning of child elements */
+    width: 100%;
+    height: 80vh; /* Full viewport height */
+    overflow: hidden;
+}
+
+/* Styling for the background image */
+.homepageimg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire section */
+    z-index: -1; /* Puts the image behind the text */
+}
+
+/* Styling for the text */
+h1, .p {
+    position: absolute; /* Absolute positioning to control where the text is */
+    color: white; /* White text for visibility */
+    margin: 0;
+    z-index: 0.5; /* Ensures text is above the image */
+    font-size: 3rem; /* Adjust as needed */
+    text-align: center;
+}
+
+/* Positioning for each individual text element */
+h1:nth-of-type(1) {
+    top: 20%; /* Adjust this to control vertical position */
+    left:3.8rem; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+}
+
+h1:nth-of-type(2) {
+    top: 30%; /* Adjust this to control vertical position */
+    left: 5rem; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+}
+
+.forever {
+    top: 40%; /* Adjust this to control vertical position */
+    left: 7.5rem;
+    transform: translateX(-50%);
+    font-size: 4rem; /* Make this text bigger */
+    font-weight: bold;
+}
+
+.main .p {
+    top: 53%; /* Adjust this to control vertical position */
+    left: 5rem;
+    transform: translateX(-50%);
+    font-size: 1rem;
+
+}
+
+
+@media (min-width: 1700px) {
+    .main h1 {
+        font-size: 100px; /* Large font size for headings */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    .main h1 {
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+        padding-left: 70px; /* Space from the left */
+    }
+    
+    .main h1.forever {
+        color: #ff5c33; /* Orange color for specific heading */
+        text-align: left; /* Left align text */
+        padding-left: 190px; /* Space from the left */
+    }
+
+    .main .Fast {
+        padding-left: 115px;
+    }
+
+    .main .p {
+        top: 52%; /* Adjust this to control vertical position */
+        left: 4.5rem;
+        transform: translateX(-50%);
+        font-size: 1rem;
+    }
+}
+
+.btn-signup {
+    display: inline-block;
+    background-color: #ff6347; /* Button color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    top: 60%;
+    left: 5%;
+}
+
+.btn-signup:hover {
+    background-color: #ff4500; /* Darker color on hover */
+}
+

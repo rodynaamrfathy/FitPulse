@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/startheader.css') }}">
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+
+</head>
+<body>
+    
+
+    <header>
+        {% include 'startheader.html' %} 
+    </header>
+
+    <section class="main" id="home">
+        <img src="{{ url_for('static', filename='images/HomePage.jpg') }}" alt="Fit Couple" class="homepageimg">
+        <h1>Fit.</h1>
+        <h1 class="Fast">Fast.</h1>
+        <h1 class="forever">Forever.</h1>
+        <a href="{{ url_for('signup.register') }}" class="btn-signup">Join us NOW!</a>
+    </section>
+    
+
+<section id="features">
+    <div class="features">
+        <!-- Feature 1 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/ozckswtv.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>          
+            <h3>Exercise Plan</h3>
+            <p>Get personalized workout plans that suit your fitness goals. Whether you're a beginner or a seasoned athlete, we have the right plan for you.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/wjhxvnmc.json"
+                trigger="hover"
+                colors="primary:#121331,secondary:#000000"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>Recipes</h3>
+            <p>Discover healthy and delicious recipes to complement your fitness plan.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/ayhtotha.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>AI Coaching</h3>
+            <p>Let our AI-driven virtual coach guide you through your fitness journey with smart, personalized recommendations.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/jdgfsfzr.json"
+                trigger="hover"
+                colors="primary:#121331,secondary:#000000"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>Chat</h3>
+            <p>Connect with trainers, friends, and other fitness enthusiasts through our chat feature.</p>
+        </div>
+        <!-- Feature 6 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/hrjifpbq.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>Friends</h3>
+            <p>Invite friends, track each other's progress, and stay motivated together.</p>
+        </div>
+        <!-- Feature 7 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/lomfljuq.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>Challenges</h3>
+            <p>Participate in fitness challenges to push your limits and earn rewards.</p>
+        </div>
+        <!-- Feature 8 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/pbrgppbb.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>            
+            <h3>Cart</h3>
+            <p>Easily purchase supplements, workout gear, and other fitness products from your cart.</p>
+        </div>
+        <!-- Feature 9 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/jyjslctx.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>           
+            <h3>Progress Dashboard</h3>
+            <p>Set your fitness goals and track your progress over time.</p>
+        </div>
+        <!-- Feature 10 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/xljvqlng.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>            
+            <h3>Plan</h3>
+            <p>Create a personalized workout and nutrition plan that fits your lifestyle.</p>
+        </div>
+        <!-- Feature 11 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/iazmohzf.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon> 
+            <h3>Trainers</h3>
+            <p>Find the perfect trainer to help you achieve your fitness goals.</p>
+        </div>
+        <!-- Feature 12 -->
+        <div class="feature">
+            <lord-icon
+                src="https://cdn.lordicon.com/wmlleaaf.json"
+                trigger="hover"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <h3>Meal Plans</h3>
+            <p>Get personalized meal plans based on your dietary preferences and fitness goals.</p>
+        </div>
+    </div>
+</section>
+
+<section id="about-us">
+    <div class="about-us">
+        <h2 style="text-align: left; margin-left: 20px;">Our Mission:</h2>
+        <p style="text-align: left; padding: 20px;">We are committed to helping you become the best version of yourself. Our platform offers a variety of fitness-related services, including workout plans, supplement guidance, and much more to make sure you stay fit, fast, and forever healthy!</p>
+        <p style="text-align: left; padding: 20px;">
+            <a href="{{ url_for('careers.careers_page') }}" class="careers-link">Interested in joining us? Check out our <strong>Careers</strong> page!</a>
+        </p>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2024 Fitness Website - All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
