@@ -8,7 +8,7 @@ from helpers import allowed_file  # Import the allowed_file function from helper
 
 
 # Create a blueprint for store management
-managestore_bp = Blueprint('storemanager', __name__)
+store_bp = Blueprint('store', __name__)
 
 
 '''
@@ -31,7 +31,7 @@ managestore_bp = Blueprint('storemanager', __name__)
     it fetch all the products from the DB and render them in the manage_store.html
 '''
 
-@managestore_bp.route('/admin/manage_store')
+@store_bp.route('/admin/manage_store')
 @store_management_required
 def manage_store():
 
@@ -59,7 +59,7 @@ def manage_store():
 '''
 
 
-@managestore_bp.route('/admin/add_product', methods=['POST'])
+@store_bp.route('/admin/add_product', methods=['POST'])
 @store_management_required
 def add_product():
 
@@ -127,7 +127,7 @@ def add_product():
 '''
 
 
-@managestore_bp.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+@store_bp.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
 @store_management_required
 def edit_product(product_id):
 
@@ -200,7 +200,7 @@ def edit_product(product_id):
     Then render the manage_store.html with the exeisting products
 '''
 
-@managestore_bp.route('/admin/delete_product/<int:product_id>', methods=['POST'])
+@store_bp.route('/admin/delete_product/<int:product_id>', methods=['POST'])
 @store_management_required
 def delete_product(product_id):
 
@@ -238,3 +238,63 @@ def delete_product(product_id):
 
 
 # -------------------------------Store-Product-Managnment-Ends-Here------------------------------------------
+
+# -------------------------------Store-Product-Starts-Here------------------------------------------
+
+
+
+'''
+    The Following Route are for the renderng the store Page in the store.html
+    it fetch all the products and render them
+'''
+
+
+@store_bp.route('/store')
+def store():
+
+    mysql = current_app.config['mysql']  
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    
+    cursor.execute('SELECT * FROM products')
+    products = cursor.fetchall()
+    cursor.close()  
+    
+    return render_template('store.html', products=products)
+
+
+
+'''
+    The Following Route are for the renderng the Product-Details in the product.html
+    it fetch the details of the pressed product and render it
+'''
+
+
+@store_bp.route('/product/<int:product_id>')
+def product(product_id):
+
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    
+    cursor.execute('SELECT * FROM products WHERE productid = %s', (product_id,))
+    product = cursor.fetchone()
+    
+    
+    if product is None:
+        flash('Product not found.', 'danger')
+        return redirect(url_for('store.store')) 
+    
+    
+    cursor.execute('SELECT description FROM productdescription WHERE productid = %s', (product_id,))
+    descriptions = cursor.fetchall()
+    
+    cursor.close()  
+    
+    
+    return render_template('product.html', product=product, descriptions=descriptions)
+
+
+
+# -------------------------------Store-Product-Ends-Here------------------------------------------
+

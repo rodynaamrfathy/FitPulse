@@ -2,7 +2,6 @@ from flask import Flask, session, request, flash, redirect, url_for, render_temp
 from database import init_db  # Import the init_db function
 import MySQLdb.cursors
 from routes import register_routes
-
 from functools import wraps
 from datetime import datetime
 from werkzeug.utils import secure_filename
