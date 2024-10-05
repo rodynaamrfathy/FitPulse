@@ -32,6 +32,7 @@
         <div class="icon-container">
             <div class="login-container">
                 
+                
                 {% if session.get('loggedin') %}
                 <span class="login-text">{{ session['firstName'] }}</span>
                 {% else %}
@@ -49,8 +50,8 @@
                         <a href="#" class="dropdown-item">My Recipes</a>
                         <a href="{{ url_for('logout') }}" class="logout">Logout</a>
                     {% else %}
-                        <a href="" class="sign">Sign In</a>
-                        <a href="" class="create">Create Account</a>
+                        <a href="{{ url_for('signin.signin') }}" class="sign">Sign In</a>
+                        <a href="{{ url_for('signup.register') }}" class="create">Create Account</a>
                     {% endif %}
                 </div>
             </div>
