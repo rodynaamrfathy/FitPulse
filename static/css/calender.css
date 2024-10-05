@@ -1,0 +1,209 @@
+
+/* Plans container */
+.wrapper2 {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 2rem;
+    padding: 0 15px;
+}
+
+.plans-container {
+    background: rgba(31, 30, 30, 0.9); /* Dark overlay with slight transparency */
+    color: white;
+    padding: 15px;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    position: relative; /* To allow the image to be positioned absolutely */
+    
+}
+
+.noplans {
+    font-size: 1.8rem;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+}
+
+/* Plan container styling */
+.plan {
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    color: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 15px; /* Rounded corners */
+    border: 1px solid #ff9409; /* Border to match the theme */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+/* Plan title styling */
+.plan-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ff9409; /* Highlight the plan title */
+    text-transform: uppercase;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+/* Plan description styling */
+.plan-description {
+    font-size: 1rem;
+    color: #d4d4d4;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Plan button styling (as an anchor) */
+.plan-button {
+    display: inline-block; /* Allows padding and dimensions like a button */
+    background-color: #ff9409;
+    color: white;
+    text-decoration: none; /* Removes underline from the link */
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Hover effect for the anchor */
+.plan-button:hover {
+    background-color: #e67c07;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Hover effect for plan container */
+.plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* General wrapper for the page */
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+}
+
+/* Calendar container */
+.container-calendar {
+    background: rgba(31, 30, 30, 0.9); /* Dark overlay with slight transparency */
+    color: white;
+    padding: 15px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    position: relative; /* To allow the image to be positioned absolutely */
+    border: 2px solid #ffffff;
+    z-index:0; /* Ensure the content is on top of the image */
+}
+
+/* Style for the background image */
+.container-calendar .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* Make sure the image is beneath the content */
+    opacity: 0.5; /* Slight transparency for the image */
+    border-radius: 20px; /* Same border-radius to match container */
+}
+
+/* Ensure all calendar content is on top of the image */
+.container-calendar * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Calendar table layout */
+.table-calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-calendar td,
+.table-calendar th {
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    text-align: center;
+    vertical-align: top;
+}
+
+/* Date picker styles */
+.date-picker:hover {
+    background-color: rgb(78, 75, 75);
+    color: white;
+    cursor: pointer;
+}
+
+.date-picker.selected {
+    background-color: rgb(78, 75, 75);
+    font-weight: bold;
+}
+
+#monthAndYear {
+    text-align: center;
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Navigation buttons */
+.button-container-calendar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.button-container-calendar button {
+    background: rgb(78, 75, 75);
+    color: white;
+    border: 1px solid rgb(78, 75, 75);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Footer container for month and year selection */
+.footer-container-calendar {
+    margin-top: 1em;
+    border-top: 1px solid #dadada;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer-container-calendar select {
+    background: rgb(78, 75, 75);
+    border: 1px solid rgb(78, 75, 75);
+    border-radius: 3px;
+    color: white;
+    padding: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {  
+
+    .wrapper {
+        max-width: 700px;
+    }
+
+    .wrapper2 {
+        max-width: 700px;
+        
+    }
+}

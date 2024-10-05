@@ -1,0 +1,226 @@
+/* General wrapper for the page */
+.exercise-banner{
+    max-width: 900px;
+    width: 100%;
+}
+
+.exercise-banner img{
+    width: 1000px;
+    height: 400px;
+    border-radius: 20px;
+    opacity: 0.7;
+    border: 1px solid white;
+}
+
+.exercise-banner h1 {
+    position: absolute;
+    top: 35%; /* Adjust this to control the vertical position */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Shift the element to the exact center */
+    color: white;
+    font-size: 3rem; /* Adjust as necessary */
+    font-family: 'Protest Guerrilla', sans-serif;
+    z-index: 0.1; /* Ensure it appears on top of the image */
+}
+
+.exercise-banner p {
+    position: absolute;
+    top: 45%; /* Adjust this to control the vertical position */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    color: white;
+    font-size: 1.4rem; /* Adjust as necessary */
+    max-width: 600px; /* Limit the width of the paragraph */
+    z-index: 0.1; /* Ensure it appears on top of the image */
+}
+
+.wrapper0{
+    max-width: 1000px !important;
+    margin-bottom: -2rem !important;
+}
+
+.wrapper1{
+    margin-top: 2.5rem !important;
+    margin-bottom:-5.5rem !important;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.1rem;
+}
+   
+
+
+.wrapper1 h1 {
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+.wrapper1 p {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.wrapper2 a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.3rem;
+   
+    padding: 8px 8px ;
+    font-family: 'Protest Guerrilla', sans-serif;
+
+}
+
+.wrapper2 {
+    
+    margin-bottom: -5rem !important;
+}
+
+.filter-search-container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    align-items: center;
+    gap: 15px; /* Add space between the filter link and the search input */
+}
+.search-input{
+    align-items: right;
+    margin-right: 2rem;
+    background-color: #333;
+    border: 1px solid white;
+    color : white;
+}
+
+.search-input::placeholder{
+    color: white;
+}
+
+.search-input:focus{
+    border-color: white !important;
+}
+
+.wrapper0,
+.wrapper1,
+.wrapper2,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap if necessary */
+    justify-content: center; /* Center the items */
+    gap: 1rem; /* Space between items */
+    justify-content: flex-start; /* Align items to the left */
+    max-width: 900px;
+    margin: 15px auto;
+    padding: 0 15px;
+    text-align: center;
+    margin-top: 7rem;
+
+}
+/* Styling for each exercise block */
+.exercise {
+    text-align: center;
+    width: calc(33.33% - 12px); /* Ensure each exercise takes one-third of the row, minus some margin */
+    margin-bottom: 1rem; /* Add spacing between rows */
+    
+}
+
+.exercise img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.2rem;
+    border-radius: 10px;
+}
+
+.exercise h2 {
+    font-size: 1.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.exercise img:hover{
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper0,
+    .wrapper1,
+    .wrapper2,
+    .wrapper {
+        width: 700px;
+        
+    }
+
+    .wrapper1 h1 {
+        font-size: 2rem;
+    }
+    
+    .wrapper1 p {
+        font-size: 1rem;
+    }
+
+    .exercise h2 {
+        font-size: 1.2rem;
+        
+    }
+
+    .exercise-banner img{
+        height:300px;
+        width: 700px;
+
+    }
+
+}
+
+@media (min-width: 1700px) {
+
+    .wrapper0 {
+        max-width: 1000px;
+    }
+
+    .exercise-banner img{
+        width: 1000px;
+        height: 400px;
+        border-radius: 20px;
+        opacity: 0.7;
+        
+    }
+
+    .exercise-banner h1 {
+        position: absolute;
+        top: 25%; /* Adjust this to control the vertical position */
+        left: 50%; /* Center horizontally */
+        transform: translate(-50%, -50%); /* Shift the element to the exact center */
+        color: white;
+        font-size: 4rem; /* Adjust as necessary */
+        font-family: 'Protest Guerrilla', sans-serif;
+        z-index: 0.1; /* Ensure it appears on top of the image */
+    }
+    
+    .exercise-banner p {
+        position: absolute;
+        top: 30%; /* Adjust this to control the vertical position */
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+        color: white;
+        font-size: 1.8rem; /* Adjust as necessary */
+        max-width: 600px; /* Limit the width of the paragraph */
+        z-index: 0.1; /* Ensure it appears on top of the image */
+    }
+}

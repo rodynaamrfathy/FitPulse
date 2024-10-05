@@ -1,0 +1,211 @@
+.wrapper6,
+.wrapper5,
+.wrapper4,
+.wrapper3,
+.wrapper2,
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+    
+}
+
+
+.wrapper1 {
+    margin-top: 0.5rem;
+}
+
+.recipe-title{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+}
+
+/* Flex layout for the author container to align items on the same line */
+.author-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start; /* Align items to the left */
+    text-align: left;
+    width: 100%; /* Ensure the container spans the full width */
+}
+
+/* Author image */
+.author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Add spacing between the image and the text */
+}
+
+/* Flex layout for author info (name and date) */
+.author-info {
+    display: flex;
+    flex-direction: column; /* Stack name and date vertically */
+    text-align: left;
+}
+
+.author-name {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #f7f7f7;
+}
+
+.author-date {
+    font-size: 1rem;
+    margin: 0;
+    color: #ccc;
+}
+
+.wrapper3,
+.wrapper2 {
+    margin-top: 2rem !important;
+}
+
+.wrapper2 img {
+    width: 900px;
+    height:600px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+
+.wrapper3 h3 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    border-left: 5px solid #ff9409;
+    padding-left: 1rem;
+}
+
+.wrapper6,
+.wrapper5,
+.wrapper4 {
+    margin-top: 2rem !important;
+}
+
+.wrapper4 img {
+    border-radius: 50%;
+}
+
+.wrapper4 .cook-time,
+.wrapper4 .prep-time {
+    display: flex; /* Enables flexbox to align items */
+    align-items: center; /* Vertically centers the img and text */
+}
+
+.wrapper4 img {
+    
+    margin-right: 2rem; /* Adds space between the image and text */
+}
+
+.wrapper4 .text-container {
+    display: flex;
+    flex-direction: column; /* Stack the h1 and h2 vertically */
+    text-align: left;
+}
+
+.wrapper4 h1 {
+    margin: 0; /* Removes default margin */
+    font-size: 1.5rem; /* Adjust the font size */
+    color: #ff9409;
+    padding: 5px 5px;
+    margin-bottom: 0.2rem;
+    font-weight: 300;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+.wrapper4 h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.wrapper6 h1,
+.wrapper5 h1{
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    border-left: 5px solid #ff9409;
+    padding-left: 1rem;
+}
+
+.wrapper5 ul {
+    list-style-type: "\2713";
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.wrapper5 ul li {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    color: white;
+}
+
+
+
+.wrapper5 .nutrition-facts li {
+    list-style-type: disc;
+    margin-bottom: 0.5rem;
+
+}
+
+.nutrition-facts {
+    padding: 2rem 2rem;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    text-align: left;
+}
+
+.wrapper6 p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: white;
+    text-align: left;
+    white-space: pre-line; /* Preserve whitespace and line breaks */
+
+}
+
+
+
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper6,
+    .wrapper5,
+    .wrapper4,
+    .wrapper3,
+    .wrapper2,
+    .wrapper1,
+    .wrapper {
+        width: 600px;      
+    }
+
+    .wrapper2 img {
+        width: 600px;
+        height:600px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    
+
+}

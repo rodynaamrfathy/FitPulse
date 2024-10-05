@@ -1,0 +1,155 @@
+
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+}
+
+.wrapper {
+    border-bottom: 1px solid white;
+}
+
+.wrapper1 {
+    margin-top: 1rem !important;
+}
+
+.exercise-intro {
+    width: 100%;
+}
+
+.exercise-intro h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.exercise-intro p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.exercise {
+    text-align: center;
+    width: calc(50% - 12px); /* Ensure each exercise takes one-third of the row, minus some margin */
+    margin-bottom: 2rem; /* Add spacing between rows */
+}
+
+.exercise img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.2rem;
+    border-radius: 10px;
+    border: 0.5px solid white;
+}
+
+.exercise-info {
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    margin-bottom: 0.7rem;
+    
+}
+
+.exercise h2 {
+    font-size: 1.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.view-button {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 0.5px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-out;
+}
+
+.view-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* General styling for the .info block */
+.info {
+    border: 0.5px solid white;
+    padding: 5px 5px;
+    border-radius: 10px;
+    width: 24%;
+    position: relative; /* Make sure this is set for tooltip positioning */
+}
+
+.info h3 {
+    color : #ff9409  !important;
+}
+
+.info p {
+   font-size: 0.8rem !important;
+}
+
+/* Styling for the heading (h3) inside .info */
+.info h3, .info p {
+    font-size: 0.9rem;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis when text overflows */
+    color: white;
+}
+
+/* Show full text on hover using a tooltip */
+.info:hover h3::after, .info:hover p::after {
+    content: attr(title); /* Show full text from the title attribute */
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: normal; /* Allow the text to wrap in the tooltip */
+    z-index: 10;
+    font-size: 0.9rem;
+    width: max-content;
+    max-width: 200px; /* Control the width of the tooltip */
+}
+
+
+
+.info h3::after, .info p::after {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-out;
+}
+
+@media (max-width: 1200px) {  
+
+    .wrapper1,
+    .wrapper {
+        width: 700px;
+        
+    }
+
+    .info h3 {
+        font-size: 0.7rem;
+    }
+
+    .info p {
+        font-size: 0.6rem !important;
+    }
+
+
+
+    
+
+}

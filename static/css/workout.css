@@ -1,0 +1,252 @@
+.wrapper4,
+.wrapper3,
+.wrapper2,
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+    
+}
+
+.wrapper1 {
+    margin-top: 0.5rem;
+}
+
+.workout-title{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+}
+
+/* Flex layout for the author container to align items on the same line */
+.author-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start; /* Align items to the left */
+    text-align: left;
+    width: 100%; /* Ensure the container spans the full width */
+}
+
+/* Author image */
+.author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Add spacing between the image and the text */
+}
+
+/* Flex layout for author info (name and date) */
+.author-info {
+    display: flex;
+    flex-direction: column; /* Stack name and date vertically */
+    text-align: left;
+}
+
+.author-name {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #f7f7f7;
+}
+
+.author-date {
+    font-size: 1rem;
+    margin: 0;
+    color: #ccc;
+}
+
+.wrapper2 {
+    margin-top: 4rem;
+}
+
+.workout-intro-description p{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    border-left : 5px solid #ff9409;
+    padding-left: 1rem;
+}
+
+.workout-summary {
+    border-top: 5px solid #ff9409;
+    margin-top: 2rem;
+   
+}
+
+.workout-summary h2{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between; /* Add space between the two headings */
+    align-items: center; /* Align them vertically in the center */
+    width: 900px;
+    margin-bottom: 1rem;
+}
+
+.property-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color: white;
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    font-weight: bold; /* Make the text bold */
+    color : #ff9409;
+}
+
+.property-value pre {
+    text-align: left;
+}
+
+.property-value {
+    font-size: 1.2rem;
+    white-space: pre-line; /* Preserve whitespace and line breaks */
+    margin: 0;
+    color: white;
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    font-weight: bold; /* Make the text bold */
+
+}
+
+.wrapper3 {
+    margin-top: 3rem;
+    text-align: left;
+
+}
+
+.workout-description h1{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    padding-top: 1rem;
+    padding-bottom: -1rem;
+}
+
+.workout-description p{
+    font-size: 1.25rem;
+    white-space: pre-line; /* Preserve whitespace and line breaks */
+    color: white;
+    text-align: left;
+}
+
+.wrapper4 {
+    margin-top: 3rem;
+    text-align: left;
+    margin-bottom: 3rem;
+
+}
+
+.Day,
+.workout-split{
+    width: 900px;
+}
+
+.workout-split {
+    border-top : 5px solid #ff9409;
+}
+.Day {
+    margin-bottom: 3rem;
+}
+
+.workout-split h1{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    padding-top: 1rem;
+    padding-bottom: -1rem;
+}
+
+.workout-table {
+    width: 900px;
+    border-collapse: collapse; /* Collapse the borders between cells */
+    margin-top: 1rem;
+}
+
+.workout-table th {
+    background-color: #ff9409; /* Change this to your desired background color */
+    color: white; /* Text color for the headers */
+    padding: 10px; /* Add some padding for better spacing */
+    text-align: left; /* Align the text to the left */
+    font-weight: bold; /* Make the text bold */
+    font-size:1.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    margin-bottom:rem;
+}
+
+.workout-table tr:first-child td {
+    padding-top: 1rem;
+}
+
+.workout-table th:first-child {
+    border-top-left-radius: 10px; /* Add left border to the first header */
+}
+
+.workout-table th:last-child {
+    border-top-right-radius: 10px; /* Add left border to the first header */
+}
+
+
+
+.workout-table td {
+    padding: 10px; /* Add some padding for better spacing */
+    border-bottom: 1px solid #ccc; /* Add a border at the bottom of each row */
+    border-left: 1px solid #ccc; /* Add a border at the left of each cell */
+    border-right: 1px solid #ccc; /* Add a border at the right of each cell */
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper4,
+    .wrapper3,
+    .wrapper2,
+    .wrapper1,
+    .wrapper {
+        width: 600px;      
+    }
+
+    .workout-summary,
+    .workout-split,
+    .workout-table {
+        width: 600px;
+        
+    }
+
+   
+    
+    .property-value {
+        max-width: 500px;
+    }
+
+    
+
+}

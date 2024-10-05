@@ -1,0 +1,79 @@
+/* Style for side navbar */
+.side-navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6rem; /* Changed to rem */
+    background-color: #333;
+    border-radius: 3rem; /* Changed to rem */
+    margin-top: 1rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0.5rem;
+    
+    /* Flexbox properties for positioning */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 1.25rem 0; /* Changed to rem */
+    z-index: 1000; /* Ensure the navbar is on top of other elements */
+}
+
+.logo {
+    width: 5rem; /* Changed to rem */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 5rem; /* Changed to rem */
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Use transform for scaling */
+}
+
+.side-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-navbar ul li {
+    margin-bottom: 1.25rem; /* Changed to rem */
+}
+
+.side-navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.125rem; /* Changed to rem */
+    padding: 0.625rem; /* Changed to rem */
+    padding-left: 1.25rem; /* Changed to rem */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, border-left 0.3s;
+    border-left: 0.25rem solid transparent; /* Changed to rem */
+}
+
+.side-navbar ul li a:hover {
+    border-left: 0.25rem solid orange; /* Changed to rem */
+    padding-left: 1.875rem; /* Changed to rem */
+    padding-right: 2.5rem; /* Changed to rem */
+}
+
+.side-navbar ul li a i {
+    margin-bottom: 0.625rem; /* Changed to remm */
+}
+
+@media (max-width: 1400px) { 
+    .logo{
+        margin-bottom: 2rem;
+    }
+
+    lord-icon{
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    
+}
+}
+  

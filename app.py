@@ -37,9 +37,57 @@ def startpage():
     session.clear()
     return render_template('index.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('mainpage.html')
+
+@app.route('/header')
+def header():
+    return render_template('header.html')
+
 @app.route('/startheader')
 def startheader():
     return render_template('startheader.html')
+
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html')
+
+@app.route('/calender')
+def calender():
+    return render_template('calender.html')
+
+@app.route('/workoutsCategory')
+def workoutsCategory():
+    return render_template('workoutsCategory.html')
+
+@app.route('/workouts')
+def workouts():
+    return render_template('workouts.html')
+
+@app.route('/workout')
+def workout():
+    return render_template('workout.html')
+
+@app.route('/dietplans')
+def dietplans():
+    return render_template('dietplans.html')
+
+@app.route('/dietplan')
+def dietplan():
+    return render_template('dietplan.html')
+
+@app.route('/recipes')
+def recipes():
+    return render_template('recipes.html')
+
+@app.route('/recipe')
+def recipe():
+    return render_template('recipe.html')
+
+@app.route('/tools')
+def tools():
+    return render_template('tools.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

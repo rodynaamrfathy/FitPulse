@@ -144,7 +144,7 @@ lord-icon:first-child {
     border-radius: 1rem;
     color: #fff;
     padding: 0.5rem;
-    margin-left: 1.3rem;
+    margin-left: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: flex;
@@ -179,7 +179,7 @@ lord-icon:first-child {
 .dropdown-menu {
     position: absolute;
     top: 100%; /* Position below the login container */
-    left: -2;
+    left: 0;
     background-color: rgb(63, 61, 61);
     border: 1px solid #ccc;
     border-radius: 0.5rem;

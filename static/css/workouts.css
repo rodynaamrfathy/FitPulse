@@ -1,0 +1,105 @@
+
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+}
+
+.wrapper {
+    border-bottom: 1px solid white;
+}
+
+.wrapper1 {
+    margin-top: 1rem !important;
+}
+
+.workout-intro {
+    width: 100%;
+}
+
+.workout-intro h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.workout-intro p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.workout {
+    text-align: center;
+    width: calc(50% - 12px); /* Ensure each workout takes one-third of the row, minus some margin */
+    margin-bottom: 2rem; /* Add spacing between rows */
+}
+
+.workout p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.workout img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.2rem;
+    border-radius: 10px;
+    border: 0.5px solid white;
+}
+
+
+.workout h2 {
+    font-size: 1.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.view-button {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 0.5px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-out;
+}
+
+.view-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper1,
+    .wrapper {
+        width: 700px;
+        
+    }
+
+    .info h3 {
+        font-size: 0.7rem;
+    }
+
+    .info p {
+        font-size: 0.6rem !important;
+    }
+
+
+
+    
+
+}

@@ -1,0 +1,165 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(31, 30, 30);
+    font-size: 16px; /* Use base font-size to scale content */
+}
+
+.navigation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Make the width dynamic */
+    padding: 1rem;
+    padding-bottom: 0.2rem;
+    margin-left: auto; /* Ensure the container is centered */
+    background-color: rgb(31, 30, 30);
+    border-bottom: 2px solid rgb(70, 67, 67);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Keep the navigation fixed */
+
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.main-content {
+    margin-top: calc(2rem + 2.2rem);
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Playwrite BE VLG', sans-serif;
+    margin-right: 1rem;
+    margin-top: -0.4rem;
+    flex-shrink: 0; /* Prevent the logo from shrinking */
+}
+
+.logo-container .fit, .logo-container .pulse {
+    font-size: 1.3rem;
+    color: #ff9409;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: block;
+}
+
+.logo-container .pulse {
+    margin-left: 0.6rem;
+    margin-top: 0.1rem;
+}
+
+.nav-links-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap; /* Allow links to wrap on small screens */
+    justify-content: center; /* Center the links if space allows */
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #f9f1f1;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: rgb(31, 30, 30);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.4rem;
+    height: 2px;
+    background-color: #ff9409;
+    border-radius: 1rem;
+}
+
+.search-container {
+    flex: 1;
+    display: none;
+    justify-content: flex-end;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 15rem; /* Limit the width for flexibility */
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #084999;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+lord-icon {
+    margin-right: 2rem;
+}
+
+lord-icon:last-child {
+    margin-right: 0;
+}
+
+lord-icon:first-child {
+    margin-left: 1rem;
+}
+
+@media (max-width: 1200px) {  
+    .logo-container .fit, .logo-container .pulse {
+        font-size: 1rem;
+        color: #ff9409;
+        font-family: "Protest Guerrilla", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        display: block;
+    }
+    
+    .logo-container .pulse {
+        margin-left: 0.6rem;
+        margin-top: 0.1rem;
+    }
+
+    .nav-link {
+        
+        font-size: 0.9rem;
+        
+    }
+    
+  }
+  
+
+
+
+

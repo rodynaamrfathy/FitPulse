@@ -1,0 +1,138 @@
+.wrapper4,
+.wrapper3,
+.wrapper2,
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+}
+
+.wrapper1 {
+    margin-top: 1rem !important;
+    
+}
+
+
+
+.exercise-video{
+    width: 100%;
+    
+}
+
+
+.exercise-title {
+    width: 100%;
+}
+
+.exercise-title h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.wrapper2{
+    border-top: 4px solid #ff9409;
+    margin-top: 3rem !important;
+}
+
+.info {
+    display: flex; /* Use flexbox */
+    justify-content: space-between; /* Space between title and content */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 1rem;
+}
+.info-titleP{
+    width: 200px;
+}
+
+.info-content{
+    width:200px;
+    text-align: left;
+}
+
+.wrapper2 h2 {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    text-align: left;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+.wrapper2 img {
+    margin-top:1rem;
+}
+.exercise-content {
+    display: flex;
+    justify-content: space-between; /* Distribute space between elements */
+    align-items: flex-start; /* Align items at the top */
+}
+
+
+.info-title{
+    margin-right: 5rem;
+}
+
+.exercise-overview{
+    text-align: left;
+}
+
+.exercise-overview h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.exercise-overview p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+
+    color: white;
+}
+
+.exercise-instruction{
+    text-align: left;
+}
+
+.exercise-instruction h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.exercise-instruction li {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+    list-style: number;
+    margin-left: 2rem;
+}
+
+.wrapper4 {
+    margin-top:3rem;
+}
+
+
+@media (max-width: 1200px) {  
+
+
+    .wrapper1,
+    .wrapper2,
+    .wrapper3,
+    .wrapper4,
+    .wrapper {
+        width: 700px;
+        
+    }
+
+    
+
+}
