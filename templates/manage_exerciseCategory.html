@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Exercise Categories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: black;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .form {
+            border: none ;
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Exercise Categories</h1>
+
+    <!-- Form to Add a New Exercise Category -->
+    <h2>Add a New Exercise Category</h2>
+    <form action="{{ url_for('exercisescontroller.add_exercise_category') }}" method="POST" enctype="multipart/form-data">
+        <label for="exercisecategoryname">Exercise Category Name:</label>
+        <input type="text" id="exercisecategoryname" name="exercisecategoryname" required>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4"></textarea>
+
+        <button type="submit">Add Exercise Category</button>
+    </form>
+
+
+    <!-- Table to Display Existing Categories -->
+    <h2>Existing Exercise Categories</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category[0] }}</td> <!-- id -->
+                <td>{{ category[1] }}</td> <!-- name -->
+                <td>
+                    <img src="{{ url_for('static', filename='uploads/category_images/' + category[2]) }}" alt="{{ category[1] }}"> <!-- image -->
+                </td>
+                <td>{{ category[3] }}</td> <!-- description -->
+                <td>
+                    <form class= "form" action="{{ url_for('exercisescontroller.edit_exercise_category', category_id=category[0]) }}" method="POST" enctype="multipart/form-data">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form class = "form" action="{{ url_for('exercisescontroller.delete_exercise_category', category_id=category[0]) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</body>
+</html>
