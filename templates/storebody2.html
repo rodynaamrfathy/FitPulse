@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/storebody2.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        
+        <div class="large-container23">
+            
+            <div class="carousel-container3">
+                <div class="arrow-container left-arrow3">
+                    <span class="arrow3"><</span>
+                </div>
+                <div class="carousel-wrapper3">
+                    <div class="carousel-content3">
+                        <!-- Add your sliding divs here -->
+                        {% for product in products %}
+
+                        <div class="slide3">
+                            <div class="image-container3">
+                                <a href="#">
+                                    <img id="dynamic-image" src="{{ url_for('static', filename='uploads/productsimg/' + product.imageurl) }}" alt="{{ product.productname }}">
+                                </a>                     
+                             </div>
+                            <div class="text-container3">
+                                <p class="item-name3">{{ product.productname }}</p>
+                            </div>
+                            <div class = "item-details2">
+                                <p class="item-quantity3">Quantity: {{ product.stockquantity }}</p>
+                                <p class="item-price3">Price: ${{ product.price }}</p>
+                            </div>
+                            <a href="{{ url_for('store.product', product_id=product['productid']) }}" class="view-product-link3">View Product</a>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+                <div class="arrow-container right-arrow3">
+                    <span class="arrow3">></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/product.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class = "wrapper">
+            <div class = "product-container">   
+                <div class = "product-image">
+                    <img src="{{ url_for('static', filename='uploads/productsimg/' + product.imageurl) }}" alt="{{ product.productname }}">
+                </div>
+                <div class = "product-details">
+                    <h1 class = "product-title">{{ product.productname }}</h1>
+                    <ul>
+                        {% for desc in descriptions %}
+                            <li>{{ desc.description }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="price-rating">
+                        <h2 class="price"> ${{ product.price }}</h2>
+                        <div class="rating">
+                            {% for i in range(1, 6) %}
+                            {% if i <= product.rating %}
+                                <span class="star" data-value="{{ i }}">&#9733;</span>  <!-- Filled star -->
+                            {% else %}
+                                <span class="star" data-value="{{ i }}">&#9734;</span>  <!-- Empty star -->
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Updated Add to Cart Button: Changed to form -->
+                    <form action="{{ url_for('store.add_to_cart', product_id=product.productid) }}" method="POST">
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
+                    </form>                    
+            </div>
+    
+        </div>
+    </div>
+
+   
+    
+    
+    
+   
+
+    <script src="{{ url_for('static', filename='js/product.js') }}"></script>
+</body>
+</html>
