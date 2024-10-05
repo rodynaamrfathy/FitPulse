@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/register.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+
+    
+</head>
+<body>
+    <img src="{{ url_for('static', filename='images/register_poster2.jpg') }}" alt="Register Image" class="background-image">
+
+    <div class="center-container">
+        
+        <form class="login-form" method="POST" action="{{ url_for('signup.register') }}">
+            <h1><span class="welcome-text">Step Into</span> FIT PULSE</h1>
+        
+            <input type="text" id="firstname" name="firstName" placeholder="First Name" class="input-field" required>
+            <input type="text" id="lastname" name="lastName" placeholder="Last Name" class="input-field" required>
+            <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+            <!-- Gender Select -->
+            <select id="gender" name="gender" class="input-field" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <input type="date" id="dob" name="dateOfBirth" placeholder="Date of Birth" class="input-field" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
+                <span class="eye-icon" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+            <button type="submit" class="login-button">Register</button>
+            <a href="{{ url_for('signin.signin') }}" class="create-account">Already Have Account!</a>
+        </form>
+        
+    </div>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</body>
+</html>

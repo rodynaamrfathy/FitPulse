@@ -20,5 +20,7 @@ def register_routes(app):
     app.register_blueprint(trainers_bp)  # Trainers management blueprint
 
     # Register other blueprints
-   
+    app.register_blueprint(workouts_bp)  # Workouts blueprint
+    app.register_blueprint(dietplans_bp)  # Diet plans blueprint
+    app.register_blueprint(recipes_bp)  # Recipes blueprint
     app.register_blueprint(careers_bp)  # Register careers blueprint
