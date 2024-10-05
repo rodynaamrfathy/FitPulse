@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Store Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/storebody1.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Image Slider -->
+        <div class="large-container1">
+            <div class="image-slider">
+                <img src="{{ url_for('static', filename='images/suppdeal1.png') }}" alt="Image 1">
+                <img src="{{ url_for('static', filename='images/suppdeal2.jpg') }}" alt="Image 2">
+                <img src="{{ url_for('static', filename='images/suppdeal3.jpg') }}" alt="Image 3">
+                <!-- Add more images as needed -->
+            </div>
+        </div>
+
+        <!-- Carousel Section -->
+        <div class="large-container2">
+            <div class="top-div">
+                <div class="link-section"> 
+                    <a href="#" class="top-link">Your Favorites</a>
+                    <a href="#" class="top-link">Sale Items</a>
+                    <a href="#" class="top-link">Last Purchase</a>
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="arrow-container left-arrow">
+                    <span class="arrow">&lt;</span>
+                </div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-content">
+                        {% for product in products %}
+                        <div class="slide">
+                            <div class="image-container">
+                                <a href="#">
+                                    <img id="dynamic-image" src="{{ url_for('static', filename='uploads/productsimg/' + product.imageurl) }}" alt="{{ product.productname }}">
+                                </a>
+                            </div>
+                            <div class="text-container">
+                                <p class="item-name">{{ product.productname }}</p>
+                            </div>
+                            <div class = "item-details">
+                                <p class="item-quantity">Quantity: {{ product.stockquantity }} </p>
+                                <p class="item-price">Price: ${{ product.price }}</p>
+                            </div>
+                            <a href="{{ url_for('store.product', product_id=product['productid']) }}" class="view-product-link">View Product</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="arrow-container right-arrow">
+                    <span class="arrow">&gt;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Image Section -->
+        <div class="large-container3">
+            <img src="{{ url_for('static', filename='images/suppdeal4.jpeg') }}" alt="Promotional Image">
+        </div>
+    </div>
+</body>
+</html>
