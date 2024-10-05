@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exercise['exercise_name'] }} - Exercise Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/exercise.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <div class="exercise-title">
+            <h1>{{ exercise['exercisename'] }} Video Exercise Guide</h1>
+        </div>
+    </div>
+    
+    <div class="wrapper1">
+        <div class="exercise-video">
+            <iframe width="760" height="315" src="{{ exercise['videourl'] }}" title="{{ exercise['exercisename'] }} Video"></iframe>
+        </div>
+    </div>
+    
+    <div class="wrapper2">
+        <div class="exercise-content">
+            <div class="exercise-profile">
+                <h2>Exercise Profile</h2>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Target Muscle</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['targetmuscle'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Exercise Type</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['type'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Equipment Required</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['equipment'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Mechanics</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['mechanics'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Force Type</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['forcetype'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Experience Level</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['experiencelevel'] }}</h3></div>
+                </div>
+    
+                <div class="info">
+                    <div class="info-title"> <h3>Secondary Muscles</h3></div>
+                    <div class="info-content"> <h3>{{ exercise['secondarymuscles'] }}</h3></div>
+                </div>
+            </div>
+    
+            <div class="exercise-img">
+                <img src="{{ url_for('static', filename='uploads/exercise_images/' + exercise['targetmuscleimage']) }}" alt="{{ exercise['exercisename'] }}">
+            </div>
+        </div>
+    </div>
+    
+    <div class="wrapper3">
+        <div class="exercise-overview">
+            <h1>{{ exercise['exercisename'] }} Overview</h1>
+            <p>{{ exercise['overview'] }}</p>
+        </div>
+    </div>
+    
+    <div class="wrapper4">
+        <div class="exercise-instruction">
+            <h1>{{ exercise['exercisename'] }} Instructions</h1>
+            <ul>
+                {% for instruction in exercise['instructions'].split('\n') %}
+                    <li>{{ instruction }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='js/exercise.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/exercises.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <div class = "exercise-intro">
+            <h1>{{ category['name'] }} Exercises</h1>
+            <p>Here are the exercises related to the {{ category['name'] }} muscle group.</p>
+        </div>
+    </div>
+
+    <div class = "wrapper1">
+        {% for exercise in exercises %}
+        <div class = "exercise">
+            <img src="{{ url_for('static', filename='uploads/exercise_images/' + exercise['image']) }}" alt="{{ exercise['exercise_name'] }} Image">
+            <div class = "exercise-info">
+                <div class = "info">
+                    <h3>Type<h3>
+                    <p>{{ exercise['type'] }}</p>
+                </div>
+                <div class = "info">
+                    <h3>Equipment<h3>
+                        <p>{{ exercise['equipment'] }}</p> 
+                    </div>
+                <div class = "info">
+                    <h3>Exp. Level<h3>
+                        <p>{{ exercise['experiencelevel'] }}</p> 
+                    </div>
+                <div class = "info">
+                    <h3>Mechanics<h3>
+                        <p>{{ exercise['mechanics'] }}</p> 
+                    </div>
+            </div>
+            <h2>{{ exercise['exercise_name'] }}</h2>
+            <a href="{{ url_for('exercisescontroller.exercise', exerciseid=exercise['exerciseid']) }}" class="view-button"> View Exercise</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+
+    <script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
+</body>
+</html>

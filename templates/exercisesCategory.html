@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/exercisesCategory.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class = "wrapper0">
+        <div class = "exercise-banner">
+           <img src="{{ url_for('static', filename='images/exercise-banner1.jpg') }}" alt="Abs Image">
+           <h1>Master Every Move </h1>
+           <p>From core strength to cardio, unlock hundreds of guided exercises that build toward your goals.</p>
+        </div>  
+    </div>
+
+    <div class = "wrapper1">
+        <div>
+        <h1 >EXERCISES BY MUSCLE GROUP </h1>
+        <p>Choose the muscle group you want to target. Once in the muscle group, use the sort and filter options to find the best exercises for the equipment you have, your training experience, and goals.</p>
+        </div>
+    </div>
+
+    <div class="wrapper2">
+        <div class="filter-search-container">
+            <a href="">Filter By</a>
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
+    </div>
+    
+
+    
+    <div class="wrapper">
+        {% for category in exercise_categories %}
+
+            <div class="exercise">
+                <a href="{{ url_for('exercisescontroller.exercises', category_id=category['id']) }}"><img src="{{ url_for('static', filename='images/' + category['image']) }}" alt="{{ category['name'] }} Image"></a>
+                <h2>{{ category['name'] }}</h2>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
+</body>
+</html>
