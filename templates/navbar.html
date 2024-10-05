@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Left Side Navbar</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/navbar.css') }}">
+</head>
+<body>
+
+    <!-- Left Navbar -->
+    <nav class="side-navbar">
+        <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Logo" class="logo">
+        <ul>
+            <li><a href=""><i ></i> 
+                <lord-icon
+                    src="https://cdn.lordicon.com/wmwqvixz.json"
+                    trigger="in"
+                    delay="1"
+                    state="in-home"
+                    colors="primary:#ffffff"
+                    style="width:30px;height:30px">
+                </lord-icon>
+            </a></li>
+
+            <li><a href="#"><i ></i> 
+                <lord-icon
+                    src="https://cdn.lordicon.com/hrjifpbq.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style="width:30px;height:30px">
+                </lord-icon>
+            </a></li>
+
+            <li><a href=""><i></i>
+                <lord-icon
+                    src="https://cdn.lordicon.com/wmlleaaf.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style="width:30px;height:30px">
+                </lord-icon>
+            </a></li>
+            <li><a href="#"><i></i>
+                <lord-icon
+                    src="https://cdn.lordicon.com/uwinmnkh.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style="width:30px;height:30px">
+                </lord-icon>
+            </a></li>
+            <li><a href="#"><i></i>
+                <lord-icon
+                    src="https://cdn.lordicon.com/jyjslctx.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style="width:30px;height:30px">
+                </lord-icon>
+            </a></li>
+        </ul>
+    </nav>
+
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/header.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+    
+</head>
+<body>
+    <div class="navigation-container">
+        <div class="logo-container">
+            <span class="fit">FIT</span>
+            <span class="pulse">PULSE</span>
+        </div>
+        <div class="nav-links-container">
+            <a href="{{ url_for('store.store') }}"class="nav-link">Store</a>
+            <a href="" class="nav-link">Workouts</a>
+            <a href="#" class="nav-link">Diet Plans</a>
+            <a href="" class="nav-link">Exercises</a>
+            <a href="#" class="nav-link">Recipes</a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
+
+        <div class="icon-container">
+            <lord-icon  
+                src="https://cdn.lordicon.com/fkdzyfle.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                style="width:25px;height:25px">
+            </lord-icon>
+        
+            <lord-icon 
+                src="https://cdn.lordicon.com/ifsxxxte.json"
+                trigger="loop"
+                state="loop-cog"
+                colors="primary:#ffffff"
+                style="width:25px;height:25px">
+            </lord-icon>
+        
+            <lord-icon 
+                src="https://cdn.lordicon.com/pbrgppbb.json"
+                trigger="hover"
+                colors="primary:#fff"
+                style="width:25px;height:25px">
+            </lord-icon>
+
+            <lord-icon 
+                src="https://cdn.lordicon.com/lznlxwtc.json"
+                trigger="hover"
+                colors="primary:#ffffff"
+                style="width:25px;height:25px">
+            </lord-icon>
+        </div>
+        
+        
+    </div>
+    
+</body>
+</html>
