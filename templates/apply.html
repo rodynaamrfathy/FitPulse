@@ -1,0 +1,46 @@
+<!-- templates/apply.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for {{ specialty }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/apply.css') }}">
+</head>
+<body>
+
+    <section class="apply">
+        <h1>Apply for {{ specialty }}</h1>
+        <form action="{{ url_for('careers.submit_application') }}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="specialty" value="{{ specialty }}">
+            
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="experienceyears">Years of Experience:</label>
+            <input type="number" id="experienceyears" name="experienceyears" min="0" required>
+
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" rows="4" required></textarea>
+
+            <label for="resume">Upload Resume (PDF):</label>
+            <input type="file" id="resume" name="resume" accept="application/pdf" required>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Fitness Website - All Rights Reserved</p>
+    </footer>
+</body>
+</html>
