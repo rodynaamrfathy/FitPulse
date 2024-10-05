@@ -1,7 +1,6 @@
 from flask import Flask, session, request, flash, redirect, url_for, render_template
 from database import init_db  # Import the init_db function
 import MySQLdb.cursors
-from routes import register_routes
 from functools import wraps
 from datetime import datetime
 from werkzeug.utils import secure_filename
@@ -29,7 +28,6 @@ mysql = init_db(app)
 app.config['mysql'] = mysql
 
 # Register the routes
-register_routes(app)
 
 @app.route('/')
 def startpage():
