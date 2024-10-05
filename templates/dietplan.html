@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workouts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/dietplan.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <div>
+            <h1 class = "diet-plan-title">The Clean Eating Diet Plan Guide</h1>
+        </div>
+    </div>
+    <div class = "wrapper1">
+        <div class = "author-container">
+            <img class = "author-img" src="{{ url_for('static', filename='../static/images/hanma.jpg') }}" alt="author">
+            <div class = "author-info">
+                <p class = "author-name">Written By : Hanma Baki</p>
+                <p class = "author-date">Published on :  2024-06-01</p>
+            </div>
+        </div>
+    </div>
+
+    <div class = "wrapper2">
+        <img src="{{ url_for('static', filename='images/meal.jpg') }}" alt="Abs Image">
+    </div>
+
+    <div class = "wrapper3">
+        <div class = "description">
+            <h3>Learn everything you need to know before starting the Clean Eating Diet plan including it's history, guidelines & components, & all of the science behind it.</h3>
+        </div>
+        <div class = "core-principles">
+            <h2>Core Principles</h2>
+            <ul>
+                <li>Avoid processed foods</li>
+                <li>Avoid refined foods</li>
+                <li>Avoid artificial ingredients </li>
+                <li>Avoid alcohol </li>
+                <li>Avoid soda and fruit juice</li>
+            </ul>
+        </div>
+        <div class = "timing-frequency">
+            <h2>Meal Timing/Frequency</h2>
+            <p>On principle, clean eating does not have strict requirements for meal timing or meal frequency (read: how many times a day you eat).
+
+                However, in application most clean eating programs suggest people eat 5-6 smaller, clean food, meals and snacks throughout the day rather than 3 main meals.</p>
+        </div>
+        <div class = "suited-for">
+            <h2>Who Is It Best Suited For?</h2>
+            <p>Clean eating is best suited for people who are focused on the health properties of food, do not feel the desire to track the calories in their food, and who do not mind fairly restrictive approaches to nutrition.
+
+                Clean eating allows substantial flexibility in the amount of food one eats, the timing and frequency, and with some effort and diligence the diet can be used for a wide range of people with drastically different goals (e.g. fat loss, muscle gain, or sport performance).</p>
+            
+        </div>
+        <div class = "how-easy-to-follow">
+            <h2>How Easy Is It To Follow?</h2>
+            <p>How easy it is to follow the clean eating diet really depends on what type of person you are and your food preferences. For people who enjoy eating a wide variety of food, do not enjoy food restrictions, and would rather focus on the quantity of their food (i.e. the calories and macros) clean eating may be rather difficult to follow.
+
+                For people who are creatures of habit, do not mind eating within restricted dietary frameworks and do not enjoy counting their calories of macros clean eating can be an excellent dietary framework to follow.
+                
+                Most people who practice clean eating long term usually build in small amounts of flexibility and follow either an 80/20 or 90/10 rule where they allow themselves to eat food on the restricted list 10-20% of the time.</p>
+        </div>
+        <div class = "scientific-studies">
+            <h2>Scientific Studies and Interpretation of Data</h2>
+            <p>To date there are no published studies examining the effect of a clean eating diet which makes it difficult to draw hard conclusions on the scientific efficacy of this diet. However, there are a few things we can glean.
+
+                Most whole, natural foods are more satiating than their processed counter parts1. This makes controlling calorie intake much easier for a large majority of people.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/workout.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+.wrapper3,
+.wrapper2,
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+    
+}
+
+
+.wrapper1 {
+    margin-top: 0.5rem;
+}
+
+.diet-plan-title{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+}
+
+/* Flex layout for the author container to align items on the same line */
+.author-container {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start; /* Align items to the left */
+    text-align: left;
+    width: 100%; /* Ensure the container spans the full width */
+}
+
+/* Author image */
+.author-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Add spacing between the image and the text */
+}
+
+/* Flex layout for author info (name and date) */
+.author-info {
+    display: flex;
+    flex-direction: column; /* Stack name and date vertically */
+    text-align: left;
+}
+
+.author-name {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #f7f7f7;
+}
+
+.author-date {
+    font-size: 1rem;
+    margin: 0;
+    color: #ccc;
+}
+
+.wrapper3,
+.wrapper2 {
+    margin-top: 2rem !important;
+}
+
+.wrapper2 img {
+    width: 900px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+
+.wrapper3 h3 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    border-left: 5px solid #ff9409;
+    padding-left: 1rem;
+}
+
+.scientific-studies h2,
+.how-easy-to-follow h2,
+.suited-for h2,
+.timing-frequency h2,
+.core-principles h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    text-align: left;
+    border-bottom: #ff9409 2px solid;
+}
+
+
+.core-principles ul {
+    list-style-type: number;
+    text-align: left;
+    margin-left: 2rem;
+    font-size: 1.2;
+}
+
+.core-principles li {
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+}
+
+.scientific-studies p,
+.how-easy-to-follow p,
+.suited-for p,
+.timing-frequency p {
+    font-size: 1rem;
+    text-align: left;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    white-space: pre-line; /* Preserve whitespace and line breaks */
+}
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper3,
+    .wrapper2,
+    .wrapper1,
+    .wrapper {
+        width: 600px;      
+    }
+
+    
+    
+
+}
