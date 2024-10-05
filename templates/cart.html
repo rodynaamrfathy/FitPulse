@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="product-removal">
-                                <form action="{{ url_for('store.remove_from_cart', product_id=product_id|int) }}" method="POST">
+                                <form action="{{ url_for('store.remove_from_cart', product_id=product_id) }}" method="POST">
                                     <button type="submit">
                                         <lord-icon src="https://cdn.lordicon.com/zxvuvcnc.json" trigger="hover" state="hover-cross-3" colors="primary:#c71f16" style="width:50;height:50"></lord-icon>
                                     </button>

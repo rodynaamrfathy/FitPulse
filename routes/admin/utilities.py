@@ -21,7 +21,7 @@ def store_management_required(f):
         # Ensure user is logged in and has "Store Management" role
         if 'user_role' not in session or session['user_role'] != 'StoreManager':
             flash("You don't have permission to access this page.", "danger")
-            return redirect(url_for('admin_login'))  # Redirect to admin login if unauthorized
+            return redirect(url_for('admin_auth.admin_login'))  # Redirect to admin login if unauthorized
         return f(*args, **kwargs)
     return decorated_function
 

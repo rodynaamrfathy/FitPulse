@@ -9,16 +9,15 @@ from helpers import allowed_file  # Import the allowed_file function from helper
 
 # Create a blueprint for store management
 store_bp = Blueprint('store', __name__)
+managestore_bp = Blueprint('storemanager', __name__)
 
 
 '''
     The Following Routes are for the Store Management
-
     1- Manage the store Add / Edit / Delete Product From the DB
     2- Render the Mangment Pages
     3- Render the Store Page
     4- Render the View Product Page
-
 '''
 
 
@@ -32,12 +31,13 @@ store_bp = Blueprint('store', __name__)
 '''
 
 @store_bp.route('/admin/manage_store')
+@managestore_bp.route('/admin/manage_store')
 @store_management_required
 def manage_store():
 
     mysql = current_app.config['mysql']  
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    
+
     # Using '\n' as the separator for newlines
     cursor.execute("""
         SELECT p.*, GROUP_CONCAT(d.description SEPARATOR '/n') AS description
@@ -45,7 +45,7 @@ def manage_store():
         LEFT JOIN productdescription d ON p.productid = d.productid
         GROUP BY p.productid
     """)
-    
+
     products = cursor.fetchall()
     cursor.close()  
 
@@ -60,6 +60,7 @@ def manage_store():
 
 
 @store_bp.route('/admin/add_product', methods=['POST'])
+@managestore_bp.route('/admin/add_product', methods=['POST'])
 @store_management_required
 def add_product():
 
@@ -69,8 +70,8 @@ def add_product():
         stock_quantity = request.form['stockquantity']
         category = request.form['category']
         description_text = request.form['description']  
-        
-        
+
+
         if 'image' not in request.files:
             flash('No file part', 'error')
             return redirect(request.url)
@@ -84,23 +85,23 @@ def add_product():
             filename = secure_filename(file.filename)
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
-        
+
         # Automatically set the current date and time for added_date
         added_date = datetime.now()
 
-        
+
         mysql = current_app.config['mysql']  
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        
-        
+
+
         cursor.execute(""" 
             INSERT INTO products (productname, price, stockquantity, category, imageurl, addeddate)
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (product_name, price, stock_quantity, category, filename, added_date))
-        
+
         # Retrieve the newly inserted product ID
         product_id = cursor.lastrowid
-        
+
         # Split the descriptions by newline and insert them into the productdescription table
         descriptions = description_text.splitlines()  #
         for desc in descriptions:
@@ -112,7 +113,7 @@ def add_product():
 
         mysql.connection.commit()
         cursor.close()  
-        
+
         flash('Product and descriptions added successfully!', 'success')
         return redirect(url_for('store.manage_store'))  
 
@@ -128,17 +129,18 @@ def add_product():
 
 
 @store_bp.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+@managestore_bp.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
 @store_management_required
 def edit_product(product_id):
 
     mysql = current_app.config['mysql'] 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    
+
     cursor.execute("SELECT * FROM products WHERE productid = %s", (product_id,))
     product = cursor.fetchone()
 
-    
+
     if product is None:
         flash('Product not found.', 'danger')
         return redirect(url_for('store.manage_store'))  
@@ -159,18 +161,18 @@ def edit_product(product_id):
                 if not os.path.exists(upload_folder):
                     os.makedirs(upload_folder)
 
-               
+
                 filename = secure_filename(file.filename)
                 file_path = os.path.join(upload_folder, filename)
                 file.save(file_path)
 
-                
+
                 product['imageurl'] = filename 
 
-        
+
         imageurl = request.form.get('imageurl', product['imageurl'])
 
-        
+
         product['productname'] = product_name
         product['price'] = price
         product['stockquantity'] = stockquantity
@@ -178,7 +180,7 @@ def edit_product(product_id):
         product['addeddate'] = addeddate
         product['imageurl'] = imageurl  
 
-        
+
         cursor.execute(""" 
             UPDATE products
             SET productname = %s, price = %s, stockquantity = %s, category = %s, addeddate = %s, imageurl = %s
@@ -201,13 +203,14 @@ def edit_product(product_id):
 '''
 
 @store_bp.route('/admin/delete_product/<int:product_id>', methods=['POST'])
+@managestore_bp.route('/admin/delete_product/<int:product_id>', methods=['POST'])
 @store_management_required
 def delete_product(product_id):
 
     mysql = current_app.config['mysql']  
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    
+
     cursor.execute("SELECT * FROM products WHERE productid = %s", (product_id,))
     product = cursor.fetchone()
 
@@ -215,86 +218,23 @@ def delete_product(product_id):
         flash('Product not found.', 'danger')
         return redirect(url_for('store.manage_store'))  
 
-    
+
     image_filename = product['imageurl']
     if image_filename:
-        
+
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], image_filename)
-        
-        
+
+
         if os.path.isfile(file_path):
             os.remove(file_path)
 
-    
+
     cursor.execute("DELETE FROM productdescription WHERE productid = %s", (product_id,))
 
-    
+
     cursor.execute("DELETE FROM products WHERE productid = %s", (product_id,))
     mysql.connection.commit()
     cursor.close()  
 
     flash('Product and associated descriptions deleted successfully!', 'success')
     return redirect(url_for('store.manage_store'))  
-
-
-# -------------------------------Store-Product-Managnment-Ends-Here------------------------------------------
-
-# -------------------------------Store-Product-Starts-Here------------------------------------------
-
-
-
-'''
-    The Following Route are for the renderng the store Page in the store.html
-    it fetch all the products and render them
-'''
-
-
-@store_bp.route('/store')
-def store():
-
-    mysql = current_app.config['mysql']  
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    
-    
-    cursor.execute('SELECT * FROM products')
-    products = cursor.fetchall()
-    cursor.close()  
-    
-    return render_template('store.html', products=products)
-
-
-
-'''
-    The Following Route are for the renderng the Product-Details in the product.html
-    it fetch the details of the pressed product and render it
-'''
-
-
-@store_bp.route('/product/<int:product_id>')
-def product(product_id):
-
-    mysql = current_app.config['mysql']
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    
-    
-    cursor.execute('SELECT * FROM products WHERE productid = %s', (product_id,))
-    product = cursor.fetchone()
-    
-    
-    if product is None:
-        flash('Product not found.', 'danger')
-        return redirect(url_for('store.store')) 
-    
-    
-    cursor.execute('SELECT description FROM productdescription WHERE productid = %s', (product_id,))
-    descriptions = cursor.fetchall()
-    
-    cursor.close()  
-    
-    
-    return render_template('product.html', product=product, descriptions=descriptions)
-
-
-
-# -------------------------------Store-Product-Ends-Here------------------------------------------
-

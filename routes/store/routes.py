@@ -38,6 +38,7 @@ def product(product_id):
     
     return render_template('product.html', product=product, descriptions=descriptions)
 
+# # Route for adding product to cart
 @store_bp.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     # Convert product_id to string if necessary
@@ -53,7 +54,7 @@ def add_to_cart(product_id):
     cursor.execute('SELECT * FROM products WHERE productid = %s', (product_id,))
     product = cursor.fetchone()
     cursor.close()
-
+    
     if product is None:
         flash('Product not found.', 'danger')
         return redirect(url_for('store.store'))
@@ -64,7 +65,6 @@ def add_to_cart(product_id):
         cart[product_id_str]['quantity'] += 1
     else:
         cart[product_id_str] = {
-            'id': product_id_str,  # Store product ID in the cart
             'name': product['productname'],
             'price': product['price'],
             'quantity': 1,
@@ -78,6 +78,9 @@ def add_to_cart(product_id):
     return redirect(url_for('store.store'))
 
 
+
+
+
 # Route to display cart
 @store_bp.route('/cart')
 def view_cart():
@@ -87,13 +90,16 @@ def view_cart():
 
 @store_bp.route('/remove_from_cart/<int:product_id>', methods=['POST'])
 def remove_from_cart(product_id):
-    if 'cart' in session and str(product_id) in session['cart']:  # Ensure product_id is converted to string
-        session['cart'].pop(str(product_id))
+    # Convert product_id to string for consistency with how it is stored in the session
+    product_id_str = str(product_id)
+    
+    if 'cart' in session and product_id_str in session['cart']:
+        session['cart'].pop(product_id_str)  # Remove item from cart
         flash('Item removed from cart.', 'info')
     else:
         flash('Item not found in cart.', 'danger')
     
-    return redirect(url_for('store.view_cart'))  # Change this line
+    return redirect(url_for('cart'))
 
 # Route for increasing the quantity of a product in the cart
 @store_bp.route('/increase_quantity/<int:product_id>', methods=['POST'])

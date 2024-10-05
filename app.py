@@ -31,6 +31,10 @@ app.config['mysql'] = mysql
 # Register the routes
 register_routes(app)
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
 @app.route('/')
 def startpage():
     # Clear the session to log the user out
@@ -48,6 +52,8 @@ def header():
 @app.route('/startheader')
 def startheader():
     return render_template('startheader.html')
+
+
 
 @app.route('/navbar')
 def navbar():
