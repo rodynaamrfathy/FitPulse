@@ -30,7 +30,7 @@
             <!-- Use the author image and info if available -->
             <img class="author-img" src="{{ url_for('static', filename='images/author_placeholder.jpg') }}" alt="author">
             <div class="author-info">
-                <p class="author-name">Written By: {{ author[1] }}</p>
+                <p class="author-name">Written By: {{ author[1] }} {{ author[2] }}</p>
                 <p class="author-date">Published on: {{ recipe[5] }}</p>
             </div>
         </div>
