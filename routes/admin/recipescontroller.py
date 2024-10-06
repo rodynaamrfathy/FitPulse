@@ -48,11 +48,12 @@ def add_recipe():
     mysql = current_app.config['mysql']  
 
     # Fetch the authorid from the session
-    authorid = session.get('authorid')  # Get authorid from session
+    authorid = session.get('userid')  # Get userid (authorid) from session
 
     # Check if authorid is not None (user is logged in)
     if authorid is None:
         flash('You must be logged in to add a recipe!', 'danger')
+        return redirect(url_for('signin.signin'))
 
     # Get the recipe details from the form
     recipename = request.form['recipename']
