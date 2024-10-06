@@ -149,9 +149,6 @@ def edit_recipe(recipe_id):
 
 
 
-
-
-
 @recipes_bp.route('/delete_recipe/<int:recipe_id>', methods=['POST'])
 def delete_recipe(recipe_id):
     mysql = current_app.config['mysql'] 
@@ -168,3 +165,47 @@ def delete_recipe(recipe_id):
         cursor.close()
 
     return redirect(url_for('recipescontroller.manage_recipes'))
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+
+@recipes_bp.route('/recipes')
+def recipes():
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    cursor.execute("SELECT * FROM recipes")
+    recipes = cursor.fetchall()
+
+    cursor.close()
+
+    return render_template('recipes.html', recipes=recipes)
+
+@recipes_bp.route('/recipe/<int:recipe_id>')
+def recipe(recipe_id):
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Query to fetch the recipe details
+    cursor.execute("SELECT * FROM recipes WHERE recipeid = %s", (recipe_id,))
+    recipe = cursor.fetchone()
+
+    # Use the correct index to fetch the authorid (assuming it's in a specific column in the recipe)
+    # For example, if 'authorid' is the 4th column, recipe[3] would be used.
+    # If you're unsure of the index, you can explicitly refer to the column name by using dictionary cursor
+    authorid = recipe['authorid'] if isinstance(recipe, dict) else recipe[1]  # Adjust according to your database structure
+
+    # Query to fetch the author (user) details based on the recipe's authorid
+    cursor.execute("SELECT * FROM users WHERE userid = %s", (authorid,))
+    author = cursor.fetchone()
+
+    cursor.close()
+
+    # Pass both recipe and author data to the template
+    return render_template('recipe.html', recipe=recipe, author=author)
+
+
+
+

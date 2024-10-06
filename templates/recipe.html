@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>workouts</title>
+    <title>{{ recipe[2] }} - Recipe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/recipe.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -21,26 +21,28 @@
 
     <div class="wrapper">
         <div>
-            <h1 class = "recipe-title">The Bounce-Back Protein Smoothie Recipe</h1>
+            <h1 class="recipe-title">{{ recipe[2] }} Recipe</h1>
         </div>
     </div>
-    <div class = "wrapper1">
-        <div class = "author-container">
-            <img class = "author-img" src="{{ url_for('static', filename='../static/images/hanma.jpg') }}" alt="author">
-            <div class = "author-info">
-                <p class = "author-name">Written By : Hanma Baki</p>
-                <p class = "author-date">Published on :  2024-06-01</p>
+
+    <div class="wrapper1">
+        <div class="author-container">
+            <!-- Use the author image and info if available -->
+            <img class="author-img" src="{{ url_for('static', filename='images/author_placeholder.jpg') }}" alt="author">
+            <div class="author-info">
+                <p class="author-name">Written By: {{ author[1] }}</p>
+                <p class="author-date">Published on: {{ recipe[5] }}</p>
             </div>
         </div>
     </div>
 
-    <div class = "wrapper2">
-        <img src="{{ url_for('static', filename='images/proteinsmoothie.jpg') }}" alt="Abs Image">
+    <div class="wrapper2">
+        <img src="{{ url_for('static', filename='uploads/recipe_images/' ~ recipe[4]) }}" alt="{{ recipe[2] }} Image">
     </div>
 
-    <div class = "wrapper3">
-        <div class = "description">
-            <h3>Plan on hitting the town hard this weekend? Drink the Bounce Back Smoothie the morning after to recover & have a solid training session the very next day!</h3>
+    <div class="wrapper3">
+        <div class="description">
+            <h3>{{ recipe[6] }}</h3>
         </div>
     </div>
 
@@ -49,54 +51,45 @@
             <img src="{{ url_for('static', filename='images/preptime.png') }}" alt="Prep Time Image">
             <div class="text-container">
                 <h1>PREP TIME</h1>
-                <h2>~ 5 mins</h2>
+                <h2>{{ recipe[7] }}</h2>
             </div>
         </div>
 
         <div class="cook-time">
-            <img src="{{ url_for('static', filename='images/cooktime.png') }}" alt="Prep Time Image">
+            <img src="{{ url_for('static', filename='images/cooktime.png') }}" alt="Cook Time Image">
             <div class="text-container">
                 <h1>COOK TIME</h1>
-                <h2>~ 1 mins</h2>
+                <h2>{{ recipe[8] }}</h2>
             </div>
         </div>
     </div>
 
-    <div class = "wrapper5">
-        <div class = "ingredients">
+    <div class="wrapper5">
+        <div class="ingredients">
             <h1>Ingredients</h1>
             <ul>
-                <li>1 cup of almond milk</li>
-                <li>1 scoop of protein powder</li>
-                <li>1/2 cup of frozen berries</li>
-                <li>1/2 banana</li>
-                <li>1/2 cup of spinach</li>
-                <li>1/2 cup of oats</li>
-                <li>1 tbsp of chia seeds</li>
-                <li>1 tbsp of honey</li>
+                {% for ingredient in recipe[9].splitlines() %}
+                <li>{{ ingredient }}</li>
+                {% endfor %}
             </ul>
         </div>    
 
-        <div class = "nutrition-facts">
+        <div class="nutrition-facts">
             <h1>Nutrition Facts</h1>
             <ul>
-                <li>Calories: 400</li>
-                <li>Protein: 30g</li>
-                <li>Fat: 10g</li>
-                <li>Carbs: 50g</li>
-                <li>Fiber: 6g</li>
+                {% for fact in recipe[10].splitlines() %}
+                <li>{{ fact }}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>
 
-    <div class = "wrapper6">
+    <div class="wrapper6">
         <div>
-        <h1>Cooking Instructions</h1>
-        <p>Add all ingredients into a blender
-            Mix for 30 seconds</p>
+            <h1>Cooking Instructions</h1>
+            <p>{{ recipe[11] }}</p>
         </div>
     </div>
-    
 
     <script src="{{ url_for('static', filename='js/workout.js') }}"></script>
 </body>
