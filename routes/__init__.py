@@ -8,6 +8,7 @@ from .admin.trainerscontroller import trainers_bp  # Import the trainers managem
 from .diet.dietplanscontroller import dietplans_bp  # Import diet plans management blueprint
 from .careers.routes import careers_bp  # Import the careers blueprint
 from .store.routes import store_bp
+from .admin.recipescontroller import recipes_bp
 
 def register_routes(app):
     # Register authentication blueprints
@@ -25,3 +26,5 @@ def register_routes(app):
     app.register_blueprint(dietplans_bp)  # Diet plans blueprint
     app.register_blueprint(careers_bp)  # Register careers blueprint
     app.register_blueprint(store_bp)  # Register store blueprint
+    
+    app.register_blueprint(recipes_bp)  # Register recipes blueprint

@@ -45,6 +45,7 @@ def startpage():
 def dashboard():
     return render_template('mainpage.html')
 
+
 @app.route('/header')
 def header():
     return render_template('header.html')
