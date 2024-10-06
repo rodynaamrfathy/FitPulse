@@ -160,11 +160,25 @@ def checkout():
             quantity = item['quantity']
             price_per_item = item['price']
             total_amount += quantity * price_per_item
-            
+
+            # Insert into order_detail
             cursor.execute("""
                 INSERT INTO `order_detail` (orderid, productid, quantity, priceperitem)
                 VALUES (%s, %s, %s, %s)
             """, (order_id, product_id, quantity, price_per_item))
+
+            # Decrease the product stock quantity
+            cursor.execute("""
+                UPDATE products
+                SET StockQuantity = StockQuantity - %s
+                WHERE productid = %s AND StockQuantity >= %s
+            """, (quantity, product_id, quantity))
+
+            # Check if stock update was successful
+            if cursor.rowcount == 0:
+                flash(f'Failed to update stock for product {product_id}. Not enough stock available.', 'danger')
+                mysql.connection.rollback()  # Roll back the transaction
+                return redirect(url_for('store.view_cart'))
 
         # Update the total amount for the order
         cursor.execute("""
