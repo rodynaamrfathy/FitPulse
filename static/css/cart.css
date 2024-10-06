@@ -184,3 +184,15 @@
 
     
 }
+
+.checkout-button {
+    display: block;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff6f00;
+    border: none;
+    cursor: pointer;
+}

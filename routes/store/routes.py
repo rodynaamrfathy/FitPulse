@@ -128,3 +128,73 @@ def decrease_quantity(product_id):
         flash('Item not found in cart.', 'danger')
     
     return redirect(url_for('store.view_cart'))
+
+@store_bp.route('/checkout', methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        # Collect order details from the form submission
+        shipping_address = request.form['address']
+        payment_method = request.form['payment_method']
+
+        # Assume that user ID is available via the session (logged-in user)
+        user_id = session.get('user_id')  # Make sure the user is logged in
+
+        # Access the database connection
+        mysql = current_app.config['mysql']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+        # Insert new order into the `order` table
+        cursor.execute("""
+            INSERT INTO `order` (userid, totalamount, orderstatus, paymentmethod, orderdate, shippingaddress)
+            VALUES (%s, %s, 'pending', %s, NOW(), %s)
+        """, (user_id, 0, payment_method, shipping_address))
+        
+        order_id = cursor.lastrowid  # Get the new order ID
+
+        # Get cart details from session
+        cart = session.get('cart', {})
+        total_amount = 0
+
+        # Insert each product in the cart into the `order_detail` table
+        for product_id, item in cart.items():
+            quantity = item['quantity']
+            price_per_item = item['price']
+            total_amount += quantity * price_per_item
+
+            # Insert into order_detail
+            cursor.execute("""
+                INSERT INTO `order_detail` (orderid, productid, quantity, priceperitem)
+                VALUES (%s, %s, %s, %s)
+            """, (order_id, product_id, quantity, price_per_item))
+
+            # Decrease the product stock quantity
+            cursor.execute("""
+                UPDATE products
+                SET StockQuantity = StockQuantity - %s
+                WHERE productid = %s AND StockQuantity >= %s
+            """, (quantity, product_id, quantity))
+
+            # Check if stock update was successful
+            if cursor.rowcount == 0:
+                flash(f'Failed to update stock for product {product_id}. Not enough stock available.', 'danger')
+                mysql.connection.rollback()  # Roll back the transaction
+                return redirect(url_for('store.view_cart'))
+
+        # Update the total amount for the order
+        cursor.execute("""
+            UPDATE `order`
+            SET totalamount = %s
+            WHERE orderid = %s
+        """, (total_amount, order_id))
+
+        # Commit the transaction to save the order and order details
+        mysql.connection.commit()
+        cursor.close()
+
+        # Clear the cart after placing the order
+        session.pop('cart', None)
+        flash('Your order has been placed successfully!', 'success')
+
+        return redirect(url_for('store.store'))
+
+    return render_template('checkout.html')

@@ -71,10 +71,12 @@
         {% if session.cart %}
             <div class="subtotal">
                 <div class="subtotal-price">Total: ${{ total }}</div>
-                <button class="checkout-button">Checkout</button>
+                <a href="{{ url_for('store.checkout') }}">
+                <button class="checkout-button">Continue to Checkout</button>
+                </a>
             </div>
         {% endif %}
-    </div>
+    </div>    
 
     <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
 </body>
