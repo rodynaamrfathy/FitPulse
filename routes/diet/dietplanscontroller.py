@@ -21,7 +21,7 @@ def allowed_file(filename):
     """Check if the uploaded file is an allowed type."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@dietplans_bp.route('/add_diet_plan', methods=['POST'])
+@dietplans_bp.route('/dietplan', methods=['POST'])
 def add_diet_plan():
     # Get form data
     diet_name = request.form['diet_name']

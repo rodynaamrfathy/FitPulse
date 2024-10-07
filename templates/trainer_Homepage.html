@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainer Homepage</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trainer_Homepage.css') }}"> <!-- Link to your CSS file -->
 </head>
 <body>
 
@@ -14,10 +14,11 @@
     </header>
 
     <main>
+        {% if specialty == 'Nutrition Coach' %}
         <!-- Section for adding diet plans -->
         <section id="add-diet-plan">
             <h2>Add Diet Plan</h2>
-            <form action="{{ url_for('add_diet_plan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
+            <form action="{{ url_for('dietplan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
                 <label for="diet_name">Diet Name:</label>
                 <input type="text" id="diet_name" name="diet_name" required>
                 
@@ -45,11 +46,14 @@
                 <button type="submit">Add Diet Plan</button>
             </form>
         </section>
+        {% endif %}
 
+        {% if specialty == 'Coach' %}
         <!-- Section for adding workouts -->
         <section id="add-workout">
             <h2>Add Workout</h2>
         </section>
+        {% endif %}
     </main>
 
     <footer>
