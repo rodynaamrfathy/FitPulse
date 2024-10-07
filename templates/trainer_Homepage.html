@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- Link to your CSS file -->
+</head>
+<body>
+
+    <header>
+        <h1>Welcome, {{ firstName }}</h1> <!-- Display trainer's first name -->
+        <p>Your specialty: {{ specialty }}</p> <!-- Display trainer's specialty -->
+    </header>
+
+    <main>
+        <!-- Section for adding diet plans -->
+        <section id="add-diet-plan">
+            <h2>Add Diet Plan</h2>
+            <form action="{{ url_for('add_diet_plan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
+                <label for="diet_name">Diet Name:</label>
+                <input type="text" id="diet_name" name="diet_name" required>
+                
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <label for="core_principles">Core Principles:</label>
+                <textarea id="core_principles" name="core_principles" required></textarea>
+
+                <label for="timing_frequency">Timing Frequency:</label>
+                <input type="text" id="timing_frequency" name="timing_frequency" required>
+
+                <label for="best_suited_for">Best Suited For:</label>
+                <input type="text" id="best_suited_for" name="best_suited_for" required>
+
+                <label for="easy_to_follow">Is it Easy to Follow?</label>
+                <input type="text" id="easy_to_follow" name="easy_to_follow" required>
+
+                <label for="studies">Related Studies:</label>
+                <textarea id="studies" name="studies"></textarea>
+
+                <label for="image">Diet Plan Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+
+                <button type="submit">Add Diet Plan</button>
+            </form>
+        </section>
+
+        <!-- Section for adding workouts -->
+        <section id="add-workout">
+            <h2>Add Workout</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FitPulse. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
