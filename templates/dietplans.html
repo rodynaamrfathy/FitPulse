@@ -33,36 +33,17 @@
             <p>Confused about what diet you should follow? Our guides explain the different approaches to nutrition in detail. Read these guides and choose a diet style that best suits your goals, food preferences and lifestyle.</p>
         </div>
     </div>
-
-    <div class = "wrapper2">
-        <div class = "diet-plan">
-            <a href=""><img src="{{ url_for('static', filename='images/meal.jpg') }}" alt="Abs Image"></a>
-            <h2>The Clean Eating Diet Plan Guide</h2>
-            <p>Learn everything you need to know before starting the Clean Eating Diet plan including it's history, guidelines & components, & all of the science behind it.</p>
+    <div class="wrapper2">
+        {% for dietplan in dietplans %}
+        <div class="diet-plan">
+            <a href="{{ url_for('dietplans.dietplan', dietplan_id=dietplan['dietplanid']) }}">
+                <img src="{{ url_for('static', filename=dietplan['uploads/dietplans/image']) }}" alt="Diet Image">
+            </a>
+            <h2>{{ dietplan['dietname'] }}</h2>
+            <p>{{ dietplan['description'][:150] }}...</p>
         </div>
-
-       <div class = "diet-plan">
-            <a href=""><img src="{{ url_for('static', filename='images/meal.jpg') }}" alt="Abs Image"></a>
-            <h2>The Clean Eating Diet Plan Guide</h2>
-            <p>Learn everything you need to know before starting the Clean Eating Diet plan including it's history, guidelines & components, & all of the science behind it.</p>
-            
-        </div>
-
-       <div class = "diet-plan">
-            <a href=""><img src="{{ url_for('static', filename='images/meal.jpg') }}" alt="Abs Image"></a>
-            <h2>The Clean Eating Diet Plan Guide</h2>
-            <p>Learn everything you need to know before starting the Clean Eating Diet plan including it's history, guidelines & components, & all of the science behind it.</p>
-        </div>
-
-       <div class = "diet-plan">
-            <a href=""><img src="{{ url_for('static', filename='images/meal.jpg') }}" alt="Abs Image"></a>
-            <h2>The Clean Eating Diet Plan Guide</h2>
-            <p>Learn everything you need to know before starting the Clean Eating Diet plan including it's history, guidelines & components, & all of the science behind it.</p>
-        </div>
+        {% endfor %}
     </div>
-
-    
-
     <script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
 </body>
 </html>

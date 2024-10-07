@@ -76,13 +76,6 @@ def workouts():
 def workout():
     return render_template('workout.html')
 
-@app.route('/dietplans')
-def dietplans():
-    return render_template('dietplans.html')
-
-@app.route('/dietplan')
-def dietplan():
-    return render_template('dietplan.html')
 
 @app.route('/recipes')
 def recipes():

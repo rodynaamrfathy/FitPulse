@@ -8,11 +8,33 @@ dietplans_bp = Blueprint('dietplans', __name__)
 
 @dietplans_bp.route('/dietplans')
 def dietplans():
-    return render_template('dietplans.html')
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-@dietplans_bp.route('/dietplan')
-def dietplan():
-    return render_template('dietplan.html')
+    # Fetch all diet plans
+    cursor.execute('SELECT * FROM dietplans')
+    dietplans = cursor.fetchall()
+
+    cursor.close()
+    return render_template('dietplans.html', dietplans=dietplans)
+
+
+@dietplans_bp.route('/dietplan/<int:dietplan_id>')
+def dietplan(dietplan_id):
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # Fetch the specific diet plan
+    cursor.execute('SELECT * FROM dietplans WHERE dietplanid = %s', (dietplan_id,))
+    dietplan = cursor.fetchone()
+
+    cursor.close()
+    if dietplan:
+        return render_template('dietplan.html', dietplan=dietplan)
+    else:
+        flash('Diet plan not found.', 'danger')
+        return redirect(url_for('dietplans.dietplans'))
+
 
 UPLOAD_FOLDER = 'static/uploads/dietplans'  # Define your upload folder path
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # Allowed image types
