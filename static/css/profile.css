@@ -405,12 +405,27 @@ table button:hover {
 
 
 @media (max-width: 1200px) {  
-
+    
+    
+    .rankswrapper,
     .wrapper2,
     .wrapper1,
     .wrapper {
         width: 600px;    
         
+    }
+
+    .rankd {
+        width: 500px;    
+        
+    }
+
+    .description {
+        width: 500px !important;
+    }
+
+    .description2 {
+        width: 500px !important;
     }
 
     
