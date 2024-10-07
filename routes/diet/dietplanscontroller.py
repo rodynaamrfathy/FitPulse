@@ -23,6 +23,11 @@ def allowed_file(filename):
 
 @dietplans_bp.route('/dietplan', methods=['POST'])
 def add_diet_plan():
+    # Ensure the trainer is logged in
+    if 'trainer_id' not in session:
+        flash('You must be logged in as a trainer to add a diet plan.', 'warning')
+        return redirect(url_for('signin.signin'))  # Redirect to login if not logged in
+
     # Get form data
     diet_name = request.form['diet_name']
     description = request.form['description']
@@ -34,13 +39,13 @@ def add_diet_plan():
     image = request.files['image']
 
     # Get the current logged-in trainer's ID from session (assuming it's stored in session)
-    author_id = session['trainerid']  # Ensure trainer's ID is in the session
+    author_id = session['trainer_id']  # Ensure trainer's ID is in the session
 
     # Validate and save the image
     if image and allowed_file(image.filename):
-        filename = secure_filename(image.filename)
-        image.save(os.path.join(UPLOAD_FOLDER, filename))
-        image_path = os.path.join(UPLOAD_FOLDER, filename)
+        dietplans = secure_filename(image.filename)
+        image.save(os.path.join(UPLOAD_FOLDER, dietplans))
+        image_path = os.path.join(UPLOAD_FOLDER, dietplans)
     else:
         image_path = None  # If no image is uploaded
 
@@ -56,4 +61,4 @@ def add_diet_plan():
     cursor.close()
 
     flash('Diet plan added successfully!', 'success')
-    return redirect(url_for('trainer_homepage'))  # Redirect back to trainer homepage
+    return redirect(url_for('trainer.trainer_homepage'))  # Redirect back to trainer homepage
