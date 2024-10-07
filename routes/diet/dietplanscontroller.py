@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import os
 import MySQLdb
 
+
 dietplans_bp = Blueprint('dietplans', __name__)
 
 @dietplans_bp.route('/dietplans')
@@ -84,3 +85,41 @@ def add_diet_plan():
 
     flash('Diet plan added successfully!', 'success')
     return redirect(url_for('trainer.trainer_homepage'))  # Redirect back to trainer homepage
+
+@dietplans_bp.route('/delete_diet_plan/<int:plan_id>', methods=['POST'])
+def delete_diet_plan(plan_id):
+    # Ensure trainer is logged in
+    if 'trainer_id' not in session:
+        flash('You must be logged in to delete a diet plan.', 'warning')
+        return redirect(url_for('signin.signin'))
+
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Ensure the logged-in trainer owns the diet plan
+    cursor.execute('DELETE FROM dietplans WHERE dietplanid = %s AND authorid = %s', (plan_id, session['trainer_id']))
+    mysql.connection.commit()
+    cursor.close()
+
+    flash('Diet plan deleted successfully!', 'success')
+    return redirect(url_for('trainer.trainer_homepage'))
+
+    plan = DietPlan.query.get(plan_id)  # Fetch the existing plan from the database
+
+    if request.method == 'POST':
+        # Update the plan's attributes based on the form data
+        plan.dietname = request.form['diet_name']
+        plan.description = request.form['description']
+        plan.core_principles = request.form['core_principles']
+        plan.timing_frequency = request.form['timing_frequency']
+        plan.best_suited_for = request.form['best_suited_for']
+        plan.easy_to_follow = request.form['easy_to_follow']
+        plan.studies = request.form['studies']
+        
+        # If an image was uploaded, you may want to handle that here
+        
+        db.session.commit()  # Commit the changes to the database
+        flash('Diet plan updated successfully!')
+        return redirect(url_for('trainer.trainer_homepage'))
+
+    return render_template('edit_diet_plan.html', plan=plan)  # Render an edit form with existing data

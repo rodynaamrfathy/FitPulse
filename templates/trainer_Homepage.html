@@ -46,14 +46,31 @@
                 <button type="submit">Add Diet Plan</button>
             </form>
         </section>
+        <!-- Section to show trainer's diet plans -->
+        <section id="your-diet-plans">
+            <h2>Your Diet Plans</h2>
+            {% for plan in diet_plans %}
+            <div class="diet-plan">
+                <h3>{{ plan.dietname }}</h3>
+                <p>{{ plan.description }}</p>
+                <img src="{{ url_for('static', filename=plan.image) }}" alt="Diet Plan Image">
+                <form action="{{ url_for('dietplans.delete_diet_plan', plan_id=plan.dietplanid) }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{{ url_for('trainer.trainer_homepage', edit_id=plan.dietplanid) }}">Edit</a>
+            </div>
+            {% endfor %}
+        </section>
+        
         {% endif %}
-
+        
         {% if specialty == 'Coach' %}
         <!-- Section for adding workouts -->
         <section id="add-workout">
             <h2>Add Workout</h2>
         </section>
         {% endif %}
+        
     </main>
 
     <footer>
