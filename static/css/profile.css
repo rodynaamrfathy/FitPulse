@@ -127,6 +127,43 @@
 }
 
 
+.personal-information {
+    width: 100%; /* Full width of wrapper1 */
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+}
+
+.form-row {
+    display: flex; /* Use flexbox for rows */
+    justify-content: space-between; /* Space out the form groups */
+    margin-bottom: 15px; /* Space between rows */
+}
+
+.form-group {
+    flex: 1; /* Allow the form groups to grow */
+    margin-right: 10px; /* Space between form groups */
+}
+
+.form-group:last-child {
+    margin-right: 0; /* Remove margin for the last item */
+}
+
+label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Space between label and input */
+    text-align: left;
+}
+
+input {
+    width: 100%; /* Full width of the input */
+    padding: 8px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+}
+
 @media (max-width: 1200px) {  
 
     .wrapper1,

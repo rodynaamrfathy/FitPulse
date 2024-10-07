@@ -96,15 +96,11 @@ def recipe():
 def tools():
     return render_template('tools.html')
 
-<<<<<<< HEAD
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
-=======
-@app.route('/trainer_homepage')
-def trainer_homepage():
-    return render_template('trainer_Homepage.html')
->>>>>>> d85c92656ff4f4c8a23a4c7153b63a32a5985714
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
