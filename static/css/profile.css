@@ -31,6 +31,7 @@
     align-items: center;
     flex-direction: column; /* Stack content */
     padding: 20px; /* Optional: add some padding */
+    border-radius: 10px; /* Rounded corners */
 }
 
 .rankswrapper h3 {
