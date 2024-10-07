@@ -22,7 +22,7 @@
         <div class="nav-links-container">
             <a href="{{ url_for('store.store') }}"class="nav-link">Store</a>
             <a href="{{ url_for('recipescontroller.manage_recipes') }}" class="nav-link">Workouts</a>
-            <a href="#" class="nav-link">Diet Plans</a>
+            <a href="{{ url_for('dietplans.dietplans')}}" class="nav-link">Diet Plans</a>
             <a href="{{ url_for('exercisescontroller.exercisesCategory') }}"  class="nav-link">Exercises</a>
             <a href="{{ url_for('recipescontroller.recipes') }}"  class="nav-link">Recipes</a>
         </div>

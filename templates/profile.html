@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 
     <header>
         {% include 'header.html' %}
@@ -19,14 +20,32 @@
         {% include 'navbar.html' %}
     </main>
 
+    <div class="rankswrapper" id="ranksModal">
+        <h3>
+            The new badges system is designed to enhance user engagement and competitiveness within the app, making the experience more dynamic and rewarding. Users can earn various badges by completing specific challenges, achieving milestones, or participating in community events. This gamification element not only motivates individuals to explore the app's features more thoroughly but also fosters a sense of community as users can compare their achievements with friends and other participants. By introducing challenges that encourage users to push their limits, the badges system adds a layer of excitement and interaction, transforming the app into a vibrant platform where users can showcase their progress, celebrate their accomplishments, and inspire others to join in on the fun.
+        </h3>
+
+        <h3>This System contains Six Ranks Heres the details of each rank and How to get</h3>
+        <div class = "rankd">
+        <img src="{{ url_for('static', filename='images/gold.png') }}" alt="rank-pic" >
+
+        <p>This is the Gold Ranks is only obtained by etc</p>
+        </div>
+
+        <span class="close" id="closeModal">&times;</span> <!-- Close button -->
+
+
+    </div>
+    
+
     <div class = "wrapper">
         <div class = "profile-pic">
             <img src="{{ url_for('static', filename='images/hanma.jpg') }}" alt="profile-pic">
         </div>  
         <div class = "rank-rewardpoints"> 
-            <div class = "rank">
+            <div class = "rank" id="rank">
 
-                <img src="{{ url_for('static', filename='images/wood.png') }}" alt="rank-pic">
+                <img src="{{ url_for('static', filename='images/gold.png') }}" alt="rank-pic" id="rank-pic">
                 <div class="progress-container">
                     <div class="progress-bar" style="width: 75%;"><p>75%</p></div> <!-- Set width dynamically -->
                 </div>
@@ -218,6 +237,5 @@
 
     
 
-    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 </body>
 </html>

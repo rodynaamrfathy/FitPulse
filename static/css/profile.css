@@ -15,6 +15,44 @@
 }
 
 
+/* Add this to your profile.css file */
+/* Modal styles */
+.rankswrapper {
+    display: none; /* Hidden by default */
+    position: fixed; /* Sit on top of the page content */
+    margin: 15px auto;
+    margin-left: 25%;
+    margin-top: 3rem;
+    z-index: 1000; /* High z-index to ensure it appears on top */
+    width: 900px; /* Full width */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: white; /* Text color */
+    flex-direction: column; /* Stack content */
+}
+
+.rankswrapper h3 {
+    padding: 10px 10px;
+    width: 850px;
+    font-size: 1rem  ;
+}
+
+.rankswrapper img {
+    width: 100px;
+    height: 130px;
+}
+
+/* Close button style */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white; /* Color for the close button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+
 
 .wrapper2 {
     margin-top: -1rem;
