@@ -65,11 +65,12 @@ def add_diet_plan():
 
     # Validate and save the image
     image = request.files.get('image')  # Use .get() for safe access
-    image_filename = image.filename if image else None
+    image_filename = secure_filename(image.filename) if image else None  # Secure the filename
 
     # Save the uploaded image to the correct directory if it exists
     if image:
-        image.save(f"static/uploads/dietplans/{image_filename}")
+        image_path = os.path.join('static/uploads/dietplans', image_filename)
+        image.save(image_path)
 
     # Insert the diet plan data into the database
     mysql = current_app.config['mysql']
@@ -77,10 +78,28 @@ def add_diet_plan():
     cursor.execute('''
         INSERT INTO dietplans (authorid, dietname, description, image, publishdate, coreprinciples, timingfrequency, bestsuitedfor, easytofollow, studies)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    ''', (author_id, diet_name, description, image_filename, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
+    ''', (author_id, diet_name, description, image_path, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
     
     mysql.connection.commit()
     cursor.close()
 
     flash('Diet plan added successfully!', 'success')
     return redirect(url_for('trainer.trainer_homepage'))  # Redirect back to trainer homepage
+
+@dietplans_bp.route('/delete_diet_plan/<int:plan_id>', methods=['POST'])
+def delete_diet_plan(plan_id):
+    # Ensure trainer is logged in
+    if 'trainer_id' not in session:
+        flash('You must be logged in to delete a diet plan.', 'warning')
+        return redirect(url_for('signin.signin'))
+
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Ensure the logged-in trainer owns the diet plan
+    cursor.execute('DELETE FROM dietplans WHERE dietplanid = %s AND authorid = %s', (plan_id, session['trainer_id']))
+    mysql.connection.commit()
+    cursor.close()
+
+    flash('Diet plan deleted successfully!', 'success')
+    return redirect(url_for('trainer.trainer_homepage'))
