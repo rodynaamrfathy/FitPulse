@@ -64,12 +64,13 @@ def add_diet_plan():
     author_id = session['trainer_id']  # Ensure trainer's ID is in the session
 
     # Validate and save the image
-    if image and allowed_file(image.filename):
-        dietplans = secure_filename(image.filename)
-        image.save(os.path.join(UPLOAD_FOLDER, dietplans))
-        image_path = os.path.join(UPLOAD_FOLDER, dietplans)
-    else:
-        image_path = None  # If no image is uploaded
+    image = request.files.get('image')  # Use .get() for safe access
+    image_filename = secure_filename(image.filename) if image else None  # Secure the filename
+
+    # Save the uploaded image to the correct directory if it exists
+    if image:
+        image_path = os.path.join('static/uploads/dietplans', image_filename)
+        image.save(image_path)
 
     # Insert the diet plan data into the database
     mysql = current_app.config['mysql']
