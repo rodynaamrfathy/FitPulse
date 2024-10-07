@@ -43,7 +43,7 @@ def allowed_file(filename):
     """Check if the uploaded file is an allowed type."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@dietplans_bp.route('/dietplan', methods=['POST'])
+@dietplans_bp.route('/adddietplan', methods=['POST'])
 def add_diet_plan():
     # Ensure the trainer is logged in
     if 'trainer_id' not in session:
