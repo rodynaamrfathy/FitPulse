@@ -14,28 +14,47 @@ def signin():
         email = request.form['email']
         password = request.form['password']
 
-        # Query the database to check if the email exists
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+        # Check the 'users' table first
         cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
         user = cursor.fetchone()
-        cursor.close()
 
         if user:
-            # Check if the provided password matches the hashed password in the database
-            if bcrypt.check_password_hash(user['passwordhash'], password):  # Use bcrypt to verify
+            # Check if the provided password matches the hashed password for users
+            if bcrypt.check_password_hash(user['passwordhash'], password):
                 # If password matches, store user data in session
                 session['loggedin'] = True
-                session['userid'] = user['userid']  # Use 'userid' as per your schema
+                session['user_id'] = user['userid']  # Standardize session keys
                 session['email'] = user['email']
                 session['firstName'] = user['firstname']
 
                 flash('Logged in successfully!', 'success')
-                return render_template('mainpage.html')
-            else:
-                flash('Incorrect email or password. Please try again.', 'danger')
-        else:
-            flash('Incorrect email or password. Please try again.', 'danger')
+                cursor.close()
+                return redirect(url_for('mainpage'))  # Redirect to the mainpage
 
+        # If user not found, check the 'trainers' table
+        cursor.execute('SELECT * FROM trainers WHERE email = %s', (email,))
+        trainer = cursor.fetchone()
+
+        if trainer:
+            # Check if the provided password matches the plaintext password for trainers
+            if trainer['passwordhash'] == password:  # Direct plaintext comparison
+                # If password matches, store trainer data in session
+                session['loggedin'] = True
+                session['trainer_id'] = trainer['trainerid']  # Use consistent session key
+                session['email'] = trainer['email']
+                session['firstName'] = trainer['firstname']
+
+                flash('Logged in successfully as trainer!', 'success')
+                cursor.close()
+                return redirect(url_for('trainer_homepage'))  # Redirect to trainer homepage
+            else:
+                flash('Incorrect password for trainer. Please try again.', 'danger')
+        else:
+            flash('Account not found. Please try again or register.', 'info')
+
+        cursor.close()
         return redirect(url_for('signin.signin'))
 
     return render_template('signin.html')
