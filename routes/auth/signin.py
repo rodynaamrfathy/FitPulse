@@ -31,7 +31,7 @@ def signin():
 
                 flash('Logged in successfully!', 'success')
                 cursor.close()
-                return redirect(url_for('mainpage'))  # Redirect to the mainpage
+                return redirect(url_for('dashboard'))  # Redirect to the mainpage
 
         # If user not found, check the 'trainers' table
         cursor.execute('SELECT * FROM trainers WHERE email = %s', (email,))
