@@ -48,7 +48,7 @@ def signin():
 
                 flash('Logged in successfully as trainer!', 'success')
                 cursor.close()
-                return redirect(url_for('trainer_homepage'))  # Redirect to trainer homepage
+                return redirect(url_for('trainer.trainer_homepage'))  # Redirect to trainer homepage
             else:
                 flash('Incorrect password for trainer. Please try again.', 'danger')
         else:
