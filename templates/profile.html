@@ -21,15 +21,41 @@
     </main>
 
     <div class="rankswrapper" id="ranksModal">
-        <h3>
+        <h1 class = "title">Welcome To Our New Badging System</h1>
+        <h3 class = "description">
             The new badges system is designed to enhance user engagement and competitiveness within the app, making the experience more dynamic and rewarding. Users can earn various badges by completing specific challenges, achieving milestones, or participating in community events. This gamification element not only motivates individuals to explore the app's features more thoroughly but also fosters a sense of community as users can compare their achievements with friends and other participants. By introducing challenges that encourage users to push their limits, the badges system adds a layer of excitement and interaction, transforming the app into a vibrant platform where users can showcase their progress, celebrate their accomplishments, and inspire others to join in on the fun.
         </h3>
 
-        <h3>This System contains Six Ranks Heres the details of each rank and How to get</h3>
-        <div class = "rankd">
-        <img src="{{ url_for('static', filename='images/gold.png') }}" alt="rank-pic" >
+        <h3 class = "description2">This System contains Six Ranks Heres the details of each rank and How to get</h3>
 
-        <p>This is the Gold Ranks is only obtained by etc</p>
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/wood.png') }}" alt="rank-pic" >
+            <p>This is the <b>Wood</b> Ranks is only obtained by Completing Your Account Creation Steps</p>
+        </div>
+
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/iron.png') }}" alt="rank-pic" >
+            <p>This is the <b>Iron</b> Ranks is only obtained by Completing 25 Easy Exercise</p>
+        </div>
+
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/bronze.png') }}" alt="rank-pic" >
+            <p>This is the <b>Bronze</b> Ranks is only obtained by Completing 50 Easy Exercise</p>
+        </div>
+
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/silver.png') }}" alt="rank-pic" >
+            <p>This is the <b>Iron</b> Ranks is only obtained by Completing 50 Medium Exercise</p>
+        </div>
+
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/gold.png') }}" alt="rank-pic" >
+            <p>This is the <b>Gold</b> Ranks is only obtained by Completing 100 Hard Exercise</p>
+        </div>
+
+        <div class = "rankd">
+            <img src="{{ url_for('static', filename='images/diamond.png') }}" alt="rank-pic" >
+            <p>This is the <b>Diamond</b> Ranks is only obtained by Completing All the Exercise Levels</p>
         </div>
 
         <span class="close" id="closeModal">&times;</span> <!-- Close button -->

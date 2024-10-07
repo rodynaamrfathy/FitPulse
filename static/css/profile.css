@@ -16,7 +16,6 @@
 
 
 /* Add this to your profile.css file */
-/* Modal styles */
 .rankswrapper {
     display: none; /* Hidden by default */
     position: fixed; /* Sit on top of the page content */
@@ -25,9 +24,13 @@
     margin-top: 3rem;
     z-index: 1000; /* High z-index to ensure it appears on top */
     width: 900px; /* Full width */
+    max-height: 80vh; /* Maximum height, adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
     background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     color: white; /* Text color */
+    align-items: center;
     flex-direction: column; /* Stack content */
+    padding: 20px; /* Optional: add some padding */
 }
 
 .rankswrapper h3 {
@@ -36,10 +39,44 @@
     font-size: 1rem  ;
 }
 
-.rankswrapper img {
-    width: 100px;
-    height: 130px;
+.rankd {
+    display: flex;   
+    width: 850px;  
+    height: 280px;    /* Use flexbox for alignment */
+    flex-direction: row;
+    margin-left: -2rem;
+    align-items: center;   /* Center items vertically */
+    justify-content: left !important; /* Center items horizontally */
+    margin-bottom: -2rem !important;
+    
 }
+
+.description {
+    border-bottom: 2px solid #ff9409;
+}
+
+.description2 {
+    margin-bottom: 0.7rem;
+}
+
+.rankd img {
+    
+    margin-right: 2rem;   /* Add some space between the image and text */
+    height: 270px;         /* Adjust the height as needed */
+    width: auto;     
+    margin-left: 0;     /* Maintain aspect ratio */
+}
+
+.rankd p {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300; /* Match your font weight */
+    margin-left: 0.5rem; /* Add some space between the image and text */
+    margin-right: 0.5rem; /* Add some space between the image and text */
+    margin-top: 0.5rem; /* Add some space above the text */
+    margin-bottom: 0.5rem; /* Add some space below the text */
+}
+
 
 /* Close button style */
 .close {
@@ -52,7 +89,27 @@
     cursor: pointer; /* Pointer cursor on hover */
 }
 
+b {
+    font-size: 1.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #ff9409;
+}
 
+.title {
+    font-size: 2.5rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #ff9409;
+}
 
 .wrapper2 {
     margin-top: -1rem;
