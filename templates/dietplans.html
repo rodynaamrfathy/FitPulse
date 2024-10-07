@@ -37,7 +37,7 @@
         {% for dietplan in dietplans %}
         <div class="diet-plan">
             <a href="{{ url_for('dietplans.dietplan', dietplan_id=dietplan['dietplanid']) }}">
-                <img src="{{ url_for('static', filename=dietplan['uploads/dietplans/image']) }}" alt="Diet Image">
+                <img src="{{ url_for('static', filename=dietplan['image']) }}" alt="Diet Image">
             </a>
             <h2>{{ dietplan['dietname'] }}</h2>
             <p>{{ dietplan['description'][:150] }}...</p>
