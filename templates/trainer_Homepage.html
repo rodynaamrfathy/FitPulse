@@ -18,7 +18,7 @@
         <!-- Section for adding diet plans -->
         <section id="add-diet-plan">
             <h2>Add Diet Plan</h2>
-            <form action="{{ url_for('dietplan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
+            <form action="{{ url_for('dietplans.add_diet_plan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
                 <label for="diet_name">Diet Name:</label>
                 <input type="text" id="diet_name" name="diet_name" required>
                 

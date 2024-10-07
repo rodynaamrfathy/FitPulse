@@ -43,7 +43,7 @@ def allowed_file(filename):
     """Check if the uploaded file is an allowed type."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@dietplans_bp.route('/dietplan', methods=['POST'])
+@dietplans_bp.route('/adddietplan', methods=['POST'])
 def add_diet_plan():
     # Ensure the trainer is logged in
     if 'trainer_id' not in session:
@@ -65,11 +65,20 @@ def add_diet_plan():
 
     # Validate and save the image
     image = request.files.get('image')  # Use .get() for safe access
+<<<<<<< HEAD
     image_filename = image.filename if image else None
 
     # Save the uploaded image to the correct directory if it exists
     if image:
         image.save(f"static/uploads/dietplans/{image_filename}")
+=======
+    image_filename = secure_filename(image.filename) if image else None  # Secure the filename
+
+    # Save the uploaded image to the correct directory if it exists
+    if image:
+        image_path = os.path.join('static/uploads/dietplans', image_filename)
+        image.save(image_path)
+>>>>>>> 3b681481bf14b585613132e91b5701eabb0ac9f5
 
     # Insert the diet plan data into the database
     mysql = current_app.config['mysql']
