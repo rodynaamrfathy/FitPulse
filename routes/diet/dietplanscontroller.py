@@ -4,7 +4,6 @@ from werkzeug.utils import secure_filename
 import os
 import MySQLdb
 
-
 dietplans_bp = Blueprint('dietplans', __name__)
 
 @dietplans_bp.route('/dietplans')
@@ -66,11 +65,12 @@ def add_diet_plan():
 
     # Validate and save the image
     image = request.files.get('image')  # Use .get() for safe access
-    image_filename = image.filename if image else None
+    image_filename = secure_filename(image.filename) if image else None  # Secure the filename
 
     # Save the uploaded image to the correct directory if it exists
     if image:
-        image.save(f"static/uploads/dietplans/{image_filename}")
+        image_path = os.path.join('static/uploads/dietplans', image_filename)
+        image.save(image_path)
 
     # Insert the diet plan data into the database
     mysql = current_app.config['mysql']
@@ -78,7 +78,7 @@ def add_diet_plan():
     cursor.execute('''
         INSERT INTO dietplans (authorid, dietname, description, image, publishdate, coreprinciples, timingfrequency, bestsuitedfor, easytofollow, studies)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    ''', (author_id, diet_name, description, image_filename, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
+    ''', (author_id, diet_name, description, image_path, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
     
     mysql.connection.commit()
     cursor.close()
@@ -103,23 +103,3 @@ def delete_diet_plan(plan_id):
 
     flash('Diet plan deleted successfully!', 'success')
     return redirect(url_for('trainer.trainer_homepage'))
-
-    plan = DietPlan.query.get(plan_id)  # Fetch the existing plan from the database
-
-    if request.method == 'POST':
-        # Update the plan's attributes based on the form data
-        plan.dietname = request.form['diet_name']
-        plan.description = request.form['description']
-        plan.core_principles = request.form['core_principles']
-        plan.timing_frequency = request.form['timing_frequency']
-        plan.best_suited_for = request.form['best_suited_for']
-        plan.easy_to_follow = request.form['easy_to_follow']
-        plan.studies = request.form['studies']
-        
-        # If an image was uploaded, you may want to handle that here
-        
-        db.session.commit()  # Commit the changes to the database
-        flash('Diet plan updated successfully!')
-        return redirect(url_for('trainer.trainer_homepage'))
-
-    return render_template('edit_diet_plan.html', plan=plan)  # Render an edit form with existing data
