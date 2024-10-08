@@ -95,8 +95,12 @@ def profile():
 
 @app.route('/benchpresscalculator')
 def benchpresscalculator():
-    return render_template('benchpresscalculator.html')
+    return render_template('tools/benchpresscalculator.html')
 
+
+@app.route('/bmrcalculator')
+def bmrcalculator():
+    return render_template('tools/bmrcalculator.html')
 
 
 
