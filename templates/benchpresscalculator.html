@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/benchpresscalculator.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class = "wrapper"> 
+
+        <h1>Bench Press Calculator: Calculate Your 1 REP MAX (1RM)</h1>
+        <h3>Categoreis : <span>Powerlifting</span>  <span>Strength</span>  <span>Upper Body</span></h3>
+
+    </div>
+
+    <div class = "wrapper1">
+
+        <img src="{{ url_for('static', filename='images/bench-press-calculator.jpg') }}" alt="Image 1">
+
+        <div class = "description">
+            <h3>The Muscle & Strength bench press calculator can be used to work out your approximate 1 REP MAX bench press. These figures are not 100% accurate, but it serves as a good guide! </h3>
+        </div>
+
+    </div>
+
+    <div class = "wrapper2">
+
+        <h1 class = "title">Bench Press Calculator</h1>
+        <div class="calc-input">
+            <input type="number" id="weight" placeholder="Enter weight (KG)">
+        </div>
+        
+        <div class="calc-input">
+            <select id="reps">
+                <option value="" disabled selected>Select reps</option>
+                <!-- Options from 1 to 20 -->
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+
+        <div class="calc-input">
+            <button id="calculate">Calculate 1RM</button>
+        </div>
+        
+
+    </div>
+
+    <div class="wrapper3">
+        <h2>Your 1 REP MAX (1RM) is:</h2>
+        <p id="result">---</p>
+    </div>
+
+
+    <div class = "wrapper4">
+        <h1 >Bench Press (1RM) Calculator Instructions</h1>
+        <p>This bench press calculator can be used to work out your approximate 1 REP MAX bench press. The way this bench calculator works is it takes the amount of weight you can bench for a certain number of reps and uses a formula to calculate your approximate 1 REP MAX. Obviously, these figures are not 100% accurate.
+
+            To use the bench press calculator simply enter the weight in the first box provided and select the number of reps from the drop down box. For example, if I benched 225lbs for 10 reps I would enter 225 and select 10 reps. The bench press calculator works in both pounds and kilograms.</p>
+    </div>
+
+
+    
+
+    <script src="{{ url_for('static', filename='js/benchpresscalculator.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+.wrapper4,
+.wrapper3,
+.wrapper2,
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+}
+
+.wrapper {
+    border-bottom: 4px solid rgb(255, 148, 9);
+}
+
+.wrapper1 {
+    margin-top: 3rem !important;
+}
+
+.wrapper h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+}
+
+.wrapper h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+}
+
+.wrapper span {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: aliceblue;
+    color: black;
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+
+span:hover {
+    background-color: #bbb4b4;
+}
+
+.wrapper1 img {
+    width: 900px;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+
+
+.wrapper1 .description {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+    text-align: left;
+    border-left: 4px solid rgb(255, 148, 9);
+    padding-left: 0.7rem;
+}
+
+.wrapper2 {
+    margin-top: 3rem !important;
+}
+
+.wrapper2 .title {
+    width: 900px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+    background-color: rgb(255, 148, 9);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+.calc-input {
+    display: block; /* Ensures each input is on a separate line */
+    margin-bottom: 15px; /* Adds spacing between the inputs */
+}
+
+.calc-input label {
+    display: block; /* Ensures the label is on top of the input */
+    margin-bottom: 5px; /* Space between the label and the input */
+    font-size: 16px; /* Adjust the font size of the label */
+}
+
+.calc-input button,
+.calc-input select,
+.calc-input input {
+    width: 850px; /* Make the input take up the full width of its container */
+    padding: 10px; /* Adds some padding for a better appearance */
+    font-size: 16px; /* Adjust font size inside the input */
+    box-sizing: border-box; /* Ensures padding and borders are included in the total width */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 4px; /* Slight rounding of the input's edges */
+    margin-left: 0.5rem;
+}
+
+
+
+.calc-input button {
+    background-color: rgb(255, 148, 9); /* Set the background color */
+    color: white; /* Set the text color */
+    border: none; /* Remove the border */
+    cursor: pointer; /* Change the cursor to a pointer */
+    margin-top: 1rem; /* Add some space between the button and the input */
+    padding: 10px; /* Add padding for a better appearance */
+    font-size: 16px; /* Adjust the font size */
+    border-radius: 20px; /* Slight rounding of the button's edges */
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+}
+
+.calc-input button:hover {
+    background-color: #ff7e00; /* Change the background color on hover */
+}
+
+.wrapper3 {
+    margin-top: 1.5rem !important;
+}
+
+.wrapper3 h2{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+    
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+
+}
+
+#result {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+.wrapper3 {
+    border-bottom: 4px solid rgb(255, 148, 9);
+}
+
+.wrapper4 {
+    margin-top: 1.5rem !important;
+}
+
+.wrapper4 h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif; /* Match your font */
+    font-weight: 300;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+
+.wrapper4 p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+    text-align: left;
+}
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper4,
+    .wrapper3,
+    .wrapper2,
+    .wrapper1,
+    .wrapper {
+        width: 700px;
+        
+    }
+
+
+    .wrapper1 img {
+        width: 700px;
+    }
+
+    .calc-input button,
+    .calc-input select,
+    .calc-input input {
+        width: 650px;
+    }
+}
+
+   
+
+}

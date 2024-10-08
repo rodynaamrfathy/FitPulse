@@ -93,5 +93,12 @@ def tools():
 def profile():
     return render_template('profile.html')
 
+@app.route('/benchpresscalculator')
+def benchpresscalculator():
+    return render_template('benchpresscalculator.html')
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
