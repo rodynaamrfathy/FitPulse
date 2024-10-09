@@ -1,45 +1,291 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - FIT PULSE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/register.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
-
+    <style>
+        /* Basic Media Query for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .center-container {
+                width: 90%;
+                margin: auto;
+                padding: 10px;
+            }
+            .progress-bar {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+        .fitness-goals-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .fitness-goal {
+            width: 120px;
+            height: 150px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .fitness-goal:hover {
+            transform: scale(1.1); /* Enlarges the image slightly when hovered */
+        }
+        
+        .goal-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .goal-image + span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .fitness-goal.selected {
+            border: 2px solid orange;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        .next-button, .prev-button {
+            background-color: orange;
+            color: white; /* White text */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Center the text */
+            text-decoration: none; /* Remove underlines */
+            display: inline-block; /* Display inline */
+            font-size: 16px; /* Increase font size */
+            margin: 4px 2px; /* Add some margin */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease; /* Smooth background change */
+            border-radius: 5px; /* Rounded corners */
+        }
+        
+        .next-button:hover, .prev-button:hover {
+            background-color: darkorange; /* Darker green on hover */
+        }
     
+        .button-group {
+            display: flex;
+            justify-content: space-between; /* Space between buttons */
+        }
+    
+        /* Disabled button style */
+        .next-button.disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }        
+    </style>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='images/register_poster2.jpg') }}" alt="Register Image" class="background-image">
+    <img src="{{ url_for('static', filename='images/register_poster2.jpg') }}" alt="Register Image" class="background-image" aria-label="Background image of FIT Pulse registration">
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" role="progressbar">
+        <div class="step active" id="step1" onclick="navigateStep(1)" aria-label="Step 1 - Personal Info">1</div>
+        <div class="step" id="step2" onclick="navigateStep(2)" aria-label="Step 2 - Physical Info">2</div>
+        <div class="step" id="step3" onclick="navigateStep(3)" aria-label="Step 3 - Fitness Goals">3</div>
+    </div>
 
     <div class="center-container">
-        
         <form class="login-form" method="POST" action="{{ url_for('signup.register') }}">
-            <h1><span class="welcome-text">Step Into</span> FIT PULSE</h1>
-        
-            <input type="text" id="firstname" name="firstName" placeholder="First Name" class="input-field" required>
-            <input type="text" id="lastname" name="lastName" placeholder="Last Name" class="input-field" required>
-            <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
-            <!-- Gender Select -->
-            <select id="gender" name="gender" class="input-field" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-            <input type="date" id="dob" name="dateOfBirth" placeholder="Date of Birth" class="input-field" required>
-            <div class="password-container">
-                <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
-                <span class="eye-icon" id="togglePassword">
-                    <i class="fas fa-eye"></i>
-                </span>
+            
+            <!-- Step 1: Personal Information -->
+            <div class="form-step" id="step-1">
+                <h1><span class="welcome-text">Step Into</span> FIT PULSE</h1>
+                <input type="text" id="firstname" name="firstName" placeholder="First Name" class="input-field" required aria-label="First Name">
+                <input type="text" id="lastname" name="lastName" placeholder="Last Name" class="input-field" required aria-label="Last Name">
+                <input type="email" id="email" name="email" placeholder="Email" class="input-field" required aria-label="Email Address">
+                <select id="gender" name="gender" class="input-field" required aria-label="Gender">
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <input type="date" id="dob" name="dateOfBirth" placeholder="Date of Birth" class="input-field" required aria-label="Date of Birth">
+                <button type="button" class="next-button" onclick="nextStep(2)">Next</button>
             </div>
-            <button type="submit" class="login-button">Register</button>
-            <a href="{{ url_for('signin.signin') }}" class="create-account">Already Have Account!</a>
-        </form>
-        
+
+            <!-- Step 2: Physical Information -->
+            <div class="form-step" id="step-2" style="display: none;">
+                <h2>Physical Information</h2>
+                <input type="number" id="weight" name="weight" placeholder="Weight (kg)" class="input-field" required aria-label="Weight">
+                <span class="convert-link" onclick="openConverter('weight')">Convert units</span>
+                <input type="number" id="height" name="height" placeholder="Height (cm)" class="input-field" required aria-label="Height">
+                <span class="convert-link" onclick="openConverter('height')">Convert units</span>
+                <div class="button-group">
+                    <button type="button" class="prev-button" onclick="prevStep(1)">Back</button>
+                    <button type="button" class="next-button" onclick="nextStep(3)">Next</button>
+                </div>
+            </div>
+
+<!-- Step 3: Fitness Goals -->
+<div class="form-step" id="step-3" style="display: none;">
+    <h2>Your Fitness Goal</h2>
+    
+    <!-- Clickable fitness goal images -->
+    <div class="fitness-goals-container">
+        <div class="fitness-goal" onclick="selectGoal('weight_loss')">
+            <img src="path_to_image/weight_loss.jpg" alt="Weight Loss" class="goal-image">
+            <span>Weight Loss</span>
+        </div>
+        <div class="fitness-goal" onclick="selectGoal('muscle_gain')">
+            <img src="path_to_image/muscle_gain.jpg" alt="Muscle Gain" class="goal-image">
+            <span>Muscle Gain</span>
+        </div>
+        <div class="fitness-goal" onclick="selectGoal('endurance')">
+            <img src="path_to_image/endurance.jpg" alt="Endurance" class="goal-image">
+            <span>Endurance</span>
+        </div>
+        <div class="fitness-goal" onclick="selectGoal('general_fitness')">
+            <img src="path_to_image/general_fitness.jpg" alt="General Fitness" class="goal-image">
+            <span>General Fitness</span>
+        </div>
     </div>
+    
+    <!-- Hidden input to store selected goal -->
+    <input type="hidden" id="goal" name="goal" required>
+    
+    <div class="button-group">
+        <button type="button" class="prev-button" onclick="prevStep(2)">Back</button>
+        <button type="submit" class="login-button">Register</button>
+    </div>
+</div>
+
+
+    <!-- Unit Converter Popup -->
+    <div id="converter-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeConverter()">&times;</span>
+            <h2>Unit Converter</h2>
+            <input type="number" id="convert-input" placeholder="Enter value" aria-label="Unit Value">
+            <select id="unit-select" aria-label="Unit Type">
+                <option value="kg">Kilograms</option>
+                <option value="lbs">Pounds</option>
+                <option value="cm">Centimeters</option>
+                <option value="ft">Feet</option>
+                <!-- Add more unit options as needed -->
+            </select>
+            <button type="button" class="convert-button" onclick="convertUnits()">Convert</button>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+    <script>
+        let conversionType;
+    
+        // Display the specified step of the form
+        function nextStep(step) {
+            document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
+            document.getElementById('step-' + step).style.display = 'block';
+            updateProgress(step);
+        }
+    
+        // Display the previous step of the form
+        function prevStep(step) {
+            nextStep(step);
+        }
+    
+        // Navigate to a specified step when clicking on steps
+        function navigateStep(step) {
+            nextStep(step);
+        }
+    
+        // Update the progress indicator based on the current step
+        function updateProgress(step) {
+            document.querySelectorAll('.step').forEach((element, index) => {
+                if (index < step) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+        }
+    
+        // Open the unit converter popup and populate units based on the conversion type
+        function openConverter(type) {
+            document.getElementById('converter-popup').style.display = 'block';
+            conversionType = type;
+    
+            const unitSelect = document.getElementById('unit-select');
+            unitSelect.innerHTML = ''; // Clear previous options
+    
+            if (type === 'weight') {
+                unitSelect.innerHTML = `
+                    <option value="kg">Kilograms</option>
+                    <option value="lbs">Pounds</option>
+                `;
+            } else if (type === 'height') {
+                unitSelect.innerHTML = `
+                    <option value="cm">Centimeters</option>
+                    <option value="m">Meters</option>
+                    <option value="ft">Feet</option>
+                    <option value="in">Inches</option>
+                `;
+            }
+        }
+    
+        // Close the unit converter popup
+        function closeConverter() {
+            document.getElementById('converter-popup').style.display = 'none';
+        }
+    
+        // Perform the unit conversion and display the result
+        function convertUnits() {
+            const inputValue = parseFloat(document.getElementById('convert-input').value);
+            const selectedUnit = document.getElementById('unit-select').value;
+    
+            if (isNaN(inputValue)) {
+                alert('Please enter a valid number for conversion.');
+                return;
+            }
+    
+            let convertedValue = '';
+    
+            // Weight conversion logic
+            if (conversionType === 'weight') {
+                if (selectedUnit === 'kg') {
+                    convertedValue = `${inputValue} kg = ${(inputValue * 2.20462).toFixed(2)} lbs`;
+                } else if (selectedUnit === 'lbs') {
+                    convertedValue = `${inputValue} lbs = ${(inputValue / 2.20462).toFixed(2)} kg`;
+                }
+            } 
+            // Height conversion logic
+            else if (conversionType === 'height') {
+                if (selectedUnit === 'cm') {
+                    convertedValue = `${inputValue} cm = ${(inputValue / 100).toFixed(2)} m = ${(inputValue / 30.48).toFixed(2)} ft`;
+                } else if (selectedUnit === 'm') {
+                    convertedValue = `${inputValue} m = ${(inputValue * 100).toFixed(2)} cm = ${(inputValue * 3.28084).toFixed(2)} ft`;
+                } else if (selectedUnit === 'ft') {
+                    convertedValue = `${inputValue} ft = ${(inputValue * 30.48).toFixed(2)} cm = ${(inputValue * 12).toFixed(2)} in`;
+                }
+            }
+            
+            alert(`Converted Value: ${convertedValue}`);
+        }
+    
+        // Select a fitness goal and visually indicate the selection
+        function selectGoal(goal) {
+            document.getElementById('goal').value = goal;
+    
+            // Optionally, visually indicate the selected goal
+            document.querySelectorAll('.fitness-goal').forEach(item => {
+                item.classList.remove('selected');
+            });
+    
+            const selectedGoal = document.querySelector(`[onclick="selectGoal('${goal}')"]`);
+            selectedGoal.classList.add('selected');
+        }
+    </script>    
+
 </body>
 </html>
