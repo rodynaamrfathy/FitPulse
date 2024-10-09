@@ -24,11 +24,18 @@ def dietplan(dietplan_id):
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    # Fetch the specific diet plan
-    cursor.execute('SELECT * FROM dietplans WHERE dietplanid = %s', (dietplan_id,))
+    # Fetch the specific diet plan along with the trainer's data
+    query = """
+        SELECT dp.*, t.firstname, t.lastname, t.specialty
+        FROM dietplans dp
+        JOIN trainers t ON dp.authorid = t.trainerid
+        WHERE dp.dietplanid = %s
+    """
+    cursor.execute(query, (dietplan_id,))
     dietplan = cursor.fetchone()
 
     cursor.close()
+    
     if dietplan:
         return render_template('dietplan.html', dietplan=dietplan)
     else:
