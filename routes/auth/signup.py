@@ -81,9 +81,8 @@ def register():
             mysql.connection.commit()
         except Exception as e:
             mysql.connection.rollback()
+            current_app.logger.error(f"Registration failed: {e}")
             flash('Registration failed. Please try again.', 'danger')
-            cursor.close()
-            return render_template('register.html')
 
         # Fetch the newly created user's id
         user_id = cursor.lastrowid

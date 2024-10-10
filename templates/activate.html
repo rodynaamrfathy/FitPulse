@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Confirm Your Email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
 </head>
 <body>
-    <p>Hi {{ first_name }},</p>
-    <p>Thanks for signing up! Please click the link below to confirm your email address:</p>
-    <p><a href="{{ confirm_url }}">Confirm Your Email</a></p>
-    <p>If you did not sign up, please ignore this email.</p>
+    <h1>Email Confirmation</h1>
+    <p>To confirm your email address, please click the link below:</p>
+    <a href="{{ confirm_url }}">{{ confirm_url }}</a>
 </body>
 </html>

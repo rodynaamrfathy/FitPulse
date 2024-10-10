@@ -9,6 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
     <img src="{{ url_for('static', filename='images/register_poster2.jpg') }}" alt="Register Image" class="background-image" aria-label="Background image of FIT Pulse registration">
 
     <div class="wrapper">
