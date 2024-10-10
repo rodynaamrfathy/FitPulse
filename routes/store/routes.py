@@ -132,20 +132,26 @@ def decrease_quantity(product_id):
 @store_bp.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
-        # Collect order details from the form submission
         shipping_address = request.form['address']
         payment_method = request.form['payment_method']
 
-        # Assume that user ID is available via the session (logged-in user)
         user_id = session.get('user_id')  # Make sure the user is logged in
+        if user_id is None:
+            flash('You need to log in to place an order.', 'danger')
+            return redirect(url_for('signin.signin'))  # Redirect to the login route
 
-        # Access the database connection
+        # Verify user exists in the database
         mysql = current_app.config['mysql']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM users WHERE userid = %s', (user_id,))
+        user = cursor.fetchone()
+        if user is None:
+            flash('User not found. Please log in again.', 'danger')
+            return redirect(url_for('signin.signin'))
 
-        # Insert new order into the `order` table
+        # Insert new order into the `orders` table
         cursor.execute("""
-            INSERT INTO `order` (userid, totalamount, orderstatus, paymentmethod, orderdate, shippingaddress)
+            INSERT INTO `orders` (userid, totalamount, orderstatus, paymentmethod, orderdate, shippingaddress)
             VALUES (%s, %s, 'pending', %s, NOW(), %s)
         """, (user_id, 0, payment_method, shipping_address))
         
@@ -157,9 +163,9 @@ def checkout():
 
         # Insert each product in the cart into the `order_detail` table
         for product_id, item in cart.items():
-            quantity = item['quantity']
-            price_per_item = item['price']
-            total_amount += quantity * price_per_item
+            quantity = int(item['quantity'])  # Ensure quantity is an integer
+            price_per_item = float(item['price'])  # Ensure price is a float
+            total_amount += quantity * price_per_item  # Safely calculate the total amount
 
             # Insert into order_detail
             cursor.execute("""
@@ -182,7 +188,7 @@ def checkout():
 
         # Update the total amount for the order
         cursor.execute("""
-            UPDATE `order`
+            UPDATE `orders`
             SET totalamount = %s
             WHERE orderid = %s
         """, (total_amount, order_id))

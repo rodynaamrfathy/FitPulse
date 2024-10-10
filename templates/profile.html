@@ -339,9 +339,8 @@
 
 
 
-
-    <div class = "wrapper2">
-        <div class = orders>
+    <div class="wrapper2">
+        <div class="orders">
             <h1>Orders</h1> 
             <div class="filter-container">
                 <select id="order-status" name="order-status">
@@ -352,57 +351,34 @@
                 </select>
                 <button id="filter-button">Filter by Modified Date</button>
             </div>
-
-
-
-
+    
             <table>
                 <tr>
-                    <th>Order ID</th>
                     <th>Order Date</th>
                     <th>Order Status</th>
                     <th>Order Total</th>
                     <th>View</th>
                 </tr>
+    
+                <!-- Loop through orders and display them in the table -->
+                {% for order in orders %}
                 <tr>
-                    <td>1</td>
-                    <td>2021-06-01</td>
-                    <td>Delivered</td>
-                    <td>1000</td>
-                    <td><button>View</button></td>
+                    <td>{{ order[1] }}</td> <!-- Order Date -->
+                    <td>{{ order[2] }}</td> <!-- Order Status -->
+                    <td>{{ order[3] }}</td> <!-- Order Total -->
+                    <!-- Link to order details page using the order ID -->
+                    <a href="{{ url_for('profile_bp.view_order', order_id=order[0]) }}">
+                        <button>View</button>
+                    </a>
                 </tr>
+                {% endfor %}
+    
+                <!-- Handle case where no orders are found -->
+                {% if orders|length == 0 %}
                 <tr>
-                    <td>2</td>
-                    <td>2021-06-01</td>
-                    <td>Delivered</td>
-                    <td>1060</td>
-                    <td><button>View</button></td>
-
+                    <td colspan="5">No orders found</td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2021-06-01</td>
-                    <td>Delivered</td>
-                    <td>600</td>
-                    <td><button>View</button></td>
-
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>2021-06-01</td>
-                    <td>Delivered</td>
-                    <td>5000</td>
-                    <td><button>View</button></td>
-
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>2021-06-01</td>
-                    <td>Delivered</td>
-                    <td>3000</td>
-                    <td><button>View</button></td>
-
-                </tr>
+                {% endif %}
             </table>
         </div>    
     </div>
