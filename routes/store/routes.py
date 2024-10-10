@@ -163,9 +163,9 @@ def checkout():
 
         # Insert each product in the cart into the `order_detail` table
         for product_id, item in cart.items():
-            quantity = item['quantity']
-            price_per_item = item['price']
-            total_amount += quantity * price_per_item
+            quantity = int(item['quantity'])  # Ensure quantity is an integer
+            price_per_item = float(item['price'])  # Ensure price is a float
+            total_amount += quantity * price_per_item  # Safely calculate the total amount
 
             # Insert into order_detail
             cursor.execute("""
