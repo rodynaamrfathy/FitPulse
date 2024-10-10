@@ -171,3 +171,28 @@ def update_user_profile():
     flash('Profile updated successfully!', 'success')
     return redirect(url_for('profile_bp.profile'))  # Adjust this route as needed
 
+
+
+@profile_bp.route('/order/<int:order_id>')
+def view_order(order_id):
+    # Fetch the MySQL connection from Flask's current_app config
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Query to get order details along with product image URL from the products table
+    order_details_query = """
+        SELECT od.orderdetailid, od.productid, od.quantity, od.priceperitem, p.imageurl
+        FROM order_detail od
+        JOIN products p ON od.productid = p.productid
+        WHERE od.orderid = %s
+    """
+    cursor.execute(order_details_query, (order_id,))
+    order_details = cursor.fetchall()  # Fetch all order details for this order
+
+    cursor.close()  # Close the cursor
+
+    if not order_details:
+        return "Order details not found", 404  # Handle case where no details are found
+
+    # Pass the order details to the order_details template
+    return render_template('order_details.html', order_details=order_details)
