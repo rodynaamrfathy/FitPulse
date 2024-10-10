@@ -56,3 +56,26 @@ def profile():
 
     # Pass the data to the profile template
     return render_template('profile.html', user_data=user_data, orders=orders)
+
+@profile_bp.route('/order/<int:order_id>')
+def view_order(order_id):
+    # Fetch the MySQL connection from Flask's current_app config
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Query to get order details from the order_detail table
+    order_details_query = """
+        SELECT orderdetailid, productid, quantity, priceperitem
+        FROM order_detail
+        WHERE orderid = %s
+    """
+    cursor.execute(order_details_query, (order_id,))
+    order_details = cursor.fetchall()  # Fetch all order details for this order
+
+    cursor.close()  # Close the cursor
+
+    if not order_details:
+        return "Order details not found", 404  # Handle case where no details are found
+
+    # Pass the order details to the order_details template
+    return render_template('order_details.html', order_details=order_details)
