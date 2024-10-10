@@ -89,7 +89,9 @@ def recipe():
 def tools():
     return render_template('tools.html')
 
-
+@app.route('/availabletrainers')
+def availabletrainers():
+    return render_template("online_trainers.html")
 
 @app.route('/benchpresscalculator')
 def benchpresscalculator():

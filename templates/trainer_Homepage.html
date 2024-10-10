@@ -11,6 +11,7 @@
     <header>
         <h1>Welcome, {{ firstName }}</h1> <!-- Display trainer's first name -->
         <p>Your specialty: {{ specialty }}</p> <!-- Display trainer's specialty -->
+        <p>Your payrate: {{ payrate }} $/hour</p> <!-- Display trainer's specialty -->
     </header>
 
     <main>
@@ -66,10 +67,15 @@
         
         {% endif %}
         
-        {% if specialty == 'Coach' %}
+        {% if specialty == 'Fitness Instructor' %}
         <!-- Section for adding workouts -->
         <section id="add-workout">
             <h2>Add Workout</h2>
+        </section>
+        {% endif %}
+
+        {% if specialty == 'Online Fitness Trainer' %}
+        <section id="">
         </section>
         {% endif %}
         
