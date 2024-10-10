@@ -89,7 +89,9 @@ def recipe():
 def tools():
     return render_template('tools.html')
 
-
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 @app.route('/benchpresscalculator')
 def benchpresscalculator():
@@ -101,6 +103,9 @@ def bmrcalculator():
     return render_template('tools/bmrcalculator.html')
 
 
+@app.route('/signup')
+def register():
+    return render_template('register.html')
 
 
 if __name__ == '__main__':
