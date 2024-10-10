@@ -2,8 +2,6 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 import os
-from itsdangerous import URLSafeTimedSerializer  # Make sure to import this for token generation
-from mail import send_verification_email  # Import the email sending function
 
 signup_bp = Blueprint('signup', __name__)
 
@@ -81,8 +79,9 @@ def register():
             mysql.connection.commit()
         except Exception as e:
             mysql.connection.rollback()
-            current_app.logger.error(f"Registration failed: {e}")
             flash('Registration failed. Please try again.', 'danger')
+            cursor.close()
+            return render_template('register.html')
 
         # Fetch the newly created user's id
         user_id = cursor.lastrowid
@@ -99,55 +98,20 @@ def register():
         session['weight'] = weight
         session['height'] = height
         session['age'] = age
+        session['fitness_goal'] = goal
 
         # Insert user properties
         cursor.execute(
-            'INSERT INTO userprop (userid, weight, height, goalweight, fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
-            (user_id, weight, height, goal, fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions)
+            'INSERT INTO userprop (userid, weight, height, goalweight,fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions) VALUES (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+            (user_id, weight, height, goal,fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions)
         )
         
         mysql.connection.commit()  # Commit the transaction
 
-        # Generate the token
-        s = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-        token = s.dumps(email, salt='email-confirm')
-
-        confirm_url = url_for('signup.confirm_email', token=token, _external=True)
-        html = render_template('activate.html', confirm_url=confirm_url)
-        
-        # Send the verification email
-        subject = 'Confirm Your Email'
-        body = f'Please click the link to confirm your email: {confirm_url}'
-        send_verification_email(email, subject, body)
-
-        flash('A confirmation email has been sent via email.', 'success')
+        flash('Registration successful!', 'success')
         cursor.close()  # Close the cursor
 
         # Redirect to startpage after successful registration
-        return redirect(url_for('login'))
+        return redirect(url_for('startpage'))
 
     return render_template('register.html')
-
-@signup_bp.route('/confirm/<token>')
-def confirm_email(token):
-    try:
-        s = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-        email = s.loads(token, salt='email-confirm', max_age=3600)  # Token expires after 1 hour
-    except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
-        return redirect(url_for('login'))
-
-    mysql = current_app.config['mysql']
-    cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
-    user = cursor.fetchone()
-
-    if user and not user['is_verified']:
-        cursor.execute('UPDATE users SET is_verified = %s WHERE email = %s', (True, email))
-        mysql.connection.commit()
-        flash('You have confirmed your account. Thanks!', 'success')
-    else:
-        flash('Account already confirmed or does not exist.', 'info')
-
-    cursor.close()
-    return redirect(url_for('login'))
