@@ -24,6 +24,7 @@ def register():
         weight = request.form.get('weight', '').strip()
         height = request.form.get('height', '').strip()
         goal = request.form.get('goal', '').strip()
+        fitnessgoal = request.form.get('fitnessgoal', '').strip()
         trainingExperience = request.form.get('trainingExperience', '').strip()
         activityLevel = request.form.get('activityLevel', '').strip()
         bodyFatPercentage = request.form.get('bodyFatPercentage', '').strip()
@@ -101,8 +102,8 @@ def register():
 
         # Insert user properties
         cursor.execute(
-            'INSERT INTO userprop (userid, weight, height, goalweight, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
-            (user_id, weight, height, goal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions)
+            'INSERT INTO userprop (userid, weight, height, goalweight,fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions) VALUES (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+            (user_id, weight, height, goal,fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions)
         )
         
         mysql.connection.commit()  # Commit the transaction
