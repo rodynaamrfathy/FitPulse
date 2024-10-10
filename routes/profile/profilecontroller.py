@@ -28,11 +28,26 @@ def profile():
     cursor.execute(query, (user_id,))
     user_data = cursor.fetchone()  # Fetch a single record for the user
     
-    
+    # Check if user_data is empty
+    if user_data is None:
+        cursor.close()
+        return "User not found", 404  # Handle case where user does not exist
+
+    # Select orders related to the user
+    order_query = """
+        SELECT orderid, orderdate, orderstatus, totalamount
+        FROM orders
+        WHERE userid = %s
+        ORDER BY orderdate DESC
+    """
+
+    cursor.execute(order_query, (user_id,))
+    orders = cursor.fetchall()  # Fetch all the orders for the user
 
     cursor.close()  # Close the cursor
     
     print(f"Fetched user data: {user_data}")  # Debug print statement
+    print(f"Fetched orders: {orders}")  # Debug print statement
 
 
     # Check if user_data is empty
@@ -40,4 +55,4 @@ def profile():
         return "User not found", 404  # Handle case where user does not exist
 
     # Pass the data to the profile template
-    return render_template('profile.html', user_data=user_data)
+    return render_template('profile.html', user_data=user_data, orders=orders)
