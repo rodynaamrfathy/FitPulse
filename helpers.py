@@ -1,6 +1,5 @@
-
-# helpers.py
 import os
+from dotenv import load_dotenv
 
 from dotenv import load_dotenv
 
@@ -10,6 +9,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Load environment variables from .env file
 load_dotenv()
 
 class Config:
