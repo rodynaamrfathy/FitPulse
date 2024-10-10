@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 import os
 
-signup_bp = Blueprint('signup', _name_)
+signup_bp = Blueprint('signup', __name__)
 
 # Create an instance of Bcrypt
 bcrypt = Bcrypt()
