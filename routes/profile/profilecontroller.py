@@ -63,11 +63,12 @@ def view_order(order_id):
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor()
 
-    # Query to get order details from the order_detail table
+    # Query to get order details along with product image URL from the products table
     order_details_query = """
-        SELECT orderdetailid, productid, quantity, priceperitem
-        FROM order_detail
-        WHERE orderid = %s
+        SELECT od.orderdetailid, od.productid, od.quantity, od.priceperitem, p.imageurl
+        FROM order_detail od
+        JOIN products p ON od.productid = p.productid
+        WHERE od.orderid = %s
     """
     cursor.execute(order_details_query, (order_id,))
     order_details = cursor.fetchall()  # Fetch all order details for this order

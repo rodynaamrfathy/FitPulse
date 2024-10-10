@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>workouts</title>
+    <title>Order Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/order_details.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
         <table>
             <tr>
                 <th>Order Detail ID</th>
+                <th>Product Image</th> <!-- New column for Product Image -->
                 <th>Product ID</th>
                 <th>Quantity</th>
                 <th>Price Per Item</th>
@@ -24,6 +25,9 @@
             {% for detail in order_details %}
             <tr>
                 <td>{{ detail[0] }}</td> <!-- Order Detail ID -->
+                <td>
+                    <img src="{{ detail[4] }}" alt="Product Image" width="100" height="100"> <!-- Product Image -->
+                </td>
                 <td>{{ detail[1] }}</td> <!-- Product ID -->
                 <td>{{ detail[2] }}</td> <!-- Quantity -->
                 <td>{{ detail[3] }}</td> <!-- Price Per Item -->
@@ -33,9 +37,10 @@
             <!-- Handle case where no order details are found -->
             {% if order_details|length == 0 %}
             <tr>
-                <td colspan="4">No details found for this order</td>
+                <td colspan="5">No details found for this order</td>
             </tr>
             {% endif %}
         </table>
     </div>    
 </body>
+</html>
