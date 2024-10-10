@@ -6,6 +6,7 @@ from functools import wraps
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+from flask_mail import Mail
 
 
 app = Flask(__name__)
