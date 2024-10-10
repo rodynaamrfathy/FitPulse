@@ -10,6 +10,7 @@ from .careers.routes import careers_bp  # Import the careers blueprint
 from .store.routes import store_bp
 from .recipes.recipescontroller import recipes_bp
 from .trainer.routes import trainer_bp
+from .profile.profilecontroller import profile_bp
 
 def register_routes(app):
     # Register authentication blueprints
@@ -31,3 +32,5 @@ def register_routes(app):
     app.register_blueprint(recipes_bp)  # Register recipes blueprint
 
     app.register_blueprint(trainer_bp)  # Register trainer blueprint
+    
+    app.register_blueprint(profile_bp)  # Register profile blueprint
