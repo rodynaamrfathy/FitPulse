@@ -2,6 +2,8 @@
 # helpers.py
 import os
 
+from dotenv import load_dotenv
+
 # Allowed file extensions
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
