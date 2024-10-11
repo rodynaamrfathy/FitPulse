@@ -54,8 +54,6 @@ def profile():
     return render_template('profile.html', user_data=user_data , orders=orders)  # Adjust this route as needed  
 
 
-
-
 @profile_bp.route('/profile/update', methods=['POST'])
 def update_user_profile():
     user_id = session.get('user_id')  # Ensure the user is logged in
@@ -64,65 +62,60 @@ def update_user_profile():
         flash('User not logged in', 'danger')
         return redirect(url_for('auth.login'))  # Redirect to the login page
 
-    # Fetch the MySQL connection from Flask's current_app config
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor()
 
-    # Fetch existing user data from the database
     cursor.execute("SELECT * FROM users WHERE userid = %s", (user_id,))
     existing_user = cursor.fetchone()
     
     cursor.execute("SELECT * FROM userprop WHERE userid = %s", (user_id,))
     existing_properties = cursor.fetchone()
 
-    # Default values from the existing user data
-    first_name = request.form.get('firstName', existing_user[1]).strip()  # Assuming index 1 is firstname
-    last_name = request.form.get('lastName', existing_user[2]).strip()    # Assuming index 2 is lastname
-    address = request.form.get('address', existing_user[3]).strip()      # Assuming index 3 is address
-    phone = request.form.get('phone', existing_user[4]).strip()          # Assuming index 4 is phone
-    email = request.form.get('email', existing_user[5]).strip()          # Assuming index 5 is email
-    gender = request.form.get('gender', existing_user[6]).strip()        # Assuming index 6 is gender
+    first_name = request.form.get('firstName', existing_user[1]).strip()
+    last_name = request.form.get('lastName', existing_user[2]).strip()
+    address = request.form.get('address', existing_user[3]).strip()
+    phone = request.form.get('phone', existing_user[4]).strip()
+    email = request.form.get('email', existing_user[5]).strip()
+    gender = request.form.get('gender', existing_user[6]).strip()
     profile_pic = request.files.get('profilepic')
     
+    weight = request.form.get('weight', existing_properties[2])
+    height = request.form.get('height', existing_properties[3])
+    goalweight = request.form.get('goalweight', existing_properties[4])
+    fitnessgoal = request.form.get('fitnessgoal', existing_properties[5])
+    trainingExperience = request.form.get('trainingexperience', existing_properties[6])
+    activityLevel = request.form.get('activityLevel', existing_properties[7])
+    bodyFatPercentage = request.form.get('bodyfat', existing_properties[8])
+    muscleMass = request.form.get('musclemass', existing_properties[9])
+    waistSize = request.form.get('waistsize', existing_properties[10])
+    hipSize = request.form.get('hipsize', existing_properties[11])
+    chestSize = request.form.get('chestsize', existing_properties[12])
+    armSize = request.form.get('armsize', existing_properties[13])
+    thighSize = request.form.get('thighsize', existing_properties[14])
+    restingHeartRate = request.form.get('restingheartrate', existing_properties[15])
+    bloodPressure = request.form.get('bloodpressure', existing_properties[16])
+    vo2Max = request.form.get('vo2max', existing_properties[17])
+    injuries = request.form.get('injuries', existing_properties[18])
+    chronicConditions = request.form.get('chronicConditions', existing_properties[19])
 
-    # Collect user properties
-    weight = request.form.get('weight', existing_properties[1])                 # Assuming index 1 is weight
-    height = request.form.get('height', existing_properties[2])                  # Assuming index 2 is height
-    goalweight = request.form.get('goalweight', existing_properties[3])          # Assuming index 3 is goalweight
-    fitnessgoal = request.form.get('fitnessgoal', existing_properties[4])        # Assuming index 4 is fitnessgoal
-    trainingExperience = request.form.get('trainingexperience', existing_properties[5])  # Assuming index 5 is trainingexperience
-    activityLevel = request.form.get('activityLevel', existing_properties[6])    # Assuming index 6 is activitylevel
-    bodyFatPercentage = request.form.get('bodyfat', existing_properties[7])     # Assuming index 7 is bodyfat
-    muscleMass = request.form.get('musclemass', existing_properties[8])         # Assuming index 8 is musclemass
-    waistSize = request.form.get('waistsize', existing_properties[9])            # Assuming index 9 is waistsize
-    hipSize = request.form.get('hipsize', existing_properties[10])                # Assuming index 10 is hipsize
-    chestSize = request.form.get('chestsize', existing_properties[11])           # Assuming index 11 is chestsize
-    armSize = request.form.get('armsize', existing_properties[12])             # Assuming index 12 is armsize
-    thighSize = request.form.get('thighsize', existing_properties[13])          # Assuming index 13 is thighsize
-    restingHeartRate = request.form.get('restingheartrate', existing_properties[14])  # Assuming index 14 is restingheartrate
-    bloodPressure = request.form.get('bloodpressure', existing_properties[15])   # Assuming index 15 is bloodpressure
-    vo2Max = request.form.get('vo2max', existing_properties[16])               # Assuming index 16 is vo2max
-    injuries = request.form.get('injuries', existing_properties[17])              # Assuming index 17 is injuries
-    chronicConditions = request.form.get('chronicConditions', existing_properties[18]) # Assuming index 18 is chronicconditions
-
-    # Initialize profile_pic_filename as None
+    # Initialize profile_pic_filename
     profile_pic_filename = None
 
     # Check if the user uploaded a profile picture
-    if profile_pic:
+    if profile_pic and profile_pic.filename:
         if not profile_pic.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
             flash('Only image files are allowed for the profile picture.', 'danger')
             return redirect(url_for('profile_bp.profile'))
 
-        # If a new profile picture is uploaded, save it and update filename
+        # Save the new profile picture
         profile_pic_filename = profile_pic.filename
         upload_folder = os.path.join(current_app.root_path, 'static/uploads/userspp')
         os.makedirs(upload_folder, exist_ok=True)
         profile_pic_path = os.path.join(upload_folder, profile_pic_filename)
         profile_pic.save(profile_pic_path)
     else:
-        # If no new profile picture is uploaded, use the existing filename
-        profile_pic_filename = existing_user[7]  # Assuming index 7 is profilepic
+        # Use the existing filename if no new profile picture is uploaded
+        profile_pic_filename = existing_user[9]  # Assuming index 7 is profilepic
 
     # Update the user's profile in the 'users' table
     update_user_query = """
@@ -148,9 +141,7 @@ def update_user_profile():
         cursor.execute(update_user_query, (
             first_name, last_name, address, phone, email, gender, profile_pic_filename, user_id
         ))
-       
-        mysql.connection.commit()  # Commit changes to the database
-        
+
         # Update user properties
         cursor.execute(update_user_properties_query, (
             weight, height, goalweight, fitnessgoal, trainingExperience, activityLevel,
@@ -170,6 +161,7 @@ def update_user_profile():
     
     flash('Profile updated successfully!', 'success')
     return redirect(url_for('profile_bp.profile'))  # Adjust this route as needed
+
 
 
 

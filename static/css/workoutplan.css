@@ -1,0 +1,36 @@
+.wrapper1,
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    color: white;
+}
+
+.wrapper h1{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+}
+
+.wrapper h2 {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: white;
+    
+}
+
+
+
+@media (max-width: 1200px) {  
+
+    .wrapper {
+        width: 700px;
+        
+    }
+
+}

@@ -130,8 +130,10 @@
                     </div>
                     <div class="form-group">
                         <label for="profilepic">Profile Picture</label>
-                        <input type="file" name="profilepic" accept="image/*"> <!-- This is the profile picture input -->
+                        <input type="file" name="profilepic" value="{{ user_data[9] }}" accept="image/*">
                     </div>
+    
+                        <!-- Hidden input for storing the current profile picture filename -->
                 </div>
 
                 <div class="form-row">
@@ -322,22 +324,6 @@
             </form>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="wrapper2">
         <div class="orders">
