@@ -27,32 +27,17 @@
     </div>
 
     <div class = "wrapper1">
+
+        {% for workout in workouts %}
         <div class = "workout">
-            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
+            <img src="{{ url_for('static', filename='uploads/workouts/' ~ workout.image) }}" alt="Exercise Image">
             
-            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
-            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+            <h2>{{workout.workoutname}}</h2>
+            <p>{{workout.description}}</p>
             <a href = "" class = "view-button"> View workout</a> 
         </div>
 
-        <div class = "workout">
-            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
-            
-            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
-            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
-
-            <a href = "" class = "view-button"> View workout</a> 
-            
-        </div>
-
-        <div class = "workout">
-            <img src="{{ url_for('static', filename='../static/images/workout1.jpg') }}" alt="abs1">
-            
-            <h2>Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h2>
-            <p>This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
-
-            <a href = "" class = "view-button"> View workout</a> 
-        </div>
+        {% endfor %}
 
         
 

@@ -68,9 +68,6 @@ def calender():
 def workoutsCategory():
     return render_template('workoutsCategory.html')
 
-@app.route('/workouts')
-def workouts():
-    return render_template('workouts.html')
 
 @app.route('/workout')
 def workout():

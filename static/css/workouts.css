@@ -50,11 +50,12 @@
 }
 
 .workout img {
-    max-width: 100%;
-    height: auto;
+    width: 430px;
+    height: 250px;
     margin-bottom: 0.2rem;
     border-radius: 10px;
     border: 0.5px solid white;
+    object-fit: cover;
 }
 
 

@@ -88,9 +88,6 @@ def add_workout():
     return redirect(url_for('workoutscontroller.workoutplan'))
 
 
-
-
-
 @workouts_bp.route('/delete_workout/<int:workout_id>', methods=['POST'])
 def delete_workout(workout_id):
     # Get MySQL connection from app config
@@ -106,3 +103,74 @@ def delete_workout(workout_id):
 
     flash('Workout deleted successfully!', 'success')
     return redirect(url_for('workoutscontroller.workoutplan'))
+
+
+@workouts_bp.route('/edit_workout/<int:workout_id>', methods=['GET'])
+def edit_workout(workout_id):
+    # Get MySQL connection from app config
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Fetch the workout data for the specified ID
+    cursor.execute("SELECT * FROM workouts WHERE id = %s", (workout_id,))
+    workout = cursor.fetchone()
+
+    # Check if workout exists
+    if not workout:
+        flash('Workout not found!', 'danger')
+        return redirect(url_for('workoutscontroller.workoutplan'))
+
+    # Prepare workout data to send to the template
+    workout_data = {
+        'id': workout[0],
+        'workoutname': workout[1],
+        'maingoal': workout[2],
+        'traininglevel': workout[3],
+        'daysperweek': workout[4],
+        'timeperworkout': workout[5],
+        'equipmentrequired': workout[6],
+        'targetgender': workout[7],
+        'supps': workout[8],
+        'image': workout[9],
+        'description': workout[10]
+    }
+
+    # Close the cursor
+    cursor.close()
+
+    # Render the edit template with the workout data
+    return render_template('editworkout.html', workout=workout_data)
+
+
+
+
+@workouts_bp.route('/workouts')
+def workouts():
+    
+    # Get MySQL connection from app config
+    mysql = current_app.config['mysql']  
+    cursor = mysql.connection.cursor()
+
+    # Execute query to retrieve workouts
+    cursor.execute("SELECT * FROM workouts")
+    workouts_data = []
+
+    # Fetch all workouts and append to workouts_data list
+    for workout in cursor.fetchall():
+        workouts_data.append({
+            'id': workout[0],  # Assuming the first column is 'id'
+            'workoutname': workout[1],  # Assuming the second column is 'workoutname'
+            'maingoal': workout[2],  # Adjust index according to your table structure
+            'traininglevel': workout[3],
+            'daysperweek': workout[4],
+            'timeperworkout': workout[5],
+            'equipmentrequired': workout[6],
+            'targetgender': workout[7],
+            'supps': workout[8],
+            'image': workout[9],
+            'description': workout[10]
+        })
+
+    # Close the cursor
+    cursor.close()
+    return render_template('workouts.html', workouts=workouts_data)
