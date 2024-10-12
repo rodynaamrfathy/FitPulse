@@ -24,7 +24,7 @@
     </div>
 
     <div class = "wrapper1">
-        <form  enctype="multipart/form-data">
+        <form action="{{ url_for('workoutscontroller.add_workout') }}" method="POST" enctype="multipart/form-data">
             <label for="workoutname">Workout Name:</label>
             <input type="text" id="workoutname" name="workoutname" required>
 
@@ -79,15 +79,15 @@
                 </tr>
             </thead>
             <tbody>
-                
+                {% for workout in workouts %}
                 <tr>
-                    <td>1</td>
-                    <td>5 days Dumbell</td>
-                    <td>Weight Loss</td>
-                    <td>Beginner</td>
-                    <td>Dumbells</td>
-                    <td>5</td>
-                    <td>30 mins</td>
+                    <td>{{workout.id}}</td>
+                    <td>{{workout.workoutname}}</td>
+                    <td>{{workout.maingoal}}</td>
+                    <td>{{workout.traininglevel}}</td>
+                    <td>{{workout.equipmentrequired}}</td>
+                    <td>{{workout.daysperweek}}</td>
+                    <td>{{workout.timeperworkout}}</td>
 
 
 
@@ -99,14 +99,15 @@
                         </form>
                     </td>
                     <td>
-                        <form class= "form" action="" method="POST" onsubmit="return confirm('Are you sure you want to delete this exercise?');">
+                        <form action="{{ url_for('workoutscontroller.delete_workout', workout_id=workout.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this workout?');">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                         
                     </td>
                 </tr>
-                
+                {% endfor %}
             </tbody>
+            
         </table>
     </div>
     
