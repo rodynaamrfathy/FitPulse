@@ -92,9 +92,11 @@ def tools():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
 @app.route('/availabletrainers')
 def availabletrainers():
     return render_template("online_trainers.html")
+
 @app.route('/benchpresscalculator')
 def benchpresscalculator():
     return render_template('tools/benchpresscalculator.html')
