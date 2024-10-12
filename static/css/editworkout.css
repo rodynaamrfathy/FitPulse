@@ -16,15 +16,32 @@
     margin-bottom: 1rem;
     font-family: 'Protest Guerrilla', sans-serif;
     color: white;
+    border-bottom: 4px solid #ff9409;
 }
 
-.wrapper h2 {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+.wrapper1 h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
     color: white;
-    
+    font-weight : 300;
 }
 
+.wrapper1 {
+    margin-top: 2rem !important;
+}
+
+.wrapper2 {
+    margin-top: 2rem !important;
+}
+
+.wrapper2 h1{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: white;
+    font-weight : 300;
+}
 
 
 form {
@@ -40,6 +57,7 @@ label {
 }
 input[type="text"],
 input[type="url"],
+input[type="number"],
 textarea,
 select {
     width: 99%;
@@ -60,48 +78,12 @@ button:hover {
     background-color: #218838;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-}
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-    color: black;
-}
-th {
-    background-color: #f2f2f2;
-}
-img {
-    max-width: 100px;
-    max-height: 100px;
-}
-
-.form {
-    border: none ;
-    display: inline;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-}
-.btn-danger:hover {
-    background-color: #c82333;
-}
-
 @media (max-width: 1200px) {  
-
     .wrapper2,
     .wrapper1,
     .wrapper {
         width: 700px;
         
     }
-
-    
 
 }
