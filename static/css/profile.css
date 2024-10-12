@@ -388,7 +388,7 @@ td {
     color: #555; /* Text color for table data */
 }
 
-table button {
+table a {
     padding: 8px 12px; /* Padding inside the button */
     background-color: #ff9409; /* Background color */
     color: white; /* Text color */
@@ -400,7 +400,7 @@ table button {
     transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
-table button:hover {
+table a:hover {
     background-color: #e68900; /* Darker orange on hover */
 }
 

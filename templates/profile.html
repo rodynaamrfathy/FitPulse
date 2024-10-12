@@ -353,9 +353,11 @@
                     <td>{{ order[2] }}</td> <!-- Order Status -->
                     <td>{{ order[3] }}</td> <!-- Order Total -->
                     <!-- Link to order details page using the order ID -->
+                    <td>
                     <a href="{{ url_for('profile_bp.view_order', order_id=order[0]) }}">
-                        <button>View</button>
+                       View
                     </a>
+                    </td>
                 </tr>
                 {% endfor %}
     
