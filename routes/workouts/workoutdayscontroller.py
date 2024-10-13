@@ -4,7 +4,6 @@ from flask import Blueprint, request, flash, redirect, url_for, render_template,
 
 # Define Blueprint for exercises management
 workoutdays_bp = Blueprint('workoutdayscontroller', __name__)
-
 @workoutdays_bp.route('/editworkout/<int:workout_id>')
 def editworkout(workout_id):
     mysql = current_app.config['mysql']  
@@ -23,12 +22,21 @@ def editworkout(workout_id):
                 'name': day[3]  # Assuming the fourth column is 'name'
             })
 
+        # Print the days_data to the console for debugging
+        print("Fetched Days Data:", days_data)  # This will print the list of days
+
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
         cursor.close()  # Always close your cursor to avoid leaks
 
     return render_template('editworkout.html', days=days_data)
+
+
+
+
+
+
 
 
 @workoutdays_bp.route('/add_day/<int:workout_id>', methods=['POST'])
