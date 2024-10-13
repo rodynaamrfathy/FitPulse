@@ -1,35 +1,36 @@
 import MySQLdb
 from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app
 
-
 # Define Blueprint for exercises management
 workoutdays_bp = Blueprint('workoutdayscontroller', __name__)
-@workoutdays_bp.route('/editworkout')
-def editworkout():
-    mysql = current_app.config['mysql']
+
+@workoutdays_bp.route('/editworkout/<int:workout_id>')
+def editworkout(workout_id):
+    mysql = current_app.config['mysql']  
     cursor = mysql.connection.cursor()
+    
+    days_data = []  # Initialize an empty list to hold day data
 
     try:
-        cursor.execute("SELECT DayID, name FROM WorkoutDay")
-        days = cursor.fetchall()
+        # Fetch days associated with the specific WorkoutID
+        cursor.execute("SELECT * FROM WorkoutDay WHERE WorkoutID = %s", (workout_id,))
+        for day in cursor.fetchall():
+            days_data.append({
+                'DayID': day[0],  # Assuming the first column is 'DayID'
+                'WorkoutID': day[1],  # Assuming the second column is 'WorkoutID'
+                'DayNumber': day[2],  # Assuming the third column is 'DayNumber'
+                'name': day[3]  # Assuming the fourth column is 'name'
+            })
 
-        # Log the results of the SQL query
-        if not days:
-            print("No days found in the WorkoutDay table.")
-        else:
-            print(f"Fetched days: {days}")
-
-        days = [{'DayID': day[0], 'name': day[1]} for day in days]
+        # Print the days_data to the console for debugging
+        print("Fetched Days Data:", days_data)  # This will print the list of days
 
     except Exception as e:
-        flash(f"Error fetching workout days: {str(e)}", "danger")
-        days = []  # Ensure days is defined even on error
+        print(f"An error occurred: {e}")
     finally:
-        cursor.close()
+        cursor.close()  # Always close your cursor to avoid leaks
 
-    return render_template('editworkout.html', days=days)
-
-
+    return render_template('editworkout.html', days=days_data, workout_id=workout_id)
 
 @workoutdays_bp.route('/add_day/<int:workout_id>', methods=['POST'])
 def add_day(workout_id):
@@ -60,7 +61,4 @@ def add_day(workout_id):
         cursor.close()
 
     # Redirect back to the edit workout page (or another page as needed)
-    return redirect(url_for('workoutscontroller.edit_workout' , workout_id=workout_id))
-
-
-
+    return redirect(url_for('workoutdayscontroller.editworkout', workout_id=workout_id))
