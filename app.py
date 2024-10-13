@@ -7,7 +7,6 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
 
-
 app = Flask(__name__)
 
 # Set the upload folder path for product images
@@ -90,9 +89,7 @@ def tools():
 def profile():
     return render_template('profile.html')
 
-@app.route('/availabletrainers')
-def availabletrainers():
-    return render_template("online_trainers.html")
+
 
 @app.route('/benchpresscalculator')
 def benchpresscalculator():

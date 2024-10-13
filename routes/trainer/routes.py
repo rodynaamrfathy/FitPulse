@@ -33,3 +33,7 @@ def trainer_homepage():
                            firstName=session['firstName'], 
                            specialty=trainer['specialty'], 
                            diet_plans=diet_plans)
+
+@trainer_bp.route('/availabletrainers')
+def availabletrainers():
+    return render_template("online_trainers.html")
