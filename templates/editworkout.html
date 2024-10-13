@@ -52,15 +52,14 @@
         <form>
             <p>Days: {{ days }}</p>
             <label for="day">Select A Day By Name:</label>
-            <select>
+            <select id="day" name="day" required>
                 <option value="" disabled selected>Select A Day</option>
                 
                 {% for day in days %}
-                    <h1>{{ day.name }}</h1 > <!-- Correctly reference the name field -->
+                    <option value="{{ day.DayID }}">{{ day.name }}</option>
                 {% endfor %}
-            </select>
+            </select>            
         
-            <!-- Other fields -->
         
             <button type="submit">Add Exercise</button>
         </form>
