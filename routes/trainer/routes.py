@@ -1,10 +1,7 @@
 from flask import current_app, request, redirect, session, url_for, flash, render_template, Blueprint
-from werkzeug.utils import secure_filename
-import os
 import MySQLdb
 
 trainer_bp = Blueprint('trainer', __name__)
-
 
 @trainer_bp.route('/trainer_homepage')
 def trainer_homepage():
@@ -19,15 +16,19 @@ def trainer_homepage():
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    # Get the trainer's specialty
-    cursor.execute('SELECT specialty FROM trainers WHERE trainerid = %s', (trainer_id,))
-    trainer = cursor.fetchone()
+    try:
+        # Get the trainer's specialty
+        cursor.execute('SELECT specialty FROM trainers WHERE trainerid = %s', (trainer_id,))
+        trainer = cursor.fetchone()
 
-    # Fetch the diet plans created by this trainer
-    cursor.execute('SELECT * FROM dietplans WHERE authorid = %s', (trainer_id,))
-    diet_plans = cursor.fetchall()
-
-    cursor.close()
+        # Fetch the diet plans created by this trainer
+        cursor.execute('SELECT * FROM dietplans WHERE authorid = %s', (trainer_id,))
+        diet_plans = cursor.fetchall()
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+        return redirect(url_for('trainer.trainer_homepage'))
+    finally:
+        cursor.close()
 
     return render_template('trainer_Homepage.html', 
                            firstName=session['firstName'], 
@@ -40,11 +41,19 @@ def availabletrainers():
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     
-    # Fetch all approved trainers
-    cursor.execute("SELECT firstname, lastname, specialty, experienceyears, rating, bio, payrate FROM trainers WHERE is_approved = TRUE")
-    trainers = cursor.fetchall()
-    
-    cursor.close()
+    try:
+        # Fetch all approved trainers
+        cursor.execute("""
+            SELECT trainerid AS id, firstname, lastname, specialty, experienceyears, rating, bio, payrate 
+            FROM trainers 
+            WHERE is_approved = TRUE
+        """)
+        trainers = cursor.fetchall()
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+        trainers = []  # Fallback to an empty list
+    finally:
+        cursor.close()
     
     # Render the template and pass the list of trainers
     return render_template("online_trainers.html", trainers=trainers)
@@ -62,19 +71,21 @@ def request_trainer():
     print("User ID:", session.get('user_id'))
 
     # Add logic to handle trainer request (e.g., save to database, notify trainer, etc.)
-    # Here you can save the trainer request with the dates in a table
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     
-    # For example, you could insert this request into a `trainer_requests` table
-    cursor.execute('''
-        INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
-        VALUES (%s, %s, %s, %s)
-    ''', (trainer_id, start_date, end_date, session['user_id'])) 
+    try:
+        # Insert the request into the Trainer_User_Assignment table
+        cursor.execute('''
+            INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
+            VALUES (%s, %s, %s, %s)
+        ''', (trainer_id, start_date, end_date, session['user_id'])) 
 
-    mysql.connection.commit()
-    cursor.close()
+        mysql.connection.commit()
+        flash('Trainer request submitted successfully for the specified date range!', 'success')
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+    finally:
+        cursor.close()
 
-    # Flash a success message and redirect back to the trainers list
-    flash('Trainer request submitted successfully for the specified date range!', 'success')
     return redirect(url_for('trainer.availabletrainers'))

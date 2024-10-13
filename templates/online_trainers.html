@@ -19,7 +19,7 @@
                     <p><strong>Pay Rate:</strong> ${{ trainer.payrate }}/hour</p>
                     
                     <!-- Add date inputs for start and end date -->
-                    <form action="/request_trainer" method="post">
+                    <form action="{{ url_for('trainer.request_trainer') }}" method="post">
                         <input type="hidden" name="trainer_id" value="{{ trainer.id }}">
                         
                         <label for="start_date">Start Date:</label>
