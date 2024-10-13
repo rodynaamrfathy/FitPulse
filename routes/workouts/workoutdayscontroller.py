@@ -1,9 +1,9 @@
 import MySQLdb
 from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app
 
-
 # Define Blueprint for exercises management
 workoutdays_bp = Blueprint('workoutdayscontroller', __name__)
+
 @workoutdays_bp.route('/editworkout/<int:workout_id>')
 def editworkout(workout_id):
     mysql = current_app.config['mysql']  
@@ -30,14 +30,7 @@ def editworkout(workout_id):
     finally:
         cursor.close()  # Always close your cursor to avoid leaks
 
-    return render_template('editworkout.html', days=days_data)
-
-
-
-
-
-
-
+    return render_template('editworkout.html', days=days_data, workout_id=workout_id)
 
 @workoutdays_bp.route('/add_day/<int:workout_id>', methods=['POST'])
 def add_day(workout_id):
@@ -68,7 +61,4 @@ def add_day(workout_id):
         cursor.close()
 
     # Redirect back to the edit workout page (or another page as needed)
-    return redirect(url_for('workoutscontroller.edit_workout' , workout_id=workout_id))
-
-
-
+    return redirect(url_for('workoutdayscontroller.editworkout', workout_id=workout_id))

@@ -18,12 +18,12 @@
         {% include 'navbar.html' %}
     </main>
 
-    <div class = "wrapper">
-        <h1> Here You can Add Days and Exercises for Dumbellel Workout Plan</h1>
+    <div class="wrapper">
+        <h1>Here You can Add Days and Exercises for Dumbellel Workout Plan</h1>
     </div>
 
-    <div class = "wrapper1"> 
-        <h1> Please Enter A Day Name Then u can add exercises for the Day from the bottom </h1>
+    <div class="wrapper1"> 
+        <h1>Please Enter A Day Name Then you can add exercises for the Day from the bottom</h1>
         <form id="dayform" action="{{ url_for('workoutdayscontroller.add_day', workout_id=workout_id) }}" method="POST">
 
             <label for="dayname">Day Name:</label>
@@ -43,29 +43,31 @@
         
             <button type="submit">Add Day</button>
         </form>
-        
-
     </div>
 
-    <div class = "wrapper2"> 
+    <div class="wrapper2"> 
         <h1>Add Exercises for the Day You will select</h1>
+
+        <!-- Print the days for debugging -->
+        <p>Days (for debugging): {{ days }}</p>
+
         <form>
-            <p>Days: {{ days }}</p>
             <label for="day">Select A Day By Name:</label>
             <select id="day" name="day" required>
                 <option value="" disabled selected>Select A Day</option>
-                {% for day in days %}
-                    <option value="{{ day['DayID'] }}">{{ day['name'] }}</option> <!-- Use dictionary keys -->
-                {% endfor %}
+
+                {% if days %}
+                    {% for day in days %}
+                        <option value="{{ day['DayID'] }}">{{ day['name'] }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="" disabled>No days available, please add some days first</option>
+                {% endif %}
             </select>
-            
         
             <button type="submit">Add Exercise</button>
         </form>
-        
-        
     </div>    
-    
 
     <script src="{{ url_for('static', filename='js/workoutplan.js') }}"></script>
 </body>
