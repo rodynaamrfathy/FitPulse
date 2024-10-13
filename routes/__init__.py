@@ -12,6 +12,7 @@ from .recipes.recipescontroller import recipes_bp
 from .trainer.routes import trainer_bp
 from .profile.profilecontroller import profile_bp
 from .workouts.workoutcontroller import workouts_bp
+from .workouts.workoutdayscontroller import workoutdays_bp  
 
 def register_routes(app):
     # Register authentication blueprints
@@ -37,3 +38,5 @@ def register_routes(app):
     app.register_blueprint(profile_bp)  # Register profile blueprint
     
     app.register_blueprint(workouts_bp)  # Register workouts blueprint
+    
+    app.register_blueprint(workoutdays_bp)  # Register workout days blueprint   

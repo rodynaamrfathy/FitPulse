@@ -24,60 +24,48 @@
 
     <div class = "wrapper1"> 
         <h1> Please Enter A Day Name Then u can add exercises for the Day from the bottom </h1>
-        <form id="dayform">
+        <form id="dayform" action="{{ url_for('workoutdayscontroller.add_day', workout_id=workout_id) }}" method="POST">
 
             <label for="dayname">Day Name:</label>
             <input type="text" id="dayname" name="dayname" required>
-
+        
             <label for="dayweek">Day In the Week:</label>
-            <input type="text" id="dayweek" name="dayweek" required>
-
+            <select id="dayweek" name="dayweek" required>
+                <option value="" disabled selected>Select A Day</option>
+                <option value="1">Saturday</option>
+                <option value="2">Sunday</option>
+                <option value="3">Monday</option>
+                <option value="4">Tuesday</option>
+                <option value="5">Wednesday</option>
+                <option value="6">Thursday</option>
+                <option value="7">Friday</option>
+            </select>
+        
             <button type="submit">Add Day</button>
         </form>
+        
 
     </div>
 
     <div class = "wrapper2"> 
         <h1>Add Exercises for the Day You will select</h1>
-
         <form>
+            <p>Days: {{ days }}</p>
             <label for="day">Select A Day By Name:</label>
             <select>
                 <option value="" disabled selected>Select A Day</option>
-                <option value="day1">Day 1</option>
-                <option value="day2">Day 2</option>
-                <option value="day3">Day 3</option>
-                <option value="day4">Day 4</option>
-                <option value="day5">Day 5</option>
-                <option value="day6">Day 6</option>
-                <option value="day7">Day 7</option>
+                
+                {% for day in days %}
+                    <h1>{{ day.name }}</h1 > <!-- Correctly reference the name field -->
+                {% endfor %}
             </select>
-
-            <label for="exercisename">Exercise Name:</label>
-            <select>
-                <option value="" disabled selected>Select exercise</option>
-                <option value="day1">Day 1</option>
-                <option value="day2">Day 2</option>
-                <option value="day3">Day 3</option>
-                <option value="day4">Day 4</option>
-                <option value="day5">Day 5</option>
-                <option value="day6">Day 6</option>
-                <option value="day7">Day 7</option>
-            </select>
-
-            <label for="sets">Sets:</label>
-            <input type="number" id="sets" name="sets" required>
-
-            <label for="reps">Reps:</label>
-            <input type="number" id="reps" name="reps" required>
-
-            <label for="rest">Rest:</label>
-            <input type="number" id="rest" name="rest" required>
-
-
-
+        
+            <!-- Other fields -->
+        
             <button type="submit">Add Exercise</button>
         </form>
+        
+        
     </div>    
     
 

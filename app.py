@@ -107,9 +107,6 @@ def bmrcalculator():
 def workoutplan():
     return render_template('workoutplan.html')
 
-@app.route('/editworkout')
-def editworkout():
-    return render_template('editworkout.html')
 
 
 

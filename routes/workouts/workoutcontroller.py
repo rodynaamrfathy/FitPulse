@@ -138,9 +138,8 @@ def edit_workout(workout_id):
     # Close the cursor
     cursor.close()
 
-    # Render the edit template with the workout data
-    return render_template('editworkout.html', workout=workout_data)
-
+    # Render the edit template with the workout data and workout_id
+    return render_template('editworkout.html', workout=workout_data, workout_id=workout_id)
 
 
 
