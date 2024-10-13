@@ -17,8 +17,17 @@
                     <p><strong>Rating:</strong> {{ trainer.rating }}</p>
                     <p><strong>Bio:</strong> {{ trainer.bio }}</p>
                     <p><strong>Pay Rate:</strong> ${{ trainer.payrate }}/hour</p>
+                    
+                    <!-- Add date inputs for start and end date -->
                     <form action="/request_trainer" method="post">
                         <input type="hidden" name="trainer_id" value="{{ trainer.id }}">
+                        
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" name="start_date" required>
+
+                        <label for="end_date">End Date:</label>
+                        <input type="date" name="end_date" required>
+                        
                         <button type="submit">Request Trainer</button>
                     </form>
                 </div>
