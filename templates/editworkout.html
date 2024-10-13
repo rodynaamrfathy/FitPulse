@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/editworkout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editworkout.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -54,16 +54,11 @@
             <label for="day">Select A Day By Name:</label>
             <select id="day" name="day" required>
                 <option value="" disabled selected>Select A Day</option>
-                
                 {% for day in days %}
-<<<<<<< HEAD
-                    <h1>{{ day.DayID }}</h1  > <!-- Correctly reference the name field -->
-=======
-                    <option value="{{ day.DayID }}">{{ day.name }}</option>
->>>>>>> ecb343d479127eff987530a03eac2740a29862bb
+                    <option value="{{ day['DayID'] }}">{{ day['name'] }}</option> <!-- Use dictionary keys -->
                 {% endfor %}
-            </select>            
-        
+            </select>
+            
         
             <button type="submit">Add Exercise</button>
         </form>
