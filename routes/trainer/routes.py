@@ -56,6 +56,11 @@ def request_trainer():
     start_date = request.form.get('start_date')
     end_date = request.form.get('end_date')
 
+    print("Trainer ID:", trainer_id)
+    print("Start Date:", start_date)
+    print("End Date:", end_date)
+    print("User ID:", session.get('user_id'))
+
     # Add logic to handle trainer request (e.g., save to database, notify trainer, etc.)
     # Here you can save the trainer request with the dates in a table
     mysql = current_app.config['mysql']
@@ -63,7 +68,7 @@ def request_trainer():
     
     # For example, you could insert this request into a `trainer_requests` table
     cursor.execute('''
-        INSERT INTO assignmentID (trainer_id, start_date, end_date, user_id) 
+        INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
         VALUES (%s, %s, %s, %s)
     ''', (trainer_id, start_date, end_date, session['user_id'])) 
 
