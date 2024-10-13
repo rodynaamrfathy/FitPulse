@@ -12,8 +12,8 @@
             {% for trainer in trainers %}
                 <div class="trainer-card">
                     <h2>{{ trainer.firstname }} {{ trainer.lastname }}</h2>
-                    <p><strong>Speciality:</strong> {{ trainer.speciality }}</p>
-                    <p><strong>Experience:</strong> {{ trainer.experience_years }} years</p>
+                    <p><strong>Speciality:</strong> {{ trainer.specialty }}</p>
+                    <p><strong>Experience:</strong> {{ trainer.experienceyears }} years</p>
                     <p><strong>Rating:</strong> {{ trainer.rating }}</p>
                     <p><strong>Bio:</strong> {{ trainer.bio }}</p>
                     <p><strong>Pay Rate:</strong> ${{ trainer.payrate }}/hour</p>
