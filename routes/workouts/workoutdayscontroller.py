@@ -21,7 +21,16 @@ def editworkout(workout_id):
                 'DayNumber': day[2],  # Assuming the third column is 'DayNumber'
                 'name': day[3]  # Assuming the fourth column is 'name'
             })
-
+            
+            
+        cursor.execute("SELECT exerciseid, exercisename FROM exercise")
+        exercises_data = []
+        for exercise in cursor.fetchall():
+            exercises_data.append({
+                'exerciseid': exercise[0],
+                'exercisename': exercise[1]
+            })
+        print("Fetched Exercises Data:", exercises_data)  # This will print the list of exercises
         # Print the days_data to the console for debugging
         print("Fetched Days Data:", days_data)  # This will print the list of days
 
@@ -30,7 +39,7 @@ def editworkout(workout_id):
     finally:
         cursor.close()  # Always close your cursor to avoid leaks
 
-    return render_template('editworkout.html', days=days_data, workout_id=workout_id)
+    return render_template('editworkout.html', days=days_data, workout_id=workout_id, exercises=exercises_data)
 
 @workoutdays_bp.route('/add_day/<int:workout_id>', methods=['POST'])
 def add_day(workout_id):
@@ -53,6 +62,44 @@ def add_day(workout_id):
         mysql.connection.commit()
 
         flash("Day added successfully!", "success")
+    except Exception as e:
+        flash(f"Error: {str(e)}", "danger")
+        mysql.connection.rollback()
+    finally:
+        # Close the cursor
+        cursor.close()
+
+    # Redirect back to the edit workout page (or another page as needed)
+    return redirect(url_for('workoutdayscontroller.editworkout', workout_id=workout_id))
+
+
+
+
+# New endpoint for adding exercises to a day
+@workoutdays_bp.route('/add_exercise/<int:workout_id>', methods=['POST'])
+def add_exercise(workout_id):
+    # Get MySQL connection from app config
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Collect form data
+    day_id = request.form['day']
+    exercise_id = request.form['exercise']
+    sets = request.form['sets']
+    reps = request.form['reps']
+    rest_time = request.form['rest']
+
+    try:
+        # Insert the collected data into the DayExercise table
+        cursor.execute("""
+            INSERT INTO DayExercise (DayID, ExerciseID, Sets, Reps, RestTime)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (day_id, exercise_id, sets, reps, rest_time))
+
+        # Commit the changes to the database
+        mysql.connection.commit()
+
+        flash("Exercise added successfully!", "success")
     except Exception as e:
         flash(f"Error: {str(e)}", "danger")
         mysql.connection.rollback()
