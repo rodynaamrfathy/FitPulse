@@ -36,4 +36,27 @@ def trainer_homepage():
 
 @trainer_bp.route('/availabletrainers')
 def availabletrainers():
-    return render_template("online_trainers.html")
+    # Get the MySQL connection
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    
+    # Fetch all approved trainers
+    cursor.execute("SELECT firstname, lastname, specialty, experienceyears, rating, bio, payrate FROM trainers WHERE is_approved = TRUE")
+    trainers = cursor.fetchall()
+    
+    cursor.close()
+    
+    # Render the template and pass the list of trainers
+    return render_template("online_trainers.html", trainers=trainers)
+
+@trainer_bp.route('/request_trainer', methods=['POST'])
+def request_trainer():
+    # Get the trainer ID from the form
+    trainer_id = request.form.get('trainer_id')
+    
+    # Logic to handle trainer request 
+    # logic: hn3ml tabled el user assigned to a trainer
+    # This is a placeholder, so you can implement according to your needs
+    flash('Trainer request submitted successfully!', 'success')
+    
+    return redirect(url_for('trainer.availabletrainers'))

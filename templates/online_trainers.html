@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Trainers</title>
+</head>
+<body>
+    <h1>Available Trainers</h1>
+    <div class="trainers-list">
+        {% if trainers %}
+            {% for trainer in trainers %}
+                <div class="trainer-card">
+                    <h2>{{ trainer.firstname }} {{ trainer.lastname }}</h2>
+                    <p><strong>Speciality:</strong> {{ trainer.speciality }}</p>
+                    <p><strong>Experience:</strong> {{ trainer.experience_years }} years</p>
+                    <p><strong>Rating:</strong> {{ trainer.rating }}</p>
+                    <p><strong>Bio:</strong> {{ trainer.bio }}</p>
+                    <p><strong>Pay Rate:</strong> ${{ trainer.payrate }}/hour</p>
+                    <form action="/request_trainer" method="post">
+                        <input type="hidden" name="trainer_id" value="{{ trainer.id }}">
+                        <button type="submit">Request Trainer</button>
+                    </form>
+                </div>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <p>No trainers are available at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
