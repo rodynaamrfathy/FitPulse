@@ -173,3 +173,76 @@ def workouts():
     # Close the cursor
     cursor.close()
     return render_template('workouts.html', workouts=workouts_data)
+
+@workouts_bp.route('/workout/<int:workout_id>')
+def view_workout(workout_id):
+    # Get MySQL connection from app config
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor()
+
+    # Fetch the workout data for the specified workout ID
+    cursor.execute("SELECT * FROM workouts WHERE id = %s", (workout_id,))
+    
+    # Convert the workout data into a dictionary
+    workout_data = cursor.fetchone()
+    
+    if not workout_data:
+        flash('Workout not found!', 'danger')
+        return redirect(url_for('workoutscontroller.workoutplan'))
+    
+    # Creating a dictionary for the workout
+    workout = {
+        'id': workout_data[0],  # Assuming the first column is 'id'
+        'workoutname': workout_data[1],  # Assuming the second column is 'workoutname'
+        'maingoal': workout_data[2],  # Adjust index according to your table structure
+        'traininglevel': workout_data[3],
+        'daysperweek': workout_data[4],
+        'timeperworkout': workout_data[5],
+        'equipmentrequired': workout_data[6],
+        'targetgender': workout_data[7],
+        'supps': workout_data[8],
+        'image': workout_data[9],
+        'description': workout_data[10]
+    }
+
+    # Fetch the workout days, exercises, sets, and reps
+    query = """
+        SELECT 
+            wd.DayID,
+            wd.name,
+            e.exercisename,
+            de.Sets,
+            de.Reps
+        FROM 
+            WorkoutDay wd
+        JOIN 
+            DayExercise de ON wd.DayID = de.DayID
+        JOIN 
+            exercise e ON de.ExerciseID = e.exerciseid
+        WHERE 
+            wd.WorkoutID = %s
+    """
+    cursor.execute(query, (workout_id,))
+    workout_days = cursor.fetchall()
+
+    # Prepare the data structure for workout days
+    days_data = {}
+    for DayID, name, exercisename, Sets, Reps in workout_days:
+        if DayID not in days_data:
+            days_data[DayID] = {
+                'day_name': name,
+                'exercises': []
+            }
+        days_data[DayID]['exercises'].append({
+            'exercise_name': exercisename,
+            'sets': Sets,
+            'reps': Reps
+        })
+
+    # Close the cursor
+    cursor.close()
+
+    # Render the workout details page with the workout and days data
+    return render_template('workout.html', workout=workout, workout_days=days_data)
+
+

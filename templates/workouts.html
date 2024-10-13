@@ -34,7 +34,7 @@
             
             <h2>{{workout.workoutname}}</h2>
             <p>{{workout.description}}</p>
-            <a href = "" class = "view-button"> View workout</a> 
+            <a href="{{ url_for('workoutscontroller.view_workout', workout_id=workout['id']) }}" class="view-button">View workout</a>
         </div>
 
         {% endfor %}

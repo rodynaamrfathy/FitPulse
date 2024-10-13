@@ -21,7 +21,7 @@
 
     <div class="wrapper">
         <div>
-            <h1 class = "workout-title">Dumbbell Only Workout: 5 Day Dumbbell Workout Split</h1>
+            <h1 class = "workout-title">{{workout.workoutname}}</h1>
         </div>
     </div>
     <div class = "wrapper1">
@@ -36,54 +36,47 @@
 
     <div class = "wrapper2">
         <div class = "workout-intro-description"> 
-            <p> This 5 day dumbbell only workout program only requires dumbbells and is perfect for those looking to build lean muscle mass at home or on the go!</p>
+            <p> {{workout.description}}</p>
         </div>
 
         <div class = "workout-summary">
             <h2>Workout Summary</h2>
 
             <div class = "row">
-                <h3 class = "property-title">Main Goal</h3>  
-                <h3 class = " property-value">Build Muscle</h3>
+                <h3 class = "property-title">Main Goal </h3>  
+                <h3 class = " property-value">{{workout.maingoal}}</h3>
             </div>
 
-            <div class = "row">
-                <h3 class = "property-title">Workout Type</h3>  
-                <h3 class = " property-value">Split</h3>
-            </div>
-
+        
             <div class = "row">
                 <h3 class = "property-title">Training Level</h3>  
-                <h3 class = " property-value">Intermediate</h3>
+                <h3 class = " property-value">{{workout.traininglevel}}</h3>
             </div>
 
             <div class = "row">
                 <h3 class = "property-title">Days Per Week</h3>  
-                <h3 class = " property-value">5</h3>
+                <h3 class = " property-value">{{workout.daysperweek}}</h3>
             </div>
 
             <div class = "row">
                 <h3 class = "property-title">Time Per Workout</h3>  
-                <h3 class = " property-value">45-60 minutes</h3>
+                <h3 class = " property-value">{{workout.timeperworkout}}</h3>
             </div>
 
             <div class = "row">
                 <h3 class = "property-title">Equipment Required</h3>  
-                <h3 class = " property-value"> Bodyweight, Dumbbells</h3>
+                <h3 class = " property-value">{{workout.equipmentrequired}}</h3>
             </div>
 
             <div class = "row">
                 <h3 class = "property-title">Target Gender</h3>  
-                <h3 class = " property-value">Male & Female</h3>
+                <h3 class = " property-value">{{workout.targetgender}}</h3>
             </div>
 
             <div class = "row">
                 <h3 class = "property-title">Recommended Supps</h3>  
                 <h3 class = " property-value">
-                    Whey Protein 
-                    Protein Bars (Optional)
-                    Multivitamin
-                    Fish Oil</h3>
+                    {{workout.supps}}</h3>
             </div>
 
         </div>
@@ -108,107 +101,40 @@
     </div>
 
     <div class = "wrapper4">
-        <div class = "workout-split">
+        <div class="workout-split">
             <h1>Workout Split</h1>
-
-            <div class="Day">
-                <div class="day-title">
-                    <h2>Day 1: Chest, Shoulders, & Triceps Dumbbell Workout</h2>
+        
+            <!-- Loop through each workout day -->
+            {% for workout_day in workout_days.values() %}  <!-- .values() since workout_days is a dictionary -->
+                <div class="Day">
+                    <div class="day-title">
+                        <h2>{{ workout_day['day_name'] }}</h2> <!-- Day name from backend -->
+                    </div>
+                    
+                    <table class="workout-table">
+                        <thead>
+                            <tr>
+                                <th>Exercise</th>
+                                <th>Sets</th>
+                                <th>Reps</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through exercises in this day -->
+                            {% for exercise in workout_day['exercises'] %}
+                            <tr>
+                                <td>{{ exercise['exercise_name'] }}</td>
+                                <td>{{ exercise['sets'] }}</td>
+                                <td>{{ exercise['reps'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-            
-                <table class="workout-table">
-                    <thead>
-                        <tr>
-                            <th>Exercise</th>
-                            <th>Sets</th>
-                            <th>Reps</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dumbbell Bench Press</td>
-                            <td>4</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>Incline Dumbbell Bench Press</td>
-                            <td>3</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Floor Press</td>
-                            <td>3</td>
-                            <td>15</td>
-                        </tr>
-                         <tr>
-                            <td>Standing Dumbbell Press</td>
-                            <td>4</td>
-                            <td>10-12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Lateral Raise</td>
-                            <td>3</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Tricep Kickback</td>
-                            <td>3</td>
-                            <td>15-20</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="Day">
-                <div class="day-title">
-                    <h2>Day 1: Chest, Shoulders, & Triceps Dumbbell Workout</h2>
-                </div>
-            
-                <table class="workout-table">
-                    <thead>
-                        <tr>
-                            <th>Exercise</th>
-                            <th>Sets</th>
-                            <th>Reps</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dumbbell Bench Press</td>
-                            <td>4</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>Incline Dumbbell Bench Press</td>
-                            <td>3</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Floor Press</td>
-                            <td>3</td>
-                            <td>15</td>
-                        </tr>
-                         <tr>
-                            <td>Standing Dumbbell Press</td>
-                            <td>4</td>
-                            <td>10-12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Lateral Raise</td>
-                            <td>3</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>Dumbbell Tricep Kickback</td>
-                            <td>3</td>
-                            <td>15-20</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            {% endfor %}
         </div>
+        
+        
     </div>
 
 
