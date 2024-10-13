@@ -50,20 +50,19 @@
     <div class = "wrapper2"> 
         <h1>Add Exercises for the Day You will select</h1>
         <form>
-            <p>Days: {{ days }}</p>
             <label for="day">Select A Day By Name:</label>
-            <select>
-                <option value="" disabled selected>Select A Day</option>
+            <select id="day" name="day" required>
                 
                 {% for day in days %}
-                    <h1>{{ day.DayID }}</h1  > <!-- Correctly reference the name field -->
+                    <option value="{{ day.DayID }}">{{ day.name }}</option> 
                 {% endfor %}
-            </select>
-        
-            <!-- Other fields -->
-        
-            <button type="submit">Add Exercise</button>
+            </select>            
+            
+            <!-- Optional: Add a button to perform an action if needed, or you can remove it -->
+            <button type="button" onclick="alert('You selected: ' + document.getElementById('day').value)">Check Selection</button>
         </form>
+        
+        
         
         
     </div>    

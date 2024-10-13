@@ -4,38 +4,30 @@ from flask import Blueprint, request, flash, redirect, url_for, render_template,
 
 # Define Blueprint for exercises management
 workoutdays_bp = Blueprint('workoutdayscontroller', __name__)
-@workoutdays_bp.route('/editworkout/<int:workout_id>')
-def editworkout(workout_id):
-    mysql = current_app.config['mysql']  
+@workoutdays_bp.route('/editworkout')
+def editworkout():
+    mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor()
-    
-    days_data = []  # Initialize an empty list to hold day data
 
     try:
-        # Fetch days associated with the specific WorkoutID
-        cursor.execute("SELECT * FROM WorkoutDay WHERE WorkoutID = %s", (workout_id,))
-        for day in cursor.fetchall():
-            days_data.append({
-                'DayID': day[0],  # Assuming the first column is 'DayID'
-                'WorkoutID': day[1],  # Assuming the second column is 'WorkoutID'
-                'DayNumber': day[2],  # Assuming the third column is 'DayNumber'
-                'name': day[3]  # Assuming the fourth column is 'name'
-            })
+        cursor.execute("SELECT DayID, name FROM WorkoutDay")
+        days = cursor.fetchall()
 
-        # Print the days_data to the console for debugging
-        print("Fetched Days Data:", days_data)  # This will print the list of days
+        # Log the results of the SQL query
+        if not days:
+            print("No days found in the WorkoutDay table.")
+        else:
+            print(f"Fetched days: {days}")
+
+        days = [{'DayID': day[0], 'name': day[1]} for day in days]
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        flash(f"Error fetching workout days: {str(e)}", "danger")
+        days = []  # Ensure days is defined even on error
     finally:
-        cursor.close()  # Always close your cursor to avoid leaks
+        cursor.close()
 
-    return render_template('editworkout.html', days=days_data)
-
-
-
-
-
+    return render_template('editworkout.html', days=days)
 
 
 
