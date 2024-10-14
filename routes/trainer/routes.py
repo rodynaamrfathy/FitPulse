@@ -46,7 +46,7 @@ def availabletrainers():
         cursor.execute("""
             SELECT trainerid AS id, firstname, lastname, specialty, experienceyears, rating, bio, payrate 
             FROM trainers 
-            WHERE is_approved = TRUE
+            WHERE is_approved = TRUE AND specialty='Online Fitness Trainer' 
         """)
         trainers = cursor.fetchall()
     except MySQLdb.Error as e:
@@ -89,3 +89,4 @@ def request_trainer():
         cursor.close()
 
     return redirect(url_for('trainer.availabletrainers'))
+
