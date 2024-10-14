@@ -18,7 +18,6 @@
     <main>
         {% include 'navbar.html' %}
     </main>
-        <a href="{{ url_for('recipescontroller.manage_recipes') }}"  class="nav-link">Recipes</a>
 
     <div class = "wrapper">
         <a href="{{ url_for('recipescontroller.manage_recipes') }}"  class="nav-link">Recipes</a>
@@ -50,7 +49,8 @@
         </div>
         {% endfor %}
 
-        
+        <a href="{{ url_for('recipescontroller.manage_recipes') }}"  class="nav-link">Share Your Recipes</a>
+
     </div>
 
     <script src="{{ url_for('static', filename='js/workouts.js') }}"></script>
