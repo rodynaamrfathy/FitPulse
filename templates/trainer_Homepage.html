@@ -74,34 +74,42 @@
         </section>
         {% endif %}
 
-        {% if specialty == 'Online Fitness Trainer' %}
-        <section id="user-requests">
-            {% if user_requests %}
-            <section id="user-requests">
-                <h2>User Requests</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for request in user_requests %}
-                        <tr>
-                            <td>{{ request.firstname }} {{ request.lastname }}</td>
-                            <td>{{ request.startdate }}</td>
-                            <td>{{ request.enddate }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </section>
-            {% else %}
-            <p>No user requests yet.</p>
-            {% endif %}
+        {% if specialty == 'Nutrition Coach' %}
+        <!-- Diet Plan Section -->
+        <section id="your-diet-plans">
+            <h2>Your Diet Plans</h2>
+            {% for plan in diet_plans %}
+            <div class="diet-plan">
+                <h3>{{ plan.dietname }}</h3>
+                <p>{{ plan.description }}</p>
+                <img src="{{ url_for('static', filename=plan.image) }}" alt="Diet Plan Image">
+                <form action="{{ url_for('dietplans.delete_diet_plan', plan_id=plan.dietplanid) }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{{ url_for('trainer.trainer_homepage', edit_id=plan.dietplanid) }}">Edit</a>
+            </div>
+            {% endfor %}
         </section>
+        {% endif %}
+        
+        <!-- Section to display user requests -->
+        {% if user_requests %}
+        <section id="user-requests">
+            <h2>User Requests</h2>
+            {% for request in user_requests %}
+            <div class="user-request">
+                <h3>Request from {{ request.firstname }} {{ request.lastname }}</h3>
+                <p>Start Date: {{ request.StartDate }}</p>
+                <p>End Date: {{ request.EndDate }}</p>
+                <form action="{{ url_for('trainer.handle_request', assignment_id=request.AssignmentID) }}" method="POST">
+                    <button type="submit" name="action" value="approve">Approve</button>
+                    <button type="submit" name="action" value="decline">Decline</button>
+                </form>
+            </div>
+            {% endfor %}
+        </section>
+        {% else %}
+        <p>No user requests at the moment.</p>
         {% endif %}
         
     </main>

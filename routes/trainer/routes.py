@@ -24,6 +24,16 @@ def trainer_homepage():
         # Fetch the diet plans created by this trainer
         cursor.execute('SELECT * FROM dietplans WHERE authorid = %s', (trainer_id,))
         diet_plans = cursor.fetchall()
+
+        # Fetch user requests made to this trainer
+        cursor.execute('''
+            SELECT tua.AssignmentID, tua.StartDate, tua.EndDate, u.firstname, u.lastname, tua.request
+            FROM Trainer_User_Assignment tua
+            JOIN users u ON tua.userid = u.userid
+            WHERE tua.trainerid = %s AND tua.request = TRUE
+        ''', (trainer_id,))
+        user_requests = cursor.fetchall()
+
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
         return redirect(url_for('trainer.trainer_homepage'))
@@ -33,7 +43,8 @@ def trainer_homepage():
     return render_template('trainer_Homepage.html', 
                            firstName=session['firstName'], 
                            specialty=trainer['specialty'], 
-                           diet_plans=diet_plans)
+                           diet_plans=diet_plans,
+                           user_requests=user_requests)  # Pass user requests to the template
 
 @trainer_bp.route('/availabletrainers')
 def availabletrainers():
@@ -90,3 +101,29 @@ def request_trainer():
 
     return redirect(url_for('trainer.availabletrainers'))
 
+
+@trainer_bp.route('/handle_request', methods=['POST'])
+def handle_request():
+    assignment_id = request.form.get('assignment_id')
+    action = request.form.get('action')
+
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    try:
+        if action == 'approve':
+            # Update the request status to approved (e.g., set 'request' to False or another field for approval)
+            cursor.execute('UPDATE Trainer_User_Assignment SET request = FALSE WHERE AssignmentID = %s', (assignment_id,))
+            flash('Request approved successfully!', 'success')
+        elif action == 'decline':
+            # Delete the request
+            cursor.execute('DELETE FROM Trainer_User_Assignment WHERE AssignmentID = %s', (assignment_id,))
+            flash('Request declined and removed successfully.', 'success')
+
+        mysql.connection.commit()
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+    finally:
+        cursor.close()
+
+    return redirect(url_for('trainer.trainer_homepage'))
