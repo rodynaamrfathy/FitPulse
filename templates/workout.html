@@ -26,10 +26,10 @@
     </div>
     <div class = "wrapper1">
         <div class = "author-container">
-            <img class = "author-img" src="{{ url_for('static', filename='../static/images/hanma.jpg') }}" alt="author">
+            <img class="author-img" src="{{ url_for('static', filename='uploads/trainerspp/' ~ trainer.profilepic) }}" alt="author">
             <div class = "author-info">
-                <p class = "author-name">Written By : Hanma Baki</p>
-                <p class = "author-date">Published on :  2024-06-01</p>
+                <p class = "author-name">Written By : {{trainer.firstname}} {{trainer.lastname}}</p>
+                <p class = "author-date">Published on :  {{workout.publishdate}}</p>
             </div>
         </div>
     </div>
@@ -87,15 +87,7 @@
         <div class = "workout-description">
             <h1>Workout Description</h1>
             <p>
-                So, you’ve completed the 3 day full body dumbbell only workout?
-
-                AND you’ve completed the 4 day upper/lower dumbbell only workout as a form of progression?
-
-                Well, you’ve asked for it and today I’m bringing you the next step in our dumbbell only workout series.
-
-                The following workout, for those who only have access to a set of dumbbells, is a 5 day per week program.
-
-                It can be performed by those who work out at home in their home gym, travel frequently and need a go-to program they can do at a hotel gym, or anyone really who prefers to use dumbbells over other implements at the gym.
+                {{workout.longdescription}}
             </p>
         </div>
     </div>

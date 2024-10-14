@@ -38,6 +38,10 @@ def workoutplan():
 
     # Render the template and pass workouts_data to it
     return render_template('workoutplan.html', workouts=workouts_data)
+
+
+
+
 @workouts_bp.route('/add_workout', methods=['POST'])
 def add_workout():
     # Get MySQL connection from app config
@@ -180,6 +184,12 @@ def workouts():
     cursor.close()
     return render_template('workouts.html', workouts=workouts_data)
 
+
+
+
+
+
+
 @workouts_bp.route('/workout/<int:workout_id>')
 def view_workout(workout_id):
     # Get MySQL connection from app config
@@ -208,8 +218,23 @@ def view_workout(workout_id):
         'targetgender': workout_data[7],
         'supps': workout_data[8],
         'image': workout_data[9],
-        'description': workout_data[10]
+        'description': workout_data[10],
+        'publishdate': workout_data[12],
+        'longdescription': workout_data[13],
+        'authorid': workout_data[11]  # Assuming authorid is at index 11
+
     }
+    
+    cursor.execute("SELECT firstname, lastname, profilepic FROM trainers WHERE trainerid = %s", (workout['authorid'],))
+    trainer_data = cursor.fetchone()
+
+    # Creating a dictionary for the trainer
+    if trainer_data:
+        trainer = {
+            'firstname': trainer_data[0],  # Trainer's first name
+            'lastname': trainer_data[1],   # Trainer's last name
+            'profilepic': trainer_data[2]   # Trainer's profile picture
+        }
 
     # Fetch the workout days, exercises, sets, and reps
     query = """
@@ -249,6 +274,6 @@ def view_workout(workout_id):
     cursor.close()
 
     # Render the workout details page with the workout and days data
-    return render_template('workout.html', workout=workout, workout_days=days_data)
+    return render_template('workout.html', workout=workout,trainer=trainer, workout_days=days_data)
 
 
