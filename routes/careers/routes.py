@@ -33,14 +33,21 @@ def submit_application():
     experienceyears = request.form.get('experienceyears')
     bio = request.form.get('bio')
     resume = request.files.get('resume')
+    
+    image = request.files.get('profile_picture')
+    
+    image_filename = image.filename if image else None
+    
+    if image:
+        image.save(f"static/uploads/trainerspp/{image_filename}")
 
     # Get MySQL instance from the app context
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor() 
     
     # Ensure the SQL statement is correctly formatted
-    cursor.execute('INSERT INTO trainers (specialty, firstname, lastname, email, passwordhash, experienceyears, bio, resume) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', 
-                   (specialty, firstname, lastname, email, password, experienceyears, bio, resume.filename))
+    cursor.execute('INSERT INTO trainers (specialty, firstname, lastname, email, passwordhash, experienceyears, bio, resume, profilepic) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+                   (specialty, firstname, lastname, email, password, experienceyears, bio, resume.filename, image_filename))
     
     # Handle resume upload and save to the server
     if resume and allowed_file(resume.filename):
