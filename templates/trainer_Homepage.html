@@ -75,7 +75,32 @@
         {% endif %}
 
         {% if specialty == 'Online Fitness Trainer' %}
-        <section id="">
+        <section id="user-requests">
+            {% if user_requests %}
+            <section id="user-requests">
+                <h2>User Requests</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in user_requests %}
+                        <tr>
+                            <td>{{ request.firstname }} {{ request.lastname }}</td>
+                            <td>{{ request.startdate }}</td>
+                            <td>{{ request.enddate }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+            {% else %}
+            <p>No user requests yet.</p>
+            {% endif %}
         </section>
         {% endif %}
         
