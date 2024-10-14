@@ -1,5 +1,5 @@
 import MySQLdb
-from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app
+from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app,session
 
 
 # Define Blueprint for exercises management
@@ -8,11 +8,13 @@ workouts_bp = Blueprint('workoutscontroller', __name__)
 @workouts_bp.route('/workoutplan')
 def workoutplan():
     # Get MySQL connection from app config
+    authorid = session.get('trainer_id')  # Fetch the logged-in trainer's ID from the session
+    print(f"Author ID: {authorid}")  # Debug print statement
     mysql = current_app.config['mysql']  
     cursor = mysql.connection.cursor()
 
     # Execute query to retrieve workouts
-    cursor.execute("SELECT * FROM workouts")
+    cursor.execute("SELECT * FROM workouts where authorid = %s", (authorid,))
     workouts_data = []
 
     # Fetch all workouts and append to workouts_data list
@@ -36,15 +38,17 @@ def workoutplan():
 
     # Render the template and pass workouts_data to it
     return render_template('workoutplan.html', workouts=workouts_data)
-
-
-
-# Route to handle form submission and add a new workout
 @workouts_bp.route('/add_workout', methods=['POST'])
 def add_workout():
     # Get MySQL connection from app config
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor()
+
+    # Get the author (trainer) ID from the session
+    authorid = session.get('trainer_id')  # Fetch the logged-in trainer's ID from the session
+    if not authorid:
+        flash("You must be logged in to add a workout.", "danger")
+        return redirect(url_for('auth.login'))  # Redirect to login if the trainer is not logged in
 
     # Collect form data
     workoutname = request.form['workoutname']
@@ -56,22 +60,23 @@ def add_workout():
     targetgender = request.form['targetgender']
     recommendersupps = request.form['recommendersupps']
     description = request.form['description']
+    longdescription = request.form['longdescription']
     
     # Handle image upload
     image = request.files['image']
     image_filename = image.filename if image else None
-    if image :
+    if image:
         # Secure the filename and save the image to the 'static/uploads/workout_images' folder
-       image.save(f"static/uploads/workouts/{image_filename}")
+        image.save(f"static/uploads/workouts/{image_filename}")
 
     try:
-        # Insert the collected data into the database
+        # Insert the collected data into the database along with the author ID and current date
         cursor.execute("""
             INSERT INTO workouts (workoutname, maingoal, traininglevel, daysperweek, timeperworkout, 
-                                  equipmentrequired, targetgender, supps, image, description)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                                  equipmentrequired, targetgender, supps, image, description, authorid, publishdate, longdescription)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURDATE(), %s)
         """, (workoutname, maingoal, traininglevel, daysperweek, timeperworkout, equipmentrequired, 
-              targetgender, recommendersupps, image_filename, description))
+              targetgender, recommendersupps, image_filename, description, authorid, longdescription))  # Use the authorid from session
         
         # Commit the changes to the database
         mysql.connection.commit()
@@ -86,6 +91,7 @@ def add_workout():
 
     # Redirect back to the workout plan page
     return redirect(url_for('workoutscontroller.workoutplan'))
+
 
 
 @workouts_bp.route('/delete_workout/<int:workout_id>', methods=['POST'])
