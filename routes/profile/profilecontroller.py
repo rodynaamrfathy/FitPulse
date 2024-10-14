@@ -171,6 +171,15 @@ def view_order(order_id):
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor()
 
+    order_total_query = """
+        SELECT totalamount
+        FROM orders
+        WHERE orderid = %s
+    """
+    
+    cursor.execute(order_total_query, (order_id,))
+    order_total = cursor.fetchone()  # Fetch the total amount for this order
+
     # Query to get order details along with product image URL from the products table
     order_details_query = """
         SELECT od.orderdetailid, od.productid, od.quantity, od.priceperitem, p.imageurl
@@ -180,6 +189,8 @@ def view_order(order_id):
     """
     cursor.execute(order_details_query, (order_id,))
     order_details = cursor.fetchall()  # Fetch all order details for this order
+    
+    print(f"Order details: {order_details}")
 
     cursor.close()  # Close the cursor
 
@@ -187,4 +198,4 @@ def view_order(order_id):
         return "Order details not found", 404  # Handle case where no details are found
 
     # Pass the order details to the order_details template
-    return render_template('order_details.html', order_details=order_details)
+    return render_template('order_details.html', order_details=order_details , order_total=order_total)  # Adjust this route as needed

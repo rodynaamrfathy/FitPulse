@@ -1,0 +1,83 @@
+
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Add space between the items */
+    text-align: center ;
+    color : white;
+}
+
+.wrapper h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-family: 'Protest Guerrilla', sans-serif;
+    text-align: left !important;
+    font-weight: 300;
+}
+
+.wrapper table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+
+    color: white;
+}
+
+.wrapper table th {
+    background-color: #ff9409;
+    color: white;
+    padding: 0.5rem;
+    text-align: center;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.wrapper table th:first-child {
+    border-top-left-radius: 20px;
+}
+
+.wrapper table th:last-child {
+    border-top-right-radius: 20px;
+}
+
+.wrapper table td {
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.wrapper .product-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.total-price h2 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    font-family: 'Protest Guerrilla', sans-serif;
+}
+
+@media (max-width: 1200px) {  
+
+    
+    .wrapper {
+        width: 700px;
+        
+    }
+
+
+}
