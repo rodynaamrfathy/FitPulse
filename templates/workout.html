@@ -109,6 +109,7 @@
                                 <th>Exercise</th>
                                 <th>Sets</th>
                                 <th>Reps</th>
+                                <th>Rest</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -118,6 +119,7 @@
                                 <td>{{ exercise['exercise_name'] }}</td>
                                 <td>{{ exercise['sets'] }}</td>
                                 <td>{{ exercise['reps'] }}</td>
+                                <td>{{ exercise['resttime'] }} secs</td>
                             </tr>
                             {% endfor %}
                         </tbody>

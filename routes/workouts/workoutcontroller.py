@@ -243,7 +243,8 @@ def view_workout(workout_id):
             wd.name,
             e.exercisename,
             de.Sets,
-            de.Reps
+            de.Reps,
+            de.RestTime
         FROM 
             WorkoutDay wd
         JOIN 
@@ -258,7 +259,7 @@ def view_workout(workout_id):
 
     # Prepare the data structure for workout days
     days_data = {}
-    for DayID, name, exercisename, Sets, Reps in workout_days:
+    for DayID, name, exercisename, Sets, Reps, RestTime in workout_days:
         if DayID not in days_data:
             days_data[DayID] = {
                 'day_name': name,
@@ -267,7 +268,8 @@ def view_workout(workout_id):
         days_data[DayID]['exercises'].append({
             'exercise_name': exercisename,
             'sets': Sets,
-            'reps': Reps
+            'reps': Reps,
+            'resttime': RestTime
         })
 
     # Close the cursor
