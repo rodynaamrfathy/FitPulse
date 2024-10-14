@@ -161,7 +161,7 @@ def workouts():
     cursor = mysql.connection.cursor()
 
     # Execute query to retrieve workouts
-    cursor.execute("SELECT * , trainers.specialty FROM workouts, trainers WHERE specialty='Fitness Instructor'")
+    cursor.execute("SELECT * , trainers.specialty FROM workouts, trainers WHERE specialty='Fitness Instructor' AND workouts.authorid = trainers.trainerid")
     workouts_data = []
 
     # Fetch all workouts and append to workouts_data list
