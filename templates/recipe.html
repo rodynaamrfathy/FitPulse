@@ -28,7 +28,7 @@
     <div class="wrapper1">
         <div class="author-container">
             <!-- Use the author image and info if available -->
-            <img class="author-img" src="{{ url_for('static', filename='images/author_placeholder.jpg') }}" alt="author">
+            <img class="author-img" src="{{ url_for('static', filename='uploads/userspp/' ~ author[9]) }}" alt="Recipe Image">  <!-- Assuming the third column is the image filename -->
             <div class="author-info">
                 <p class="author-name">Written By: {{ author[1] }} {{ author[2] }}</p>
                 <p class="author-date">Published on: {{ recipe[5] }}</p>
@@ -90,6 +90,16 @@
             <p>{{ recipe[11] }}</p>
         </div>
     </div>
+
+    <div class="wrapper6">
+        <div>
+            <h1>Calories</h1>
+            <p>{{ recipe[12] }}</p>
+        </div>
+    </div>
+
+
+
 
     <script src="{{ url_for('static', filename='js/workout.js') }}"></script>
 </body>

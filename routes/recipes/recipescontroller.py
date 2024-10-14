@@ -1,5 +1,5 @@
 import MySQLdb
-from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app
+from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app,session
 
 # Define Blueprint for recipes management
 recipes_bp = Blueprint('recipescontroller', __name__)
@@ -40,22 +40,24 @@ def manage_recipes():
     it takes the recipe details from the form and inserts them into the database
     then redirects to manage_recipes
 '''
-from flask import session, redirect, url_for, flash, current_app, request, render_template
-
 @recipes_bp.route('/add_recipe', methods=['POST'])
 def add_recipe():
-    # Get the MySQL connection
-    mysql = current_app.config['mysql']  
+    mysql = current_app.config['mysql']
+    authorid = session.get('user_id')
 
-    # Fetch the authorid from the session
-    authorid = session.get('userid')  # Get userid (authorid) from session
+    print(f'Logged in user ID: {authorid}')  # Debugging line
 
-    # Check if authorid is not None (user is logged in)
     if authorid is None:
         flash('You must be logged in to add a recipe!', 'danger')
         return redirect(url_for('signin.signin'))
 
-    # Get the recipe details from the form
+    # Get recipe details
+    required_fields = ['recipename', 'category', 'description', 'preptime', 'cooktime', 'ingredients', 'nutritionsfacts', 'instructions', 'calories']
+    for field in required_fields:
+        if field not in request.form or not request.form[field]:
+            flash(f'{field.replace("_", " ").capitalize()} is required.', 'danger')
+            return redirect(url_for('recipescontroller.add_recipe'))
+
     recipename = request.form['recipename']
     category = request.form['category']
     description = request.form['description']
@@ -63,30 +65,36 @@ def add_recipe():
     cooktime = request.form['cooktime']
     ingredients = request.form['ingredients']
     nutritionfacts = request.form['nutritionsfacts']
-    instructions = request.form['instructions']  # Added instructions
+    instructions = request.form['instructions']
+    calories = request.form['calories']
 
-    # Upload image (if any)
-    image = request.files.get('image')  # Use .get() for safe access
+    image = request.files.get('image')
     image_filename = image.filename if image else None
 
-    # Save the uploaded image to the correct directory if it exists
     if image:
-        image.save(f"static/uploads/recipe_images/{image_filename}")
+        try:
+            image.save(f"static/uploads/recipe_images/{image_filename}")
+        except Exception as e:
+            flash(f'Error saving image: {str(e)}', 'danger')
 
     cursor = mysql.connection.cursor()
 
-    # Inserting recipe details into the database, including description
-    cursor.execute("""
-        INSERT INTO recipes (authorid, recipename, category, image, description, preptime, cooktime, ingredients, nutritionfacts,instructions, publisheddate) 
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s, NOW())
-    """, (authorid, recipename, category, image_filename, description, preptime, cooktime, ingredients, nutritionfacts,instructions))
+    try:
+        cursor.execute(""" 
+            INSERT INTO recipes (authorid, recipename, category, image, description, preptime, cooktime, ingredients, nutritionfacts, instructions, publisheddate, calories) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s)
+        """, (authorid, recipename, category, image_filename, description, preptime, cooktime, ingredients, nutritionfacts, instructions, calories))
+        
+        mysql.connection.commit()
+        flash('Recipe added successfully!', 'success')
+    except Exception as e:
+        mysql.connection.rollback()
+        print(f'SQL Error: {str(e)}')  # Print the error to the console for debugging
+        flash(f'Error adding recipe: {str(e)}', 'danger')
+    finally:
+        cursor.close()
 
-    mysql.connection.commit()
-    cursor.close()
-
-    flash('Recipe added successfully!', 'success')
     return redirect(url_for('recipescontroller.manage_recipes'))
-
 
 
 
@@ -200,6 +208,8 @@ def recipe(recipe_id):
     # Query to fetch the author (user) details based on the recipe's authorid
     cursor.execute("SELECT * FROM users WHERE userid = %s", (authorid,))
     author = cursor.fetchone()
+    
+    print(author)
 
     cursor.close()
 

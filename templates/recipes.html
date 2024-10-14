@@ -18,8 +18,11 @@
     <main>
         {% include 'navbar.html' %}
     </main>
+        <a href="{{ url_for('recipescontroller.manage_recipes') }}"  class="nav-link">Recipes</a>
 
     <div class = "wrapper">
+        <a href="{{ url_for('recipescontroller.manage_recipes') }}"  class="nav-link">Recipes</a>
+
         <div class = "recipes-banner">
            <img src="{{ url_for('static', filename='images/recipes.jpg') }}" alt="Abs Image">
            <h1>Healthy Recipes Database</h1>
