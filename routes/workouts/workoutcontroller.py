@@ -235,6 +235,9 @@ def view_workout(workout_id):
             'lastname': trainer_data[1],   # Trainer's last name
             'profilepic': trainer_data[2]   # Trainer's profile picture
         }
+        
+    else:
+        trainer = None
 
     # Fetch the workout days, exercises, sets, and reps
     query = """

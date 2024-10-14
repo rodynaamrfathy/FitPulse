@@ -26,7 +26,7 @@ def dietplan(dietplan_id):
 
     # Fetch the specific diet plan along with the trainer's data
     query = """
-        SELECT dp.*, t.firstname, t.lastname, t.specialty
+        SELECT dp.*, t.firstname, t.lastname, t.specialty, t.profilepic
         FROM dietplans dp
         JOIN trainers t ON dp.authorid = t.trainerid
         WHERE dp.dietplanid = %s

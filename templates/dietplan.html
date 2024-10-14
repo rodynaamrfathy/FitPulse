@@ -26,7 +26,7 @@
     </div>
     <div class="wrapper1">
         <div class="author-container">
-            <img class="author-img" src="{{ url_for('static', filename=dietplan['image']) }}" alt="Diet Image">
+            <img class="author-img" src="{{ url_for('static', filename='uploads/trainerspp/' ~ dietplan.profilepic) }}" alt="author">
             <div class="author-info">
                 <p class="author-name">Written By: {{ dietplan['firstname'] }} {{ dietplan['lastname'] }}</p>
                 <p class = "author-date">Speciality: {{ dietplan['specialty'] }}</p>
