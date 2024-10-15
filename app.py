@@ -139,10 +139,6 @@ def workoutplan():
 
 
 
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
 
 @app.route('/chartstest')
 def chartstest():
@@ -157,8 +153,7 @@ def chartstest():
     }
 
     return render_template('chartstest.html', chart_data=chart_data)
-if __name__ == '__main__':
-    app.run(debug=True)
+
 
 
 

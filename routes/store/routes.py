@@ -128,7 +128,6 @@ def decrease_quantity(product_id):
         flash('Item not found in cart.', 'danger')
     
     return redirect(url_for('store.view_cart'))
-
 @store_bp.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
@@ -149,12 +148,15 @@ def checkout():
             flash('User not found. Please log in again.', 'danger')
             return redirect(url_for('signin.signin'))
 
+        # Fetch current reward points
+        current_reward_points = user['rewardpoints']
+
         # Insert new order into the `orders` table
-        cursor.execute("""
+        cursor.execute(""" 
             INSERT INTO `orders` (userid, totalamount, orderstatus, paymentmethod, orderdate, shippingaddress)
             VALUES (%s, %s, 'pending', %s, NOW(), %s)
         """, (user_id, 0, payment_method, shipping_address))
-        
+
         order_id = cursor.lastrowid  # Get the new order ID
 
         # Get cart details from session
@@ -168,13 +170,13 @@ def checkout():
             total_amount += quantity * price_per_item  # Safely calculate the total amount
 
             # Insert into order_detail
-            cursor.execute("""
+            cursor.execute(""" 
                 INSERT INTO `order_detail` (orderid, productid, quantity, priceperitem)
                 VALUES (%s, %s, %s, %s)
             """, (order_id, product_id, quantity, price_per_item))
 
             # Decrease the product stock quantity
-            cursor.execute("""
+            cursor.execute(""" 
                 UPDATE products
                 SET StockQuantity = StockQuantity - %s
                 WHERE productid = %s AND StockQuantity >= %s
@@ -187,19 +189,27 @@ def checkout():
                 return redirect(url_for('store.view_cart'))
 
         # Update the total amount for the order
-        cursor.execute("""
+        cursor.execute(""" 
             UPDATE `orders`
             SET totalamount = %s
             WHERE orderid = %s
         """, (total_amount, order_id))
 
-        # Commit the transaction to save the order and order details
+        # Update user's reward points
+        new_reward_points = current_reward_points + 50
+        cursor.execute(""" 
+            UPDATE users
+            SET rewardpoints = %s
+            WHERE userid = %s
+        """, (new_reward_points, user_id))
+
+        # Commit the transaction to save the order, order details, and update reward points
         mysql.connection.commit()
         cursor.close()
 
         # Clear the cart after placing the order
         session.pop('cart', None)
-        flash('Your order has been placed successfully!', 'success')
+        flash('Your order has been placed successfully! You have earned 50 reward points.', 'success')
 
         return redirect(url_for('store.store'))
 
