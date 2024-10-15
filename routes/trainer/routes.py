@@ -33,6 +33,24 @@ def trainer_homepage():
             WHERE tua.trainerid = %s AND tua.request = TRUE
         ''', (trainer_id,))
         user_requests = cursor.fetchall()
+        
+        cursor.execute('SELECT * FROM workouts WHERE authorid = %s', (trainer_id,))
+        workouts_data = []
+        for workout in cursor.fetchall():
+            workouts_data.append({
+                'id': workout['id'],
+                'workoutname': workout['workoutname'],
+                'maingoal': workout['maingoal'],
+                'traininglevel': workout['traininglevel'],
+                'daysperweek': workout['daysperweek'],
+                'timeperworkout': workout['timeperworkout'],
+                'equipmentrequired': workout['equipmentrequired'],
+                'targetgender': workout['targetgender'],
+                'supps': workout['supps'],
+                'image': workout['image'],
+                'description': workout['description']
+            })
+        print(f"Workouts fetched: {workouts_data}")  # Debug print
 
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
@@ -44,7 +62,10 @@ def trainer_homepage():
                            firstName=session['firstName'], 
                            specialty=trainer['specialty'], 
                            diet_plans=diet_plans,
-                           user_requests=user_requests)  # Pass user requests to the template
+                           user_requests=user_requests,
+                           workouts = workouts_data)  # Pass user requests to the template
+    
+    
 
 @trainer_bp.route('/availabletrainers')
 def availabletrainers():
@@ -107,16 +128,18 @@ def handle_request():
     assignment_id = request.form.get('assignment_id')
     action = request.form.get('action')
 
+    print(f"Assignment ID: {assignment_id}, Action: {action}")  # Debugging
+
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
     try:
         if action == 'approve':
-            # Update the request status to approved (e.g., set 'request' to False or another field for approval)
+            print(f"Approving request with Assignment ID: {assignment_id}")
             cursor.execute('UPDATE Trainer_User_Assignment SET request = FALSE WHERE AssignmentID = %s', (assignment_id,))
             flash('Request approved successfully!', 'success')
         elif action == 'decline':
-            # Delete the request
+            print(f"Declining request with Assignment ID: {assignment_id}")
             cursor.execute('DELETE FROM Trainer_User_Assignment WHERE AssignmentID = %s', (assignment_id,))
             flash('Request declined and removed successfully.', 'success')
 
@@ -127,44 +150,3 @@ def handle_request():
         cursor.close()
 
     return redirect(url_for('trainer.trainer_homepage'))
-
-# Assuming this is a workouts route
-@trainer_bp.route('/your_workouts')
-def your_workouts():
-    # Ensure trainer is logged in
-    if 'trainer_id' not in session:
-        flash('You must be logged in as a trainer to view this page.', 'warning')
-        return redirect(url_for('signin.signin'))
-
-    trainer_id = session['trainer_id']  # Get trainer ID from session
-
-    # Connect to MySQL database
-    mysql = current_app.config['mysql']
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-
-    try:
-        # Fetch the workouts associated with the trainer
-        cursor.execute('SELECT * FROM workouts WHERE trainerid = %s', (trainer_id,))
-        workouts_data = []
-        for workout in cursor.fetchall():
-            workouts_data.append({
-                'id': workout[0],  # Assuming the first column is 'id'
-                'workoutname': workout[1],  # Assuming the second column is 'workoutname'
-                'maingoal': workout[2],  # Adjust index according to your table structure
-                'traininglevel': workout[3],
-                'daysperweek': workout[4],
-                'timeperworkout': workout[5],
-                'equipmentrequired': workout[6],
-                'targetgender': workout[7],
-                'supps': workout[8],
-                'image': workout[9],
-                'description': workout[10]
-            })
-    except MySQLdb.Error as e:
-        flash(f"An error occurred: {e}", 'danger')
-        workouts = []  # Fallback to empty list if there's an error
-    finally:
-        cursor.close()
-
-    # Render template and pass the workouts data
-    return render_template('your_workouts.html', workouts=workouts_data)
