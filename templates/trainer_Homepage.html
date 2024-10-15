@@ -101,10 +101,11 @@
                 <h3>Request from {{ request.firstname }} {{ request.lastname }}</h3>
                 <p>Start Date: {{ request.StartDate }}</p>
                 <p>End Date: {{ request.EndDate }}</p>
-                <form action="{{ url_for('trainer.handle_request', assignment_id=request.AssignmentID) }}" method="POST">
+                <form action="{{ url_for('trainer.handle_request') }}" method="POST">
+                    <input type="hidden" name="assignment_id" value="{{ request.AssignmentID }}">
                     <button type="submit" name="action" value="approve">Approve</button>
                     <button type="submit" name="action" value="decline">Decline</button>
-                </form>
+                </form>                
             </div>
             {% endfor %}
         </section>
