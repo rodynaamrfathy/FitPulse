@@ -2,7 +2,6 @@ from flask import current_app, request, redirect, session, url_for, flash, rende
 import MySQLdb
 
 trainer_bp = Blueprint('trainer', __name__)
-
 @trainer_bp.route('/trainer_homepage')
 def trainer_homepage():
     # Ensure trainer is logged in
@@ -52,25 +51,6 @@ def trainer_homepage():
             })
         print(f"Workouts fetched: {workouts_data}")  # Debug print
 
-                # Fetch the workouts associated with the trainer
-        cursor.execute('SELECT * FROM workouts WHERE trainerid = %s', (trainer_id,))
-        workout = []
-
-        for workout in cursor.fetchall():
-            workout.append({
-                'id': workout[0],  # Assuming the first column is 'id'
-                'workoutname': workout[1],  # Assuming the second column is 'workoutname'
-                'maingoal': workout[2],  # Adjust index according to your table structure
-                'traininglevel': workout[3],
-                'daysperweek': workout[4],
-                'timeperworkout': workout[5],
-                'equipmentrequired': workout[6],
-                'targetgender': workout[7],
-                'supps': workout[8],
-                'image': workout[9],
-                'description': workout[10]
-            })
-
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
         return redirect(url_for('trainer.trainer_homepage'))
@@ -82,13 +62,10 @@ def trainer_homepage():
                            specialty=trainer['specialty'], 
                            diet_plans=diet_plans,
                            user_requests=user_requests,
-<<<<<<< HEAD
                            workouts = workouts_data)  # Pass user requests to the template
     
     
-=======
-                           workouts=workout)  # Pass user requests to the template
->>>>>>> 968dd898aa73edf43235fafcf9b1365ef032fe1a
+    
 
 @trainer_bp.route('/availabletrainers')
 def availabletrainers():
