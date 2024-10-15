@@ -92,9 +92,7 @@ def startheader():
 def navbar():
     return render_template('navbar.html')
 
-@app.route('/calender')
-def calender():
-    return render_template('calender.html')
+
 
 @app.route('/workoutsCategory')
 def workoutsCategory():

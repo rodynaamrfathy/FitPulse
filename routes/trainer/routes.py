@@ -111,7 +111,6 @@ def availabletrainers():
     
     # Render the template and pass the list of trainers
     return render_template("online_trainers.html", trainers=trainers)
-
 @trainer_bp.route('/request_trainer', methods=['POST'])
 def request_trainer():
     # Get the trainer ID, start date, and end date from the form
@@ -119,6 +118,8 @@ def request_trainer():
     start_date = request.form.get('start_date')
     end_date = request.form.get('end_date')
     user_id = session.get('user_id')
+    workoutid = None  # Use None to represent SQL NULL
+    dietplanid = None  # Use None to represent SQL NULL
 
     print("Trainer ID:", trainer_id)
     print("Start Date:", start_date)
@@ -133,7 +134,8 @@ def request_trainer():
         # Check for existing requests with overlapping dates
         cursor.execute('''
             SELECT * FROM Trainer_User_Assignment 
-            WHERE trainerid = %s AND userid = %s
+            WHERE trainerid = %s AND userid = %s 
+            AND ((StartDate <= %s AND EndDate >= %s) OR (StartDate <= %s AND EndDate >= %s))
         ''', (trainer_id, user_id, end_date, start_date, start_date, end_date))
 
         existing_request = cursor.fetchone()
@@ -143,9 +145,9 @@ def request_trainer():
         else:
             # Insert the request into the Trainer_User_Assignment table if no conflicts
             cursor.execute('''
-                INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
-                VALUES (%s, %s, %s, %s)
-            ''', (trainer_id, start_date, end_date, user_id))
+                INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid, workoutid, dietplanid) 
+                VALUES (%s, %s, %s, %s, %s, %s)
+            ''', (trainer_id, start_date, end_date, user_id, workoutid, dietplanid))
 
             mysql.connection.commit()
             flash('Trainer request submitted successfully for the specified date range!', 'success')
