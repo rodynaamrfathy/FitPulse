@@ -42,8 +42,41 @@ def startpage():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('mainpage.html')
+    trainer = {
+        'name': 'John Doe',
+        'specialty': 'Strength Training',
+        'experience': 10,  # in years
+        'rating': 4.8
+    }
 
+    water_intake = 1500  # in milliliters
+    total_water_goal = 3000  # in milliliters
+
+    protein = 150  # in grams
+    carbs = 200  # in grams
+    calories = 2500  # in kcal
+
+    exercises = [
+        {'name': 'Squat', 'reps': 10, 'sets': 3},
+        {'name': 'Deadlift', 'reps': 8, 'sets': 3},
+        {'name': 'Bench Press', 'reps': 12, 'sets': 4}
+    ]
+
+    # Data for the charts
+    chart_data = {
+        'water_intake': water_intake,
+        'total_water_goal': total_water_goal,
+        'protein': protein,
+        'carbs': carbs,
+        'calories': calories
+    }
+
+    return render_template(
+        'mainpage.html',
+        trainer=trainer,
+        chart_data=chart_data,
+        exercises=exercises
+    )
 
 @app.route('/header')
 def header():
