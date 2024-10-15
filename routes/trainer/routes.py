@@ -23,6 +23,9 @@ def trainer_homepage():
         # Fetch the diet plans created by this trainer
         cursor.execute('SELECT * FROM dietplans WHERE authorid = %s', (trainer_id,))
         diet_plans = cursor.fetchall()
+        
+        cursor.execute('SELECT * FROM dietplans')
+        all_diet_plans = cursor.fetchall()
 
         # Fetch user requests made to this trainer
         cursor.execute('''
@@ -32,6 +35,19 @@ def trainer_homepage():
             WHERE tua.trainerid = %s AND tua.request = TRUE
         ''', (trainer_id,))
         user_requests = cursor.fetchall()
+        
+        # Fetch accepted users along with their first and last names
+        cursor.execute('''
+            SELECT u.firstname, u.lastname, tua.*
+            FROM Trainer_User_Assignment tua
+            JOIN users u ON tua.userid = u.userid
+            WHERE tua.trainerid = %s AND tua.request = 0
+        ''', (trainer_id,))
+
+        users_accepted = cursor.fetchall()
+
+        
+        
         
         cursor.execute('SELECT * FROM workouts WHERE authorid = %s', (trainer_id,))
         workouts_data = []
@@ -49,7 +65,11 @@ def trainer_homepage():
                 'image': workout['image'],
                 'description': workout['description']
             })
+            
+        
         print(f"Workouts fetched: {workouts_data}")  # Debug print
+        
+        
 
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
@@ -62,7 +82,9 @@ def trainer_homepage():
                            specialty=trainer['specialty'], 
                            diet_plans=diet_plans,
                            user_requests=user_requests,
-                           workouts = workouts_data)  # Pass user requests to the template
+                           workouts = workouts_data,
+                           all_diet_plans = all_diet_plans,
+                           users_accepted = users_accepted)  # Pass user requests to the template
     
     
     
@@ -150,3 +172,48 @@ def handle_request():
         cursor.close()
 
     return redirect(url_for('trainer.trainer_homepage'))
+
+
+
+
+@trainer_bp.route('/assign_workout_and_diet', methods=['POST'])
+def assign_workout_and_diet():
+    user_id = request.form.get('userid')
+    workout_id = request.form.get('workoutid')
+    dietplan_id = request.form.get('dietplanid')
+
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    try:
+        # Update the Trainer_User_Assignment table with the assigned workout and diet plan
+        cursor.execute('''
+            UPDATE Trainer_User_Assignment
+            SET workoutid = %s, dietplanid = %s
+            WHERE userid = %s
+        ''', (workout_id, dietplan_id, user_id))
+
+        mysql.connection.commit()
+        flash('Workout and diet plan assigned successfully!', 'success')
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+    finally:
+        cursor.close()
+
+    return redirect(url_for('trainer.trainer_homepage'))
+
+
+
+@trainer_bp.route('/terminate_user', methods=['POST'])
+def terminate_user():
+    user_id = request.form.get('userid')
+    
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    cursor.execute('DELETE FROM Trainer_User_Assignment WHERE userid = %s', (user_id,))
+    mysql.connection.commit()  # Commit the changes to the database
+   
+
+    return redirect(url_for('trainer.trainer_homepage'))  # Redirect back to homepage
+

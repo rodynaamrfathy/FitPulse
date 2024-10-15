@@ -128,11 +128,64 @@
                 <p>Description: {{ workout.description }}</p>
             </div>
             {% endfor %}
-        </section>      
+        </section>  
+        
+        <section class="approvedusers">
+            <table>
+                <tr>
+                    <th>Approved Users</th>
+                    <th>Assign Workout</th>
+                    <th>Nutrition Plan</th>
+                    <th>Assign</th>
+                    <th>Terminate User</th>
+                </tr>
+                {% for user in users_accepted %}
+                <tr>
+                    <form action="{{ url_for('trainer.assign_workout_and_diet') }}" method="POST">
+                        <td>
+                            {{ user.firstname }} {{ user.lastname }}
+                            <input type="hidden" name="userid" value="{{ user.userid }}">
+                        </td>
+                        <td>
+                            <select name="workoutid">
+                                <option value="" disabled selected>Select A Workout Please</option>
+
+                                {% for workout in workouts %}
+                                <option value="{{ workout.id }}">{{ workout.workoutname }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="dietplanid">
+                                <option value="" disabled selected>Select A DietPlan Please</option>
+
+                                {% for dietplan in all_diet_plans %}
+                                <option value="{{ dietplan.dietplanid }}">{{ dietplan.dietname }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="assign">Assign</button>
+                        </td>
+                        <td>
+                            
+                            <button type="submit" class="terminate">Terminate</button>
+                            
+                            
+                        </td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+        
+        <section>
+        <a href = "{{ url_for('workoutscontroller.workoutplan') }}"> Create A workout</a>
+        </section>
+
         
     </main>
 
-    <a href = "{{ url_for('workoutscontroller.workoutplan') }}"> Create A workout</a>
 
 
     <footer>
