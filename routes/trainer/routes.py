@@ -107,16 +107,18 @@ def handle_request():
     assignment_id = request.form.get('assignment_id')
     action = request.form.get('action')
 
+    print(f"Assignment ID: {assignment_id}, Action: {action}")  # Debugging
+
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
     try:
         if action == 'approve':
-            # Update the request status to approved (e.g., set 'request' to False or another field for approval)
+            print(f"Approving request with Assignment ID: {assignment_id}")
             cursor.execute('UPDATE Trainer_User_Assignment SET request = FALSE WHERE AssignmentID = %s', (assignment_id,))
             flash('Request approved successfully!', 'success')
         elif action == 'decline':
-            # Delete the request
+            print(f"Declining request with Assignment ID: {assignment_id}")
             cursor.execute('DELETE FROM Trainer_User_Assignment WHERE AssignmentID = %s', (assignment_id,))
             flash('Request declined and removed successfully.', 'success')
 
