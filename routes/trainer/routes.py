@@ -118,27 +118,41 @@ def request_trainer():
     trainer_id = request.form.get('trainer_id')
     start_date = request.form.get('start_date')
     end_date = request.form.get('end_date')
+    user_id = session.get('user_id')
 
     print("Trainer ID:", trainer_id)
     print("Start Date:", start_date)
     print("End Date:", end_date)
-    print("User ID:", session.get('user_id'))
+    print("User ID:", user_id)
 
     # Add logic to handle trainer request (e.g., save to database, notify trainer, etc.)
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     
     try:
-        # Insert the request into the Trainer_User_Assignment table
+        # Check for existing requests with overlapping dates
         cursor.execute('''
-            INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
-            VALUES (%s, %s, %s, %s)
-        ''', (trainer_id, start_date, end_date, session['user_id'])) 
+            SELECT * FROM Trainer_User_Assignment 
+            WHERE trainerid = %s AND userid = %s
+        ''', (trainer_id, user_id, end_date, start_date, start_date, end_date))
 
-        mysql.connection.commit()
-        flash('Trainer request submitted successfully for the specified date range!', 'success')
+        existing_request = cursor.fetchone()
+
+        if existing_request:
+            flash('You have already requested this trainer for an overlapping date range.', 'danger')
+        else:
+            # Insert the request into the Trainer_User_Assignment table if no conflicts
+            cursor.execute('''
+                INSERT INTO Trainer_User_Assignment (trainerid, StartDate, EndDate, userid) 
+                VALUES (%s, %s, %s, %s)
+            ''', (trainer_id, start_date, end_date, user_id))
+
+            mysql.connection.commit()
+            flash('Trainer request submitted successfully for the specified date range!', 'success')
+    
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
+    
     finally:
         cursor.close()
 
