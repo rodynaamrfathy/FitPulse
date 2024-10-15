@@ -139,6 +139,28 @@ def workoutplan():
 
 
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/chartstest')
+def chartstest():
+    # Define your data
+    water_intake = 80  # in milliliters
+    total_water_goal = 100  # in milliliters
+
+    # Data for the charts
+    chart_data = {
+        'water_intake': water_intake,
+        'total_water_goal': total_water_goal,
+    }
+
+    return render_template('chartstest.html', chart_data=chart_data)
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
