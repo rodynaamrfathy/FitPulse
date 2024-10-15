@@ -127,3 +127,44 @@ def handle_request():
         cursor.close()
 
     return redirect(url_for('trainer.trainer_homepage'))
+
+# Assuming this is a workouts route
+@trainer_bp.route('/your_workouts')
+def your_workouts():
+    # Ensure trainer is logged in
+    if 'trainer_id' not in session:
+        flash('You must be logged in as a trainer to view this page.', 'warning')
+        return redirect(url_for('signin.signin'))
+
+    trainer_id = session['trainer_id']  # Get trainer ID from session
+
+    # Connect to MySQL database
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    try:
+        # Fetch the workouts associated with the trainer
+        cursor.execute('SELECT * FROM workouts WHERE trainerid = %s', (trainer_id,))
+        workouts_data = []
+        for workout in cursor.fetchall():
+            workouts_data.append({
+                'id': workout[0],  # Assuming the first column is 'id'
+                'workoutname': workout[1],  # Assuming the second column is 'workoutname'
+                'maingoal': workout[2],  # Adjust index according to your table structure
+                'traininglevel': workout[3],
+                'daysperweek': workout[4],
+                'timeperworkout': workout[5],
+                'equipmentrequired': workout[6],
+                'targetgender': workout[7],
+                'supps': workout[8],
+                'image': workout[9],
+                'description': workout[10]
+            })
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+        workouts = []  # Fallback to empty list if there's an error
+    finally:
+        cursor.close()
+
+    # Render template and pass the workouts data
+    return render_template('your_workouts.html', workouts=workouts_data)

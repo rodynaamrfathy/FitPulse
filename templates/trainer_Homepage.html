@@ -111,6 +111,23 @@
         {% else %}
         <p>No user requests at the moment.</p>
         {% endif %}
+
+        <section id="your-workouts">
+            <h2>Your Workouts</h2>
+            {% for workout in workouts %}
+            <div class="workout">
+                <h3>{{ workout.workoutname }}</h3>
+                <p>Main Goal: {{ workout.maingoal }}</p>
+                <p>Training Level: {{ workout.traininglevel }}</p>
+                <p>Days per Week: {{ workout.daysperweek }}</p>
+                <p>Time per Workout: {{ workout.timeperworkout }}</p>
+                <p>Equipment Required: {{ workout.equipmentrequired }}</p>
+                <p>Target Gender: {{ workout.targetgender }}</p>
+                <p>Supplements: {{ workout.supps }}</p>
+                <p>Description: {{ workout.description }}</p>
+            </div>
+            {% endfor %}
+        </section>      
         
     </main>
 
