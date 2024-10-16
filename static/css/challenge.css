@@ -31,6 +31,10 @@
     font-weight: 400;
 }
 
+.wrapper1 {
+    margin-top: 2rem !important;
+}
+
 .wrapper1 h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -49,21 +53,40 @@
 
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-}
-th, td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-    color: black;
-}
-th {
-    background-color: #f2f2f2;
+    width: 100%; /* Full width for the table */
+    border-collapse: collapse; /* Remove space between table borders */
 }
 
+
+
+
+th, td {
+    padding: 12px 15px; /* Padding inside table cells */
+    text-align: left; /* Left-align text in table */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+}
+
+th {
+    background-color: #ff9409; /* Background color for the header */
+    color: white; /* White text for header */
+    font-weight: bold; /* Make header text bold */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+tr:nth-child(odd) {
+    background-color: #fff; /* Alternate row background color */
+}
+
+tr:hover {
+    background-color: #e9e9e9; /* Highlight row on hover */
+}
+
+td {
+    color: #555; /* Text color for table data */
+}
 button {
     padding: 10px 15px;
     border: none;
@@ -94,7 +117,7 @@ button:hover {
 .progress-bar {
     height: 100%;
     width: 100%; /* Start width (100% means full) */
-    background-color: #28a745; /* Color of the progress bar */
+    background-color: #ff9409; /* Color of the progress bar */
     position: absolute;
     top: 0;
     left: 0;
@@ -114,6 +137,13 @@ button:hover {
     display: none;
 }
 
+.finish {
+    font-size: 1.5rem;
+    margin-top: 50px;
+    color: white;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+}
 
 @media (max-width: 1200px) {  
 
