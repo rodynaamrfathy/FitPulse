@@ -115,4 +115,19 @@ hr {
     margin-top: -4rem;
     margin-left: 2rem;
     z-index: 2;
+    border: 3px solid #ffffff;
+}
+
+
+@media (max-width: 1200px) {  
+
+    .trainers-list {
+        display: flex;
+        flex-direction: column;
+        width: 700px;
+        gap: 20px;
+       margin-left: 20%;
+       margin-top: 5rem;
+    }
+
 }
