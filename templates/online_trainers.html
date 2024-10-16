@@ -8,17 +8,32 @@
     <title>Available Trainers</title>
 </head>
 <body>
-    <h1>Available Trainers</h1>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+    
     <div class="trainers-list">
+        <h1 class = "title">Available Trainers</h1>
         {% if trainers %}
             {% for trainer in trainers %}
                 <div class="trainer-card">
+                    <img class= "bannerimg"src="{{ url_for('static', filename='images/register_poster3.jpg') }}" alt="Abs Image">
+                    <img class="pp" src="{{ url_for('static', filename='uploads/trainerspp/' ~ trainer.profilepic) }}" alt="Abs Image">
+
                     <h2>{{ trainer.firstname }} {{ trainer.lastname }}</h2>
                     <p><strong>Speciality:</strong> {{ trainer.specialty }}</p>
                     <p><strong>Experience:</strong> {{ trainer.experienceyears }} years</p>
                     <p><strong>Rating:</strong> {{ trainer.rating }}</p>
                     <p><strong>Bio:</strong> {{ trainer.bio }}</p>
                     <p><strong>Pay Rate:</strong> ${{ trainer.payrate }}/hour</p>
+                    <p><strong>Resume:</strong> 
+                        <a href="{{ url_for('static', filename='uploads/resumes/' ~ trainer.resume) }}" target="_blank">Download Resume</a>
+                    </p>
                     
                     <!-- Add date inputs for start and end date -->
                     <form action="{{ url_for('trainer.request_trainer') }}" method="post">

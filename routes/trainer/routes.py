@@ -98,7 +98,7 @@ def availabletrainers():
     try:
         # Fetch all approved trainers
         cursor.execute("""
-            SELECT trainerid AS id, firstname, lastname, specialty, experienceyears, rating, bio, payrate 
+            SELECT trainerid AS id, firstname, lastname, specialty, experienceyears, rating, bio, payrate , profilepic, resume
             FROM trainers 
             WHERE is_approved = TRUE AND specialty='Online Fitness Trainer' 
         """)
@@ -111,6 +111,10 @@ def availabletrainers():
     
     # Render the template and pass the list of trainers
     return render_template("online_trainers.html", trainers=trainers)
+
+
+
+
 @trainer_bp.route('/request_trainer', methods=['POST'])
 def request_trainer():
     # Get the trainer ID, start date, and end date from the form
