@@ -42,40 +42,65 @@ def startpage():
 
 @app.route('/dashboard')
 def dashboard():
-    trainer = {
-        'name': 'John Doe',
-        'specialty': 'Strength Training',
-        'experience': 10,  # in years
-        'rating': 4.8
-    }
+    # Assume user ID is stored in the session
+    user_id = session.get('user_id')
 
-    water_intake = 1500  # in milliliters
-    total_water_goal = 3000  # in milliliters
+    if not user_id:
+        flash('You must be logged in to view the dashboard.', 'warning')
+        return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
 
-    protein = 150  # in grams
-    carbs = 200  # in grams
-    calories = 2500  # in kcal
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    exercises = [
-        {'name': 'Squat', 'reps': 10, 'sets': 3},
-        {'name': 'Deadlift', 'reps': 8, 'sets': 3},
-        {'name': 'Bench Press', 'reps': 12, 'sets': 4}
-    ]
+    try:
+        # Fetch the assigned trainer for the user
+        cursor.execute('''
+            SELECT t.trainerid, t.firstname, t.lastname, t.specialty
+            FROM Trainer_User_Assignment tua
+            JOIN trainers t ON tua.trainerid = t.trainerid
+            WHERE tua.userid = %s
+        ''', (user_id,))
+        
+        assigned_trainer = cursor.fetchone()
 
-    # Data for the charts
-    chart_data = {
-        'water_intake': water_intake,
-        'total_water_goal': total_water_goal,
-        'protein': protein,
-        'carbs': carbs,
-        'calories': calories
-    }
+        # Fetch the assigned workouts for the user
+        cursor.execute('''
+            SELECT w.*
+            FROM Trainer_User_Assignment tua
+            JOIN workouts w ON tua.workoutid = w.id
+            WHERE tua.userid = %s
+        ''', (user_id,))
+        
+        assigned_workouts = cursor.fetchall()
+
+        # Prepare the data for the dashboard charts
+        water_intake = 1500  # in milliliters
+        total_water_goal = 3000  # in milliliters
+
+        protein = 150  # in grams
+        carbs = 200  # in grams
+        calories = 2500  # in kcal
+
+        # Data for the charts
+        chart_data = {
+            'water_intake': water_intake,
+            'total_water_goal': total_water_goal,
+            'protein': protein,
+            'carbs': carbs,
+            'calories': calories
+        }
+
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+        return redirect(url_for('dashboard'))  # Redirect back to dashboard in case of error
+    finally:
+        cursor.close()
 
     return render_template(
         'mainpage.html',
-        trainer=trainer,
-        chart_data=chart_data,
-        exercises=exercises
+        assigned_trainer=assigned_trainer,  # Pass assigned trainer to template
+        assigned_workouts=assigned_workouts,  # Pass assigned workouts to template
+        chart_data=chart_data
     )
 
 @app.route('/header')
