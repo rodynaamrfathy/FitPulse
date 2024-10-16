@@ -49,3 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+const ctx2 = document.getElementById('pieChart2').getContext('2d'); // Change to new ID
+const pieChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Label1', 'Label2', 'Label3'], // Update labels as necessary
+        datasets: [{
+            data: [10, 20, 30], // Update data as necessary
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+        },
+    }
+});
