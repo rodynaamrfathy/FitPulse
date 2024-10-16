@@ -18,6 +18,13 @@
     <main class="main-container">
         {% include 'navbar.html' %}
     </main>
+    <div id="chart-container" style="width: 600px; height: 400px;">
+        <canvas id="salesChart"></canvas>
+    </div>
+    
+    <div id="pie-chart-container" style="width: 400px; height: 400px;">
+        <canvas id="pieChart"></canvas>
+    </div>
 
     <div class="main-container2">
         <div class="wrapper">
@@ -65,6 +72,9 @@
                 <p>
                     6
                 </p>
+                <div id="pie-chart-container" style="width: 200px; height: 200px;">
+                    <canvas id="pieChart2"></canvas> <!-- Changed ID to pieChart2 -->
+                </div>                
             </div> 
         </div>
 
@@ -77,7 +87,7 @@
     </div>
 
     
-        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 </html>
