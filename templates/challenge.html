@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/challenge.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper">
+        <h1>Welcome to {{ challenge[1] }}</h1>
+        <p>Now you can view the exercises and start to finish the challenge! Good Luck </p>
+    </div>
+
+    <div class="wrapper1">
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercise Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Time to Complete (seconds)</th>
+                    <th>Start</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exerciseselected in exercises_selected %}
+                <tr>
+                    <td>{{ exerciseselected[1] }}</td>
+                    <td>{{ exerciseselected[2] }}</td>
+                    <td>{{ exerciseselected[3] }}</td>
+                    <td>{{ exerciseselected[4] }}</td>
+                    <td>
+                        <button class="start-button" type="button" data-time="{{ exerciseselected[4] }}" data-sets="{{ exerciseselected[3] }}">Start</button>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="timer-container hidden" id="timer-container">
+            <div class="progress-container" id="progress-container">
+                <!-- Progress bars will be dynamically added here -->
+            </div>
+            <div class="set-message" id="set-message"></div>
+        </div>
+        
+        <h1 id="reward-message" class="hidden">It's time to collect the reward! The {{ challenge[4] }} Point Is All Yours</h1>
+        <form id="claim-reward-form" method="POST" action="/claim_reward">
+            <input type="hidden" name="challenge_id" id="challenge_id" value="{{challenge[0]}}">
+            <button id="finished-button" class="hidden" type="button">Finished</button>
+        </form>
+        
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('finished-button').addEventListener('click', function() {
+        const challengeId = document.getElementById('challenge_id').value;
+        if (!challengeId) {
+            alert('Challenge ID is not defined.');
+            return;
+        }
+
+        const data = { challenge_id: challengeId };
+
+        fetch('/claim_reward', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    alert(data.message || 'An error occurred while claiming the reward.');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                // Redirect to the new URL
+                window.location.href = data.redirect_url; // Use the redirect URL returned from the server
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while claiming the reward.');
+        });
+    });
+});
+
+        </script>
+
+    <script src="{{ url_for('static', filename='js/challenge.js') }}"></script>
+    
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/challenges.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class = "wrapper">
+        <h1>Unleash Your Potential: Browse Our Available Challenges!</h1>
+        <p>Complete challenges and watch you ranking soar!</p>
+    </div>
+
+   
+
+    <div class = "wrapper1">
+        <table>
+            <th>Challenge Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reward Points</th>
+            <th>Experience Level </th>
+            <th>Equipment</th>
+            <th></th>
+
+            {% for challenge in challenges %}
+            <tr>
+                <td>{{challenge[1]}}</td>
+                <td>{{challenge[2]}}</td>
+                <td>{{challenge[3]}}</td>
+                <td>{{challenge[4]}}</td>
+                <td>{{challenge[5]}}</td>
+                <td>{{challenge[6]}}</td>
+                <td><a href="{{ url_for('challengecontroller.view_challenge_user', challengeid=challenge[0]) }}"><button>View</button></a></td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+    
+
+    <script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
+</body>
+</html>
