@@ -128,6 +128,7 @@ a {
     flex-shrink: 0; /* Prevent shrinking */
 }
 
+.alord,
 lord-icon {
     margin-right: 2rem;
 }

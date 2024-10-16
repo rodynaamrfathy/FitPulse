@@ -1,13 +1,10 @@
 import MySQLdb
-from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app,session
+from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app, session
+from datetime import datetime
 
-# Define Blueprint for recipes management
+# Define Blueprint for calendar management
 calender_bp = Blueprint('calendercontroller', __name__)
 
-
-
-from flask import render_template, session, current_app
-from datetime import datetime
 @calender_bp.route('/calender')
 def calender():
     # Get the MySQL connection from Flask's current_app config
@@ -36,17 +33,10 @@ def calender():
     plans = cursor.fetchall()  # Fetch all matching plans
 
     cursor.close()  # Close the cursor
-    
-    print(plans)
 
     # If there are no plans for today
     if not plans:
         return render_template('calender.html', plans=None)
 
-    # Prepare the plan data to pass to the template
-    
-    
-
     # Render the calender.html with the plans data
     return render_template('calender.html', plans=plans)
-
