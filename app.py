@@ -1,4 +1,4 @@
-from flask import Flask, session, request, flash, redirect, url_for, render_template
+from flask import Flask, session, request, flash, redirect, url_for, render_template, jsonify
 from database import init_db  # Import the init_db function
 import MySQLdb.cursors
 from routes import register_routes
@@ -6,8 +6,21 @@ from functools import wraps
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+@app.route('/data')
+def data():
+    dashboard_data = {
+        'sales': [150, 200, 250, 300],
+        'profits': [120, 180, 210, 280],
+        'pieChartData': {
+            'labels': ['Product A', 'Product B', 'Product C'],
+            'values': [40, 30, 30]
+        }
+    }
+    return jsonify(dashboard_data)
 
 # Set the upload folder path for product images
 UPLOAD_PRODUCT_FOLDER = 'static/uploads/productsimg/'
