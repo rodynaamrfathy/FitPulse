@@ -22,22 +22,61 @@
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
-                <canvas id="waterIntakeChart"></canvas> <!-- Canvas for the chart -->
+                {% if user_id %}  <!-- Check if the user ID exists -->
+                    <h2>Welcome back, {{ user_name }}!</h2> <!-- Display user's name -->
+                {% else %}
+                    <h2>Welcome back!</h2>
+                {% endif %}
             </div>
-            <div class="second-container"></div>
+            <div class="second-container">
+                <h3>User Data</h3>
+                <p><strong>Trainer:</strong> 
+                {% if assigned_trainer %}
+                    {{ assigned_trainer.firstname }} {{ assigned_trainer.lastname }}
+                {% else %}
+                    No trainer assigned.
+                {% endif %}
+                </p>
+                <p><strong>Protein Intake:</strong> {{ chart_data.protein }} grams</p>
+                <p><strong>Carbohydrates Intake:</strong> {{ chart_data.carbs }} grams</p>
+                <p><strong>Calories Intake:</strong> {{ chart_data.calories }} kcal</p>
+                <p><strong>Water Intake:</strong> {{ chart_data.water_intake }} ml (Goal: {{ chart_data.total_water_goal }} ml)</p>
+            </div>
         </div>
         <div class="swrapper">
-            <div class="third-container"></div>
-            <div class="fourth-container"></div>
+            <div class="third-container">
+                <p>
+                    3
+                </p>
+            </div>
+            <div class="fourth-container">
+                <p>
+                    4
+                </p>
+            </div>
         </div>
         <div class="twrapper">
-            <div class="fifth-container"></div> 
-            <div class="sixth-container"></div> 
+            <div class="fifth-container">
+                <p>
+                    5
+                </p>
+            </div> 
+            <div class="sixth-container">
+                <p>
+                    6
+                </p>
+            </div> 
         </div>
 
         <div class = "fwrapper">
-            <div class="seventh-container"></div>
-            <div class="eighth-container"></div>
+            {% if assigned_trainer %}
+                <div class="seventh-container">
+                    <p>
+                        7
+                    </p>
+                </div>
+            {% endif %}
+
         </div>
 
         
