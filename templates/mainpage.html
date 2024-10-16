@@ -21,11 +21,6 @@
     <div id="chart-container" style="width: 600px; height: 400px;">
         <canvas id="salesChart"></canvas>
     </div>
-    
-    <div id="pie-chart-container" style="width: 400px; height: 400px;">
-        <canvas id="pieChart"></canvas>
-    </div>
-
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
@@ -44,10 +39,6 @@
                     No trainer assigned.
                 {% endif %}
                 </p>
-                <p><strong>Protein Intake:</strong> {{ chart_data.protein }} grams</p>
-                <p><strong>Carbohydrates Intake:</strong> {{ chart_data.carbs }} grams</p>
-                <p><strong>Calories Intake:</strong> {{ chart_data.calories }} kcal</p>
-                <p><strong>Water Intake:</strong> {{ chart_data.water_intake }} ml (Goal: {{ chart_data.total_water_goal }} ml)</p>
             </div>
         </div>
         <div class="swrapper">
@@ -69,12 +60,20 @@
                 </p>
             </div> 
             <div class="sixth-container">
-                <p>
-                    6
-                </p>
                 <div id="pie-chart-container" style="width: 200px; height: 200px;">
-                    <canvas id="pieChart2"></canvas> <!-- Changed ID to pieChart2 -->
-                </div>                
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <p>
+                    total water intake: 1000/3000ml
+                </p>
+                <button action="add1l">
+
+                </button>
+                <button action="add500ml">
+
+                </button><button action="add250ml">
+
+                </button>     
             </div> 
         </div>
 
@@ -85,8 +84,6 @@
 
         
     </div>
-
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>

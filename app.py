@@ -13,11 +13,11 @@ app = Flask(__name__)
 @app.route('/data')
 def data():
     dashboard_data = {
-        'sales': [150, 200, 250, 300],
-        'profits': [120, 180, 210, 280],
-        'pieChartData': {
-            'labels': ['Product A', 'Product B', 'Product C'],
-            'values': [40, 30, 30]
+        'Steps': [150, 200, 250, 300],
+        'calories burned': [120, 180, 210, 280],
+        'WaterInTake': {
+            'labels': ['water intake', 'goal'],
+            'values': [1000, 3000]
         }
     }
     return jsonify(dashboard_data)
@@ -86,22 +86,6 @@ def dashboard():
         
         assigned_workouts = cursor.fetchall()
 
-        # Prepare the data for the dashboard charts
-        water_intake = 1500  # in milliliters
-        total_water_goal = 3000  # in milliliters
-
-        protein = 150  # in grams
-        carbs = 200  # in grams
-        calories = 2500  # in kcal
-
-        # Data for the charts
-        chart_data = {
-            'water_intake': water_intake,
-            'total_water_goal': total_water_goal,
-            'protein': protein,
-            'carbs': carbs,
-            'calories': calories
-        }
 
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
@@ -113,7 +97,6 @@ def dashboard():
         'mainpage.html',
         assigned_trainer=assigned_trainer,  # Pass assigned trainer to template
         assigned_workouts=assigned_workouts,  # Pass assigned workouts to template
-        chart_data=chart_data
     )
 
 @app.route('/header')
