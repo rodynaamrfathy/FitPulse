@@ -14,6 +14,7 @@ from .profile.profilecontroller import profile_bp
 from .workouts.workoutcontroller import workouts_bp
 from .workouts.workoutdayscontroller import workoutdays_bp  
 from .calenders.callendercontroller import calender_bp  # Import the calender blueprint
+from .challenges.challengecontroller import challenges_bp  # Import the challenges blueprint
 
 
 def register_routes(app):
@@ -44,3 +45,5 @@ def register_routes(app):
     app.register_blueprint(workoutdays_bp)  # Register workout days blueprint  \
         
     app.register_blueprint(calender_bp)  # Register calender blueprint 
+    
+    app.register_blueprint(challenges_bp)  # Register challenges blueprint

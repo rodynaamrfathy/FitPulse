@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input[type="text"],
+        input[type="url"],
+        input[type="date"],
+        input[type="number"],
+
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .deleteform {
+            border: none !important;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            color: black;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Challenge </h1>
+
+    <!-- Form to Edit an Exercise Category -->
+    <!-- edit_challenge.html -->
+<form action="{{ url_for('challengecontroller.update_challenge', challengeid=challenge[0]) }}" method="POST">
+    <label for="challengename">Challenge Name:</label>
+    <input type="text" id="challengename" name="challengename" value="{{ challenge[1] }}" required>
+
+    <label for="startdate">Start Date:</label>
+    <input type="date" id="startdate" name="startdate" value="{{ challenge[2] }}" required>
+
+    <label for="enddate">End Date:</label>
+    <input type="date" id="enddate" name="enddate" value="{{ challenge[3] }}" required>
+
+    <label for="equipment">Equipment:</label>
+    <input type="text" id="equipment" name="equipment" value="{{ challenge[6] }}" required>
+
+    <label for="rewardpoints">Reward Points:</label>
+    <input type="number" id="rewardpoints" name="rewardpoints" value="{{ challenge[4] }}" required>
+
+    <label for="experiencelevel">Experience Level:</label>
+    <select name="experiencelevel" required>
+        <option value="beginner" {% if challenge[6] == 'beginner' %}selected{% endif %}>Beginner</option>
+        <option value="intermediate" {% if challenge[6] == 'intermediate' %}selected{% endif %}>Intermediate</option>
+        <option value="advanced" {% if challenge[6] == 'advanced' %}selected{% endif %}>Advanced</option>
+    </select>
+
+    <button type="submit">Update Challenge</button>
+</form>
+
+
+<h1>Add Exercises To Your Challenge</h1>
+<form action="{{ url_for('challengecontroller.add_challenge_exercise', challengeid=challenge[0]) }}" method="POST">
+    <label> Select Exercise </label>
+    <select name="exercise" required>
+        <option value="" disabled selected>Select an exercise</option>
+        {% for exercise in exercises %}
+        <option value="{{ exercise[0] }}">{{ exercise[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <label> Select Reps </label>
+    <input type="number" name="reps" required>
+
+    <label> Select Sets </label>
+    <input type="number" name="sets" required>
+
+    <label>Time to Complete</label>
+    <input type="number" name="timetocomplete" required>
+
+    <button type="submit">Add Exercise</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Exercise Id</th>
+            <th>Exercise Name</th>
+            <th>Reps</th>
+            <th>Sets</th>
+            <th>Time to Complete</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exerciseselected in exercises_selected %}
+        <tr>
+            <td>{{ exerciseselected[0] }}</td>
+            <td>{{ exerciseselected[1] }}</td>
+            <td>{{ exerciseselected[2] }}</td>
+            <td>{{ exerciseselected[3] }}</td>
+            <td>{{ exerciseselected[4] }}</td>
+            <td>
+                <form class = "deleteform"action="{{ url_for('challengecontroller.delete_challenge_exercise', challengeid=challenge[0]) }}" method="POST">
+                    <!-- Pass the challenge ID directly from the URL -->
+                    <input type="hidden" name="challengeid" value="{{ challenge[0] }}">
+                    <input type="hidden" name="exerciseid" value="{{ exerciseselected[0] }}">
+                    <button class = "delete-button" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    
+    
+    
+
+</body>
+</html>
