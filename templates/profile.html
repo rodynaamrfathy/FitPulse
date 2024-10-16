@@ -317,11 +317,86 @@
                         </select>
                     </div>
                 </div>
+
+                <h1> My Goals </h1>
                 
-                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="caloriesgoal">Calories Goal</label>
+                        <input type="number" id="caloriesgoal" name="caloriesgoal" value="{{ user_data[34] }}" placeholder="Calories Goal">
+                    </div>
+                    <div class="form-group">
+                        <label for="protiengoal">Protein Goal</label>
+                        <input type="number" id="protiengoal" name="protiengoal" value="{{ user_data[36] }}" placeholder="Protien Goal">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carbgoal">Carb Goal</label>
+                        <input type="number" id="carbgoal" name="carbgoal" value="{{ user_data[38] }}" placeholder="Carb Goal">
+                    </div>
+                    <div class="form-group">
+                        <label for="stepsgoal">Steps Goal</label>
+                        <input type="number" id="stepsgoal" name="stepsgoal" value="{{ user_data[40] }}" placeholder="Steps Goal">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="watergoal">Water Goal</label>
+                        <input type="number" id="watergoal" name="watergoal" value="{{ user_data[42] }}" placeholder="Water Goal">
+                    </div>
+                    
+                </div>
+
                 <button type="submit" class = "submit-button">Update</button>
 
             </form>
+        </div>
+    </div>
+
+    <div class = "wrapper3">
+        <div class="orders">
+            <h1>Workouts</h1>
+            <table>
+                <tr>
+                    <th>Workout Name</th>
+                    <th>Trainer Name</th>
+                    <th>Workout Goal</th>
+                    <th>Start-Date</th>
+                    <th>End-Date</th>
+                    <th>Diet Plan</th>
+                    <th>View Workout</th>
+                    <th>View Diet Plan</th>
+
+
+                </tr>
+
+                {% for workout in workouts %}
+
+                <tr>
+                    <td>{{ workout[2] }}</td> 
+                    <td>{{ workout[0] }} {{ workout[1] }}</td> 
+                    <td>{{ workout[3] }}</td> 
+                    <td>{{ workout[5] }}</td> 
+                    <td>{{ workout[6] }}</td> 
+                    <td>{{ workout[4] }}</td> 
+                    <td>
+                        <a href="{{ url_for('workoutscontroller.view_workout', workout_id=workout[7]) }}">
+                            View 
+                        </a>
+                    </td> 
+
+                    <td>
+                        <a href="{{ url_for('dietplans.dietplan', dietplan_id=workout[8]) }}">
+                            View 
+                        </a>
+                    </td> 
+                </tr>
+
+                {% endfor %}
+            </table>
         </div>
     </div>
 

@@ -29,6 +29,36 @@ def profile():
     cursor.execute(query, (user_id,))
     user_data = cursor.fetchone()  # Fetch a single record for the user
     
+    
+    workouts_query = """
+        SELECT 
+            t.firstname, 
+            t.lastname, 
+            w.workoutname, 
+            w.maingoal, 
+            d.dietname, 
+            tua.StartDate, 
+            tua.EndDate,
+            w.id,
+            d.dietplanid
+        FROM 
+            Trainer_User_Assignment tua
+        JOIN 
+            trainers t ON tua.trainerid = t.trainerid
+        JOIN 
+            workouts w ON tua.workoutid = w.id
+        JOIN 
+            dietplans d ON tua.dietplanid = d.dietplanid
+        WHERE 
+            tua.userid = %s
+    """
+
+    cursor.execute(workouts_query, (user_id,))
+    workouts = cursor.fetchall()
+    
+    print(f"Workouts: {workouts}")  # Debug print statement
+
+    
      # Select orders related to the user
     order_query = """
         SELECT orderid, orderdate, orderstatus, totalamount
@@ -51,7 +81,9 @@ def profile():
         return "User not found", 404  # Handle case where user does not exist
 
     # Pass the data to the profile template
-    return render_template('profile.html', user_data=user_data , orders=orders)  # Adjust this route as needed  
+    return render_template('profile.html', user_data=user_data , orders=orders , workouts = workouts)  # Adjust this route as needed  
+
+
 
 
 @profile_bp.route('/profile/update', methods=['POST'])
@@ -97,6 +129,11 @@ def update_user_profile():
     vo2Max = request.form.get('vo2max', existing_properties[17])
     injuries = request.form.get('injuries', existing_properties[18])
     chronicConditions = request.form.get('chronicConditions', existing_properties[19])
+    caloriesgoal = request.form.get('caloriesgoal', existing_properties[20])
+    protiengoal = request.form.get('protiengoal', existing_properties[22])
+    carbgoal = request.form.get('carbgoal', existing_properties[24])
+    stepsgoal = request.form.get('stepsgoal', existing_properties[26])
+    watergoal = request.form.get('watergoal', existing_properties[28])
 
     # Initialize profile_pic_filename
     profile_pic_filename = None
@@ -132,7 +169,9 @@ def update_user_profile():
             musclemass = %s, waistsize = %s, hipsize = %s,
             chestsize = %s, armsize = %s, thighsize = %s,
             restingheartrate = %s, bloodpressure = %s, vo2max = %s,
-            injuries = %s, chronicconditions = %s
+            injuries = %s, chronicconditions = %s,
+            caloriesgoal = %s, protiengoal = %s, carbgoal = %s,
+            stepsgoal = %s, watergoal = %s
         WHERE userid = %s
     """
 
@@ -147,7 +186,7 @@ def update_user_profile():
             weight, height, goalweight, fitnessgoal, trainingExperience, activityLevel,
             bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize,
             armSize, thighSize, restingHeartRate, bloodPressure, vo2Max,
-            injuries, chronicConditions, user_id
+            injuries, chronicConditions,caloriesgoal,protiengoal,carbgoal,stepsgoal,watergoal, user_id
         ))
 
         mysql.connection.commit()  # Commit changes to the database
@@ -199,3 +238,5 @@ def view_order(order_id):
 
     # Pass the order details to the order_details template
     return render_template('order_details.html', order_details=order_details , order_total=order_total)  # Adjust this route as needed
+
+
