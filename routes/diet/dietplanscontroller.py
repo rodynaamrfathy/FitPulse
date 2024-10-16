@@ -33,6 +33,8 @@ def dietplan(dietplan_id):
     """
     cursor.execute(query, (dietplan_id,))
     dietplan = cursor.fetchone()
+    
+    print(dietplan)
 
     cursor.close()
     

@@ -32,7 +32,10 @@
                 <p class = "author-date">Speciality: {{ dietplan['specialty'] }}</p>
                 <p class="author-date">Published on: {{ dietplan['publishdate'].strftime('%Y-%m-%d') }}</p>
             </div>
+
         </div>
+        <img src="{{ url_for('static', filename='uploads/dietplans/' ~ dietplan['image']) }}" alt="">
+
     </div>
     
     <div class="wrapper3">

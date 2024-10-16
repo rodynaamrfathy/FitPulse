@@ -19,6 +19,14 @@
     margin-top: 0.5rem;
 }
 
+.wrapper1 .diet-image {
+    width: 900px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    
+}
+
 .diet-plan-title{
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -34,6 +42,7 @@
     justify-content: flex-start; /* Align items to the left */
     text-align: left;
     width: 100%; /* Ensure the container spans the full width */
+    margin-bottom: 1rem;
 }
 
 /* Author image */
