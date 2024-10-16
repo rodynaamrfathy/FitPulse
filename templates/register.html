@@ -101,7 +101,21 @@
     </div>
 
     <div class="wrapper3" style="display: none;">
-        <h1 class="title">Medical Conditions (Step4) (Optional)</h1>
+        <h1 class="title">Goals (Step4)</h1>
+            <input type="number" id="caloriesgoal" name="caloriesgoal" placeholder="Caloreis Goal" step="1" class="input-field" aria-label="Calories Goal">
+            <input type="number" id="protiengoal" name="protiengoal" placeholder="Protien Goal" step="1" class="input-field" aria-label="Protien Goal">
+            <input type="number" id="carbgoal" name="carbgoal" placeholder="Carb Goal" step="1" class="input-field" aria-label="Carb Goal">
+            <input type="number" id="stepsgoal" name="stepsgoal" placeholder="Steps Goal" step="1" class="input-field" aria-label="Steps Goal">
+            <input type="number" id="watergoal" name="watergoal" placeholder="Water-Intake Goal" step="1" class="input-field" aria-label="Water Goal">
+
+            <div class="button-wrapper">
+                <button type="button" onclick="showPrevSection()" class="back">Back</button>
+                <button type="button" class="next" onclick="showNextSection()">Next</button>
+            </div>
+    </div>
+
+    <div class="wrapper4" style="display: none;">
+        <h1 class="title">Medical Conditions (Step5) (Optional)</h1>
             <select id="injuries" name="injuries" class="input-field" aria-label="Injuries or Limitations">
                 <option value="" disabled selected>Injuries or Limitations</option>
                 <option value="Back pain">Back pain</option>

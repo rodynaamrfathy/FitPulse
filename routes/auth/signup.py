@@ -38,6 +38,12 @@ def register():
         vo2Max = request.form.get('vo2Max', '').strip()
         injuries = request.form.get('injuries', '').strip()
         chronicConditions = request.form.get('chronicConditions', '').strip()
+        
+        calroies = request.form.get('caloriesgoal', '').strip()
+        protien = request.form.get('protiengoal', '').strip()
+        carb = request.form.get('carbgoal', '').strip()
+        steps = request.form.get('stepsgoal', '').strip()
+        water = request.form.get('watergoal', '').strip()
 
         # Check if email already exists
         mysql = current_app.config['mysql']
@@ -101,8 +107,8 @@ def register():
 
         # Insert user properties
         cursor.execute(
-            'INSERT INTO userprop (userid, weight, height, goalweight,fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions) VALUES (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
-            (user_id, weight, height, goal,fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions)
+            'INSERT INTO userprop (userid, weight, height, goalweight,fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions,caloriesgoal,protiengoal,carbgoal,stepsgoal,watergoal) VALUES (%s,%s,%s,%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s)',
+            (user_id, weight, height, goal,fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions, calroies, protien, carb, steps, water)
         )
         
         mysql.connection.commit()  # Commit the transaction

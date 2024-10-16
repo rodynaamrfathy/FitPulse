@@ -1,3 +1,4 @@
+.wrapper4,
 .wrapper3,
 .wrapper2,
 .wrapper1,
@@ -119,7 +120,8 @@ option {
 }
 
 
-@media (max-width: 1200px) {  
+@media (max-width: 1200px) { 
+    .wrapper4, 
     .wrapper3,
     .wrapper2,
     .wrapper1,

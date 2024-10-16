@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 let currentSection = 0;
-const sections = document.querySelectorAll('.wrapper, .wrapper1, .wrapper2, .wrapper3');
+const sections = document.querySelectorAll('.wrapper, .wrapper1, .wrapper2, .wrapper3,.wrapper4');
 
 function showNextSection() {
     if (currentSection < sections.length - 1) {
