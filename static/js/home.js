@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: [data.WaterInTake.current, data.WaterInTake.goal - data.WaterInTake.current],
                     backgroundColor: ['#246CD0', '#302F2F'], 
-                    borderRadius: [30, 20],
                     borderWidth: 0
                 }]
             }
@@ -56,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: [data.Calories.current, data.Calories.goal - data.Calories.current],
                     backgroundColor: ['#E8471C', '#302F2F'],
-                    borderRadius: [30, 20],
                     borderWidth: 0
                 }]
             }
@@ -70,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: [data.Carbs.current, data.Carbs.goal - data.Carbs.current],
                     backgroundColor: ['#FF8500', '#302F2F'], 
-                    borderRadius: [30, 20],
                     borderWidth: 0
                 }]
             }
@@ -84,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: [data.Protein.current, data.Protein.goal - data.Protein.current],
                     backgroundColor: ['#13103B', '#302F2F'], 
-                    borderRadius: [30, 20],
                     borderWidth: 0
                 }]
             }
