@@ -1,0 +1,21 @@
+.search-container {
+    width: 400px; /* Set the width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+#searchResults {
+    max-height: 300px; /* Set a maximum height to make it scrollable */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional border for visual separation */
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.result-item {
+    margin-bottom: 10px; /* Add space between result items */
+    border-bottom: 1px solid #ddd; /* Optional separator between items */
+    padding-bottom: 10px;
+}
