@@ -8,7 +8,6 @@ from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 
-
 app = Flask(__name__)
 
 # Set the upload folder path for product images
@@ -58,7 +57,7 @@ def dashboard():
         cursor.execute('''
             SELECT u.firstname, u.lastname, u.email, u.phone, u.profilepic, 
                    p.weight, p.height, p.caloriesgoal, p.caloriescurrent, p.watergoal, p.watercurrent, 
-                   p.protiengoal, p.protiencurrent, p.carbgoal, p.carbcurrent, p.stepsgoal, p.stepscurrent,p.goalweight
+                   p.protiengoal, p.protiencurrent, p.carbgoal, p.carbcurrent, p.stepsgoal, p.stepscurrent
             FROM users u
             JOIN userprop p ON u.userid = p.userid
             WHERE u.userid = %s
@@ -175,7 +174,26 @@ def update_water():
 
     return redirect(url_for('dashboard'))
 
+@app.route('/update_calories', methods=['POST'])
+def update_calories():
+    user_id = session.get('user_id')
+    new_calories = int(request.form['calories'])
+    print("Received calories:", new_calories)  # Debugging line
 
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current calories and goal
+    cursor.execute('SELECT caloriescurrent, caloriesgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_calories_total = min(user_data['caloriescurrent'] + new_calories, user_data['caloriesgoal'])
+
+    cursor.execute('''
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories_total, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
 
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
@@ -217,6 +235,7 @@ def update_protein():
     cursor.close()
 
     return redirect(url_for('dashboard'))
+
 
 def reset_current_values_if_new_day(user_id):
     # Get the last reset date from the database
@@ -292,5 +311,5 @@ def user_progress():
                            carbs_data=carbs_data,
                            protein_data=protein_data)
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
