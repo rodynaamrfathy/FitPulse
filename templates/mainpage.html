@@ -26,21 +26,42 @@
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
-                {% if user_id %}  <!-- Check if the user ID exists -->
-                    <h2 style="margin:10px;">Welcome back, {{ user_name }}!</h2> <!-- Display user's name -->
+                {% if user_id %}
+                <h2 style="margin:10px;">Welcome back, {{ user_name }}!</h2>
                 {% else %}
                     <h2 style="margin:10px;">Welcome back!</h2>
                 {% endif %}
+            
             </div>
             <div class="second-container">
                 <h3>User Data</h3>
-                <p><strong>Trainer:</strong> 
-                {% if assigned_trainer %}
-                    {{ assigned_trainer.firstname }} {{ assigned_trainer.lastname }}
-                {% else %}
-                    No trainer assigned.
-                {% endif %}
-                </p>
+                <!-- User progress towards target weight -->
+                <div class="progress-section">
+                    <p>Progress towards target weight: {{ user_data.weight }}kg</p>
+                    <div class="progress-bar-container" style="width: 100%; background-color: #ddd; height: 20px;">
+                        <div class="progress-bar" style="width: {{ (user_data.weight / 70) * 100 }}%; background-color: #4caf50; height: 100%;"></div>
+                    </div>
+                </div>
+            
+                <!-- Water intake -->
+                <div class="water-intake-section">
+                    <p>Water intake: {{ user_data.watergoal }}ml</p>
+                </div>
+            
+                <!-- Protein intake -->
+                <div class="protein-intake-section">
+                    <p>Protein intake: {{ user_data.protiengoal }}g</p>
+                </div>
+            
+                <!-- Carbs intake -->
+                <div class="carbs-intake-section">
+                    <p>Carbs intake: {{ user_data.carbgoal }}g</p>
+                </div>
+            
+                <!-- Calories intake -->
+                <div class="calories-intake-section">
+                    <p>Calories intake: {{ user_data.caloriesgoal }}kcal</p>
+                </div>
             </div>
         </div>
         <div class="swrapper">
@@ -51,6 +72,11 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
+                <!-- Calories intake form -->
+                <form action="/update_calories" method="POST">
+                    <input type="number" id="calories" name="calories" value="{{ user_data.caloriescurrent }}" min="1" max="10000">
+                    <button type="submit" style="background-color:#E8471C">Update Calories</button>
+                </form>                
             </div>
             <div class="fourth-container">
                 <p style="margin:10px;">
@@ -59,6 +85,11 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
+                <!-- Carbs intake form -->
+                <form action="/update_carbs" method="POST">
+                    <input type="number" id="carbs" name="carbs" value="{{ user_data.carbcurrent }}" min="1" max="1000">
+                    <button type="submit" style="background-color: #FF8500">Update Carbs</button>
+                </form>
             </div>
         </div>
         <div class="twrapper">
@@ -69,6 +100,11 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>
+                <!-- Protein intake form -->
+                <form action="/update_protein" method="POST">
+                    <input type="number" id="protein" name="protein" value="{{ user_data.protiencurrent }}" min="1" max="1000">
+                    <button type="submit" style="background-color:#13103B">Update Protein</button>
+                </form>             
             </div> 
             <div class="sixth-container">
                 <div class="water-intake-container">
@@ -90,7 +126,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add250ml">250ml</button>
+                            <button onclick="updateWaterIntake(250)">250ml</button>
                         </div>
                         <div class="button-item">
                             <lord-icon
@@ -100,7 +136,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add500ml">500ml</button>
+                            <button onclick="updateWaterIntake(500)">500ml</button>
                         </div>
                         <div class="button-item">
                             <lord-icon
@@ -110,7 +146,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add1l">1L</button>
+                            <button onclick="updateWaterIntake(1000)">1L</button>
                         </div>
                     </div>                    
                 </div>

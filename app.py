@@ -10,18 +10,6 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-@app.route('/data')
-def data():
-    dashboard_data = {
-        'Steps': [150, 200, 250, 300],
-        'calories burned': [120, 180, 210, 280],
-        'WaterInTake': {
-            'labels': ['water intake', 'goal'],
-            'values': [1000, 3000]
-        }
-    }
-    return jsonify(dashboard_data)
-
 # Set the upload folder path for product images
 UPLOAD_PRODUCT_FOLDER = 'static/uploads/productsimg/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -43,7 +31,6 @@ app.config['mysql'] = mysql
 # Register the routes
 register_routes(app)
 
-
 @app.route('/')
 def startpage():
     # Clear the session to log the user out
@@ -53,26 +40,26 @@ def startpage():
 
 @app.route('/dashboard')
 def dashboard():
-    # Assume user ID is stored in the session
     user_id = session.get('user_id')
 
     if not user_id:
         flash('You must be logged in to view the dashboard.', 'warning')
-        return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
+        return redirect(url_for('signin'))  # Redirect to login page if not logged in
 
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
     try:
-        # Fetch the assigned trainer for the user
+        # Fetch the user's profile and health data
         cursor.execute('''
-            SELECT t.trainerid, t.firstname, t.lastname, t.specialty
-            FROM Trainer_User_Assignment tua
-            JOIN trainers t ON tua.trainerid = t.trainerid
-            WHERE tua.userid = %s
+            SELECT u.firstname, u.lastname, u.email, u.phone, u.profilepic, 
+                   p.weight, p.height, p.caloriesgoal, p.caloriescurrent, p.watergoal, p.watercurrent, 
+                   p.protiengoal, p.protiencurrent, p.carbgoal, p.carbcurrent, p.stepsgoal, p.stepscurrent
+            FROM users u
+            JOIN userprop p ON u.userid = p.userid
+            WHERE u.userid = %s
         ''', (user_id,))
-        
-        assigned_trainer = cursor.fetchone()
+        user_data = cursor.fetchone()
 
         # Fetch the assigned workouts for the user
         cursor.execute('''
@@ -81,9 +68,7 @@ def dashboard():
             JOIN workouts w ON tua.workoutid = w.id
             WHERE tua.userid = %s
         ''', (user_id,))
-        
         assigned_workouts = cursor.fetchall()
-
 
     except MySQLdb.Error as e:
         flash(f"An error occurred: {e}", 'danger')
@@ -93,10 +78,100 @@ def dashboard():
 
     return render_template(
         'mainpage.html',
-        assigned_trainer=assigned_trainer,  # Pass assigned trainer to template
-        assigned_workouts=assigned_workouts,  # Pass assigned workouts to template
+        user_data=user_data,  # Pass user data to template
+        assigned_workouts=assigned_workouts  # Pass assigned workouts to template
     )
 
+
+@app.route('/data')
+def data():
+    user_id = session.get('user_id')
+
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    cursor.execute('''
+        SELECT caloriesgoal, caloriescurrent, watergoal, watercurrent, 
+               protiengoal, protiencurrent, carbgoal, carbcurrent, stepsgoal, stepscurrent
+        FROM userprop WHERE userid = %s
+    ''', (user_id,))
+    
+    user_goals = cursor.fetchone()
+    cursor.close()
+
+    dashboard_data = {
+        'Steps': [user_goals['stepscurrent'], user_goals['stepsgoal']],
+        'calories burned': [user_goals['caloriescurrent'], user_goals['caloriesgoal']],
+        'WaterInTake': {
+            'labels': ['water intake', 'goal'],
+            'values': [user_goals['watercurrent'], user_goals['watergoal']]
+        }
+    }
+
+    return jsonify(dashboard_data)
+
+
+@app.route('/update_water', methods=['POST'])
+def update_water():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 403
+    
+    data = request.get_json()
+    water_amount = data['amount']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET watercurrent = watercurrent + %s WHERE userid = %s
+    ''', (water_amount, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return jsonify({"success": True})
+
+@app.route('/update_calories', methods=['POST'])
+def update_calories():
+    user_id = session.get('user_id')
+    new_calories = request.form['calories']
+    print("Received calories:", new_calories)  # Debugging line
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/update_carbs', methods=['POST'])
+def update_carbs():
+    user_id = session.get('user_id')
+    new_carbs = request.form['carbs']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET carbcurrent = %s WHERE userid = %s
+    ''', (new_carbs, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/update_protein', methods=['POST'])
+def update_protein():
+    user_id = session.get('user_id')
+    new_protein = request.form['protein']
+    print("Received protien:", new_protein)  # Debugging line
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET protiencurrent = %s WHERE userid = %s
+    ''', (new_protein, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
 
 
 if __name__ == '__main__':
