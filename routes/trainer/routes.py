@@ -49,7 +49,7 @@ def trainer_homepage():
         
         
         
-        cursor.execute('SELECT * FROM workouts WHERE authorid = %s', (trainer_id,))
+        cursor.execute('SELECT * FROM workouts ')
         workouts_data = []
         for workout in cursor.fetchall():
             workouts_data.append({

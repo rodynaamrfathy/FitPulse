@@ -247,3 +247,13 @@ button:hover {
 .delete:hover {
     background-color: #d12c2c;
 }
+
+.user-requests {
+    color: #000000;
+}
+
+.request{
+    color: #ff9409;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+}

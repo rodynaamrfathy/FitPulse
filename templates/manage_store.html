@@ -32,6 +32,7 @@
         input[type="text"],
         input[type="number"],
         input[type="file"],
+        select,
         textarea {
             width: 98%;
             padding: 8px;
@@ -117,7 +118,11 @@
         <input type="number" id="stockquantity" name="stockquantity" required>
 
         <label for="category">Category:</label>
-        <input type="text" id="category" name="category" required>
+            <select id="category" name="category" required>
+                <option value="supplements">Supplement</option>
+                <option value="tool">Tool</option>
+            </select>
+
 
         <label for="image">Product Image:</label>
         <input type="file" id="image" name="image" accept="image/*" required>

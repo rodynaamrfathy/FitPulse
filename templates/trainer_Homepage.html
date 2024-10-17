@@ -89,7 +89,7 @@
         <!-- Section to display user requests -->
         {% if user_requests %}
         <section class= "user-requests"id="user-requests">
-            <h2>User Requests</h2>
+            <h2 class = "request">User Requests</h2>
             {% for request in user_requests %}
             <div class="user-request">
                 <h3>Request from {{ request.firstname }} {{ request.lastname }}</h3>

@@ -50,6 +50,7 @@ def startpage():
     session.clear()
     return render_template('index.html')
 
+
 @app.route('/dashboard')
 def dashboard():
     # Assume user ID is stored in the session
@@ -95,19 +96,6 @@ def dashboard():
         assigned_trainer=assigned_trainer,  # Pass assigned trainer to template
         assigned_workouts=assigned_workouts,  # Pass assigned workouts to template
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
