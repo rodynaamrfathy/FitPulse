@@ -134,9 +134,15 @@ def update_water():
     water_amount = data['amount']
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current water and goal
+    cursor.execute('SELECT watercurrent, watergoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_water_total = min(user_data['watercurrent'] + water_amount, user_data['watergoal'])
+
     cursor.execute('''
-        UPDATE userprop SET watercurrent = watercurrent + %s WHERE userid = %s
-    ''', (water_amount, user_id))
+        UPDATE userprop SET watercurrent = %s WHERE userid = %s
+    ''', (new_water_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
@@ -145,13 +151,19 @@ def update_water():
 @app.route('/update_calories', methods=['POST'])
 def update_calories():
     user_id = session.get('user_id')
-    new_calories = request.form['calories']
+    new_calories = int(request.form['calories'])
     print("Received calories:", new_calories)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current calories and goal
+    cursor.execute('SELECT caloriescurrent, caloriesgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_calories_total = min(user_data['caloriescurrent'] + new_calories, user_data['caloriesgoal'])
+
     cursor.execute('''
-        UPDATE userprop SET caloriescurrent = caloriescurrent + %s WHERE userid = %s
-    ''', (new_calories, user_id))
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
@@ -160,12 +172,18 @@ def update_calories():
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
     user_id = session.get('user_id')
-    new_carbs = request.form['carbs']
+    new_carbs = int(request.form['carbs'])
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current carbs and goal
+    cursor.execute('SELECT carbcurrent, carbgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_carbs_total = min(user_data['carbcurrent'] + new_carbs, user_data['carbgoal'])
+
     cursor.execute('''
-        UPDATE userprop SET carbcurrent = carbcurrent + %s WHERE userid = %s
-    ''', (new_carbs, user_id))
+        UPDATE userprop SET carbcurrent = %s WHERE userid = %s
+    ''', (new_carbs_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
@@ -174,13 +192,19 @@ def update_carbs():
 @app.route('/update_protein', methods=['POST'])
 def update_protein():
     user_id = session.get('user_id')
-    new_protein = request.form['protein']
+    new_protein = int(request.form['protein'])
     print("Received protein:", new_protein)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current protein and goal
+    cursor.execute('SELECT protiencurrent, protiengoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_protein_total = min(user_data['protiencurrent'] + new_protein, user_data['protiengoal'])
+
     cursor.execute('''
-        UPDATE userprop SET protiencurrent = protiencurrent + %s WHERE userid = %s
-    ''', (new_protein, user_id))
+        UPDATE userprop SET protiencurrent = %s WHERE userid = %s
+    ''', (new_protein_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
