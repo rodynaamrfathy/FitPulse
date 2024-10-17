@@ -46,6 +46,9 @@ def dashboard():
         flash('You must be logged in to view the dashboard.', 'warning')
         return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
 
+    # Reset current values if a new day has started
+    reset_current_values_if_new_day(user_id)
+
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
