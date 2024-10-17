@@ -530,6 +530,15 @@ button, input {
 
 }
 
+.weekly {
+    font-size: 1rem; /* Increase font size */
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    color: white;
+    margin-left: 1rem; /* Add some space between the image and the text */
+    width: 80px;
+}
+
 
 
 @media (max-width: 1200px) {  
