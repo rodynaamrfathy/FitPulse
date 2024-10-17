@@ -237,6 +237,38 @@ def update_protein():
     return redirect(url_for('dashboard'))
 
 
+@app.route('/update_weight', methods=['POST'])
+def update_weight():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('You must be logged in to update your weight.', 'warning')
+        return redirect(url_for('signin.signin'))  # Redirect to login if the user is not authenticated
+    
+    # Get the new weight from the form
+    new_weight = request.form.get('weight')
+    
+    try:
+        new_weight = float(new_weight)
+    except (ValueError, TypeError):
+        flash('Invalid weight value.', 'danger')
+        return redirect(url_for('dashboard'))  # Redirect back to dashboard if invalid input
+
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # Update the weight in the database
+    try:
+        cursor.execute('UPDATE userprop SET weight = %s WHERE userid = %s', (new_weight, user_id))
+        mysql.connection.commit()
+        flash('Weight updated successfully!', 'success')
+    except MySQLdb.Error as e:
+        flash(f'Error updating weight: {e}', 'danger')
+    finally:
+        cursor.close()
+
+    return redirect(url_for('dashboard'))  # Redirect back to the dashboard after updating weight
+
+
 def reset_current_values_if_new_day(user_id):
     # Get the last reset date from the database
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
