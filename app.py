@@ -124,15 +124,15 @@ def data():
 
     return jsonify(dashboard_data)
 
+
+
 @app.route('/update_water', methods=['POST'])
 def update_water():
     user_id = session.get('user_id')
     if not user_id:
+        print("No user ID found")
         return jsonify({"error": "Unauthorized"}), 403
     
-    data = request.get_json()
-    water_amount = data['amount']
-
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     
     # Fetch the current water amount
@@ -171,6 +171,8 @@ def update_water():
 
     return redirect(url_for('dashboard'))
 
+
+
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
     user_id = session.get('user_id')
@@ -199,39 +201,6 @@ def update_protein():
     cursor.close()
 
     return redirect(url_for('dashboard'))
-
-
-@app.route('/user_progress')
-def user_progress():
-    user_id = session.get('user_id')
-    if not user_id:
-        flash('You must be logged in to view your progress.', 'warning')
-        return redirect(url_for('signin.signin'))
-
-    mysql = app.config['mysql']
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-
-    cursor.execute('''
-        SELECT record_date, water_current, calories_current, carbs_current, protein_current
-        FROM user_progress
-        WHERE userid = %s
-        ORDER BY record_date DESC
-    ''', (user_id,))
-    progress_data = cursor.fetchall()
-    cursor.close()
-
-    # Prepare data for the chart
-    labels = [record['record_date'].strftime('%Y-%m-%d') for record in progress_data]
-    calories_data = [record['calories_current'] for record in progress_data]
-    water_data = [record['water_current'] for record in progress_data]
-    carbs_data = [record['carbs_current'] for record in progress_data]
-    protein_data = [record['protein_current'] for record in progress_data]
-
-    return render_template('progress.html', labels=labels, 
-                           calories_data=calories_data, 
-                           water_data=water_data,
-                           carbs_data=carbs_data,
-                           protein_data=protein_data)
 
 
 if __name__ == '__main__':
