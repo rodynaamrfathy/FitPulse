@@ -20,16 +20,13 @@
     <main class="main-container">
         {% include 'navbar.html' %}
     </main>
-    <div id="chart-container" style="width: 600px; height: 400px;">
-        <canvas id="salesChart"></canvas>
-    </div>
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
                 {% if user_id %}  <!-- Check if the user ID exists -->
-                    <h2>Welcome back, {{ user_name }}!</h2> <!-- Display user's name -->
+                    <h2 style="margin:10px;">Welcome back, {{ user_name }}!</h2> <!-- Display user's name -->
                 {% else %}
-                    <h2>Welcome back!</h2>
+                    <h2 style="margin:10px;">Welcome back!</h2>
                 {% endif %}
             </div>
             <div class="second-container">
@@ -45,35 +42,35 @@
         </div>
         <div class="swrapper">
             <div class="third-container">
-                <p>
+                <p style="margin:10px;">
                     Calories intake
                 </p>
-                <div id="pie-chart-container" style="width: 200px; height: 200px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
             </div>
             <div class="fourth-container">
-                <p>
+                <p style="margin:10px;">
                     Carbs intake
                 </p>
-                <div id="pie-chart-container" style="width: 200px; height: 200px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
             </div>
         </div>
         <div class="twrapper">
             <div class="fifth-container">
-                <p>
+                <p style="margin:10px;">
                     Protien intake
                 </p>
-                <div id="pie-chart-container" style="width: 200px; height: 200px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>
             </div> 
             <div class="sixth-container">
-                <div id="pie-chart-container" style="width: 200px; height: 200px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 10px;">
                     <canvas id="waterChart"></canvas>
-                    <p>
+                    <p style="margin:10px;">
                         total water intake: 1000/3000ml
                     </p>
                 </div>
@@ -91,7 +88,14 @@
         </div>
 
         <div class = "fwrapper">
-            <div class="seventh-container"></div>
+            <div class="seventh-container">
+                <p style="margin:10px;"> 
+                    Weekly progress:
+                </p>
+                <div id="chart-container" style="width: 600px; height: 400px; margin:auto; padding-top: 20px">
+                    <canvas id="WorkoutChart"></canvas>
+                </div>
+            </div>
         </div>
 
 

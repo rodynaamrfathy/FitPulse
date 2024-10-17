@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         // Bar chart for steps and calories burned
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        const salesChart = new Chart(ctx, {
-            type: 'bar',
+        const ctx = document.getElementById('WorkoutChart').getContext('2d');
+        const WorkoutChart = new Chart(ctx, {
+            type: 'line',
             data: {
                 labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], 
                 datasets: [
