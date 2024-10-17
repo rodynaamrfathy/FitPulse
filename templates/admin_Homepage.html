@@ -71,6 +71,7 @@ ul li a:hover {
     </style>
 </head>
 <body>
+    {% include 'flash.html' %}
     <h1>Admin Home Page</h1>
     <ul>
         <li><a href="{{ url_for('storemanager.manage_store') }}">Manage Store</a></li>

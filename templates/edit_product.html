@@ -66,6 +66,8 @@
     </style>
 </head>
 <body>
+    {% include 'flash.html' %}
+
     <h1>Edit Product</h1>
     <form action="{{ url_for('storemanager.edit_product', product_id=product.productid) }}" method="POST" enctype="multipart/form-data">
         <div>

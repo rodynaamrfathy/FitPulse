@@ -57,6 +57,8 @@
     </style>
 </head>
 <body>
+    {% include 'flash.html' %}
+
     <h1>Edit Exercise</h1>
 
     <form action="{{ url_for('exercisescontroller.edit_exercise', exercise_id=exercise[0]) }}" method="POST" enctype="multipart/form-data">

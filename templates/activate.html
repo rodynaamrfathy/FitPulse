@@ -8,6 +8,7 @@
     <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </head>
 <body>
+    {% include 'flash.html' %}
     <h1>Email Confirmation</h1>
     <p>To confirm your email address, please click the link below:</p>
     <a href="{{ confirm_url }}">{{ confirm_url }}</a>

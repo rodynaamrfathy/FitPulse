@@ -12,6 +12,7 @@
     <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </head>
 <body>
+    {% include 'flash.html' %}
 
     <header>
         <h1>Welcome, {{ firstName }}</h1> <!-- Display trainer's first name -->
