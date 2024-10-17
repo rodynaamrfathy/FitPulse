@@ -1,31 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>DashBoard</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/home.css') }}">
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
-    <link rel="icon" href="static/images/logo1.png" >
+{% extends 'base.html' %}
 
-</head>
-<body>
-
+{% block content %}
     <header>
         {% include 'header.html' %} 
     </header>
-    
+
     <main class="main-container">
         {% include 'navbar.html' %}
     </main>
+
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
-                {% if user_id %}  <!-- Check if the user ID exists -->
-                    <h2 style="margin:10px;">Welcome back, {{ user_name }}!</h2> <!-- Display user's name -->
+                {% if user_id %}
+                    <h2 style="margin:10px;">Welcome back, {{ user_name }}!</h2>
                 {% else %}
                     <h2 style="margin:10px;">Welcome back!</h2>
                 {% endif %}
@@ -43,9 +31,7 @@
         </div>
         <div class="swrapper">
             <div class="third-container">
-                <p style="margin:10px;">
-                    Calories intake
-                </p>
+                <p style="margin:10px;">Calories intake</p>
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
@@ -53,9 +39,7 @@
                 <input type="text" id="fname" name="fname">
             </div>
             <div class="fourth-container">
-                <p style="margin:10px;">
-                    Carbs intake
-                </p>
+                <p style="margin:10px;">Carbs intake</p>
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
@@ -65,24 +49,18 @@
         </div>
         <div class="twrapper">
             <div class="fifth-container">
-                <p style="margin:10px;">
-                    Protien intake
-                </p>
+                <p style="margin:10px;">Protein intake</p>
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
-                    <canvas id="ProtienChart"></canvas>
+                    <canvas id="ProteinChart"></canvas>
                 </div>
             </div> 
             <div class="sixth-container">
                 <div class="water-intake-container">
-                    <!-- Pie chart container -->
                     <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 10px;">
                         <canvas id="waterChart"></canvas>
-                        <p style="margin:10px;">
-                            total water intake: 1000/3000ml
-                        </p>
+                        <p style="margin:10px;">Total water intake: 1000/3000ml</p>
                     </div>
-            
-                    <!-- Buttons with images and water amounts -->
+
                     <div id="addWaterButtons" class="button-container">
                         <div class="button-item">
                             <lord-icon
@@ -119,18 +97,16 @@
             </div>            
         </div>
 
-        <div class = "fwrapper">
+        <div class="fwrapper">
             <div class="seventh-container">
-                <p style="margin:10px;"> 
-                    Weekly progress:
-                </p>
+                <p style="margin:10px;">Weekly progress:</p>
                 <div id="chart-container" style="width: 600px; height: 400px; margin:auto; padding-top: 20px">
                     <canvas id="WorkoutChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
-</body>
-</html>
+{% endblock %}
