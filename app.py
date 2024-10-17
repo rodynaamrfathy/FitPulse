@@ -321,8 +321,9 @@ def user_progress():
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
+    # Fetch weight_current along with other data
     cursor.execute('''
-        SELECT record_date, water_current, calories_current, carbs_current, protein_current
+        SELECT record_date, water_current, calories_current, carbs_current, protein_current, weight_current
         FROM user_progress
         WHERE userid = %s
         ORDER BY record_date DESC
@@ -330,18 +331,22 @@ def user_progress():
     progress_data = cursor.fetchall()
     cursor.close()
 
-    # Prepare data for the chart
+    # Prepare data for the chart, including weight_current
     labels = [record['record_date'].strftime('%Y-%m-%d') for record in progress_data]
     calories_data = [record['calories_current'] for record in progress_data]
     water_data = [record['water_current'] for record in progress_data]
     carbs_data = [record['carbs_current'] for record in progress_data]
     protein_data = [record['protein_current'] for record in progress_data]
+    weight_data = [record['weight_current'] for record in progress_data]
 
+    # Pass weight_data to the template
     return render_template('progress.html', labels=labels, 
                            calories_data=calories_data, 
                            water_data=water_data,
                            carbs_data=carbs_data,
-                           protein_data=protein_data)
+                           protein_data=protein_data,
+                           weight_data=weight_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
