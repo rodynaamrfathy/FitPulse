@@ -155,14 +155,15 @@
                     <canvas id="WorkoutChart"></canvas>
                 </div>
             </div>
+            <div class="seventh-container">
+                <div class="search-container">
+                    <h3>Search Food Item</h3>
+                    <input type="text" id="foodSearch" placeholder="Enter food name">
+                    <button id="searchButton" style="background-color:#E8471C">Search</button>
+                    <div id="searchResults"></div> <!-- To display search results -->
+                </div>
+            </div>
         </div>
-
-    </div>
-    <div class="search-container">
-        <h3>Search Food Item</h3>
-        <input type="text" id="foodSearch" placeholder="Enter food name">
-        <button id="searchButton" style="background-color:#E8471C">Search</button>
-        <div id="searchResults"></div> <!-- To display search results -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
