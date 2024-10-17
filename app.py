@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 
+
 app = Flask(__name__)
 
 # Set the upload folder path for product images
@@ -217,6 +218,79 @@ def update_protein():
 
     return redirect(url_for('dashboard'))
 
+def reset_current_values_if_new_day(user_id):
+    # Get the last reset date from the database
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT last_reset FROM userprop WHERE userid = %s', (user_id,))
+    result = cursor.fetchone()
+    last_reset = result['last_reset'] if result else None
 
-if __name__ == '__main__':
+    # Get the current date
+    current_date = datetime.now().date()
+
+    # If there's no last reset date or it's a new day, reset the current values
+    if not last_reset or last_reset < current_date:  # Remove .date()
+        # Fetch current values before resetting
+        cursor.execute('''
+            SELECT watercurrent, caloriescurrent, carbcurrent, protiencurrent
+            FROM userprop WHERE userid = %s
+        ''', (user_id,))
+        current_values = cursor.fetchone()
+
+        # Insert the daily progress into user_progress table
+        cursor.execute('''
+            INSERT INTO user_progress (userid, record_date, water_current, calories_current, carbs_current, protein_current)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE 
+                water_current = VALUES(water_current),
+                calories_current = VALUES(calories_current),
+                carbs_current = VALUES(carbs_current),
+                protein_current = VALUES(protein_current)
+        ''', (user_id, current_date, current_values['watercurrent'], current_values['caloriescurrent'], current_values['carbcurrent'], current_values['protiencurrent']))
+
+        # Reset current values to zero
+        cursor.execute('''
+            UPDATE userprop 
+            SET watercurrent = 0, caloriescurrent = 0, carbcurrent = 0, protiencurrent = 0,
+                last_reset = %s 
+            WHERE userid = %s
+        ''', (current_date, user_id))
+        mysql.connection.commit()
+
+    cursor.close()
+
+
+@app.route('/user_progress')
+def user_progress():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('You must be logged in to view your progress.', 'warning')
+        return redirect(url_for('signin.signin'))
+
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    cursor.execute('''
+        SELECT record_date, water_current, calories_current, carbs_current, protein_current
+        FROM user_progress
+        WHERE userid = %s
+        ORDER BY record_date DESC
+    ''', (user_id,))
+    progress_data = cursor.fetchall()
+    cursor.close()
+
+    # Prepare data for the chart
+    labels = [record['record_date'].strftime('%Y-%m-%d') for record in progress_data]
+    calories_data = [record['calories_current'] for record in progress_data]
+    water_data = [record['water_current'] for record in progress_data]
+    carbs_data = [record['carbs_current'] for record in progress_data]
+    protein_data = [record['protein_current'] for record in progress_data]
+
+    return render_template('progress.html', labels=labels, 
+                           calories_data=calories_data, 
+                           water_data=water_data,
+                           carbs_data=carbs_data,
+                           protein_data=protein_data)
+
+if __name__ == '_main_':
     app.run(debug=True)
