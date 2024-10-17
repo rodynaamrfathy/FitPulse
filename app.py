@@ -44,7 +44,7 @@ def dashboard():
 
     if not user_id:
         flash('You must be logged in to view the dashboard.', 'warning')
-        return redirect(url_for('signin'))  # Redirect to login page if not logged in
+        return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
 
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
