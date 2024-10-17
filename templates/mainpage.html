@@ -180,7 +180,12 @@
             </div> 
 
             <div class="ninth-containe">
-
+                <!-- Scale Image -->
+                <img src="{{ url_for('static', filename='images/scale.png') }}" alt="Weight Scale" style="width: 100px; margin-bottom: 10px;">
+                
+                <!-- Weight Input -->
+                <label for="weight-input" style="font-size: 18px;">Enter Your Weight (kg):</label><br>
+                <input type="number" id="weight-input" placeholder="e.g., 65.0" style="padding: 10px; margin-top: 10px; font-size: 16px; width: 150px;">
             </div>  
 
         </div>
@@ -207,26 +212,6 @@
                 </form>    
             </div>  
         </div>
-
-        <div class="sixthwrapper">
-            
-             
-            
-            <div class="eighth-container">
-                
-                       
-            </div> 
-
-            <div class="ninth-containe">
-                <!-- Scale Image -->
-                <img src="{{ url_for('static', filename='images/scale.png') }}" alt="Weight Scale" style="width: 100px; margin-bottom: 10px;">
-                
-                <!-- Weight Input -->
-                <label for="weight-input" style="font-size: 18px;">Enter Your Weight (kg):</label><br>
-                <input type="number" id="weight-input" placeholder="e.g., 65.0" style="padding: 10px; margin-top: 10px; font-size: 16px; width: 150px;">
-            </div>  
-        </div>
-
     </div>
     <div class="search-container">
         <h3>Search Food Item</h3>
