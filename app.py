@@ -57,7 +57,7 @@ def dashboard():
         cursor.execute('''
             SELECT u.firstname, u.lastname, u.email, u.phone, u.profilepic, 
                    p.weight, p.height, p.caloriesgoal, p.caloriescurrent, p.watergoal, p.watercurrent, 
-                   p.protiengoal, p.protiencurrent, p.carbgoal, p.carbcurrent, p.stepsgoal, p.stepscurrent
+                   p.protiengoal, p.protiencurrent, p.carbgoal, p.carbcurrent, p.stepsgoal, p.stepscurrent,p.goalweight
             FROM users u
             JOIN userprop p ON u.userid = p.userid
             WHERE u.userid = %s

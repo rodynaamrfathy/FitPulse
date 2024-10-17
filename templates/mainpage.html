@@ -42,43 +42,50 @@
                 
             </div>
             <div class="second-container">
-                <h3>Your Data</h3>
+                <div class="data-header">
+                    <h3 class="Ydata">Your Data</h3>
+                    <button class="Update-button">Update</button>
+                </div>
+                
                 <!-- User progress towards target weight -->
                 <div class="progress-section">
-                    <p>Progress towards target weight: {{ user_data.weight }}kg</p>
-                    <div class="progress-bar-container" style="width: 100%; background-color: #ddd; height: 20px;">
-                        <div class="progress-bar" style="width: {{ (user_data.weight / 90) * 100 }}%; background-color: #4caf50; height: 100%;"></div>
+                    <p>Progress towards target weight: {{ user_data.goalweight }}kg</p>
+                    <div class="progress-bar-container" style="width: 450px; background-color: #ddd; height: 20px;">
+                        <div class="progress-bar" style="width: {{ (user_data.weight / user_data.goalweight) * 100 }}%; background-color:#ff9409; height: 100%;border-radius: 20px;margin-top:0.3rem;"></div>
                     </div>
                 </div>
             
                 <!-- Water intake -->
-                <div class="water-intake-section">
+                <div class="water-intake-section take">
                     <p>Water intake: {{ user_data.watergoal }}ml</p>
+                    <div class="color-bar-water"></div>
                 </div>
+                
             
                 <!-- Protein intake -->
-                <div class="protein-intake-section">
+                <div class="protein-intake-section take">
                     <p>Protein intake: {{ user_data.protiengoal }}g</p>
+                    <div class="color-bar-protien"></div>
                 </div>
             
                 <!-- Carbs intake -->
-                <div class="carbs-intake-section">
+                <div class="carbs-intake-section take">
                     <p>Carbs intake: {{ user_data.carbgoal }}g</p>
+                    <div class="color-bar-carb"></div>
                 </div>
             
                 <!-- Calories intake -->
-                <div class="calories-intake-section">
+                <div class="calories-intake-section take">
                     <p>Calories intake: {{ user_data.caloriesgoal }}kcal</p>
+                    <div class="color-bar-calories"></div>
                 </div>
 
-                <button class = "Update-button">Update</button>
+                
             </div>
         </div>
         <div class="swrapper">
             <div class="third-container">
-                <p style="margin:10px;">
-                    Calories intake
-                </p>
+                
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
@@ -86,9 +93,7 @@
                                
             </div>
             <div class="fourth-container">
-                <p style="margin:10px;">
-                    Carbs intake
-                </p>
+                
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
@@ -98,9 +103,7 @@
         </div>
         <div class="twrapper">
             <div class="fifth-container">
-                <p style="margin:10px;">
-                    Protien intake
-                </p>
+                
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>

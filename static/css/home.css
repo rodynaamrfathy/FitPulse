@@ -250,6 +250,105 @@
     color: #ff9409;
 
 }
+.Ydata {
+    font-size: 1.5rem;
+    margin-top: 1rem !important;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    color: #ff9409;
+    margin-left: 1rem;
+}
+
+.progress-section {
+    margin-bottom: 1rem;
+}
+
+.data-header {
+    display: flex;                /* Use Flexbox to align items horizontally */
+    align-items: center;         /* Align items vertically in the center */
+}
+
+.Ydata {
+    margin-right: 10px;          /* Add some space between the heading and the button */
+}
+
+.progress-section p {
+    font-size: 1rem;
+    margin-top: 1rem !important;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+.progress-bar-container {
+    margin-left: 1rem;
+    border-radius: 20px;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    
+}
+.take{
+    display: flex;                /* Use Flexbox to align items horizontally */
+    align-items: center;         /* Align items vertically in the center */
+}
+
+.color-bar-calories {
+    width: 200px;                /* Set the width of the bar */
+    height: 10px;                /* Set the height of the bar */
+    background-color: #E8471C ; /* Set the color of the bar */
+    margin-left: 10px;           /* Add some space between the text and the bar */
+    border-radius: 5px;      
+    margin-left: 1rem;    /* Optional: give the bar rounded corners */
+}
+
+.color-bar-carb {
+    width: 200px;                /* Set the width of the bar */
+    height: 10px;                /* Set the height of the bar */
+    background-color: #FF8500 ; /* Set the color of the bar */
+    margin-left: 10px;           /* Add some space between the text and the bar */
+    border-radius: 5px;      
+    margin-left: 1rem;    /* Optional: give the bar rounded corners */
+}
+
+.color-bar-protien {
+    width: 200px;                /* Set the width of the bar */
+    height: 10px;                /* Set the height of the bar */
+    background-color: #13103B ; /* Set the color of the bar */
+    margin-left: 10px;           /* Add some space between the text and the bar */
+    border-radius: 5px;      
+    margin-left: 1rem;    /* Optional: give the bar rounded corners */
+}
+
+.color-bar-water {
+    width: 200px;                /* Set the width of the bar */
+    height: 10px;                /* Set the height of the bar */
+    background-color: #246CD0 ; /* Set the color of the bar */
+    margin-left: 10px;           /* Add some space between the text and the bar */
+    border-radius: 5px;      
+    margin-left: 1rem;    /* Optional: give the bar rounded corners */
+}
+
+.water-intake-section p,
+.protein-intake-section p,
+.carbs-intake-section p,
+.calories-intake-section p{
+    font-size: 1rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    margin-left: 1rem;
+
+}
+
+.water-intake-section ,
+.protein-intake-section ,
+.carbs-intake-section ,
+.calories-intake-section {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+
+}
 
 .text-section {
     margin-top: 0.3rem;
@@ -271,8 +370,15 @@
     border: 2px solid rgba(255, 255, 255, 0.39);
 }
 
+.data-header {
+    
+    z-index: 1;
+}
 
-
+.Update-button {
+    margin-left: 17rem;
+    border-radius: 10px;
+}
 
 button {
     margin-top: 10px;
@@ -288,10 +394,7 @@ button:hover {
     background-color: #1b56a8;
 }
 
-button, input {
-    z-index: 10;
-    position: relative;
-}
+
 input {
     width: 130px;
     height: 25px;
