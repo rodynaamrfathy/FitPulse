@@ -244,3 +244,77 @@ input {
 button, input {
     pointer-events: auto;
 }
+
+
+
+.wrapper1 {
+    width: 500px;
+    margin: 15px auto;
+    margin-top: -80rem;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column; /* Stack divs vertically */
+    justify-content: center;
+    align-items: center; /* Center-align items */
+    text-align: center;
+    color: white;
+    border: white 2px solid;
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+    z-index: 5;
+}
+
+.hidden {
+    display: none; /* Initially hide the div */
+}
+.wrapper1 div {
+    width: 100%; /* Make each div take up the full width */
+    margin-bottom: 10px; /* Add spacing between divs */
+}
+.wrapper1 form {
+    width: 100%; /* Ensure form takes full width of the div */
+    max-width: 400px; /* Limit the width of the form */
+    margin: 0 auto;
+    display: flex; /* Use flexbox to align input and button */
+    justify-content: space-between; /* Ensure equal space between input and button */
+    align-items: center; /* Align items vertically */
+}
+
+.wrapper1 form input {
+    flex-grow: 1; /* Make input take the remaining space */
+    margin-right: 10px; /* Add spacing between input and button */
+    padding: 8px; /* Add padding for input */
+    height: 40px; /* Set a fixed height for input */
+}
+
+.wrapper1 form button {
+    padding: 8px 10px; /* Adjust padding for buttons */
+    height: 40px; /* Set the same fixed height as the input */
+    white-space: nowrap; /* Prevent button text from wrapping */
+    margin: 0;
+}
+
+
+.wrapper1 h1 {
+    font-size: 2rem; /* Increase font size */
+    margin-bottom: 1rem; /* Add spacing below the heading */
+    font-family: 'Protest Guerrilla', sans-serif;
+    font-weight: 300;
+}
+
+
+
+@media (max-width: 1200px) {  
+
+
+    
+    .wrapper1 {
+        width: 700px;
+        
+    }
+
+    
+
+}

@@ -114,3 +114,21 @@ function updateWaterIntake(amount) {
     });
 }
 
+
+
+  // Function to show the div when the button is clicked
+  document.querySelector('.Update-button').addEventListener('click', function(event) {
+    const wrapper = document.querySelector('.wrapper1');
+    wrapper.classList.remove('hidden'); // Show the div
+});
+
+// Function to hide the div when clicked outside
+document.addEventListener('click', function(event) {
+    const wrapper = document.querySelector('.wrapper1');
+    const button = document.querySelector('.Update-button');
+
+    // Check if the clicked target is not the wrapper or its children and not the button
+    if (!wrapper.contains(event.target) && event.target !== button) {
+        wrapper.classList.add('hidden'); // Hide the div
+    }
+});

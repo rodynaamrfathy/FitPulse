@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/foodSearch.css') }}">
     <script src="{{ url_for('static', filename='js/foodSearch.js') }}"></script>
     <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+
 </head>
 <body>
     {% include 'flash.html' %}
@@ -59,6 +61,8 @@
                 <div class="calories-intake-section">
                     <p>Calories intake: {{ user_data.caloriesgoal }}kcal</p>
                 </div>
+
+                <button class = "Update-button">Update</button>
             </div>
         </div>
         <div class="swrapper">
@@ -70,10 +74,7 @@
                     <canvas id="CaloriesChart"></canvas>
                 </div>
                 <!-- Calories intake form -->
-                <form action="/update_calories" method="POST">
-                    <input type="number" id="calories" name="calories" value="{{ user_data.caloriescurrent }}" min="1" max="10000">
-                    <button type="submit" style="background-color:#E8471C">Update Calories</button>
-                </form>                
+                               
             </div>
             <div class="fourth-container">
                 <p style="margin:10px;">
@@ -82,11 +83,8 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
-                <!-- Carbs intake form -->
-                <form action="/update_carbs" method="POST">
-                    <input type="number" id="carbs" name="carbs" value="{{ user_data.carbcurrent }}" min="1" max="1000">
-                    <button type="submit" style="background-color: #FF8500">Update Carbs</button>
-                </form>
+                
+                
             </div>
         </div>
         <div class="twrapper">
@@ -98,10 +96,7 @@
                     <canvas id="ProtienChart"></canvas>
                 </div>
                 <!-- Protein intake form -->
-                <form action="/update_protein" method="POST">
-                    <input type="number" id="protein" name="protein" value="{{ user_data.protiencurrent }}" min="1" max="1000">
-                    <button type="submit" style="background-color:#13103B">Update Protein</button>
-                </form>             
+                       
             </div> 
             <div class="sixth-container">
                 <div class="water-intake-container">
@@ -155,15 +150,37 @@
                     <canvas id="WorkoutChart"></canvas>
                 </div>
             </div>
-            <div class="seventh-container">
-                <div class="search-container">
-                    <h3>Search Food Item</h3>
-                    <input type="text" id="foodSearch" placeholder="Enter food name">
-                    <button id="searchButton" style="background-color:#E8471C">Search</button>
-                    <div id="searchResults"></div> <!-- To display search results -->
-                </div>
-            </div>
         </div>
+
+        <div class="wrapper1 hidden">
+            <h1>Update Your Progress</h1>
+            <div>
+                <form action="/update_calories" method="POST">
+                    <input type="number" id="calories" name="calories" value="{{ user_data.caloriescurrent }}" min="1" max="10000">
+                    <button type="submit" style="background-color:#E8471C">Update Calories</button>
+                </form>  
+            </div>
+            <div>
+                <form action="/update_carbs" method="POST">
+                    <input type="number" id="carbs" name="carbs" value="{{ user_data.carbcurrent }}" min="1" max="1000">
+                    <button type="submit" style="background-color: #FF8500">Update Carbs</button>
+                </form>
+            </div>
+            <div>
+                <form action="/update_protein" method="POST">
+                    <input type="number" id="protein" name="protein" value="{{ user_data.protiencurrent }}" min="1" max="1000">
+                    <button type="submit" style="background-color:#13103B">Update Protein</button>
+                </form>    
+            </div>  
+        </div>
+
+
+    </div>
+    <div class="search-container">
+        <h3>Search Food Item</h3>
+        <input type="text" id="foodSearch" placeholder="Enter food name">
+        <button id="searchButton" style="background-color:#E8471C">Search</button>
+        <div id="searchResults"></div> <!-- To display search results -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
