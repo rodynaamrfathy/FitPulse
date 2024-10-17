@@ -1,39 +1,37 @@
-
 .main-container2 {
     display: flex;
-    flex-direction: column; /* Stack .wrapper and .swrapper vertically */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    padding: 1.5rem; /* Optional padding around the main container */
-    margin: 0 auto; /* Center the main container within the page */
+    flex-direction: column; /* Stack vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    margin: 0 auto;
     margin-top: 4rem;
-    width: 100%; /* Make it span the full width of the page */
+    width: 100%;
 }
 
-
-/* Container to wrap both first and second containers */
+/* Wrapper for the first and second containers */
 .wrapper {
     display: flex;
-    justify-content: center; /* Keep containers aligned to the left */
-    align-items: flex-start; /* Align them at the top */
-    gap: 1.2rem; /* Control the space between the two containers */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.2rem;
 }
 
 .first-container {
-    width: 40rem; /* Fixed width */
+    width: 40rem;
     height: 100px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
+    background-color: rgba(240, 240, 240, 0.1);
     border-radius: 20px;
-    border: 0;
+    border: none;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .second-container {
-    width: 30rem; /* Fixed width */
+    width: 30rem;
     height: 380px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
+    background-color: rgba(240, 240, 240, 0.1);
     border-radius: 20px;
-    border: 0;
+    border: none;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -43,22 +41,20 @@
     align-items: flex-start;
     gap: 1rem;
     margin: 2rem;
-    position: relative; /* Allows shifting from its original position */
-    top: -18.6rem; /* Moves the .swrapper down by 20px */
-    left: -15.5rem; /* Moves the .swrapper to the right by 50px */
+    position: relative;
+    top: -18.6rem;
+    left: -15.5rem;
     z-index: -1;
 }
-
 
 .third-container, .fourth-container {
     width: 19.5rem;
     height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
+    background-color: rgba(240, 240, 240, 0.1);
     border-radius: 20px;
-    border: 0;
+    border: none;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .fwrapper,
 .twrapper {
@@ -67,159 +63,102 @@
     align-items: flex-start;
     gap: 1rem;
     margin: 2rem;
-    position: relative; /* Allows shifting from its original position */
-    top: -21.7rem; /* Moves the .swrapper down by 20px */
+    position: relative;
     z-index: -1;
 }
 
 .fwrapper {
-    top : -24.5rem !important;
+    top: -24.5rem !important;
     left: 0.5rem !important;
 }
 
 .seventh-container {
     width: 71.4rem;
     height: 400px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
+    background-color: rgba(240, 240, 240, 0.1);
     border-radius: 20px;
-    border: 0;
+    border: none;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-
 }
- 
+
+.fifth-container, .sixth-container {
+    background-color: rgba(240, 240, 240, 0.1);
+    border-radius: 20px;
+    border: none;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
 
 .fifth-container {
     width: 19.5rem;
     height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sixth-container {
-    width:50.5rem;
+    width: 50.5rem;
     height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
-
-@media (max-width: 1400px) {  
-      
-
-.main-container2{
-    margin-left:2.5rem;
-}
-.wrapper {
-    display: flex;
-    justify-content: center; /* Keep containers aligned to the left */
-    align-items: flex-start; /* Align them at the top */
-    gap: 1.2rem; /* Control the space between the two containers */
-}
-
-.first-container {
-    width: 30rem; /* Fixed width */
-    height: 100px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.second-container {
-    width: 20rem; /* Fixed width */
-    height: 380px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.swrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-    margin: 2rem;
-    position: relative; /* Allows shifting from its original position */
-    top: -18.6rem; /* Moves the .swrapper down by 20px */
-    left: -10.5rem; /* Moves the .swrapper to the right by 50px */
-    z-index: -1;
+@media (max-width: 1400px) {
+    .main-container2 {
+        margin-left: 2.5rem;
+    }
+    .wrapper {
+        gap: 1.2rem;
+    }
+    .first-container {
+        width: 30rem;
+    }
+    .second-container {
+        width: 20rem;
+    }
+    .swrapper {
+        top: -18.6rem;
+        left: -10.5rem;
+    }
+    .third-container, .fourth-container {
+        width: 14.5rem;
+        height: 268px;
+    }
+    .twrapper {
+        top: -21.7rem;
+    }
+    .fifth-container {
+        width: 14rem;
+        height: 268px;
+    }
+    .sixth-container {
+        width: 35.5rem;
+        height: 268px;
+    }
+    .fwrapper {
+        width: 52rem;
+    }
 }
 
-
-.third-container, .fourth-container {
-    width: 14.5rem;
-    height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.twrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-    margin: 2rem;
-    position: relative; /* Allows shifting from its original position */
-    top: -21.7rem; /* Moves the .swrapper down by 20px */
-    z-index: -1;
-}
-
-
-.fifth-container {
-    width: 14rem;
-    height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sixth-container {
-    width:35.5rem;
-    height: 268px;
-    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
-    border-radius: 20px;
-    border: 0;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}  
-
-.fwrapper {
-    width: 52rem;
-}
-}
 .water-intake-container {
-    display: flex; /* Arrange chart and buttons in a row */
-    justify-content: space-between; /* Space between the chart and buttons */
-    align-items: center; /* Center items vertically */
-    margin-top: 2rem; /* Add some space above */
-    border: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    border: none;
 }
 
 .button-container {
-    display: flex; /* Align buttons in a row */
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 1rem; /* Space between buttons */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .button-container button {
-    padding: 10px 15px; /* Add some padding to buttons */
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer on hover */
-    transition: background-color 0.3s; /* Smooth transition */
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .button-container button:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
 }
