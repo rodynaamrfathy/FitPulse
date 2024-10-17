@@ -190,6 +190,7 @@ lord-icon:first-child {
     margin-top: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    margin-left: -3rem;
 }
 
 .dropdown-item {
@@ -252,6 +253,7 @@ lord-icon:first-child {
 /* Ensure dropdown menu is correctly positioned within the login container */
 .login-container {
     position: relative;
+    margin-left: 1.5rem !important;
 }
 
 .logout{
