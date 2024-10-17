@@ -69,7 +69,7 @@
     margin: 2rem;
     position: relative; /* Allows shifting from its original position */
     top: -21.7rem; /* Moves the .swrapper down by 20px */
-    z-index: -1;
+    z-index: 1;
 }
 
 .fwrapper {
@@ -170,7 +170,7 @@
     margin: 2rem;
     position: relative; /* Allows shifting from its original position */
     top: -21.7rem; /* Moves the .swrapper down by 20px */
-    z-index: -1;
+    z-index: 1;
 }
 
 
@@ -215,6 +215,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: -1rem;
 }
 
 button {
@@ -303,6 +304,21 @@ button, input {
     font-family: 'Protest Guerrilla', sans-serif;
     font-weight: 300;
 }
+
+
+
+.button-item {
+    pointer-events: auto; /* Ensure buttons can receive clicks */
+}
+
+.button-item {
+    pointer-events: auto; /* Ensure buttons can receive clicks */
+}
+
+
+
+
+
 
 
 

@@ -101,12 +101,14 @@
             <div class="sixth-container">
                 <div class="water-intake-container">
                     <!-- Pie chart container -->
-                    <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 25px; margin-top: 20px;">
+                    <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 25px; margin-top: 20px; margin-right: 45px;" >
                         <canvas id="waterChart"></canvas>
                     </div>
                     <!-- Buttons with images and water amounts -->
                     <div id="addWaterButtons" class="button-container">
                         <div class="button-item">
+                            <form action="/update_water" method="POST">
+                                <input type="hidden" name="water_amount" value="250">
                             <lord-icon
                                 src="https://cdn.lordicon.com/yowvhtxf.json"
                                 trigger="loop"
@@ -114,19 +116,25 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button onclick="updateWaterIntake(250)">250ml</button>
+                            <button type="submit" class="submit-button">Submit 250ml</button>
+                            </form>
                         </div>
                         <div class="button-item">
-                            <lord-icon
-                                src="https://cdn.lordicon.com/yowvhtxf.json"
-                                trigger="loop"
-                                state="loop-cycle"
-                                colors="primary:#2526,secondary:#246cd0"
-                                style="width:100px;height:100px">
-                            </lord-icon>
-                            <button onclick="updateWaterIntake(500)">500ml</button>
+                            <form action="/update_water" method="POST">
+                                    <input type="hidden" name="water_amount" value="500">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/yowvhtxf.json"
+                                    trigger="loop"
+                                    state="loop-cycle"
+                                    colors="primary:#2526,secondary:#246cd0"
+                                    style="width:100px;height:100px">
+                                </lord-icon>
+                                <button type="submit" class="submit-button">Submit 500ml</button>
+                                </form>
                         </div>
                         <div class="button-item">
+                            <form action="/update_water" method="POST">
+                                <input type="hidden" name="water_amount" value="1000">
                             <lord-icon
                                 src="https://cdn.lordicon.com/yowvhtxf.json"
                                 trigger="loop"
@@ -134,7 +142,8 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button onclick="updateWaterIntake(1000)">1L</button>
+                            <button type="submit" class="submit-button">Submit 1L</button>
+                            </form>
                         </div>
                     </div>                    
                 </div>

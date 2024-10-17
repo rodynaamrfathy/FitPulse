@@ -92,28 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function updateWaterIntake(amount) {
-    fetch('/update_water', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: amount }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Handle success, maybe update the UI with the new water intake amount
-            alert('Water intake updated successfully!');
-        } else {
-            alert('Failed to update water intake.');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
 
 
   // Function to show the div when the button is clicked

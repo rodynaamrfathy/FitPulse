@@ -124,38 +124,54 @@ def data():
 
     return jsonify(dashboard_data)
 
+
+
 @app.route('/update_water', methods=['POST'])
 def update_water():
     user_id = session.get('user_id')
     if not user_id:
+        print("No user ID found")
         return jsonify({"error": "Unauthorized"}), 403
     
-    data = request.get_json()
-    water_amount = data['amount']
-
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('''
-        UPDATE userprop SET watercurrent = watercurrent + %s WHERE userid = %s
-    ''', (water_amount, user_id))
+    
+    # Fetch the current water amount
+    cursor.execute('SELECT watercurrent FROM userprop WHERE userid = %s', (user_id,))
+    result = cursor.fetchone()
+    
+    if result:
+        current_water = result['watercurrent']  # Fetch the value from the dictionary
+        if current_water is None:
+            current_water = 0.0  # Initialize to 0 if no value
+        else:
+            current_water = float(current_water)  # Ensure it's a float for arithmetic operations
+        print(f"Current water amount for user {user_id}: {current_water}")
+    else:
+        print(f"No user found with id {user_id}")
+        return jsonify({"error": "User not found"}), 404
+
+    # Get water amount from the form, and convert it to a float
+    water_amount = request.form.get('water_amount')
+    try:
+        water_amount = float(water_amount)
+    except (ValueError, TypeError):
+        print(f"Invalid water amount: {water_amount}")
+        return jsonify({"error": "Invalid water amount"}), 400
+    
+    # Add the new water amount to the current water amount
+    updated_water = current_water + water_amount
+    print(f"Updated water amount: {updated_water}")
+
+    # Update the database with the new value
+    cursor.execute('''UPDATE userprop SET watercurrent = %s WHERE userid = %s''', (updated_water, user_id))
     mysql.connection.commit()
     cursor.close()
 
-    return jsonify({"success": True})
-
-@app.route('/update_calories', methods=['POST'])
-def update_calories():
-    user_id = session.get('user_id')
-    new_calories = request.form['calories']
-    print("Received calories:", new_calories)  # Debugging line
-
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('''
-        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
-    ''', (new_calories, user_id))
-    mysql.connection.commit()
-    cursor.close()
+    print(f"Water amount {water_amount} added successfully for user {user_id}")
 
     return redirect(url_for('dashboard'))
+
+
 
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
