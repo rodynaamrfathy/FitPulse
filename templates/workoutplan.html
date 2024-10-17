@@ -99,13 +99,13 @@
                 
                     
                     <td>
-                        <form class="form" action="{{ url_for('workoutscontroller.edit_workout', workout_id=workout.id) }}" method="GET">
+                        <form  class = "deleteform" action="{{ url_for('workoutscontroller.edit_workout', workout_id=workout.id) }}" method="GET">
                             <button type="submit">Edit Workout</button>
                         </form>
                         
                     </td>
                     <td>
-                        <form action="{{ url_for('workoutscontroller.delete_workout', workout_id=workout.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this workout?');">
+                        <form class = "deleteform" action="{{ url_for('workoutscontroller.delete_workout', workout_id=workout.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this workout?');">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                         
