@@ -79,6 +79,24 @@
                     <p>Calories intake: {{ user_data.caloriesgoal }}kcal</p>
                     <div class="color-bar-calories"></div>
                 </div>
+                <div class="trainer">
+                    {% if trainer_data %}
+                        <div class="text-container">
+                            <h3 class="Ydata">Your Trainer</h3>
+                            <div class="trainer-info">
+                                <div class="name-container">
+                                    <h3 class="name1">{{ trainer_data.firstname }}</h3>
+                                    <h3 class="name2">{{ trainer_data.lastname }}</h3>
+                                </div>
+                                <img class="pp" src="{{ url_for('static', filename='uploads/trainerspp/' ~ trainer_data.profilepic) }}" alt="profile-pic">
+                            </div>
+                        </div>
+                    {% else %}
+                        <h1>No trainer yet</h1>
+                    {% endif %}
+                </div>
+                
+                
 
                 
             </div>

@@ -63,6 +63,16 @@ def dashboard():
             WHERE u.userid = %s
         ''', (user_id,))
         user_data = cursor.fetchone()
+        
+        cursor.execute('''
+        SELECT t.* 
+        FROM trainers t
+        JOIN Trainer_User_Assignment tua ON tua.trainerid = t.trainerid
+        WHERE tua.userid = %s
+        ''', (user_id,))
+        
+        trainer_data = cursor.fetchone()
+        print(trainer_data)
 
         # Fetch the assigned workouts for the user
         cursor.execute('''
@@ -82,7 +92,9 @@ def dashboard():
     return render_template(
         'mainpage.html',
         user_data=user_data,  # Pass user data to template
-        assigned_workouts=assigned_workouts  # Pass assigned workouts to template
+        assigned_workouts=assigned_workouts ,
+        trainer_data = trainer_data
+        
     )
 
 
