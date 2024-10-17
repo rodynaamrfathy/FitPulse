@@ -43,9 +43,6 @@ app.config['mysql'] = mysql
 # Register the routes
 register_routes(app)
 
-@app.route('/cart')
-def cart():
-    return render_template('cart.html')
 
 @app.route('/')
 def startpage():
@@ -99,52 +96,6 @@ def dashboard():
         assigned_workouts=assigned_workouts,  # Pass assigned workouts to template
     )
 
-@app.route('/header')
-def header():
-    return render_template('header.html')
-
-@app.route('/startheader')
-def startheader():
-    return render_template('startheader.html')
-
-
-
-@app.route('/navbar')
-def navbar():
-    return render_template('navbar.html')
-
-
-
-@app.route('/workoutsCategory')
-def workoutsCategory():
-    return render_template('workoutsCategory.html')
-
-
-@app.route('/workout')
-def workout():
-    return render_template('workout.html')
-
-
-@app.route('/recipes')
-def recipes():
-    return render_template('recipes.html')
-
-@app.route('/recipe')
-def recipe():
-    return render_template('recipe.html')
-
-
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
-
-
-
-
-@app.route('/workoutplan')
-def workoutplan():
-    return render_template('workoutplan.html')
 
 
 
@@ -156,19 +107,6 @@ def workoutplan():
 
 
 
-@app.route('/chartstest')
-def chartstest():
-    # Define your data
-    water_intake = 80  # in milliliters
-    total_water_goal = 100  # in milliliters
-
-    # Data for the charts
-    chart_data = {
-        'water_intake': water_intake,
-        'total_water_goal': total_water_goal,
-    }
-
-    return render_template('chartstest.html', chart_data=chart_data)
 
 
 
