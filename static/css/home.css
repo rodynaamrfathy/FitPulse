@@ -577,6 +577,78 @@ button, input {
     background-color: #9e5e0b !important;
 }
 
+.search {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    color: #ff9409;
+    font-weight: 300;
+    margin-left: 1rem;
+}
+
+
+
+.eighth-container input {
+    margin-left: 1rem;
+    width: 97%; /* Make sure input takes up 100% width of the container */
+    max-width: 50.5rem; /* Ensure it doesn’t exceed the set width */
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+
+.eighth-container button {
+    margin-left: 0.9rem !important;
+    width: 97%; /* Make sure button takes up 100% width of the container */
+    max-width: 50.5rem; /* Ensure it doesn’t exceed the set width */
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ff9409;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* Search results */
+#searchResults {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    max-height: 350px !important;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+/* Individual search result item */
+#searchResults .result-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for search result items */
+#searchResults .result-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Text styling inside search result */
+#searchResults .result-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
 
 
 @media (max-width: 1200px) {  
