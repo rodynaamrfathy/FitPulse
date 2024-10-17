@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 datasets: [{
                     data: data.WaterInTake.values,
-                    backgroundColor: ['#246CD0', '#f0f0f0'], 
+                    borderRadius: [30, 0],
+                    backgroundColor: ['#246CD0', '#343339'], 
                     borderWidth: 0
                 }]
             }
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: data.WaterInTake.values,
                     borderRadius: 70,
-                    backgroundColor: ['#E8471C', '#f0f0f0'],
+                    backgroundColor: ['#E8471C', '#343339'],
                     borderWidth: 0
                 }]
             }
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: data.WaterInTake.values,
                     borderRadius: 70,
-                    backgroundColor: ['#FF8500', '#EFCFBC'], 
+                    backgroundColor: ['#FF8500', '#343339'], 
                     borderWidth: 0
                 }]
             }
