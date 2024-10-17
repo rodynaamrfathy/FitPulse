@@ -72,9 +72,10 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
-                <form>
-                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
-                    <button type="submit" onclick="updateCaloriesChart()">Update Chart</button>
+                <!-- Calories intake form -->
+                <form action="/update_calories" method="POST">
+                    <input type="number" id="calories" name="calories" value="{{ user_data.caloriescurrent }}" min="1" max="10000">
+                    <button type="submit">Update Calories</button>
                 </form>                
             </div>
             <div class="fourth-container">
@@ -84,10 +85,11 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
-                <form>
-                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
-                    <button type="submit" onclick="updateCarbsChart()">Update Chart</button>
-                </form>                
+                <!-- Carbs intake form -->
+                <form action="/update_carbs" method="POST">
+                    <input type="number" id="carbs" name="carbs" value="{{ user_data.carbcurrent }}" min="1" max="1000">
+                    <button type="submit">Update Carbs</button>
+                </form>
             </div>
         </div>
         <div class="twrapper">
@@ -98,10 +100,11 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>
-                <form>
-                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
-                    <button type="submit" onclick="updateProtienChart()">Update Chart</button>
-                </form>                
+                <!-- Protein intake form -->
+                <form action="/update_protein" method="POST">
+                    <input type="number" id="protein" name="protein" value="{{ user_data.protiencurrent }}" min="1" max="1000">
+                    <button type="submit">Update Protein</button>
+                </form>             
             </div> 
             <div class="sixth-container">
                 <div class="water-intake-container">
@@ -123,7 +126,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add250ml">250ml</button>
+                            <button onclick="updateWaterIntake(250)">250ml</button>
                         </div>
                         <div class="button-item">
                             <lord-icon
@@ -133,7 +136,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add500ml">500ml</button>
+                            <button onclick="updateWaterIntake(500)">500ml</button>
                         </div>
                         <div class="button-item">
                             <lord-icon
@@ -143,7 +146,7 @@
                                 colors="primary:#2526,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
-                            <button action="add1l">1L</button>
+                            <button onclick="updateWaterIntake(1000)">1L</button>
                         </div>
                     </div>                    
                 </div>

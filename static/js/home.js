@@ -93,8 +93,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function updateIntake(amount) {
-    // Logic to update the user's water intake
-    console.log(`Added ${amount} ml of water.`);
-    // You can also update the displayed water intake and chart data here
+function updateWaterIntake(amount) {
+    fetch('/update_water', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ amount: amount })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Update the UI to reflect the new water intake
+        alert('Water intake updated!');
+        location.reload();  // Reload to reflect the new intake
+    })
+    .catch(error => console.error('Error:', error));
 }
