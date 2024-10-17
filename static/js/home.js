@@ -110,3 +110,17 @@ document.addEventListener('click', function(event) {
         wrapper.classList.add('hidden'); // Hide the div
     }
 });
+
+
+
+function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString();
+    document.getElementById('current-time').textContent = timeString;
+}
+
+// Call updateTime every second to keep the time updated
+setInterval(updateTime, 1000);
+
+// Call it once on page load to set the initial time
+updateTime();

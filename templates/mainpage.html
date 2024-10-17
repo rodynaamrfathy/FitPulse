@@ -30,7 +30,16 @@
     <div class="main-container2">
         <div class="wrapper">
             <div class="first-container">
-                <h2 style="margin:10px;">Welcome back, {{ user_data.firstname }}!</h2>  
+                <div class="text-section">
+                    <h2 class= "welcome"style="margin:10px;">Welcome back </h2> 
+                    <h2 class = "name">{{ user_data.firstname }}!</h2>
+                </div>
+                <h2 style="margin:10px;" id="current-time" class = "time"></h2> <!-- This will display the current date -->
+
+                <img class= "pp"src="{{ url_for('static', filename='uploads/userspp/' ~  user_data.profilepic) }}" alt="profile-pic">
+               
+                
+                
             </div>
             <div class="second-container">
                 <h3>User Data</h3>
