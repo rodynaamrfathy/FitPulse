@@ -1,7 +1,13 @@
-{% extends 'base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
+</head>
+<body>
     <h1>Email Confirmation</h1>
     <p>To confirm your email address, please click the link below:</p>
     <a href="{{ confirm_url }}">{{ confirm_url }}</a>
-{% endblock %}
+</body>
+</html>
