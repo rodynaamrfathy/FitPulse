@@ -69,7 +69,7 @@
                 {% for plan in plans %}
                 <div class="plan">
                     <h1 class="plan-title">{{ plan[3] }}</h1>
-                    <a href="{{ plan.link }}" class="plan-button">View</a>
+                    <a href="{{ url_for('workoutscontroller.view_workout', workout_id=plan[1]) }}" class="plan-button">View</a>
                 </div>
                 {% endfor %}
             {% else %}

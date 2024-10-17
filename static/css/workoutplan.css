@@ -119,3 +119,8 @@ img {
     
 
 }
+
+main,
+header {
+    display: none;
+}
