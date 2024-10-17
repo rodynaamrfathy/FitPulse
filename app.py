@@ -133,9 +133,6 @@ def recipes():
 def recipe():
     return render_template('recipe.html')
 
-@app.route('/tools')
-def tools():
-    return render_template('tools.html')
 
 @app.route('/profile')
 def profile():
@@ -143,14 +140,7 @@ def profile():
 
 
 
-@app.route('/benchpresscalculator')
-def benchpresscalculator():
-    return render_template('benchpresscalculator.html')
 
-
-@app.route('/bmrcalculator')
-def bmrcalculator():
-    return render_template('bmrcalculator.html')
 
 @app.route('/workoutplan')
 def workoutplan():
