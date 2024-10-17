@@ -133,6 +133,7 @@ def update_water():
 def update_calories():
     user_id = session.get('user_id')
     new_calories = request.form['calories']
+    print("Received calories:", new_calories)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''
