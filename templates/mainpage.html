@@ -47,7 +47,7 @@
                 <div class="progress-section">
                     <p>Progress towards target weight: {{ user_data.weight }}kg</p>
                     <div class="progress-bar-container" style="width: 100%; background-color: #ddd; height: 20px;">
-                        <div class="progress-bar" style="width: {{ (user_data.weight / 80) * 100 }}%; background-color: #4caf50; height: 100%;"></div>
+                        <div class="progress-bar" style="width: {{ (user_data.weight / user_data.goalweight) * 100 }}%; background-color: #4caf50; height: 100%;"></div>
                     </div>
                 </div>
             
