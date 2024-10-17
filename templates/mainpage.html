@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     {% else %}
-                        <h1>No trainer yet</h1>
+                        <h3 style="margin-left: 15px; margin-top: 20px;">No trainer yet</h3>
                     {% endif %}
                 </div>
                 
@@ -140,10 +140,10 @@
                             <form action="/update_water" method="POST">
                                 <input type="hidden" name="water_amount" value="250">
                             <lord-icon
-                                src="https://cdn.lordicon.com/yowvhtxf.json"
+                                src="https://cdn.lordicon.com/xjvaszos.json"
                                 trigger="loop"
                                 state="loop-cycle"
-                                colors="primary:#2526,secondary:#246cd0"
+                                colors="primary:#1F1D1E,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
                             <button type="submit" class="submit-button">Submit 250ml</button>
@@ -156,7 +156,7 @@
                                     src="https://cdn.lordicon.com/yowvhtxf.json"
                                     trigger="loop"
                                     state="loop-cycle"
-                                    colors="primary:#2526,secondary:#246cd0"
+                                    colors="primary:#1F1D1E,secondary:#246cd0"
                                     style="width:100px;height:100px">
                                 </lord-icon>
                                 <button type="submit" class="submit-button">Submit 500ml</button>
@@ -166,10 +166,10 @@
                             <form action="/update_water" method="POST">
                                 <input type="hidden" name="water_amount" value="1000">
                             <lord-icon
-                                src="https://cdn.lordicon.com/yowvhtxf.json"
+                                src="https://cdn.lordicon.com/wyhrqibk.json"
                                 trigger="loop"
                                 state="loop-cycle"
-                                colors="primary:#2526,secondary:#246cd0"
+                                colors="primary:#1F1D1E,secondary:#246cd0"
                                 style="width:100px;height:100px">
                             </lord-icon>
                             <button type="submit" class="submit-button">Submit 1L</button>
@@ -200,8 +200,11 @@
                 <img src="{{ url_for('static', filename='images/scale.png') }}" alt="Weight Scale" style="width: 160px; margin-bottom: 10px; margin: auto;">
                 
                 <!-- Weight Input -->
-                <label for="weight-input" style="font-size: 18px;">Enter Your Weight (kg):</label><br>
-                <input type="number" id="weight-input" placeholder="e.g., 65.0" style="padding: 10px; margin-top: 10px; font-size: 16px; width: 150px;">
+                <form method="POST" action="{{ url_for('update_weight') }}">
+                    <label for="weight">Enter your weight:</label>
+                    <input type="text" id="weight" name="weight" placeholder="Weight in kg">
+                    <button type="submit">Update Weight</button>
+                </form>
             </div>  
 
         </div>
