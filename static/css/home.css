@@ -539,6 +539,26 @@ button, input {
     width: 80px;
 }
 
+.ninth-containe img {
+    margin-left: 5rem !important;
+    margin-top: 1rem !important;
+
+}
+
+.ninth-containe input {
+    margin-left: 5rem !important;
+    margin-top: 1rem !important;
+    width: 50%;
+    
+}
+
+.ninth-containe button {
+    margin-left: 5rem !important;
+    margin-top: 0.6rem !important;
+    width: 50%;
+    
+}
+
 
 
 @media (max-width: 1200px) {  

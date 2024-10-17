@@ -200,10 +200,10 @@
                 <img src="{{ url_for('static', filename='images/scale.png') }}" alt="Weight Scale" style="width: 160px; margin-bottom: 10px; margin: auto;">
                 
                 <!-- Weight Input -->
-                <form method="POST" action="{{ url_for('update_weight') }}">
-                    <label for="weight">Enter your weight:</label>
-                    <input type="text" id="weight" name="weight" placeholder="Weight in kg">
+                    <input type="number" id="weight" name="weight" placeholder="Enter Your Weight in kg">
+                    <div>
                     <button type="submit">Update Weight</button>
+                    </div>
                 </form>
             </div>  
 
