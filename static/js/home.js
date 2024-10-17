@@ -2,23 +2,23 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/data')
     .then(response => response.json())
     .then(data => {
-        // Bar chart for steps and calories burned
+        // Line chart for steps and calories burned
         const ctx = document.getElementById('WorkoutChart').getContext('2d');
         const WorkoutChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], 
+                labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], // You can also make this dynamic
                 datasets: [
                     {
                         label: 'Steps',
-                        data: [data.Steps.current], // Display steps current values
+                        data: data.Steps.historical, // Use historical values for steps
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     },
                     {
                         label: 'Calories Burned',
-                        data: [data.Calories.current], // Display calories current values
+                        data: data.Calories.historical, // Use historical values for calories
                         backgroundColor: 'rgba(153, 102, 255, 0.2)',
                         borderColor: 'rgba(153, 102, 255, 1)',
                         borderWidth: 1
@@ -92,10 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-  // Function to show the div when the button is clicked
-  document.querySelector('.Update-button').addEventListener('click', function(event) {
+// Function to show the div when the button is clicked
+document.querySelector('.Update-button').addEventListener('click', function(event) {
     const wrapper = document.querySelector('.wrapper1');
     wrapper.classList.remove('hidden'); // Show the div
 });
