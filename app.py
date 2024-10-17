@@ -46,6 +46,9 @@ def dashboard():
         flash('You must be logged in to view the dashboard.', 'warning')
         return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
 
+    # Reset current values if a new day has started
+    reset_current_values_if_new_day(user_id)
+
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
@@ -134,6 +137,7 @@ def update_water():
         return jsonify({"error": "Unauthorized"}), 403
     
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+<<<<<<< HEAD
     
     # Fetch the current water amount
     cursor.execute('SELECT watercurrent FROM userprop WHERE userid = %s', (user_id,))
@@ -168,6 +172,40 @@ def update_water():
     cursor.close()
 
     print(f"Water amount {water_amount} added successfully for user {user_id}")
+=======
+    # Fetch current water and goal
+    cursor.execute('SELECT watercurrent, watergoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_water_total = min(user_data['watercurrent'] + water_amount, user_data['watergoal'])
+
+    cursor.execute('''
+        UPDATE userprop SET watercurrent = %s WHERE userid = %s
+    ''', (new_water_total, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return jsonify({"success": True})
+
+@app.route('/update_calories', methods=['POST'])
+def update_calories():
+    user_id = session.get('user_id')
+    new_calories = int(request.form['calories'])
+    print("Received calories:", new_calories)  # Debugging line
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current calories and goal
+    cursor.execute('SELECT caloriescurrent, caloriesgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_calories_total = min(user_data['caloriescurrent'] + new_calories, user_data['caloriesgoal'])
+
+    cursor.execute('''
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories_total, user_id))
+    mysql.connection.commit()
+    cursor.close()
+>>>>>>> 11f1ac1e2f7282eee8aa080605e22f3c186bce38
 
     return redirect(url_for('dashboard'))
 
@@ -176,12 +214,18 @@ def update_water():
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
     user_id = session.get('user_id')
-    new_carbs = request.form['carbs']
+    new_carbs = int(request.form['carbs'])
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current carbs and goal
+    cursor.execute('SELECT carbcurrent, carbgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_carbs_total = min(user_data['carbcurrent'] + new_carbs, user_data['carbgoal'])
+
     cursor.execute('''
         UPDATE userprop SET carbcurrent = %s WHERE userid = %s
-    ''', (new_carbs, user_id))
+    ''', (new_carbs_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
@@ -190,18 +234,45 @@ def update_carbs():
 @app.route('/update_protein', methods=['POST'])
 def update_protein():
     user_id = session.get('user_id')
-    new_protein = request.form['protein']
-    print("Received protien:", new_protein)  # Debugging line
+    new_protein = int(request.form['protein'])
+    print("Received protein:", new_protein)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current protein and goal
+    cursor.execute('SELECT protiencurrent, protiengoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_protein_total = min(user_data['protiencurrent'] + new_protein, user_data['protiengoal'])
+
     cursor.execute('''
         UPDATE userprop SET protiencurrent = %s WHERE userid = %s
-    ''', (new_protein, user_id))
+    ''', (new_protein_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
     return redirect(url_for('dashboard'))
 
+def reset_current_values_if_new_day(user_id):
+    # Get the last reset date from the database
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT last_reset FROM userprop WHERE userid = %s', (user_id,))
+    result = cursor.fetchone()
+    last_reset = result['last_reset'] if result else None
+
+    # Get the current date
+    current_date = datetime.now().date()
+
+    # If there's no last reset date or it's a new day, reset the current values
+    if not last_reset or last_reset.date() < current_date:
+        cursor.execute('''
+            UPDATE userprop 
+            SET watercurrent = 0, caloriescurrent = 0, carbcurrent = 0, protiencurrent = 0,
+                last_reset = %s 
+            WHERE userid = %s
+        ''', (current_date, user_id))
+        mysql.connection.commit()
+
+    cursor.close()
 
 if __name__ == '__main__':
     app.run(debug=True)
