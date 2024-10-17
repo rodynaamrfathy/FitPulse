@@ -3,24 +3,45 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         // Line chart for steps and calories burned
-        const ctx = document.getElementById('WorkoutChart').getContext('2d');
-        const WorkoutChart = new Chart(ctx, {
+        const ctx = document.getElementById('IntakeChart').getContext('2d');
+        const IntakeChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], // You can also make this dynamic
+                labels: ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'], // Days of the week
                 datasets: [
                     {
-                        label: 'Steps',
-                        data: data.Steps.historical, // Use historical values for steps
+                        label: 'Water Intake (ml)',
+                        data: [3000, 3100, 2900, 3050, 3000, 2950], // Water intake data
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     },
                     {
-                        label: 'Calories Burned',
-                        data: data.Calories.historical, // Use historical values for calories
+                        label: 'Calories Intake (kcal)',
+                        data: [1700, 1750, 1680, 1720, 1700, 1690], // Calorie intake data
                         backgroundColor: 'rgba(153, 102, 255, 0.2)',
                         borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Protein Intake (g)',
+                        data: [80, 82, 78, 81, 80, 79], // Protein intake data
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Carbs Intake (g)',
+                        data: [250, 240, 245, 250, 250, 255], // Carb intake data
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Weight (kg)',
+                        data: [66.5, 66.2, 66.0, 65.8, 65.6, 65.3], // Weight data
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
                     }
                 ]
