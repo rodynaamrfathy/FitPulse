@@ -6,8 +6,12 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/storebody2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </head>
 <body>
+    {% include 'flash.html' %}
+
     <div class="main-container">
         
         <div class="large-container23">

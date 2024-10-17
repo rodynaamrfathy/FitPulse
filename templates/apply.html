@@ -7,11 +7,13 @@
     <title>Apply for {{ specialty }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/apply.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/logo1.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </head>
 
 
 <body>
-
+    {% include 'flash.html' %}
     <section class="apply">
         <h1>Apply for {{ specialty }}</h1>
         <form action="{{ url_for('careers.submit_application') }}" method="POST" enctype="multipart/form-data">
