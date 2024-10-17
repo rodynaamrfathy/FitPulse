@@ -22,18 +22,18 @@
 .first-container {
     width: 40rem; /* Fixed width */
     height: 100px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .second-container {
     width: 30rem; /* Fixed width */
     height: 380px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -53,9 +53,9 @@
 .third-container, .fourth-container {
     width: 19.5rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -80,9 +80,9 @@
 .seventh-container {
     width: 71.4rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 
 }
@@ -91,18 +91,18 @@
 .fifth-container {
     width: 19.5rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sixth-container {
     width:50.5rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -125,18 +125,18 @@
 .first-container {
     width: 30rem; /* Fixed width */
     height: 100px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .second-container {
     width: 20rem; /* Fixed width */
     height: 380px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -156,9 +156,9 @@
 .third-container, .fourth-container {
     width: 14.5rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -177,18 +177,18 @@
 .fifth-container {
     width: 14rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sixth-container {
     width:35.5rem;
     height: 268px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.1); /* 10% opacity */
     border-radius: 20px;
-    border: 2px solid #ccc;
+    border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }  
 
@@ -201,6 +201,7 @@
     justify-content: space-between; /* Space between the chart and buttons */
     align-items: center; /* Center items vertically */
     margin-top: 2rem; /* Add some space above */
+    border: 0;
 }
 
 .button-container {

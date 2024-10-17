@@ -34,39 +34,61 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Pie chart for water intake
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        // Pie chart for waterChart intake
+        const pieCtx = document.getElementById('waterChart').getContext('2d');
         const pieChart = new Chart(pieCtx, {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: data.WaterInTake.values, // Use values from WaterInTake
-                    backgroundColor: ['#36A2EB', '#f0f0f0'], // Adjust as needed
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                    data: data.WaterInTake.values,
+                    backgroundColor: ['#246CD0', '#f0f0f0'], 
+                    borderWidth: 0
                 }]
             }
         });
 
-        // Second pie chart (example)
-        const ctx2 = document.getElementById('pieChart2').getContext('2d'); // Change to new ID
-        const pieChart2 = new Chart(ctx2, {
-            type: 'pie',
+        // Pie chart for CaloriesChart intake
+        const pieCtx2 = document.getElementById('CaloriesChart').getContext('2d');
+        const pieChart2 = new Chart(pieCtx2, {
+            type: 'doughnut',
             data: {
-                labels: ['Label1', 'Label2', 'Label3'], // Update labels as necessary
                 datasets: [{
-                    data: [10, 20, 30], // Update data as necessary
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    data: data.WaterInTake.values,
+                    borderRadius: 70,
+                    backgroundColor: ['#E8471C', '#f0f0f0'],
+                    borderWidth: 0
                 }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
             }
         });
+
+        // Pie chart for CarbsChart intake
+        const pieCtx3 = document.getElementById('CarbsChart').getContext('2d');
+        const pieChart3 = new Chart(pieCtx3, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: data.WaterInTake.values,
+                    borderRadius: 70,
+                    backgroundColor: ['#FF8500', '#EFCFBC'], 
+                    borderWidth: 0
+                }]
+            }
+        });
+
+        // Pie chart for ProtienChart intake
+        const pieCtx4 = document.getElementById('ProtienChart').getContext('2d');
+        const pieChart4 = new Chart(pieCtx4, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: data.WaterInTake.values,
+                    borderRadius: 70,
+                    backgroundColor: ['#13103B', '#343339'], 
+                    borderWidth: 0
+                }]
+            }
+        });
+       
     });
 });
 
