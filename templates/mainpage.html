@@ -50,7 +50,7 @@
                 <!-- User progress towards target weight -->
                 <div class="progress-section">
                     <p>Progress towards target weight: {{ user_data.goalweight }}kg</p>
-                    <div class="progress-bar-container" style="width: 450px; background-color: #ddd; height: 20px;">
+                    <div class="progress-bar-container" style="width: 350px; background-color: #ddd; height: 20px;">
                         <div class="progress-bar" style="width: {{ (user_data.weight / user_data.goalweight) * 100 }}%; background-color:#ff9409; height: 100%;border-radius: 20px;margin-top:0.3rem;"></div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
         <div class="swrapper">
             <div class="third-container">
                 
-                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto; margin-top: 20px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
                 <!-- Calories intake form -->
@@ -94,7 +94,7 @@
             </div>
             <div class="fourth-container">
                 
-                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto; margin-top: 20px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
                 
@@ -104,7 +104,7 @@
         <div class="twrapper">
             <div class="fifth-container">
                 
-                <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto; margin-top: 20px;">
+                <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>
                 <!-- Protein intake form -->
@@ -113,7 +113,7 @@
             <div class="sixth-container">
                 <div class="water-intake-container">
                     <!-- Pie chart container -->
-                    <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 50px; margin-top: 20px; margin-right: 120px;" >
+                    <div id="pie-chart-container" style="width: 200px; height: 200px; margin-left: 25px; margin-top: 20px; margin-right: 45px;" >
                         <canvas id="waterChart"></canvas>
                     </div>
                     <!-- Buttons with images and water amounts -->
@@ -122,7 +122,7 @@
                             <form action="/update_water" method="POST">
                                 <input type="hidden" name="water_amount" value="250">
                             <lord-icon
-                                src="https://cdn.lordicon.com/xjvaszos.json"
+                                src="https://cdn.lordicon.com/yowvhtxf.json"
                                 trigger="loop"
                                 state="loop-cycle"
                                 colors="primary:#2526,secondary:#246cd0"
@@ -148,7 +148,7 @@
                             <form action="/update_water" method="POST">
                                 <input type="hidden" name="water_amount" value="1000">
                             <lord-icon
-                                src="https://cdn.lordicon.com/wyhrqibk.json"
+                                src="https://cdn.lordicon.com/yowvhtxf.json"
                                 trigger="loop"
                                 state="loop-cycle"
                                 colors="primary:#2526,secondary:#246cd0"
@@ -173,6 +173,19 @@
             </div>
         </div>
 
+        <div class="sixthwrapper">
+            
+            <div class="eighth-container">
+                       
+            </div> 
+
+            <div class="ninth-containe">
+
+            </div>  
+
+        </div>
+
+
         <div class="wrapper1 hidden">
             <h1>Update Your Progress</h1>
             <div>
@@ -195,20 +208,7 @@
             </div>  
         </div>
 
-        <div class="sixthwrapper">
-            
-             
-            
-            <div class="eighth-container">
-                
-                       
-            </div> 
-
-            <div class="ninth-containe">
-
-            </div>  
-        </div>
-
+        
 
     </div>
     <div class="search-container">
