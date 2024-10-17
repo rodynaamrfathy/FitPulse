@@ -111,5 +111,66 @@ def data():
     return jsonify(dashboard_data)
 
 
+@app.route('/update_water', methods=['POST'])
+def update_water():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 403
+    
+    data = request.get_json()
+    water_amount = data['amount']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET watercurrent = watercurrent + %s WHERE userid = %s
+    ''', (water_amount, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return jsonify({"success": True})
+
+@app.route('/update_calories', methods=['POST'])
+def update_calories():
+    user_id = session.get('user_id')
+    new_calories = request.form['calories']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/update_carbs', methods=['POST'])
+def update_carbs():
+    user_id = session.get('user_id')
+    new_carbs = request.form['carbs']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET carbcurrent = %s WHERE userid = %s
+    ''', (new_carbs, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
+
+@app.route('/update_protein', methods=['POST'])
+def update_protein():
+    user_id = session.get('user_id')
+    new_protein = request.form['protein']
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('''
+        UPDATE userprop SET protiencurrent = %s WHERE userid = %s
+    ''', (new_protein, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
