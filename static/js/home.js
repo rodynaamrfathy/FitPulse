@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], 
                 datasets: [
                     {
-                        label: 'Steps',
+                        label: 'Workouts',
                         data: data.Steps, // Update to match new data
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
