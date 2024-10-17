@@ -100,16 +100,29 @@ def data():
     cursor.close()
 
     dashboard_data = {
-        'Steps': [user_goals['stepscurrent'], user_goals['stepsgoal']],
-        'calories burned': [user_goals['caloriescurrent'], user_goals['caloriesgoal']],
+        'Steps': {
+            'goal': user_goals['stepsgoal'],
+            'current': user_goals['stepscurrent']
+        },
         'WaterInTake': {
-            'labels': ['water intake', 'goal'],
-            'values': [user_goals['watercurrent'], user_goals['watergoal']]
+            'goal': user_goals['watergoal'],
+            'current': user_goals['watercurrent']
+        },
+        'Calories': {
+            'goal': user_goals['caloriesgoal'],
+            'current': user_goals['caloriescurrent']
+        },
+        'Protein': {
+            'goal': user_goals['protiengoal'],
+            'current': user_goals['protiencurrent']
+        },
+        'Carbs': {
+            'goal': user_goals['carbgoal'],
+            'current': user_goals['carbcurrent']
         }
     }
 
     return jsonify(dashboard_data)
-
 
 @app.route('/update_water', methods=['POST'])
 def update_water():
