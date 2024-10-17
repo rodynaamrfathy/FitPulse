@@ -162,6 +162,7 @@ def update_carbs():
 def update_protein():
     user_id = session.get('user_id')
     new_protein = request.form['protein']
+    print("Received protien:", new_protein)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''

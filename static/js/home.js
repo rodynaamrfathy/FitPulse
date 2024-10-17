@@ -97,15 +97,21 @@ function updateWaterIntake(amount) {
     fetch('/update_water', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ amount: amount })
+        body: JSON.stringify({ amount: amount }),
     })
     .then(response => response.json())
     .then(data => {
-        // Update the UI to reflect the new water intake
-        alert('Water intake updated!');
-        location.reload();  // Reload to reflect the new intake
+        if (data.success) {
+            // Handle success, maybe update the UI with the new water intake amount
+            alert('Water intake updated successfully!');
+        } else {
+            alert('Failed to update water intake.');
+        }
     })
-    .catch(error => console.error('Error:', error));
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
+

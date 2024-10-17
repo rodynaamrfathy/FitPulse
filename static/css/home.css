@@ -230,3 +230,17 @@ button {
 button:hover {
     background-color: #1b56a8;
 }
+
+button, input {
+    z-index: 10;
+    position: relative;
+}
+input {
+    width: 130px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+}
+button, input {
+    pointer-events: auto;
+}
