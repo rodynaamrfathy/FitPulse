@@ -29,13 +29,29 @@ function displayResults(foods) {
         foodItem.innerHTML = `
             <h4>${food.description}</h4>
             <p>Calories: ${getCalories(food)}</p>
+            <p>Protein: ${getProtein(food)} grams</p>
+            <p>Carbs: ${getCarbs(food)} grams</p>
+            <p>Weight: ${getWeight(food)} grams</p>
         `;
         resultsDiv.appendChild(foodItem);
     });
 }
 
 function getCalories(food) {
-    // Get the 'Energy' nutrient which represents calories
     const energyNutrient = food.foodNutrients.find(nutrient => nutrient.nutrientName === 'Energy' || nutrient.nutrientName === 'Calories');
-    return energyNutrient ? `${energyNutrient.value} ${energyNutrient.unitName}` : 'N/A'; // Display calories and unit, or 'N/A' if not available
+    return energyNutrient ? `${energyNutrient.value} ${energyNutrient.unitName}` : 'N/A';
+}
+
+function getProtein(food) {
+    const proteinNutrient = food.foodNutrients.find(nutrient => nutrient.nutrientName === 'Protein');
+    return proteinNutrient ? `${proteinNutrient.value}` : 'N/A';
+}
+
+function getCarbs(food) {
+    const carbsNutrient = food.foodNutrients.find(nutrient => nutrient.nutrientName === 'Carbohydrate, by difference');
+    return carbsNutrient ? `${carbsNutrient.value}` : 'N/A';
+}
+
+function getWeight(food) {
+    return food.servingSize ? food.servingSize : 'N/A';
 }
