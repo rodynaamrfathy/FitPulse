@@ -59,7 +59,7 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-
+.sixthwrapper,
 .fwrapper,
 .twrapper {
     display: flex;
@@ -88,6 +88,7 @@
 }
  
 
+.ninth-containe,
 .fifth-container {
     width: 19.5rem;
     height: 268px;
@@ -97,6 +98,11 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.ninth-containe{
+    width: 20rem !important;
+}
+
+.eighth-container,
 .sixth-container {
     width:50.5rem;
     height: 268px;
@@ -104,6 +110,13 @@
     border-radius: 20px;
     border: 0;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.sixthwrapper {
+    margin-top: -3.4rem !important;
+    margin-left: 2.5rem;
 }
 
 
@@ -194,6 +207,7 @@
 
 .fwrapper {
     width: 52rem;
+    margin-bottom: 0;
 }
 }
 .water-intake-container {
