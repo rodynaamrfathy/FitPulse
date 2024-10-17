@@ -87,7 +87,7 @@ def add_diet_plan():
     cursor.execute('''
         INSERT INTO dietplans (authorid, dietname, description, image, publishdate, coreprinciples, timingfrequency, bestsuitedfor, easytofollow, studies)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    ''', (author_id, diet_name, description, image_path, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
+    ''', (author_id, diet_name, description, image_filename, datetime.now(), core_principles, timing_frequency, best_suited_for, easy_to_follow, studies))
     
     mysql.connection.commit()
     cursor.close()

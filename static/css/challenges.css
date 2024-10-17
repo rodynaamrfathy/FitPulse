@@ -46,12 +46,24 @@ th, td {
     padding: 12px 15px; /* Padding inside table cells */
     text-align: left; /* Left-align text in table */
     border-bottom: 1px solid #ddd; /* Light border between rows */
+    font-weight: bold;
+}
+
+
+table th:first-child {
+    border-top-left-radius: 10px; /* Add left border to the first header */
+}
+
+table th:last-child {
+    border-top-right-radius: 10px; /* Add left border to the first header */
 }
 
 th {
     background-color: #ff9409; /* Background color for the header */
     color: white; /* White text for header */
     font-weight: bold; /* Make header text bold */
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
 }
 
 tr:nth-child(even) {

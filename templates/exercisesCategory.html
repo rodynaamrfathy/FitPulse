@@ -16,49 +16,63 @@
     {% include 'flash.html' %}
 
     <header>
-        {% include 'header.html' %}
+        {% include 'header.html' %} 
     </header>
 
     <main>
         {% include 'navbar.html' %}
     </main>
 
-    <div class = "wrapper0">
-        <div class = "exercise-banner">
+    <div class="wrapper0">
+        <div class="exercise-banner">
            <img src="{{ url_for('static', filename='images/exercise-banner1.jpg') }}" alt="Abs Image">
-           <h1>Master Every Move </h1>
+           <h1>Master Every Move</h1>
            <p>From core strength to cardio, unlock hundreds of guided exercises that build toward your goals.</p>
         </div>  
     </div>
 
-    <div class = "wrapper1">
+    <div class="wrapper1">
         <div>
-        <h1 >EXERCISES BY MUSCLE GROUP </h1>
-        <p>Choose the muscle group you want to target. Once in the muscle group, use the sort and filter options to find the best exercises for the equipment you have, your training experience, and goals.</p>
+            <h1>EXERCISES BY MUSCLE GROUP</h1>
+            <p>Choose the muscle group you want to target. Once in the muscle group, use the sort and filter options to find the best exercises for the equipment you have, your training experience, and goals.</p>
         </div>
     </div>
 
     <div class="wrapper2">
         <div class="filter-search-container">
-            <a href="">Filter By</a>
-            <input type="text" placeholder="Search..." class="search-input">
+            <input type="text" placeholder="Search..." id="filter-search" class="search-input">
         </div>
     </div>
-    
 
-    
-    <div class="wrapper">
+    <div class="wrapper" id="exercise-container">
         {% for category in exercise_categories %}
-
             <div class="exercise">
-                <a href="{{ url_for('exercisescontroller.exercises', category_id=category['id']) }}"><img src="{{ url_for('static', filename='images/' + category['image']) }}" alt="{{ category['name'] }} Image"></a>
-                <h2>{{ category['name'] }}</h2>
+                <a href="{{ url_for('exercisescontroller.exercises', category_id=category['id']) }}">
+                    <img src="{{ url_for('static', filename='images/' + category['image']) }}" alt="{{ category['name'] }} Image">
+                </a>
+                <h2 class="category-name">{{ category['name'] }}</h2>
             </div>
-
         {% endfor %}
-
     </div>
 
     <script src="{{ url_for('static', filename='js/exercises.js') }}"></script>
+    <script>
+        // JavaScript code to filter exercise categories by name
+        document.getElementById('filter-search').addEventListener('input', function() {
+            let filterValue = this.value.toLowerCase();
+            let exercises = document.querySelectorAll('.exercise');
+
+            exercises.forEach(function(exercise) {
+                let categoryName = exercise.querySelector('.category-name').textContent.toLowerCase();
+
+                // Show or hide the exercise category based on the search input
+                if (categoryName.includes(filterValue)) {
+                    exercise.style.display = 'block';
+                } else {
+                    exercise.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -64,6 +64,7 @@
     margin-bottom: 2rem;
 }
 
+.wrapper3,
 .wrapper2,
 .wrapper1,
 .wrapper {
@@ -77,12 +78,27 @@
     text-align: center;
 }
 
+.wrapper3 {
+    margin-top: 2rem !important;
+}
+
 /* Styling for each workout-category block */
+.wrapper2 {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: flex-start; /* Align items to the start (left) */
+    gap: 1rem; /* Add spacing between items */
+}
+
 .workout-category {
     text-align: center;
     width: calc(33.33% - 12px); /* Ensure each workout-category takes one-third of the row, minus some margin */
     margin-bottom: 1rem; /* Add spacing between rows */
-    
+    box-sizing: border-box; /* Ensure padding/margin are included in width calculations */
 }
 
 .workout-category img {
@@ -108,6 +124,7 @@
 
 @media (max-width: 1200px) {  
 
+    .wrapper3,  
     .wrapper2,
     .wrapper1,
     .wrapper {
@@ -138,6 +155,9 @@
 
 @media (min-width: 1700px) {
 
+    .wrapper3,
+    .wrapper2,
+    .wrapper1,
     .wrapper {
         max-width: 1000px;
     }
