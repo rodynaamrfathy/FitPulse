@@ -208,7 +208,7 @@
     justify-content: space-around;
     align-items: center;
     margin-top: 2rem; /* Add some space above */
-    margin-right: 30px;
+    margin-right: 2.5rem;
     gap: 20px;
 }
 .button-item {
