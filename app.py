@@ -46,6 +46,9 @@ def dashboard():
         flash('You must be logged in to view the dashboard.', 'warning')
         return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
 
+    # Reset current values if a new day has started
+    reset_current_values_if_new_day(user_id)
+
     mysql = app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
@@ -171,17 +174,42 @@ def update_water():
 
     return redirect(url_for('dashboard'))
 
+@app.route('/update_calories', methods=['POST'])
+def update_calories():
+    user_id = session.get('user_id')
+    new_calories = int(request.form['calories'])
+    print("Received calories:", new_calories)  # Debugging line
 
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current calories and goal
+    cursor.execute('SELECT caloriescurrent, caloriesgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_calories_total = min(user_data['caloriescurrent'] + new_calories, user_data['caloriesgoal'])
+
+    cursor.execute('''
+        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+    ''', (new_calories_total, user_id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('dashboard'))
 
 @app.route('/update_carbs', methods=['POST'])
 def update_carbs():
     user_id = session.get('user_id')
-    new_carbs = request.form['carbs']
+    new_carbs = int(request.form['carbs'])
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current carbs and goal
+    cursor.execute('SELECT carbcurrent, carbgoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_carbs_total = min(user_data['carbcurrent'] + new_carbs, user_data['carbgoal'])
+
     cursor.execute('''
         UPDATE userprop SET carbcurrent = %s WHERE userid = %s
-    ''', (new_carbs, user_id))
+    ''', (new_carbs_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
@@ -190,18 +218,98 @@ def update_carbs():
 @app.route('/update_protein', methods=['POST'])
 def update_protein():
     user_id = session.get('user_id')
-    new_protein = request.form['protein']
-    print("Received protien:", new_protein)  # Debugging line
+    new_protein = int(request.form['protein'])
+    print("Received protein:", new_protein)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch current protein and goal
+    cursor.execute('SELECT protiencurrent, protiengoal FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    new_protein_total = min(user_data['protiencurrent'] + new_protein, user_data['protiengoal'])
+
     cursor.execute('''
         UPDATE userprop SET protiencurrent = %s WHERE userid = %s
-    ''', (new_protein, user_id))
+    ''', (new_protein_total, user_id))
     mysql.connection.commit()
     cursor.close()
 
     return redirect(url_for('dashboard'))
 
+
+def reset_current_values_if_new_day(user_id):
+    # Get the last reset date from the database
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT last_reset FROM userprop WHERE userid = %s', (user_id,))
+    result = cursor.fetchone()
+    last_reset = result['last_reset'] if result else None
+
+    # Get the current date
+    current_date = datetime.now().date()
+
+    # If there's no last reset date or it's a new day, reset the current values
+    if not last_reset or last_reset < current_date:  # Remove .date()
+        # Fetch current values before resetting
+        cursor.execute('''
+            SELECT watercurrent, caloriescurrent, carbcurrent, protiencurrent
+            FROM userprop WHERE userid = %s
+        ''', (user_id,))
+        current_values = cursor.fetchone()
+
+        # Insert the daily progress into user_progress table
+        cursor.execute('''
+            INSERT INTO user_progress (userid, record_date, water_current, calories_current, carbs_current, protein_current)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE 
+                water_current = VALUES(water_current),
+                calories_current = VALUES(calories_current),
+                carbs_current = VALUES(carbs_current),
+                protein_current = VALUES(protein_current)
+        ''', (user_id, current_date, current_values['watercurrent'], current_values['caloriescurrent'], current_values['carbcurrent'], current_values['protiencurrent']))
+
+        # Reset current values to zero
+        cursor.execute('''
+            UPDATE userprop 
+            SET watercurrent = 0, caloriescurrent = 0, carbcurrent = 0, protiencurrent = 0,
+                last_reset = %s 
+            WHERE userid = %s
+        ''', (current_date, user_id))
+        mysql.connection.commit()
+
+    cursor.close()
+
+
+@app.route('/user_progress')
+def user_progress():
+    user_id = session.get('user_id')
+    if not user_id:
+        flash('You must be logged in to view your progress.', 'warning')
+        return redirect(url_for('signin.signin'))
+
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    cursor.execute('''
+        SELECT record_date, water_current, calories_current, carbs_current, protein_current
+        FROM user_progress
+        WHERE userid = %s
+        ORDER BY record_date DESC
+    ''', (user_id,))
+    progress_data = cursor.fetchall()
+    cursor.close()
+
+    # Prepare data for the chart
+    labels = [record['record_date'].strftime('%Y-%m-%d') for record in progress_data]
+    calories_data = [record['calories_current'] for record in progress_data]
+    water_data = [record['water_current'] for record in progress_data]
+    carbs_data = [record['carbs_current'] for record in progress_data]
+    protein_data = [record['protein_current'] for record in progress_data]
+
+    return render_template('progress.html', labels=labels, 
+                           calories_data=calories_data, 
+                           water_data=water_data,
+                           carbs_data=carbs_data,
+                           protein_data=protein_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
