@@ -51,6 +51,10 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CaloriesChart"></canvas>
                 </div>
+                <form>
+                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
+                    <button type="submit" onclick="updateCaloriesChart()">Update Chart</button>
+                </form>                
             </div>
             <div class="fourth-container">
                 <p style="margin:10px;">
@@ -59,6 +63,10 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin:auto;">
                     <canvas id="CarbsChart"></canvas>
                 </div>
+                <form>
+                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
+                    <button type="submit" onclick="updateCarbsChart()">Update Chart</button>
+                </form>                
             </div>
         </div>
         <div class="twrapper">
@@ -69,6 +77,10 @@
                 <div id="pie-chart-container" style="width: 200px; height: 200px; margin: auto;">
                     <canvas id="ProtienChart"></canvas>
                 </div>
+                <form>
+                    <input type="number" id="number" name="number" value="{{ number }}" min="1" max="1000">
+                    <button type="submit" onclick="updateProtienChart()">Update Chart</button>
+                </form>                
             </div> 
             <div class="sixth-container">
                 <div class="water-intake-container">
