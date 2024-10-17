@@ -150,7 +150,7 @@ def update_calories():
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''
-        UPDATE userprop SET caloriescurrent = %s WHERE userid = %s
+        UPDATE userprop SET caloriescurrent = caloriescurrent + %s WHERE userid = %s
     ''', (new_calories, user_id))
     mysql.connection.commit()
     cursor.close()
@@ -164,7 +164,7 @@ def update_carbs():
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''
-        UPDATE userprop SET carbcurrent = %s WHERE userid = %s
+        UPDATE userprop SET carbcurrent = carbcurrent + %s WHERE userid = %s
     ''', (new_carbs, user_id))
     mysql.connection.commit()
     cursor.close()
@@ -175,11 +175,11 @@ def update_carbs():
 def update_protein():
     user_id = session.get('user_id')
     new_protein = request.form['protein']
-    print("Received protien:", new_protein)  # Debugging line
+    print("Received protein:", new_protein)  # Debugging line
 
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('''
-        UPDATE userprop SET protiencurrent = %s WHERE userid = %s
+        UPDATE userprop SET protiencurrent = protiencurrent + %s WHERE userid = %s
     ''', (new_protein, user_id))
     mysql.connection.commit()
     cursor.close()
