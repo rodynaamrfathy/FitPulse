@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainer Homepage</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/trainer_Homepage.css') }}"> <!-- Link to your CSS file -->
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="{{ url_for('static', filename='images/logo1.png') }}" type="image/png">
+
 </head>
 <body>
 
@@ -18,7 +22,7 @@
         {% if specialty == 'Nutrition Coach' %}
         <!-- Section for adding diet plans -->
         <section id="add-diet-plan">
-            <h2>Add Diet Plan</h2>
+            <h2 class = "add-dietplan">Add Diet Plan</h2>
             <form action="{{ url_for('dietplans.add_diet_plan') }}" method="POST" enctype="multipart/form-data"> <!-- Enable file upload -->
                 <label for="diet_name">Diet Name:</label>
                 <input type="text" id="diet_name" name="diet_name" required>
@@ -50,20 +54,7 @@
             </form>
         </section>
         <!-- Section to show trainer's diet plans -->
-        <section id="your-diet-plans">
-            <h2>Your Diet Plans</h2>
-            {% for plan in diet_plans %}
-            <div class="diet-plan">
-                <h3>{{ plan.dietname }}</h3>
-                <p>{{ plan.description }}</p>
-                <img src="{{ url_for('static', filename=plan.image) }}" alt="Diet Plan Image">
-                <form action="{{ url_for('dietplans.delete_diet_plan', plan_id=plan.dietplanid) }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-                <a href="{{ url_for('trainer.trainer_homepage', edit_id=plan.dietplanid) }}">Edit</a>
-            </div>
-            {% endfor %}
-        </section>
+        
         
         {% endif %}
         
@@ -76,17 +67,20 @@
 
         {% if specialty == 'Nutrition Coach' %}
         <!-- Diet Plan Section -->
-        <section id="your-diet-plans">
+        <section class = "dietplan"id="your-diet-plans">
             <h2>Your Diet Plans</h2>
             {% for plan in diet_plans %}
             <div class="diet-plan">
+                <img class = "dietimg"src="{{ url_for('static', filename='uploads/dietplans/' + plan.image) }}" alt="">
+
                 <h3>{{ plan.dietname }}</h3>
                 <p>{{ plan.description }}</p>
-                <img src="{{ url_for('static', filename=plan.image) }}" alt="Diet Plan Image">
+                <div>
                 <form action="{{ url_for('dietplans.delete_diet_plan', plan_id=plan.dietplanid) }}" method="POST" style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button class = "delete"type="submit">Delete</button>
                 </form>
-                <a href="{{ url_for('trainer.trainer_homepage', edit_id=plan.dietplanid) }}">Edit</a>
+                
+                </div>
             </div>
             {% endfor %}
         </section>
@@ -94,7 +88,7 @@
         
         <!-- Section to display user requests -->
         {% if user_requests %}
-        <section id="user-requests">
+        <section class= "user-requests"id="user-requests">
             <h2>User Requests</h2>
             {% for request in user_requests %}
             <div class="user-request">
@@ -110,10 +104,10 @@
             {% endfor %}
         </section>
         {% else %}
-        <p>No user requests at the moment.</p>
+        <p class = "no-requests">No user requests at the moment.</p>
         {% endif %}
 
-        <section id="your-workouts">
+        <section class = "workouts"id="your-workouts">
             <h2>Your Workouts</h2>
             {% for workout in workouts %}
             <div class="workout">
@@ -179,8 +173,9 @@
             </table>
         </section>
         
-        <section>
+        <section class = "create-workout">
         <a href = "{{ url_for('workoutscontroller.workoutplan') }}"> Create A workout</a>
+        <a href = "{{ url_for('logout.logout') }}"> Sign-out</a>
         </section>
 
         

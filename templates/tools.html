@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercises</title>
+    <title>Tools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/tools.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo1.png') }}" type="image/png">
+
 </head>
 <body>
 
@@ -37,29 +39,21 @@
 
     <div class = "wrapper2">
         <div class = "tool">
-            <a href=""><img src="{{ url_for('static', filename='images/workout1.jpg') }}" alt="Abs Image"></a>
+            <a  href="{{ url_for('benchpresscalculator') }}">
+                <img src="{{ url_for('static', filename='images/bench-press-calculator.jpg') }}" alt="Abs Image"></a>
             <h2>Bench Press Calculator: Calculate Your 1 REP MAX (1RM)</h2>
             <p>The Muscle & Strength bench press calculator can be used to work out your approximate 1 REP MAX bench press. These figures are not 100% accurate, but it serves as a good guide!</p>
         </div>
 
        <div class = "tool">
-            <a href=""><img src="{{ url_for('static', filename='images/workout1.jpg') }}" alt="Abs Image"></a>
-            <h2>Bench Press Calculator: Calculate Your 1 REP MAX (1RM)</h2>
-            <p>The Muscle & Strength bench press calculator can be used to work out your approximate 1 REP MAX bench press. These figures are not 100% accurate, but it serves as a good guide!</p>
+        <a  href="{{ url_for('bmrcalculator') }}">
+            <img src="{{ url_for('static', filename='images/bmr-calculator.jpg') }}" alt="Abs Image"></a>
+            <h2>BMR Calculator: Calculate Your Basal Metabolic Rate & Calorie Requirements</h2>
+            <p>The basal metabolic rate (BMR) and calorie calculator is an excellent tool for estimating how many calories your body needs on a daily basis depending on the amount and intensity of your exercise regime.</p>
             
         </div>
 
-       <div class = "tool">
-            <a href=""><img src="{{ url_for('static', filename='images/workout1.jpg') }}" alt="Abs Image"></a>
-            <h2>Bench Press Calculator: Calculate Your 1 REP MAX (1RM)</h2>
-            <p>The Muscle & Strength bench press calculator can be used to work out your approximate 1 REP MAX bench press. These figures are not 100% accurate, but it serves as a good guide!</p>
-        </div>
-
-       <div class = "tool">
-            <a href=""><img src="{{ url_for('static', filename='images/workout1.jpg') }}" alt="Abs Image"></a>
-            <h2>Bench Press Calculator: Calculate Your 1 REP MAX (1RM)</h2>
-            <p>The Muscle & Strength bench press calculator can be used to work out your approximate 1 REP MAX bench press. These figures are not 100% accurate, but it serves as a good guide!</p>
-        </div>
+       
     </div>
 
     

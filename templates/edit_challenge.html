@@ -33,11 +33,22 @@
 
         textarea,
         select {
-            width: 100%;
+            width: 98%;
             padding: 8px;
             margin: 5px 0 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+        .submit {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff9409;
+            color: white;
+            cursor: pointer;
+        }
+        .submit:hover {
+            background-color: #d17c0e;
         }
         button {
             padding: 10px 15px;
@@ -67,7 +78,8 @@
             color: black;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #343a40;
+            color: #fff;
         }
 
         .delete-button {
@@ -108,7 +120,7 @@
         <option value="advanced" {% if challenge[6] == 'advanced' %}selected{% endif %}>Advanced</option>
     </select>
 
-    <button type="submit">Update Challenge</button>
+    <button class = "submit"type="submit">Update Challenge</button>
 </form>
 
 
@@ -131,7 +143,7 @@
     <label>Time to Complete</label>
     <input type="number" name="timetocomplete" required>
 
-    <button type="submit">Add Exercise</button>
+    <button class = "submit"type="submit">Add Exercise</button>
 </form>
 
 <table>

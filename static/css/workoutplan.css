@@ -25,6 +25,15 @@
     
 }
 
+.wrapper {
+    border-bottom: 4px solid #ff9409;
+}
+
+.wrapper2,
+.wrapper1 {
+    margin-top: 2rem !important;
+}
+
 
 
 form {
@@ -52,12 +61,12 @@ button {
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #28a745;
+    background-color: #ff9409;
     color: white;
     cursor: pointer;
 }
 button:hover {
-    background-color: #218838;
+    background-color: #d17c0e;
 }
 
 table {

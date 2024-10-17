@@ -1,18 +1,29 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 .careers {
-    padding: 20px;
+    max-width: 900px;
+    margin: 7rem auto;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.careers h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.careers p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    color: #555;
 }
 
 .positions {
@@ -21,16 +32,38 @@ header {
 }
 
 .positions li {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #ccc;
 }
 
+.positions h3 a {
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    color: #ff9409;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.positions h3 a:hover {
+    color: #333;
+}
+
+.positions p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Application Form */
 .application-form {
     margin-top: 20px;
+    text-align: left;
 }
 
 .application-form label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .application-form input,
@@ -38,6 +71,9 @@ header {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 .application-form button {
@@ -45,16 +81,46 @@ header {
     background-color: #28a745;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .application-form button:hover {
     background-color: #218838;
 }
 
+/* Footer */
 .footer {
     text-align: center;
     padding: 20px;
     background-color: #333;
     color: white;
+    margin-top: 4rem;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .careers {
+        width: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .careers h1 {
+        font-size: 2.5rem;
+    }
+
+    .careers p {
+        font-size: 1.1rem;
+    }
+
+    .positions h3 a {
+        font-size: 1.3rem;
+    }
+
+    .positions p {
+        font-size: 1rem;
+    }
 }

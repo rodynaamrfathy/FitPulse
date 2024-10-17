@@ -145,12 +145,12 @@ def profile():
 
 @app.route('/benchpresscalculator')
 def benchpresscalculator():
-    return render_template('tools/benchpresscalculator.html')
+    return render_template('benchpresscalculator.html')
 
 
 @app.route('/bmrcalculator')
 def bmrcalculator():
-    return render_template('tools/bmrcalculator.html')
+    return render_template('bmrcalculator.html')
 
 @app.route('/workoutplan')
 def workoutplan():
