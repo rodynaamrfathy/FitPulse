@@ -200,7 +200,6 @@
     display: flex; /* Arrange chart and buttons in a row */
     justify-content: space-between; /* Space between the chart and buttons */
     align-items: center; /* Center items vertically */
-    margin-top: 2rem; /* Add some space above */
     border: 0;
 }
 
@@ -208,6 +207,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 2rem; /* Add some space above */
+    margin-right: 30px;
     gap: 20px;
 }
 .button-item {
