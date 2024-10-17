@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 
+
 app = Flask(__name__)
 
 # Set the upload folder path for product images
@@ -216,6 +217,33 @@ def update_protein():
     cursor.close()
 
     return redirect(url_for('dashboard'))
+
+def reset_current_values_if_new_day(user_id):
+    # Assuming this function resets the daily values if a new day has started
+
+    mysql = app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # Fetch the last update time for the user
+    cursor.execute('SELECT last_update FROM userprop WHERE userid = %s', (user_id,))
+    user_data = cursor.fetchone()
+
+    if user_data:
+        last_update = user_data['last_update']
+        today = datetime.now().date()
+
+        # Check if the last update was on a different day
+        if last_update is None or last_update.date() < today:
+            # Reset current values
+            cursor.execute('''
+                UPDATE userprop 
+                SET caloriescurrent = 0, watercurrent = 0, protiencurrent = 0, 
+                    carbcurrent = 0, stepscurrent = 0, last_update = %s 
+                WHERE userid = %s
+            ''', (datetime.now(), user_id))
+            mysql.connection.commit()
+    
+    cursor.close()
 
 
 if __name__ == '__main__':
