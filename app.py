@@ -210,6 +210,27 @@ def update_protein():
 
     return redirect(url_for('dashboard'))
 
+def reset_current_values_if_new_day(user_id):
+    # Get the last reset date from the database
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT last_reset FROM userprop WHERE userid = %s', (user_id,))
+    result = cursor.fetchone()
+    last_reset = result['last_reset'] if result else None
+
+    # Get the current date
+    current_date = datetime.now().date()
+
+    # If there's no last reset date or it's a new day, reset the current values
+    if not last_reset or last_reset.date() < current_date:
+        cursor.execute('''
+            UPDATE userprop 
+            SET watercurrent = 0, caloriescurrent = 0, carbcurrent = 0, protiencurrent = 0,
+                last_reset = %s 
+            WHERE userid = %s
+        ''', (current_date, user_id))
+        mysql.connection.commit()
+
+    cursor.close()
 
 if __name__ == '__main__':
     app.run(debug=True)
