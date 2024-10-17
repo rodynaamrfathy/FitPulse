@@ -12,8 +12,6 @@
     <link rel="icon" href="static/images/logo1.png" >
     <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/foodSearch.css') }}">
-    <script src="{{ url_for('static', filename='js/foodSearch.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
     <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
 
 </head>
@@ -191,9 +189,14 @@
 
         <div class="sixthwrapper">
             
-            <div class="eighth-container">
-                       
-            </div> 
+            <div class="eighth-container" style="max-height: 400px; overflow-y: auto;">
+                <h3 style="margin-top: 10px; margin-left: 30px; color:#ddd;">Search Food Item</h3>
+                <input type="text" id="foodSearch" placeholder="Enter food name" style="margin-left: 30px;">
+                <button id="searchButton" style="background-color:#E8471C; margin-left: 30px; margin-top: 20px;">Search</button>
+                <div id="searchResults" style="margin-top: 30px; margin-left: 30px; margin-right: 30px; max-height: 200px; overflow-y: auto;">
+                    <!-- To display search results -->
+                </div>
+            </div>            
 
             <div class="ninth-containe">
                 <!-- Scale Image -->
@@ -208,12 +211,15 @@
             </div>  
 
         </div>
+<<<<<<< HEAD
 
         <div class = "tenth-container">
 
         </div>
 
 
+=======
+>>>>>>> 202777b929a51736945cad82c7a447f10680bee3
         <div class="wrapper1 hidden">
             <h1>Update Your Progress</h1>
             <div>
@@ -236,13 +242,10 @@
             </div>  
         </div>
     </div>
-    <div class="search-container">
-        <h3>Search Food Item</h3>
-        <input type="text" id="foodSearch" placeholder="Enter food name">
-        <button id="searchButton" style="background-color:#E8471C">Search</button>
-        <div id="searchResults"></div> <!-- To display search results -->
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/foodSearch.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </body>
 </html>
