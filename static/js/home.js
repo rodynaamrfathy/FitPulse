@@ -139,3 +139,33 @@ setInterval(updateTime, 1000);
 
 // Call it once on page load to set the initial time
 updateTime();
+
+
+let stopwatchInterval;
+let isRunning = false;
+
+document.getElementById('startButton').addEventListener('click', function () {
+    if (!isRunning) {
+        const startTime = Date.now();
+        isRunning = true;
+
+        function updateTime() {
+            const currentTime = Date.now();
+            const elapsedTime = currentTime - startTime;
+
+            const hours = Math.floor(elapsedTime / (1000 * 60 * 60)).toString().padStart(2, '0');
+            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000).toString().padStart(2, '0');
+
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        stopwatchInterval = setInterval(updateTime, 1000);
+    }
+});
+
+document.getElementById('resetButton').addEventListener('click', function () {
+    clearInterval(stopwatchInterval);  // Stop the stopwatch
+    document.getElementById('time').textContent = "00:00:00";  // Reset the displayed time
+    isRunning = false;  // Allow the stopwatch to be started again
+});
