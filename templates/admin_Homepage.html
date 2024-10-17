@@ -1,74 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Home Page</title>
+{% extends 'base.html' %}
 
-    <style>
-        /* General Styles */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-}
-
-h1 {
-    font-size: 3rem;
-    color: #333;
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 400px;
-}
-
-ul li {
-    margin-bottom: 1.5rem;
-}
-
-ul li a {
-    font-size: 1.5rem;
-    font-family: 'Roboto', sans-serif;
-    text-decoration: none;
-    color: #fff;
-    background-color: #ff9409;
-    padding: 15px 20px;
-    border-radius: 5px;
-    display: block;
-    text-align: center;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-ul li a:hover {
-    background-color: #d17c0e;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    ul li a {
-        font-size: 1.3rem;
-        padding: 12px 15px;
-    }
-}
-
-    </style>
-</head>
+{% block content %}
 <body>
     <h1>Admin Home Page</h1>
     <ul>
@@ -82,4 +14,4 @@ ul li a:hover {
 
     </ul>
 </body>
-</html>
+{% endblock %}
