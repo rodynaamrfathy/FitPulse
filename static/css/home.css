@@ -437,7 +437,7 @@ button, input {
 .wrapper1 {
     width: 500px;
     margin: 15px auto;
-    margin-top: -80rem;
+    margin-top: -100rem;
     padding: 0 15px;
     display: flex;
     flex-direction: column; /* Stack divs vertically */
