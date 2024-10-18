@@ -99,8 +99,8 @@
                 <p>End Date: {{ request.EndDate }}</p>
                 <form action="{{ url_for('trainer.handle_request') }}" method="POST">
                     <input type="hidden" name="assignment_id" value="{{ request.AssignmentID }}">
-                    <button type="submit" name="action" value="approve">Approve</button>
-                    <button type="submit" name="action" value="decline">Decline</button>
+                    <button class = "approve"type="submit" name="action" value="approve">Approve</button>
+                    <button class = "decline"type="submit" name="action" value="decline">Decline</button>
                 </form>                
             </div>
             {% endfor %}
@@ -134,6 +134,7 @@
                     <th>Nutrition Plan</th>
                     <th>Assign</th>
                     <th>Terminate User</th>
+                    
                 </tr>
                 {% for user in users_accepted %}
                 <tr>
@@ -160,16 +161,22 @@
                                 {% endfor %}
                             </select>
                         </td>
+                        
                         <td>
                             <button type="submit" class="assign">Assign</button>
                         </td>
-                        <td>
-                            
-                            <button type="submit" class="terminate">Terminate</button>
-                            
-                            
-                        </td>
+                        
                     </form>
+                    <td>
+                        <form action="{{ url_for('trainer.terminate_user') }}" method="POST"> 
+                            <input type="hidden" name="userid" value="{{ user.userid }}">
+   
+                            <button type="submit" class="terminate">Terminate</button>
+                        </form>
+                        
+                    </td>
+
+                    
                 </tr>
                 {% endfor %}
             </table>

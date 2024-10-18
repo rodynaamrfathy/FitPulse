@@ -257,3 +257,32 @@ button:hover {
     font-family: "Protest Guerrilla", sans-serif;
     font-weight: 400;
 }
+
+.approve {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-bottom: 0.2rem;
+}
+
+.approve:hover {
+    background-color: #45a049;
+}
+
+.decline {
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.decline:hover {
+    background-color: #d12c2c;
+}
