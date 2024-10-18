@@ -76,7 +76,7 @@
     document.getElementById('finished-button').addEventListener('click', function() {
         const challengeId = document.getElementById('challenge_id').value;
         if (!challengeId) {
-            alert('Challenge ID is not defined.');
+            
             return;
         }
 
@@ -106,7 +106,7 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while claiming the reward.');
+            
         });
     });
 });

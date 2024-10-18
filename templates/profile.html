@@ -75,10 +75,23 @@
         </div>  
         <div class = "rank-rewardpoints"> 
             <div class = "rank" id="rank">
-
+                {% if user_data[13] > 500 %}
+                <img src="{{ url_for('static', filename='uploads/badges/diamond.png') }}" alt="rank-pic" id="rank-pic">
+            {% elif user_data[13] > 400 %}
+                <img src="{{ url_for('static', filename='uploads/badges/gold.png') }}" alt="rank-pic" id="rank-pic">
+            {% elif user_data[13] > 300 %}
+                <img src="{{ url_for('static', filename='uploads/badges/silver.png') }}" alt="rank-pic" id="rank-pic">
+            {% elif user_data[13] > 200 %}
+                <img src="{{ url_for('static', filename='uploads/badges/bronze.png') }}" alt="rank-pic" id="rank-pic">
+            {% elif user_data[13] > 100 %}
+                <img src="{{ url_for('static', filename='uploads/badges/iron.png') }}" alt="rank-pic" id="rank-pic">
+            {% else %}
                 <img src="{{ url_for('static', filename='uploads/badges/' ~ user_data[11] ~ '.png') }}" alt="rank-pic" id="rank-pic">
+            {% endif %}
+            
+            
                 <div class="progress-container">
-                    <div class="progress-bar" style="width: {{ user_data[13] }}%;"><p>{{ user_data[13] }}%</p></div> <!-- Set width dynamically -->
+                    <div class="progress-bar" style="width: {{ user_data[13] }}% / 100;"><p></p></div> <!-- Set width dynamically -->
                 </div>
 
             </div>

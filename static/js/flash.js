@@ -2,5 +2,5 @@
 document.querySelectorAll('.flash').forEach(function(flash) {
     setTimeout(function() {
         flash.remove();
-    }, 15000);  // 15000 ms = 15 seconds
+    }, 5000);  // 15000 ms = 15 seconds
 });
