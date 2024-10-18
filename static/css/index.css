@@ -199,3 +199,81 @@ h1:nth-of-type(2) {
     background-color: #ff4500; /* Darker color on hover */
 }
 
+.footer {
+    background-color: #1a1a1a; /* Darker shade for a more modern look */
+    color: #ffffff; /* White text color */
+    text-align: center; /* Centered text */
+    padding: 30px 20px; /* Increased padding for better spacing */
+    font-size: 14px; /* Font size for footer text */
+    border-top: 2px solid #ff5c33; /* Subtle top border for separation */
+}
+
+.footer-container {
+    max-width: 1200px; /* Limit the width of the footer content */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Inner spacing */
+}
+
+.footer-links {
+    margin-bottom: 20px; /* Space below the links section */
+}
+
+.footer-links p, .developer-info p {
+    margin: 5px 0; /* Space between paragraphs */
+    line-height: 1.5; /* Better line spacing for readability */
+}
+
+.footer-links a, .developer-info a {
+    color: #ff5c33; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s; /* Smooth transition for link color */
+}
+
+.footer-links a:hover, .developer-info a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #ff4500; /* Change color on hover */
+}
+
+.developer-info {
+    display: flex; /* Flexbox for the developer info */
+    justify-content: center; /* Center developers horizontally */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-top: 20px; /* Space above developer info */
+}
+
+.dev {
+    display: flex; /* Flexbox for each developer */
+    flex-direction: column; /* Stack image and name vertically */
+    align-items: center; /* Center items horizontally */
+    margin: 10px 20px; /* Space around each developer */
+}
+
+.dev-img {
+    width: 80px; /* Fixed width for developer images */
+    height: 80px; /* Fixed height for developer images */
+    border-radius: 50%; /* Circular images */
+    border: 2px solid #ff5c33; /* Border around images for better visibility */
+    transition: transform 0.3s; /* Smooth transition for image scaling */
+}
+
+.dev-img:hover {
+    transform: scale(1.1); /* Scale effect on hover */
+}
+
+.dev span {
+    font-weight: bold; /* Bold font for developer names */
+    color: #ffffff; /* White text for visibility */
+    margin-top: 5px; /* Space between image and name */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .developer-info {
+        flex-direction: column; /* Stack developers vertically on smaller screens */
+        align-items: center; /* Center all items */
+    }
+
+    .dev {
+        margin: 10px 0; /* Space around each developer */
+    }
+}

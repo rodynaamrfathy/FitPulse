@@ -157,8 +157,25 @@
 </section>
 
 <footer class="footer">
-    <p>© 2024 Fitness Website - All Rights Reserved</p>
+    <div class="footer-container">
+        <div class="footer-links">
+            <p>© 2024 Fitness Website - All Rights Reserved</p>
+            <p>Contact Us: <a href="mailto:info@fitnesswebsite.com">info@fitnesswebsite.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+        </div>
+        <div class="developer-info">
+            <div class="dev">
+                <img src="{{ url_for('static', filename='uploads/developers/Mo.jpg') }}" alt="Developer 1" class="dev-img">
+                <span>Mohamed Khaled</span>
+            </div>
+            <div class="dev">
+                <img src="{{ url_for('static', filename='uploads/developers/IMG_4937.JPG') }}" alt="Developer 1" class="dev-img">
+                <span>Rodyna Amr</span>
+            </div>
+        </div>
+    </div>
 </footer>
+
 
 </body>
 </html>
