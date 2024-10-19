@@ -1,0 +1,127 @@
+/* Wrapper for the content */
+.wrapper {
+    max-width: 900px;
+    margin: 15px auto;
+    margin-top: 7rem;
+    padding: 0 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: white;
+    font-family: 'Protest Guerrilla', sans-serif; /* Apply the custom font */
+}
+
+/* Styling for the image */
+.wrapper img {
+    width: 300px;
+    height: 300px;
+    border-radius: 20%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* Flex container for the image */
+.img-div {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin-bottom: 2rem;
+}
+
+/* Section for the user details */
+.wrapper div {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Styling for labels (e.g., Name:, Email:, etc.) */
+h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.3rem;
+    color: #f2f2f2;
+}
+
+/* Special style for the labels before the actual data */
+h3::before {
+    content: attr(data-label);
+    font-weight: 700;
+    margin-right: 10px;
+    color: #f39c12; /* Color for the label */
+    text-transform: uppercase;
+}
+
+/* Example labels for the user information */
+h3[data-label="Name:"] span,
+h3[data-label="Email:"] span {
+    font-weight: 400;
+    color: #f2f2f2;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #f39c12;
+    text-align: left;
+    font-family: "Protest Guerrilla", sans-serif;
+    font-weight: 400;
+    margin-top: 3rem;
+    border-top: 3px solid #f39c12;
+    padding-top: 0.3rem;
+}
+
+/* Labels for goals */
+label {
+    display: block;
+    margin: 0.7rem 0 0.3rem;
+    font-size: 1rem;
+    text-align: left;
+    color: #f39c12;
+}
+
+/* Input fields for goals */
+input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Button for updating the goals */
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #f1c40f;
+}
+
+
+@media (max-width: 1200px) {  
+
+    
+    .wrapper {
+        width: 600px;      
+    }
+
+
+}

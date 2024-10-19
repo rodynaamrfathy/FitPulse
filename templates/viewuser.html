@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/exercise.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='images/logo1.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewuser.css') }}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+</head>
+<body>
+    {% include 'flash.html' %}
+
+    <header>
+        {% include 'header.html' %}
+    </header>
+
+    <main>
+        {% include 'navbar.html' %}
+    </main>
+
+    <div class="wrapper"> 
+        <div class="img-div">
+            <img src="{{ url_for('static', filename='uploads/userspp/' ~  user.profilepic) }}" alt="profile-pic">
+        </div>
+        <div>
+            <h3 data-label="Name:">{{ user.firstname }} {{ user.lastname }}</h3>
+            <h3 data-label="Email:">{{ user.email }}</h3>
+            <h3 data-label="Gender:">{{ user.gender }}</h3>
+
+            <h3 data-label="Fitness Goal:">{{ userprops.fitnessgoal }}</h3>
+            <h3 data-label="Goal Weight:">{{ userprops.goalweight }}</h3>
+            <h3 data-label="Weight:">{{ userprops.weight }}</h3>
+            <h3 data-label="Height:">{{ userprops.height }}</h3>
+            <h3 data-label="Training Experience:">{{ userprops.trainingexperience }}</h3>
+            <h3 data-label="Activity Level:">{{ userprops.activitylevel }}</h3>
+            <h3 data-label="Injuries:">{{ userprops.injuries }}</h3>
+            <h3 data-label="Chronic Conditions:">{{ userprops.chronicconditions }}</h3>
+
+            <h1>Goals</h1>
+            <form action="{{ url_for('trainer.update_userprops') }}" method="POST">
+                <input type="hidden" name="userid" value="{{ user.userid }}">
+                
+                <label for="caloriesgoal">Calories Goal</label>
+                <input type="number" id="caloriesgoal" name="caloriesgoal" value="{{ userprops.caloriesgoal }}" placeholder="Calories Goal">
+                
+                <label for="protiengoal">Protein Goal</label>
+                <input type="number" id="protiengoal" name="protiengoal" value="{{ userprops.protiengoal }}" placeholder="Protein Goal">
+                
+                <label for="carbgoal">Carb Goal</label>
+                <input type="number" id="carbgoal" name="carbgoal" value="{{ userprops.carbgoal }}" placeholder="Carb Goal">
+                
+                <label for="watergoal">Water Goal</label>
+                <input type="number" id="watergoal" name="watergoal" value="{{ userprops.watergoal }}" placeholder="Water Goal">
+                
+                <button type="submit">Update</button>
+            </form>
+
+            
+            
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/exercise.js') }}"></script>
+</body>
+</html>

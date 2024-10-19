@@ -266,7 +266,7 @@
     margin-top: 1rem !important;
     font-family: 'Protest Guerrilla', sans-serif;
     font-weight: 300;
-    color: #ff9409;
+    color: #ffffff;
 }
  .text-section .name{
     font-size: 2rem;
@@ -274,7 +274,7 @@
     font-weight: 300;
     margin-top: -0.5rem !important;
     margin-left: 0.8rem !important;
-    color: #ff9409;
+    color: #ffffff;
 
 }
 .Ydata {
@@ -610,7 +610,7 @@ button, input {
     border: none;
     border-radius: 20px;
     background-color: #ff9409;
-    color: white;
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -674,11 +674,10 @@ button, input {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
     position: relative;
     font-family: 'Arial', sans-serif;
     font-size: 2rem;
-    color: #333;
+    color: #ff9409;
 }
 
 /* Time display */

@@ -112,17 +112,19 @@
         <section class = "workouts"id="your-workouts">
             <h2>Your Workouts</h2>
             {% for workout in workouts %}
-            <div class="workout">
-                <h3>{{ workout.workoutname }}</h3>
-                <p>Main Goal: {{ workout.maingoal }}</p>
-                <p>Training Level: {{ workout.traininglevel }}</p>
-                <p>Days per Week: {{ workout.daysperweek }}</p>
-                <p>Time per Workout: {{ workout.timeperworkout }}</p>
-                <p>Equipment Required: {{ workout.equipmentrequired }}</p>
-                <p>Target Gender: {{ workout.targetgender }}</p>
-                <p>Supplements: {{ workout.supps }}</p>
-                <p>Description: {{ workout.description }}</p>
-            </div>
+                {% if workout.authorid == trainerid %}
+                    <div class="workout">
+                        <h3>{{ workout.workoutname }}</h3>
+                        <p>Main Goal: {{ workout.maingoal }}</p>
+                        <p>Training Level: {{ workout.traininglevel }}</p>
+                        <p>Days per Week: {{ workout.daysperweek }}</p>
+                        <p>Time per Workout: {{ workout.timeperworkout }}</p>
+                        <p>Equipment Required: {{ workout.equipmentrequired }}</p>
+                        <p>Target Gender: {{ workout.targetgender }}</p>
+                        <p>Supplements: {{ workout.supps }}</p>
+                        <p>Description: {{ workout.description }}</p>
+                    </div>
+                {% endif %}
             {% endfor %}
         </section>  
         
@@ -134,6 +136,7 @@
                     <th>Nutrition Plan</th>
                     <th>Assign</th>
                     <th>Terminate User</th>
+                    <th>View User</th>
                     
                 </tr>
                 {% for user in users_accepted %}
@@ -175,6 +178,14 @@
                         </form>
                         
                     </td>
+
+                    <td>
+                        <form action="{{ url_for('trainer.viewuser') }}" method="GET"> 
+                            <input type="hidden" name="userid" value="{{ user.userid }}">
+                            <button class = "view-button" type="submit" class="terminate">View</button>
+                        </form>
+                    </td>
+                    
 
                     
                 </tr>

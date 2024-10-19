@@ -353,11 +353,14 @@ def user_progress():
 
     # Pass weight_data to the template
     return render_template('progress.html', labels=labels, 
-                           calories_data=calories_data, 
-                           water_data=water_data,
-                           carbs_data=carbs_data,
-                           protein_data=protein_data,
-                           weight_data=weight_data)
+        calories_data=calories_data, 
+        water_data=water_data,
+        carbs_data=carbs_data,
+        protein_data=protein_data,
+        weight_data=weight_data)
+
+
+
 
 
 if __name__ == '__main__':

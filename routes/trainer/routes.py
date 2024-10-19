@@ -17,7 +17,7 @@ def trainer_homepage():
 
     try:
         # Get the trainer's specialty
-        cursor.execute('SELECT specialty FROM trainers WHERE trainerid = %s', (trainer_id,))
+        cursor.execute('SELECT specialty, payrate,profilepic FROM trainers WHERE trainerid = %s', (trainer_id,))
         trainer = cursor.fetchone()
 
         # Fetch the diet plans created by this trainer
@@ -78,13 +78,14 @@ def trainer_homepage():
         cursor.close()
 
     return render_template('trainer_Homepage.html', 
-                           firstName=session['firstName'], 
-                           specialty=trainer['specialty'], 
-                           diet_plans=diet_plans,
-                           user_requests=user_requests,
-                           workouts = workouts_data,
-                           all_diet_plans = all_diet_plans,
-                           users_accepted = users_accepted)  # Pass user requests to the template
+            firstName=session['firstName'], 
+            specialty=trainer['specialty'], 
+            payrate=trainer['payrate'],
+            diet_plans=diet_plans,
+            user_requests=user_requests,
+            workouts = workouts_data,
+            all_diet_plans = all_diet_plans,
+            users_accepted = users_accepted)  # Pass user requests to the template
     
     
     
@@ -237,3 +238,65 @@ def terminate_user():
 
     return redirect(url_for('trainer.trainer_homepage'))  # Redirect back to homepage
 
+
+from flask import request, render_template, redirect, url_for, current_app
+import MySQLdb.cursors
+
+@trainer_bp.route('/viewuser', methods=['GET'])
+def viewuser():
+    # Get the user ID from the query parameter
+    userid = request.args.get('userid')
+
+    if userid:
+        # Get the MySQL connection
+        mysql = current_app.config['mysql']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        
+        # Query the users table
+        cursor.execute('SELECT * FROM users WHERE userid = %s', (userid,))
+        user = cursor.fetchone()
+
+        print(f"User data: {user}")
+
+        # Query the userprops table
+        cursor.execute('SELECT * FROM userprop WHERE userid = %s', (userid,))
+        userprops = cursor.fetchone()
+
+        print(f"User properties: {userprops}")
+        # Render the viewuser.html page and pass the user and userprops data
+        return render_template('viewuser.html', user=user, userprops=userprops)
+    
+    # If no user ID is provided, redirect or handle appropriately
+    return "User ID not provided", 400
+
+
+
+@trainer_bp.route('/update_userprops', methods=['POST'])
+def update_userprops():
+    # Get the user ID and properties from the form data
+    userid = request.form.get('userid')
+    caloriesgoal = request.form.get('caloriesgoal')
+    protiengoal = request.form.get('protiengoal')
+    carbgoal = request.form.get('carbgoal')
+    watergoal = request.form.get('watergoal')
+
+    if userid:
+        # Get the MySQL connection
+        mysql = current_app.config['mysql']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        
+        # Update the userprops table with the new values
+        cursor.execute('''UPDATE userprop 
+                          SET caloriesgoal = %s, 
+                              protiengoal = %s, 
+                              carbgoal = %s, 
+                              watergoal = %s 
+                          WHERE userid = %s''', 
+                       (caloriesgoal, protiengoal, carbgoal, watergoal, userid))
+        mysql.connection.commit()  # Commit the changes
+
+        # Optionally, you can add a flash message or notification here
+
+        return redirect(url_for('trainer.viewuser', userid=userid))  # Redirect to viewuser page
+    
+    return "User ID not provided", 400
