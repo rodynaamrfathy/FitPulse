@@ -2,6 +2,7 @@ import MySQLdb
 from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app,session
 
 
+
 # Define Blueprint for exercises management
 workouts_bp = Blueprint('workoutscontroller', __name__)
 
@@ -240,14 +241,17 @@ def view_workout(workout_id):
         trainer = None
 
     # Fetch the workout days, exercises, sets, and reps
+    # Fetch the workout days, exercises, sets, and reps
     query = """
         SELECT 
             wd.DayID,
             wd.name,
             e.exercisename,
+            e.exerciseid,
             de.Sets,
             de.Reps,
-            de.RestTime
+            de.RestTime,
+            de.ExerciseID  -- Add this line to select ExerciseID
         FROM 
             WorkoutDay wd
         JOIN 
@@ -256,13 +260,12 @@ def view_workout(workout_id):
             exercise e ON de.ExerciseID = e.exerciseid
         WHERE 
             wd.WorkoutID = %s
-    """
+"""
     cursor.execute(query, (workout_id,))
     workout_days = cursor.fetchall()
-
-    # Prepare the data structure for workout days
+# Prepare the data structure for workout days
     days_data = {}
-    for DayID, name, exercisename, Sets, Reps, RestTime in workout_days:
+    for DayID, name, exercisename, exerciseid, Sets, Reps, RestTime, ExerciseID in workout_days:
         if DayID not in days_data:
             days_data[DayID] = {
                 'day_name': name,
@@ -272,7 +275,8 @@ def view_workout(workout_id):
             'exercise_name': exercisename,
             'sets': Sets,
             'reps': Reps,
-            'resttime': RestTime
+            'resttime': RestTime,
+            'exerciseid': exerciseid  # This should now work as expected
         })
 
     # Close the cursor

@@ -7,34 +7,34 @@ document.addEventListener('DOMContentLoaded', function() {
         const IntakeChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'], // Days of the week
+                labels: ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'], 
                 datasets: [
                     {
                         label: 'Water Intake (ml)',
                         data: [3000, 3100, 2900, 3050, 3000, 2950], // Water intake data
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        backgroundColor: '#7CF5FF',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     },
                     {
                         label: 'Calories Intake (kcal)',
                         data: [1700, 1750, 1680, 1720, 1700, 1690], // Calorie intake data
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
+                        backgroundColor: '#FABC3F',
+                        borderColor: '#FABC3F',
                         borderWidth: 1
                     },
                     {
                         label: 'Protein Intake (g)',
                         data: [80, 82, 78, 81, 80, 79], // Protein intake data
-                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        borderColor: 'rgba(255, 159, 64, 1)',
+                        backgroundColor: '#FF6363',
+                        borderColor: '#FF6363',
                         borderWidth: 1
                     },
                     {
                         label: 'Carbs Intake (g)',
                         data: [250, 240, 245, 250, 250, 255], // Carb intake data
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: '#B6FFA1',
+                        borderColor: '#B6FFA1',
                         borderWidth: 1
                     },
                     {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 datasets: [{
                     data: [data.WaterInTake.current, data.WaterInTake.goal - data.WaterInTake.current],
-                    backgroundColor: ['#246CD0', '#302F2F'], 
+                    backgroundColor: ['#7CF5FF', '#302F2F'], 
                     borderWidth: 0
                 }]
             }
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 datasets: [{
                     data: [data.Calories.current, data.Calories.goal - data.Calories.current],
-                    backgroundColor: ['#E8471C', '#302F2F'],
+                    backgroundColor: ['#FABC3F', '#302F2F'],
                     borderWidth: 0
                 }]
             }
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 datasets: [{
                     data: [data.Carbs.current, data.Carbs.goal - data.Carbs.current],
-                    backgroundColor: ['#FF8500', '#302F2F'], 
+                    backgroundColor: ['#B6FFA1', '#302F2F'], 
                     borderWidth: 0
                 }]
             }
@@ -101,11 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {
                 datasets: [{
                     data: [data.Protein.current, data.Protein.goal - data.Protein.current],
-                    backgroundColor: ['#13103B', '#302F2F'], 
+                    backgroundColor: ['#FF6363', '#302F2F'], 
                     borderWidth: 0
                 }]
             }
         });
+
+        
     });
 });
 

@@ -14,6 +14,25 @@
     color : white;
     
 }
+.view-button {
+    background-color: #ff9409;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+    text-align: center;
+    width: 200px;
+    float: right; 
+
+}
+
+.view-button:hover {
+    background-color: #ad6c16;
+    color: white;
+    text-decoration: none;
+}
 
 .wrapper1 {
     margin-top: 0.5rem;

@@ -32,7 +32,7 @@
                     <h2 class= "welcome"style="margin:10px;">Welcome back </h2> 
                     <h2 class = "name">{{ user_data.firstname }}!</h2>
                 </div>
-                <h2 style="margin:10px;" id="current-time" class = "time"></h2> <!-- This will display the current date -->
+                <h2 style="margin:10px;" id="current-time" class = "time"></h2> 
 
                 <img class= "pp"src="{{ url_for('static', filename='uploads/userspp/' ~  user_data.profilepic) }}" alt="profile-pic">
                
@@ -49,7 +49,7 @@
                 <div class="progress-section">
                     <p>Progress towards target weight: {{ user_data.goalweight }}kg</p>
                     <div class="progress-bar-container" style="width: 350px; background-color: #ddd; height: 20px;">
-                        <div class="progress-bar" style="width: {{ (user_data.weight / user_data.goalweight) * 100 }}%; background-color:rgb(0, 208, 255); height: 100%;border-radius: 20px;margin-top:0.3rem;"></div>
+                        <div class="progress-bar" style="width: {{ (user_data.weight / user_data.goalweight) * 100 }}%; background-color:#AB886D; height: 100%;border-radius: 20px;margin-top:0.3rem;"></div>
                     </div>
                 </div>
             
@@ -141,7 +141,7 @@
                                 src="https://cdn.lordicon.com/xjvaszos.json"
                                 trigger="loop"
                                 state="loop-cycle"
-                                colors="primary:#1F1D1E,secondary:#246cd0"
+                                colors="primary:#697565,secondary:#7CF5FF"
                                 style="width:100px;height:100px">
                             </lord-icon>
                             <button type="submit" class="submit-button">Submit 250ml</button>
@@ -154,7 +154,7 @@
                                     src="https://cdn.lordicon.com/yowvhtxf.json"
                                     trigger="loop"
                                     state="loop-cycle"
-                                    colors="primary:#1F1D1E,secondary:#246cd0"
+                                    colors="primary:#697565,secondary:#7CF5FF"
                                     style="width:100px;height:100px">
                                 </lord-icon>
                                 <button type="submit" class="submit-button">Submit 500ml</button>
@@ -167,7 +167,7 @@
                                 src="https://cdn.lordicon.com/wyhrqibk.json"
                                 trigger="loop"
                                 state="loop-cycle"
-                                colors="primary:#1F1D1E,secondary:#246cd0"
+                                colors="primary:#697565,secondary:#7CF5FF"
                                 style="width:100px;height:100px">
                             </lord-icon>
                             <button type="submit" class="submit-button">Submit 1L</button>
@@ -190,9 +190,12 @@
                     <div id="stopwatch">
                         <span id="time">00:00:00</span>
                     </div>
-                    <button class = "stopbutton"id="startButton">Start</button>
-                    <button class = "stopbutton" id="resetButton">Reset</button>
+                    <div class="buttons-container">
+                        <button class="stopbutton" id="startButton">Start</button>
+                        <button class="stopbutton" id="resetButton">Reset</button>
+                    </div>
                 </div>
+                
                 
                                 
             </div>
@@ -236,19 +239,19 @@
             <div>
                 <form action="/update_calories" method="POST">
                     <input type="number" id="calories" name="calories" value="{{ user_data.caloriescurrent }}" min="1" max="10000">
-                    <button type="submit" style="background-color:#E8471C">Update Calories</button>
+                    <button type="submit" style="background-color:#FABC3F ; color:black ; font-weight:bold">Update Calories</button>
                 </form>  
             </div>
             <div>
                 <form action="/update_carbs" method="POST">
                     <input type="number" id="carbs" name="carbs" value="{{ user_data.carbcurrent }}" min="1" max="1000">
-                    <button type="submit" style="background-color: #FF8500">Update Carbs</button>
+                    <button type="submit" style="background-color: #B6FFA1 ; color:black ; font-weight:bold">Update Carbs</button>
                 </form>
             </div>
             <div>
                 <form action="/update_protein" method="POST">
                     <input type="number" id="protein" name="protein" value="{{ user_data.protiencurrent }}" min="1" max="1000">
-                    <button type="submit" style="background-color:#13103B">Update Protein</button>
+                    <button type="submit" style="background-color:#FF6363; color:black ; font-weight:bold">Update Protein</button>
                 </form>    
             </div>  
         </div>

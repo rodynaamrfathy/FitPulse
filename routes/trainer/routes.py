@@ -287,12 +287,12 @@ def update_userprops():
         
         # Update the userprops table with the new values
         cursor.execute('''UPDATE userprop 
-                          SET caloriesgoal = %s, 
-                              protiengoal = %s, 
-                              carbgoal = %s, 
-                              watergoal = %s 
-                          WHERE userid = %s''', 
-                       (caloriesgoal, protiengoal, carbgoal, watergoal, userid))
+                        SET caloriesgoal = %s, 
+                        protiengoal = %s, 
+                        carbgoal = %s, 
+                        watergoal = %s 
+                        WHERE userid = %s''', 
+                    (caloriesgoal, protiengoal, carbgoal, watergoal, userid))
         mysql.connection.commit()  # Commit the changes
 
         # Optionally, you can add a flash message or notification here

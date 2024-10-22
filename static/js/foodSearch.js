@@ -1,9 +1,8 @@
 document.getElementById('searchButton').addEventListener('click', function() {
     const foodName = document.getElementById('foodSearch').value;
-    const apiKey = 'MA5SryEx9s1s84qOXC1yuc2nzQQTgEGw2YHAaKP5'; // Replace with your USDA FoodData Central API key
+    const apiKey = 'MA5SryEx9s1s84qOXC1yuc2nzQQTgEGw2YHAaKP5'; 
     const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(foodName)}&api_key=${apiKey}`;
 
-    // Fetch data from the USDA FoodData Central API
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -21,7 +20,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
 
 function displayResults(foods) {
     const resultsDiv = document.getElementById('searchResults');
-    resultsDiv.innerHTML = ''; // Clear previous results
+    resultsDiv.innerHTML = ''; 
 
     foods.forEach(food => {
         const foodItem = document.createElement('div');

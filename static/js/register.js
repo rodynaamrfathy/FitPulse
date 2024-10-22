@@ -29,5 +29,4 @@ function showPrevSection() {
     }
 }
 
-// Initialize first section
 sections[currentSection].style.display = 'block';
