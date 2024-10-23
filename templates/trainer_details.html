@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ trainer.firstname }} {{ trainer.lastname }} - Details</title>
+</head>
+<body>
+    <h1>{{ trainer.firstname }} {{ trainer.lastname }} - Trainer Details</h1>
+    
+    <h2>Trainer Information</h2>
+    <p><strong>Specialty:</strong> {{ trainer.specialty }}</p>
+    <p><strong>Payrate:</strong> {{ trainer.payrate }}</p>
+    <p><strong>Experience:</strong> {{ trainer.experienceyears }} years</p>
+
+    <h2>Users Assigned</h2>
+    <ul>
+        {% for user in users_added %}
+        <li>{{ user.firstname }} {{ user.lastname }} (From: {{ user.StartDate }} to {{ user.EndDate }})</li>
+        {% else %}
+        <li>No users assigned yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Workouts Created</h2>
+    <ul>
+        {% for workout in exercises_added %}
+        <li>
+            <strong>{{ workout.workoutname }}</strong><br>
+            Goal: {{ workout.maingoal }}<br>
+            Training Level: {{ workout.traininglevel }}<br>
+            Days per Week: {{ workout.daysperweek }}<br>
+            Time per Workout: {{ workout.timeperworkout }} minutes
+        </li>
+        {% else %}
+        <li>No workouts created yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Diet Plans Created</h2>
+    <ul>
+        {% for dietplan in dietplans_added %}
+        <li>
+            <strong>{{ dietplan.planname }}</strong><br>
+            Calories: {{ dietplan.calories }}<br>
+            Protein: {{ dietplan.protein }}g<br>
+            Carbs: {{ dietplan.carbs }}g<br>
+            Fats: {{ dietplan.fats }}g
+        </li>
+        {% else %}
+        <li>No diet plans created yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

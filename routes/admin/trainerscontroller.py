@@ -57,23 +57,55 @@ def reject_trainer(trainer_id):
     flash('Trainer rejected and removed successfully!', 'danger')
     return redirect(url_for('trainerscontroller.manage_trainers'))
 
-# Route to View Trainer Details
+
 @trainers_bp.route('/trainer/details/<int:trainer_id>', methods=['GET'])
 def trainer_details(trainer_id):
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
-    # Fetch trainer details
-    cursor.execute("SELECT * FROM trainers WHERE trainerid = %s", (trainer_id,))
-    trainer_details = cursor.fetchone()
+    try:
+        # Fetch trainer details
+        cursor.execute("SELECT * FROM trainers WHERE trainerid = %s", (trainer_id,))
+        trainer_details = cursor.fetchone()
 
-    # Fetch trainer activities (you may need to implement this)
-    # cursor.execute("SELECT * FROM activities WHERE trainerid = %s", (trainer_id,))
-    # activities = cursor.fetchall()
+        # Fetch all users added by the trainer
+        cursor.execute('''
+            SELECT tua.AssignmentID, u.firstname, u.lastname, tua.StartDate, tua.EndDate
+            FROM Trainer_User_Assignment tua
+            JOIN users u ON tua.userid = u.userid
+            WHERE tua.trainerid = %s
+        ''', (trainer_id,))
+        users_added = cursor.fetchall()
 
-    cursor.close()
+        # Fetch all exercises (workouts) added by the trainer
+        cursor.execute('''
+            SELECT w.*
+            FROM workouts w
+            WHERE w.authorid = %s  -- Use the correct column name here, replace 'authorid' if necessary
+        ''', (trainer_id,))
+        exercises_added = cursor.fetchall()
 
-    return render_template('trainer_details.html', trainer=trainer_details)  # Make sure to create this template
+        # Fetch all nutrition plans added by the trainer
+        cursor.execute('''
+            SELECT dp.*
+            FROM dietplans dp
+            WHERE dp.authorid = %s
+        ''', (trainer_id,))
+        dietplans_added = cursor.fetchall()
+
+    except MySQLdb.Error as e:
+        flash(f"An error occurred: {e}", 'danger')
+        return redirect(url_for('trainer.trainer_homepage'))
+
+    finally:
+        cursor.close()
+
+    return render_template('trainer_details.html', 
+                           trainer=trainer_details, 
+                           users_added=users_added, 
+                           exercises_added=exercises_added, 
+                           dietplans_added=dietplans_added)
+
 
 # Route to Delete a Trainer
 @trainers_bp.route('/trainer/delete/<int:trainer_id>', methods=['POST'])
