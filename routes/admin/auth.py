@@ -22,6 +22,7 @@ def admin_login():
             if admin['password'] == password:
                 session['user_id'] = admin['id']
                 session['user_role'] = admin['role']  # Save the user's role
+                session['normaluser'] = False
                 flash("Welcome, Admin!", "success")
                 return redirect(url_for('admin_auth.admin_Homepage'))
             else:

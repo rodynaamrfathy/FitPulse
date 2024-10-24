@@ -31,6 +31,7 @@ def signin():
                 session['user_id'] = user['userid']  # Store the user ID correctly
                 session['email'] = user['email']
                 session['firstName'] = user['firstname']
+                session['normaluser'] = True
 
                 # Retrieve the user ID from the session
                 user_id = session.get('user_id')  # Use the correct key to retrieve the user ID
@@ -56,6 +57,7 @@ def signin():
                 session['trainer_id'] = trainer['trainerid']  # Use consistent session key
                 session['email'] = trainer['email']
                 session['firstName'] = trainer['firstname']
+                session['normaluser'] = False
 
                 flash('Logged in successfully as trainer!', 'success')
                 cursor.close()

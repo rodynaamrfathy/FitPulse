@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     });
 
+    // Close dropdown if clicked outside
     document.addEventListener('click', (event) => {
         if (!loginContainer.contains(event.target)) {
             dropdownMenu.style.display = 'none';

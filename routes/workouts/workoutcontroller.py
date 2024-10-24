@@ -285,4 +285,3 @@ def view_workout(workout_id):
     # Render the workout details page with the workout and days data
     return render_template('workout.html', workout=workout,trainer=trainer, workout_days=days_data)
 
-

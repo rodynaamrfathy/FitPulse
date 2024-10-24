@@ -29,7 +29,7 @@ def manage_recipes():
     cursor.close()
 
     # Render the fetched recipes in the manage_recipes.html template
-    return render_template('manage_recipes.html', recipes=recipes)
+    return render_template('manage_recipes.html', recipes=recipes, check= session.get('normaluser'))
 
 
 
