@@ -20,33 +20,32 @@ def register():
         date_of_birth = request.form.get('dateOfBirth', '').strip()
         gender = request.form.get('gender', '').strip()
 
-        # Optional data fields
-        weight = request.form.get('weight', '').strip() or None
-        height = request.form.get('height', '').strip() or None
-        goal = request.form.get('goal', '').strip() or None
-        fitnessgoal = request.form.get('fitnessgoal', '').strip() or None
-        trainingExperience = request.form.get('trainingExperience', '').strip() or None
-        activityLevel = request.form.get('activityLevel', '').strip() or None
-        bodyFatPercentage = request.form.get('bodyFatPercentage', '').strip() or None
-        muscleMass = request.form.get('muscleMass', '').strip() or None
-        waistSize = request.form.get('waistSize', '').strip() or None
-        hipSize = request.form.get('hipSize', '').strip() or None
-        chestSize = request.form.get('chestSize', '').strip() or None
-        armSize = request.form.get('armSize', '').strip() or None
-        thighSize = request.form.get('thighSize', '').strip() or None
-        restingHeartRate = request.form.get('restingHeartRate', '').strip() or None
-        bloodPressure = request.form.get('bloodPressure', '').strip() or None
-        vo2Max = request.form.get('vo2Max', '').strip() or None
-        injuries = request.form.get('injuries', '').strip() or None
-        chronicConditions = request.form.get('chronicConditions', '').strip() or None
+        weight = request.form.get('weight', '').strip()
+        height = request.form.get('height', '').strip()
+        goal = request.form.get('goal', '').strip()
+        fitnessgoal = request.form.get('fitnessgoal', '').strip()
+        trainingExperience = request.form.get('trainingExperience', '').strip()
+        activityLevel = request.form.get('activityLevel', '').strip()
+        bodyFatPercentage = request.form.get('bodyFatPercentage', '').strip()
+        muscleMass = request.form.get('muscleMass', '').strip()
+        waistSize = request.form.get('waistSize', '').strip()
+        hipSize = request.form.get('hipSize', '').strip()
+        chestSize = request.form.get('chestSize', '').strip()
+        armSize = request.form.get('armSize', '').strip()
+        thighSize = request.form.get('thighSize', '').strip()
+        restingHeartRate = request.form.get('restingHeartRate', '').strip()
+        bloodPressure = request.form.get('bloodPressure', '').strip()
+        vo2Max = request.form.get('vo2Max', '').strip()
+        injuries = request.form.get('injuries', '').strip()
+        chronicConditions = request.form.get('chronicConditions', '').strip()
         
-        calories = request.form.get('caloriesgoal', '').strip() or None
-        protein = request.form.get('protiengoal', '').strip() or None
-        carb = request.form.get('carbgoal', '').strip() or None
-        steps = request.form.get('stepsgoal', '').strip() or None
-        water = request.form.get('watergoal', '').strip() or None
+        calroies = request.form.get('caloriesgoal', '').strip()
+        protien = request.form.get('protiengoal', '').strip()
+        carb = request.form.get('carbgoal', '').strip()
+        steps = request.form.get('stepsgoal', '').strip()
+        water = request.form.get('watergoal', '').strip()
 
-        # Email check
+        # Check if email already exists
         mysql = current_app.config['mysql']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
@@ -57,9 +56,10 @@ def register():
             cursor.close()
             return render_template('register.html')
 
-        # Hash password and handle profile picture upload
+        # Hash the password using bcrypt
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
+        # Upload profile picture (if any)
         profile_pic = request.files.get('profilepic')
         profile_pic_filename = None
 
@@ -75,7 +75,7 @@ def register():
             profile_pic_path = os.path.join(upload_folder, profile_pic_filename)
             profile_pic.save(profile_pic_path)
 
-        # Insert mandatory user data
+        # Insert user data into the users table
         try:
             cursor.execute(
                 'INSERT INTO users (firstname, lastname, email, passwordhash, gender, dateofbirth, phone, profilepic, address) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)',
@@ -88,18 +88,35 @@ def register():
             cursor.close()
             return render_template('register.html')
 
+        # Fetch the newly created user's id
         user_id = cursor.lastrowid
 
-        # Insert optional user properties (only if provided)
+        # Calculate the age based on the date_of_birth
+        birth_date = datetime.strptime(date_of_birth, '%Y-%m-%d')
+        age = (datetime.now() - birth_date).days // 365
+
+        # Store user information in the session
+        session['loggedin'] = True
+        session['id'] = user_id
+        session['email'] = email
+        session['firstName'] = first_name
+        session['weight'] = weight
+        session['height'] = height
+        session['age'] = age
+        session['fitness_goal'] = goal
+
+        # Insert user properties
         cursor.execute(
-            'INSERT INTO userprop (userid, weight, height, goalweight, fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions, caloriesgoal, protiengoal, carbgoal, stepsgoal, watergoal) VALUES (%s,%s,%s,%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
-            (user_id, weight, height, goal, fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions, calories, protein, carb, steps, water)
+            'INSERT INTO userprop (userid, weight, height, goalweight,fitnessgoal, trainingexperience, activitylevel, bodyfatpercentage, musclemass, waistsize, hipsize, chestsize, armsize, thighsize, restingheartrate, bloodpressure, vo2max, injuries, chronicconditions,caloriesgoal,protiengoal,carbgoal,stepsgoal,watergoal) VALUES (%s,%s,%s,%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s)',
+            (user_id, weight, height, goal,fitnessgoal, trainingExperience, activityLevel, bodyFatPercentage, muscleMass, waistSize, hipSize, chestSize, armSize, thighSize, restingHeartRate, bloodPressure, vo2Max, injuries, chronicConditions, calroies, protien, carb, steps, water)
         )
         
-        mysql.connection.commit()
-        flash('Registration successful!', 'success')
-        cursor.close()
+        mysql.connection.commit()  # Commit the transaction
 
+        flash('Registration successful!', 'success')
+        cursor.close()  # Close the cursor
+
+        # Redirect to startpage after successful registration
         return redirect(url_for('startpage'))
 
     return render_template('register.html')
