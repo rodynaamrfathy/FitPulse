@@ -50,10 +50,58 @@
                 {% endif %}
             </section>
 
+            <!-- Messaging Box Section -->
+            <section class="messaging-box">
+                <h2>Message Your Trainer</h2>
+                <div id="chatBox" class="messages">
+                    {% for message in messages %}
+                        <div class="message">
+                            <strong>{{ message.sender }}:</strong> {{ message.content }}<br>
+                            <small>{{ message.timestamp }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <form action="javascript:void(0);">
+                    <textarea id="messageInput" rows="3" placeholder="Type your message here..." required></textarea>
+                    <button id="sendButton" type="button">Send</button>
+                </form>
+            </section>
+
             <footer>
                 <p>&copy; {{ current_year }} Your Fitness App</p>
             </footer>
-            </div>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const socket = io.connect();
+
+            const userId = "{{ user_id }}";
+            const trainerId = "{{ trainer['trainerid'] }}";
+            const room = `user_${userId}_trainer_${trainerId}`;
+
+            socket.emit('join', { room: room, username: 'User' });
+
+            document.getElementById('sendButton').onclick = function(event) {
+                event.preventDefault();
+                const messageInput = document.getElementById('messageInput');
+                const message = messageInput.value.trim();
+
+                if (message) {
+                    socket.emit('send_message', { room: room, message: message, username: 'User' });
+                    messageInput.value = '';  // Clear input after sending
+                }
+            };
+
+            socket.on('receive_message', function(data) {
+                const chatBox = document.getElementById('chatBox');
+                chatBox.innerHTML += `<p><strong>${data.username}:</strong> ${data.message}</p>`;
+            });
+        });
+    </script>
+
 </body>
 </html>

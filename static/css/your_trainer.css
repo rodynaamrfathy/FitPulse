@@ -68,3 +68,59 @@
 .yourtrainer footer p {
     margin: 5px 0;
 }
+
+/* Messaging Box Section */
+.yourtrainer .messaging-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.yourtrainer .messaging-box h2 {
+    color: #333;
+}
+
+.yourtrainer .messages {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.yourtrainer .message {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.yourtrainer .message strong {
+    color: #ff9409;
+}
+
+.yourtrainer .message small {
+    display: block;
+    color: #666;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.yourtrainer .messaging-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.yourtrainer .messaging-box button {
+    background-color: #ff9409;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.yourtrainer .messaging-box button:hover {
+    background-color: #e58408;
+}

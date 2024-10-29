@@ -7,12 +7,15 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
+from flask_socketio import SocketIO, emit, join_room, leave_room
+
 
 app = Flask(__name__)
 
 # Set the upload folder path for product images
 UPLOAD_PRODUCT_FOLDER = 'static/uploads/productsimg/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 
 # Check if the upload directory exists, if not, create it
 upload_product_folder = 'static/uploads/productsimg/'
@@ -24,6 +27,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 # Initialize the database by calling the init_db function
 mysql = init_db(app)
+socketio = SocketIO(app)
 
 # Store mysql instance in the app config
 app.config['mysql'] = mysql
@@ -359,9 +363,34 @@ def user_progress():
         protein_data=protein_data,
         weight_data=weight_data)
 
+#set up WebSocket events
 
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
 
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+@socketio.on('join')
+def handle_join(data):
+    room = data.get('room')
+    join_room(room)
+    emit('status', {'msg': f'{data["username"]} has entered the room.'}, room=room)
+
+@socketio.on('leave')
+def handle_leave(data):
+    room = data.get('room')
+    leave_room(room)
+    emit('status', {'msg': f'{data["username"]} has left the room.'}, room=room)
+
+@socketio.on('send_message')
+def handle_send_message(data):
+    room = data.get('room')
+    message = data.get('message')
+    emit('receive_message', {'username': data['username'], 'message': message}, room=room)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

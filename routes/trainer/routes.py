@@ -303,19 +303,15 @@ def update_userprops():
 
 @trainer_bp.route('/your_trainer')
 def your_trainer():
-    # Ensure user is logged in
     if 'user_id' not in session:
         flash('You must be logged in to view your trainer.', 'warning')
-        return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
+        return redirect(url_for('signin.signin'))
 
     user_id = session['user_id']
-
-    # Get MySQL connection
     mysql = current_app.config['mysql']
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
 
     try:
-        # Fetch the trainer assigned to this user
         cursor.execute('''
             SELECT t.trainerid, t.firstname, t.lastname, t.specialty, t.experienceyears, 
                    t.rating, t.bio, t.payrate, t.profilepic, t.resume
@@ -327,7 +323,7 @@ def your_trainer():
 
         if not trainer:
             flash("You haven't been assigned a trainer yet.", 'warning')
-            return redirect(url_for('user.dashboard'))  # Redirect to user's dashboard or homepage if no trainer found
+            return redirect(url_for('user.dashboard'))
 
     except MySQLdb.Error as e:
         flash(f"An error occurred while retrieving your trainer: {e}", 'danger')
@@ -335,5 +331,4 @@ def your_trainer():
     finally:
         cursor.close()
 
-    # Render the your_trainer.html page and pass trainer data
-    return render_template('your_trainer.html', trainer=trainer)
+    return render_template('your_trainer.html', trainer=trainer, user_id=user_id)
