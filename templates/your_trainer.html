@@ -4,44 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Trainer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/your_trainer.css') }}">
+    <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Your Trainer Profile</h1>
-            <a href="{{ url_for('trainer.trainer_homepage') }}">Back to Homepage</a>
-        </header>
+    {% include 'flash.html' %}
 
-        <section class="trainer-details">
-            <h2>Trainer Information</h2>
-            <img src="{{ trainer.profilepic }}" alt="Profile Picture" class="profile-pic">
-            <p><strong>Name:</strong> {{ trainer.firstname }} {{ trainer.lastname }}</p>
-            <p><strong>Specialty:</strong> {{ trainer.specialty }}</p>
-            <p><strong>Pay Rate:</strong> ${{ trainer.payrate }} per session</p>
-            <p><strong>Bio:</strong> {{ trainer.bio }}</p>
-        </section>
+    <header>
+        {% include 'header.html' %}
+    </header>
 
-        <section class="client-sessions">
-            <h2>Client Sessions</h2>
-            {% if sessions %}
-                <ul>
-                    {% for session in sessions %}
-                        <li>
-                            <strong>Client:</strong> {{ session.client_name }}<br>
-                            <strong>Session Date:</strong> {{ session.date }}<br>
-                            <strong>Workout Plan:</strong> {{ session.workout_plan }}<br>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No sessions scheduled at this time.</p>
-            {% endif %}
-        </section>
+    <main>
+        {% include 'navbar.html' %}
+    </main>
 
-        <footer>
-            <p>&copy; {{ current_year }} Your Fitness App</p>
-        </footer>
+    <div class="yourtrainer">
+        <div class="container">
+            <header>
+                <h1>Your Trainer Profile</h1>
+            </header>
+
+            <section class="trainer-details">
+                <h2>Trainer Information</h2>
+                <img src="{{ url_for('static', filename='uploads/trainerspp/' ~ trainer.profilepic) }}" alt="Profile Picture" class="profile-pic">
+                <p><strong>Name:</strong> {{ trainer.firstname }} {{ trainer.lastname }}</p>
+                <p><strong>Specialty:</strong> {{ trainer.specialty }}</p>
+                <p><strong>Pay Rate:</strong> ${{ trainer.payrate }} per session</p>
+                <p><strong>Bio:</strong> {{ trainer.bio }}</p>
+            </section>
+
+            <section class="client-sessions">
+                <h2>Client Sessions</h2>
+                {% if sessions %}
+                    <ul>
+                        {% for session in sessions %}
+                            <li>
+                                <strong>Client:</strong> {{ session.client_name }}<br>
+                                <strong>Session Date:</strong> {{ session.date }}<br>
+                                <strong>Workout Plan:</strong> {{ session.workout_plan }}<br>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No sessions scheduled at this time.</p>
+                {% endif %}
+            </section>
+
+            <footer>
+                <p>&copy; {{ current_year }} Your Fitness App</p>
+            </footer>
+            </div>
     </div>
 </body>
 </html>
