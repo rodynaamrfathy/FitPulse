@@ -104,6 +104,7 @@ def register():
         session['height'] = height
         session['age'] = age
         session['fitness_goal'] = goal
+        session['assigned_to_trainer'] = False
 
         # Insert user properties
         cursor.execute(

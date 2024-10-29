@@ -300,3 +300,40 @@ def update_userprops():
         return redirect(url_for('trainer.viewuser', userid=userid))  # Redirect to viewuser page
     
     return "User ID not provided", 400
+
+@trainer_bp.route('/your_trainer')
+def your_trainer():
+    # Ensure user is logged in
+    if 'user_id' not in session:
+        flash('You must be logged in to view your trainer.', 'warning')
+        return redirect(url_for('signin.signin'))  # Redirect to login page if not logged in
+
+    user_id = session['user_id']
+
+    # Get MySQL connection
+    mysql = current_app.config['mysql']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    try:
+        # Fetch the trainer assigned to this user
+        cursor.execute('''
+            SELECT t.trainerid, t.firstname, t.lastname, t.specialty, t.experienceyears, 
+                   t.rating, t.bio, t.payrate, t.profilepic, t.resume
+            FROM trainers t
+            JOIN Trainer_User_Assignment tua ON tua.trainerid = t.trainerid
+            WHERE tua.userid = %s
+        ''', (user_id,))
+        trainer = cursor.fetchone()
+
+        if not trainer:
+            flash("You haven't been assigned a trainer yet.", 'warning')
+            return redirect(url_for('user.dashboard'))  # Redirect to user's dashboard or homepage if no trainer found
+
+    except MySQLdb.Error as e:
+        flash(f"An error occurred while retrieving your trainer: {e}", 'danger')
+        return redirect(url_for('user.dashboard'))
+    finally:
+        cursor.close()
+
+    # Render the your_trainer.html page and pass trainer data
+    return render_template('your_trainer.html', trainer=trainer)

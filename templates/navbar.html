@@ -60,15 +60,31 @@
             </lord-icon>
             </a></li>
 
-            <li><a href="{{ url_for('trainer.availabletrainers') }}"><i></i>
-                <lord-icon
-                    src="https://cdn.lordicon.com/shcfcebj.json"
-                    trigger="hover"
-                    stroke="bold"
-                    colors="primary:#ffffff,secondary:#ffffff"
-                    style="width:30px;height:30px">
-                </lord-icon>
-            </a></li>
+            <li>
+                {% if session.assigned_to_trainer %}
+                    <a href="{{ url_for('trainer.your_trainer') }}">
+                        <i></i>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/shcfcebj.json"
+                            trigger="hover"
+                            stroke="bold"
+                            colors="primary:#ffffff,secondary:#ffffff"
+                            style="width:30px;height:30px">
+                        </lord-icon>
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('trainer.availabletrainers') }}">
+                        <i></i>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/shcfcebj.json"
+                            trigger="hover"
+                            stroke="bold"
+                            colors="primary:#ffffff,secondary:#ffffff"
+                            style="width:30px;height:30px">
+                        </lord-icon>
+                    </a>
+                {% endif %}
+            </li>
             
             
 

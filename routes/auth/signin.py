@@ -33,6 +33,17 @@ def signin():
                 session['firstName'] = user['firstname']
                 session['normaluser'] = True
 
+                # Check if user is assigned to a trainer
+                cursor.execute('''
+                    SELECT * FROM Trainer_User_Assignment
+                    WHERE userid = %s AND request = TRUE
+                ''', (session['user_id'],))
+                assignment = cursor.fetchone()
+                
+                if assignment:
+                    session['assigned_to_trainer'] = True  # Set session variable if assigned
+
+
                 # Retrieve the user ID from the session
                 user_id = session.get('user_id')  # Use the correct key to retrieve the user ID
                 print(f"User ID from session: {user_id}")  # Debug print statement
